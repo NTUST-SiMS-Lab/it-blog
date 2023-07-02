@@ -1,0 +1,218 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+theme: livemylife
+title: SiMS Lab
+subtitle: IT Blog
+author: "@ntust-simslab"
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://ntust-simslab.github.io/it-blog     # Note: don't forget to modify the CNAME file to your url
+root: /
+permalink: :title/
+permalink_defaults:
+
+# Site settings
+SEOTitle: SiMS Lab | IT Blog
+description: "It's an IT blog for simslaber"
+keyword: "NTUST,SiMS Lab,IT Blog"
+header-img: img/header_img/home.jpg
+archives-img: img/header_img/archive_bg2.jpg
+
+# Favicon settings
+favicon: img/avatar/ntust-simslab.png
+
+# Wave settings
+wave: false
+
+github_username: NTUST-SiMS-Lab
+
+
+# Sidebar Settings
+sidebar: true   # whether or not using Sidebar.
+sidebar-about-description: ""
+sidebar-avatar: img/avatar/ntust-simslab.png    # use absolute URL, seeing it's used in both `/` and `/about/`
+widgets:
+# - featured-tags
+- short-about
+- recent-posts
+- archive
+- category
+
+
+# widget behavior
+## Archive
+archive_type: 'monthly'
+show_count: true
+
+## Featured Tags
+# featured-tags: true   # whether or not using Feature-Tags
+featured-condition-size: 0    # A tag will be featured if the size of it is more than this condition value
+
+# Directory
+source_dir: source
+public_dir: public
+# tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+skip_render:
+
+
+# Writing
+new_post_name: :title.md    # File name of new posts
+default_layout: post
+auto_spacing: true
+titlecase: false    # Transform title into titlecase
+# New option
+# https://hexo.io/docs/configuration.html#Writing
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: true
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: true
+  tab_replace:
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+home_posts_tag: true    # show posts tags
+
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+##
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+# New option
+# https://hexo.io/docs/configuration#Date-Time-format
+updated_option: date
+
+
+# Pagination
+## Set per_page to 0 to disable pagination
+##
+per_page: 10
+pagination_dir: archives
+
+# hexo-generator-i18n config
+## Docs: https://github.com/xcatliu/hexo-generator-index-i18n
+index_generator:
+  per_page: 10
+  pagination_dir: page
+  path: ''
+  order_by: -date
+
+archive_generator:
+  enabled: false
+  per_page: 10
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+
+
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+##
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+
+
+# Build Settings
+anchorjs: true    # if you want to customize anchor. check out line:26 of `anchorjs.ejs`
+
+
+# article top
+top: true
+
+
+# WordCount Settings
+## Dependencies: https://github.com/willin/hexo-wordcount
+## Docs: https://www.npmjs.com/package/hexo-wordcount
+##
+wordcount: true
+
+
+# Busuanzi Settings
+## Dependencies: https://busuanzi.ibruce.info/
+## Docs: https://ibruce.info/
+busuanzi: true
+
+
+# top scroll progress
+scroll: true
+
+
+# Tip
+tip:
+  enable: true
+  # copyright: If you like this blog or find it useful for you, you are welcome to comment on it. You are also welcome to share this blog, so that more people can participate in it. If the images used in the blog infringe your copyright, please contact the author to delete them. Thank you !
+
+
+# Social Share Post
+## Docs:https://github.com/overtrue/share.js
+##
+socialshare: true
+
+
+# Viewer config
+## Docs:https://github.com/fengyuanchen/viewer
+## Demo:https://fengyuanchen.github.io/viewer/
+##
+# viewer: true
+
+
+# ThemeColor config
+themecolor:
+  enable: true
+  mode: light # themecolor mode light or dark, default light
+
+
+
+
+# Search Setting
+## Search: https://go.kieran.top/post/45/
+## Dependencies: https://github.com/V-Vincen/hexo-generator-zip-search
+##
+search:
+  path: search.json
+  zipPath: search.flv
+  versionPath: searchVersion.json
+  field: post
+  trigger: auto   # if 'auto', trigger search by changing input;if 'manual', trigger search by pressing enter key or search button
+  top_n_per_article: 1    # show top n results per article, show all results by setting to -1
+
+# deploy:
+#   type: git
+#   repo: https://github.com/<yourAccount>/<repo> # or https://gitee.com/<yourAccount>/<repo>
+#   branch: <your-branch>
