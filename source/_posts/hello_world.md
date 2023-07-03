@@ -81,3 +81,9 @@ categories:
       - 第一次 push 的時候因為這個檔案還不存在，所以會要你建立新的檔案
       - 你可以替這個文章取的名稱，記住這個檔案名稱最後會變成你的文章的網址，所以好好取名，不要有空白、中文
       - 例如：`this_is_demo.md` --> `https://ntust-sims-lab.github.io/it-blog/this_is_demo`
+
+1. 開啟這篇文章的權限（如果你有上傳圖片的話）
+
+   ![](https://hackmd.io/_uploads/HJ_Xyp1tn.png)
+   - 點選**分享**中的**權限**，在**可閱讀**選擇**所有人**，這樣外部的網頁才能連結到這張圖片
+   - 詳細內容請參考 [Hackmd 圖片](https://hackmd.io/@docs/how-to-upload-images-in-team-tw)
