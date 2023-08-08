@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag (contains Google-Analytics、Baidu-Tongji)-->
+<head>
+  <!-- Google Analytics -->
+  
+
+  <!-- Baidu Tongji -->
+  
+
+  <!-- Baidu Push -->
+  
+
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <meta name="google-site-verification" content="lxDfCplOZbIzjhG34NuQBgu2gdyRlAtMB4utP5AgEBc"/>
+  <meta name="baidu-site-verification" content="PpzM9WxOJU"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="It&#39;s an IT blog for simslaber"/>
+  <meta name="keyword" content="NTUST,SiMS Lab,IT Blog"/>
+  <link rel="shortcut icon" href="/it-blog/img/avatar/ntust-simslab.png"/>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async="async" defer="defer" src="https://buttons.github.io/buttons.js"></script>
+
+  
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/it-blog/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/it-blog/css/beantech.min.css"/>
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/it-blog/css/highlight.css"/>
+    <link rel="stylesheet" href="/it-blog/css/widget.css"/>
+    <link rel="stylesheet" href="/it-blog/css/rocket.css"/>
+    <link rel="stylesheet" href="/it-blog/css/signature.css"/>
+    <link rel="stylesheet" href="/it-blog/css/catalog.css"/>
+    <link rel="stylesheet" href="/it-blog/css/livemylife.css"/>
+
+    
+
+    
+      <!-- top start (article top hot config) -->
+      <link rel="stylesheet" href="/it-blog/css/top.css"/>
+      <!-- top end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/scroll.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+      <!-- Search start -->
+      <link rel="stylesheet" href="/it-blog/css/search.css"/>
+      <!-- Search end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/themecolor.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+  
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Hux Delete, sad but pending in China <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <link
+  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/ css'> -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/APSNet_paper_review/">
+  <title>
+    
+      APSNet論文介紹 - SiMS Lab | IT Blog
+    
+  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+
+	<body ontouchstart="" class="body--light body--light">
+
+
+		<!-- ThemeColor -->
+		
+		<!-- ThemeColor -->
+<style type="text/css">
+  .body--light {
+    --light-mode: none;
+    --dark-mode: block;
+  }
+  .body--dark {
+    --light-mode: block;
+    --dark-mode: none;
+  }
+  i.mdui-icon.material-icons.light-mode {
+    display: var(--light-mode);
+  }
+  i.mdui-icon.material-icons.dark-mode {
+    display: var(--dark-mode);
+  }
+</style>
+<div class="toggle" onclick="document.body.classList.toggle('body--dark')">
+  <i class="mdui-icon material-icons light-mode"></i>
+  <i class="mdui-icon material-icons dark-mode"></i>
+</div>
+<script>
+  //getCookieValue
+  function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b
+      ? b.pop()
+      : '';
+  }
+  let themeMode = 'light';
+  if (getCookieValue('sb-color-mode') && (getCookieValue('sb-color-mode') !== themeMode)) {
+    let dbody = document.body.classList;
+    themeMode === 'dark' ? dbody.remove('body--dark') : dbody.add('body--dark');
+  }
+
+  //setCookieValue
+  var toggleBtn = document.querySelector(".toggle");
+  toggleBtn.addEventListener("click", function () {
+    var e = document.body.classList.contains("body--dark");
+    var cookieString = e
+      ? "dark"
+      : "light";
+    var exp = new Date();
+    exp.setTime(exp.getTime() + 3 * 24 * 60 * 60 * 1000); //3天过期
+    document.cookie = "sb-color-mode=" + cookieString + ";expires=" + exp.toGMTString() + ";path=/";
+  });
+</script>
+
+		
+
+		<!-- Gitter -->
+		
+
+		<!-- Navigation (contains search)-->
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/it-blog/">SiMS Lab</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux: <nav>'s height woule be hold on by its content. so, when navbar scale out, the <nav> will cover tags. also mask any touch event of tags, unfortunately. -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/it-blog/">HOME</a>
+          </li>
+
+          
+          
+          
+          
+          <li>
+            <a href="/it-blog/archive/">
+              
+              ARCHIVES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/categories/">
+              
+              CATEGORIES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/tags/">
+              
+              TAGS
+              
+              
+            </a>
+          </li>
+          
+          
+
+          
+          <li>
+            <a class="popup-trigger">
+              <span class="search-icon"></span>SEARCH</a>
+          </li>
+          
+
+          <!-- LangSelect -->
+          
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<!-- progress -->
+<div id="progress">
+  <div class="line" style="width: 0%;"></div>
+</div>
+
+<script>
+  // Drop Bootstarp low-performance Navbar Use customize navbar with high-quality material design animation in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector('.navbar-toggle');
+  var $navbar = document.querySelector('#huxblog_navbar');
+  var $collapse = document.querySelector('.navbar-collapse');
+
+  $toggle.addEventListener('click', handleMagic)
+
+  function handleMagic(e) {
+    if ($navbar.className.indexOf('in') > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function() {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf('in') < 0) {
+          $collapse.style.height = "0px"
+        }
+      }, 400)
+    } else {
+      // OPEN
+      $collapse.style.height = "auto"
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+		<!-- Post Header (contains intro-header、signature、wordcount、busuanzi、waveoverlay) -->
+		<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+
+  <style type="text/css">
+    .body--light {
+      /* intro-header */
+      --intro-header-background-image-url-home: url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: url('');
+      --intro-header-background-image-url-page: url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+    .body--dark {
+      --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+
+    header.intro-header {
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
+      
+    }
+
+    
+  </style>
+
+
+
+
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>APSNet論文介紹</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by Chao-Hung Huang on
+              2023-08-08
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">16</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">4k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</header>
+
+
+
+		<!-- Main Content (Post contains
+	Pager、
+	tip、
+	socialshare、
+	gitalk、gitment、disqus-comment、
+	Catalog、
+	Sidebar、
+	Featured-Tags、
+	Friends Blog、
+	anchorjs、
+	) -->
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <h1><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9844448">APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition</a>(來源自IEEE)</h1>
+<h1>自適應點採樣的高效3D動作辨識(APSNet)</h1>
+<h3 id="small-blue-diamond-Date-2023-08-01">:small_blue_diamond: <strong>Date:</strong> 2023/08/01</h3>
+<h3 id="small-blue-diamond-Time-15-00">:small_blue_diamond: <strong>Time:</strong> 15:00</h3>
+<h2 id="white-check-mark-現有3D動作辨識遇到的問題">:white_check_mark: 現有3D動作辨識遇到的問題</h2>
+<h3 id="1-現有-3D-動作辨識模型提取動作信息的效率不夠好">1. 現有 3D 動作辨識模型提取動作信息的效率不夠好</h3>
+<p>以近期的<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.05501">3DV-PointNet++ network</a> (2020年)為例，它需要花費大量時間對點雲數據進行體素化並通過時間排序池預先計算運動信息。</p>
+<h3 id="2-希望設計一個end-to-end-端到端-的網路結構">2. 希望設計一個end-to-end(端到端)的網路結構</h3>
+<p>可以直接學習來自原始點雲序列的運動表示和同時優化幾何信息，並以完全端到端的方式進行提取過程。</p>
+<h3 id="3-點雲模型的運算量大，期望高效的網路架構">3. 點雲模型的運算量大，期望高效的網路架構</h3>
+<p>在資源有限的設備上部署這些模型的問題，例如自動駕駛汽車。</p>
+<h3 id="4-現有的3D動作識別方法通常使用相同的分辨率進行辨識">4. 現有的3D動作識別方法通常使用相同的分辨率進行辨識</h3>
+<p>不同的動作模式其點雲的複雜度也不同，較複雜的動作行為可以用高分辨率進行處理，而有些存在冗餘和噪聲幀靜態場景中的點雲序列，可使用較低分辨率進行處理。圖中顯示了兩點來自動作類“投擲”和“握手”的點雲序列。觀察到“投擲”的動作類通常具有更複雜的運動模式。因此，使用高分辨率幀是有利的在測試過程中做到合理分類結果。另一方面，“握手”的動作類，其點雲序列相對簡單，使用低分辨率幀就足夠進行辨識了。</p>
+<p><img src="https://hackmd.io/_uploads/rkS8_0Nih.png" alt=""></p>
+<h2 id="white-check-mark-論文主要貢獻">:white_check_mark: 論文主要貢獻</h2>
+<ol>
+<li>
+<p>作者引入高效的骨幹網絡並提出<strong>端到端的自適應點採樣</strong>基於此主幹的網絡（APSNet）架構網絡，專為高效3D而設計的動作辨識模型。</p>
+</li>
+<li>
+<p>作者新提出的 APSNet 中，可以根據輸入點雲資訊自適應地決定對測試過程中<strong>不同幀點雲視頻的最佳分辨率</strong>（即最優點雲數目）。</p>
+</li>
+<li>
+<p>多個基準的綜合實驗數據集證明了作者骨幹網絡(Backbone Network) 和 APSNet 3D 動作辨識的有效性和效率。</p>
+</li>
+</ol>
+<h2 id="white-check-mark-Backbone-Network-架構介紹">:white_check_mark: Backbone Network 架構介紹</h2>
+<ul>
+<li>
+<p><strong>模型的總架構圖：</strong></p>
+<p><img src="https://hackmd.io/_uploads/Skj_nR4s3.png" alt=""></p>
+<ol>
+<li>Input: 點雲影片(三維點雲資訊)</li>
+<li>Frame sampling(得到成雙的frame pairs)</li>
+<li>將每個frame pairs投入Backbone Network裡，可以得到Pair-level級別的特徵(geometry &amp; motion)</li>
+<li>整合所有frame pairs的得到的特徵</li>
+<li>使用分類器進行動作分類(FC layers and softmax)</li>
+</ol>
+</li>
+<li>
+<p><strong>Frame sampling(幀採樣):</strong></p>
+<ol>
+<li>投入點雲影片(三維點雲資訊)並分割成採樣幀數(2T = 8)個片段，T = 4。</li>
+<li>隨機抽取每個片段的一個幀(8個片段各取一個幀)，組成T frame pairs。<br>
+公式表示：<img src="https://hackmd.io/_uploads/rJdrCRNih.png" alt="">，t = 0 , … , T-1</li>
+</ol>
+</li>
+<li>
+<p><strong>Backbone network 架構圖：</strong><br>
+<img src="https://hackmd.io/_uploads/S17gr1Hoh.png" alt=""></p>
+<ol>
+<li>
+<p><strong>Data Pre-Processing Module:</strong></p>
+<p>投入Qc(current frame)與Qr(reference frame)經過<strong>第一次FPS處理</strong>後，進行點雲降維變為˜Qc與˜Qr，從原本的點雲數目變為˜N個點。再進行<strong>S次</strong>的Set abstraction operation(集合抽象)，它是一種幾何特徵抽取的過程：首先分別對˜Qc與˜Qr點雲再進行降維一次(<strong>第二次FPS處理</strong>)變為N個點，再進行Grouping與Mini-PointNet操作，最後得到的特徵表示為：</p>
+<p><img src="https://hackmd.io/_uploads/SJRS1xri3.png" alt=""> 特徵表示為<br>
+<img src="https://hackmd.io/_uploads/S1dYA1rsn.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/BkIF1gSs2.png" alt=""> 特徵表示為<br>
+<img src="https://hackmd.io/_uploads/Hke2RJHi3.png" alt=""></p>
+ <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(˜<span class="built_in">N</span>, <span class="built_in">N</span>)是作者自己設定的分辨率(點雲數目)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>最遠點採樣(Farthest point sampling, FPS):</strong></p>
+<p>點雲在進行樣本採樣時能夠達到均勻採樣的效果，舉例來說：就像卷積在做max pooling的時候一樣，在保留圖像主要特徵信息的同時，能將圖像轉換為不同尺度。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oT411x7TH/?spm_id_from=333.337.search-card.all.click">FPS演算法流程：</a></p>
+<ol>
+<li>輸入點雲有N個點，從點雲中<strong>隨機選取</strong>一個點P0作為起始點，得到採樣點集合S={P0}。</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/S1wEwxHih.png" alt=""></p>
+<ol start="2">
+<li>計算所有點到P0的距離(<strong>歐式距離</strong>)，構成N維數組L，從中選擇最大值對應的點作為P1，更新採樣點集合S={P0，P1}。</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/SJ9_werj2.png" alt=""></p>
+<ol start="3">
+<li>計算所有點到P1的距離，對於每一個點Pi，其距離P1的距離如果小於L[i]，則更新L[i] = d(Pi, P1)，因此，數組L中存儲的一直是每一個點到採樣點集合S的最近距離。</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/ryr6DgSo3.png" alt=""></p>
+<ol start="4">
+<li>選取L中最大值對應的點作為P2，更新採樣點集合S={P0，P1，P2}。</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/Hy8-deSin.png" alt=""></p>
+<ol start="5">
+<li>重複2-4步，一直採樣到N’個目標採樣點為止。</li>
+</ol>
+</li>
+<li>
+<p><strong>集合抽象(<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Cu411p7Pu/?spm_id_from=333.788.recommend_more_video.1">Set abstraction operation</a>來自<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.02413">pointnet++</a> 2017年)，以BBNet3為例：</strong></p>
+<p><img src="https://hackmd.io/_uploads/rJNyjJrjh.png" alt=""></p>
+<p>進行第二次FPS降維點雲，利用pointnet++的Grouping技術擷取所有採樣點N限定範圍內的點雲，使神經網路更專注於局部的區域特徵，Grouping詳細操作過程如下圖：</p>
+<p><img src="https://hackmd.io/_uploads/SkX_Qxri3.png" alt=""></p>
+<p>將第二次FPS的採樣點，每一點利用<strong>球狀鄰域查詢(Ball Query)</strong> or <strong>K近鄰算法(KNN)</strong> 組成區域點的集合。最後經由多尺度感知器 <strong>(MLPs)</strong> 與 <strong>Max pooling</strong>，組成Pc與Pr的幾何特徵(<strong>geometry feature</strong>)。</p>
+<p><img src="https://hackmd.io/_uploads/HyxuXZUjn.png" alt=""></p>
+</li>
+<li>
+<p><strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bh4y1o7Ji/?spm_id_from=333.788.recommend_more_video.0">Mini-PointNet</a>(來自<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1612.00593">pointnet</a> 2016年):</strong></p>
+<p>一種為保留點雲無序性的特徵擷取方式，幾乎在每次擷取點雲特徵的過程結尾都會使用<strong>MLPs+Max pooling</strong>，統稱為Mini-PointNet。</p>
+<p>先將每個點雲投入MLPs中，原先3維的資訊升維成C(通道數的特徵)，利用Max pooling取得每維特徵中的最大值，因此在置換投入的點雲順序時，最後的特徵結果是不會受到影響的。<br>
+<img src="https://hackmd.io/_uploads/BJM8_grih.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/Sk7c8xHi3.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Backbone Network (Core)架構圖：</strong><br>
+<img src="https://hackmd.io/_uploads/SJ7ETers3.png" alt=""></p>
+<ol>
+<li>
+<p><strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1U3411j7Fg/">Aggregated feature extraction</a>(來自<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9503414">GeometryMotion-Net</a> 2021年，其作者與本篇作者相同):</strong></p>
+<p>經由set abstraction後得到的cloud point，將Pc每一個點在Pr點雲上找出鄰近的K點(KNN)，再把Pr每一個鄰近點的三維座標減去Pc，可以得到帶有點雲偏移量的特徵(<strong>motion feature</strong>)。</p>
+<p>表示公式為：<img src="https://hackmd.io/_uploads/ry5VzZrj2.png" alt=""></p>
+</li>
+<li>
+<p><strong>Local feature extraction:</strong></p>
+<p>此過程是將Aggregated feature extraction得到的其中一個點特徵再去做Mini-pointnet。<br>
+<img src="https://hackmd.io/_uploads/SJiOHZSjh.png" alt="">進行區域性的特徵提取<br>
+<img src="https://hackmd.io/_uploads/B1orSZSs3.png" alt=""></p>
+</li>
+</ol>
+<p>以下為Aggregated feature extraction+Local feature extraction的示意圖：<br>
+<img src="https://hackmd.io/_uploads/B1XbbZSih.png" alt=""></p>
+<ol start="3">
+<li>
+<p><strong>Global feature extraction:</strong></p>
+<p>每個<img src="https://hackmd.io/_uploads/SJiOHZSjh.png" alt="">點，i = 1 , …, N，再做一次Mini-pointnet可以提取出帶有幾何與動作的全域pair-level特徵vector<img src="https://hackmd.io/_uploads/HJ_QrGBin.png" alt="">。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Concatenation and Classification:</strong></p>
+<p>最終結合所有的T frame pairs的幾何與動作特徵，再使用分類器來預測影片的動作。</p>
+</li>
+</ul>
+<h2 id="white-check-mark-作者的-APSNet-模型架構介紹">:white_check_mark: 作者的 APSNet 模型架構介紹</h2>
+<p>它與Backbone Network的差異在於，由下圖可知：</p>
+<p><img src="https://hackmd.io/_uploads/B1jj9zrsh.png" alt=""></p>
+<p>在Backbone Network提取完Global feature extraction的特徵vector<img src="https://hackmd.io/_uploads/HJ_QrGBin.png" alt="">後，新增了Multi-resolution backbone network pre-training。BBNeti , i = {0, 1, 2, 3}，四種不同的分辨率<strong>BBNet0, BBNet1, BBNet2 and BBNet3 as (128, 64), (256, 128), (512, 128) and (1,024, 128)</strong>，其對應的數值就是前面在做FPS中有提到的(˜N , N)，BTW這四種模型都是需要預先訓練好的，再把訓練好的模型參數置入APSNet (Core)中。</p>
+<ul>
+<li>
+<p><strong>APSNet (Core):</strong></p>
+<p>分為三個步驟Coarse Feature Extraction Stage、Decision Making Stage、Fine Feature Extraction Stage以下分別說明：</p>
+<ol>
+<li>
+<p><strong>Coarse Feature Extraction Stage:</strong></p>
+<p>它就是等於Backbone Network的架構，所採用分辨率為最低的(128, 64)，也是消耗最少的運算成本，特徵表示為<img src="https://hackmd.io/_uploads/SkbsymBsn.png" alt=""><br>
+。</p>
+<p><img src="https://hackmd.io/_uploads/ryTzRMrj2.png" alt=""></p>
+</li>
+<li>
+<p><strong>Decision Making Stage:</strong></p>
+<p>作者使用決策模塊(DM)來生成操作決策，並確定該frame pair最佳分辨率為何(四選一)。</p>
+<p><img src="https://hackmd.io/_uploads/ByXcRzSo3.png" alt=""></p>
+<p>a. <strong>LSTM updating:</strong></p>
+<p>將Coarse Feature Extraction Stage所得到的特徵<img src="https://hackmd.io/_uploads/SJfp1mBs2.png" alt="">當作input投入<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xCGidAeyS4M">LSTM模型</a>，模型會持續更新隱藏層ht和輸出Ot，可以表示為：<img src="https://hackmd.io/_uploads/HyzybXrsn.png" alt=""></p>
+<p>原先的LSTM結構，如下圖：<br>
+<img src="https://hackmd.io/_uploads/r1UUr7Boh.png" alt=""></p>
+<p><strong>以下為個人猜想，APSNet (Core)裡的LSTM</strong>：<br>
+<img src="https://hackmd.io/_uploads/rJKDQXHih.png" alt=""><br>
+(截圖源至：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xCGidAeyS4M">LSTM模型</a> 46:07)</p>
+<p>原本的LSTM是投入ct-1跟ct，在APSNet (Core)裡，作者換成上一個LSTM記憶模塊的輸出，第一個LSTM記憶模塊投入<img src="https://hackmd.io/_uploads/SJfp1mBs2.png" alt="">特徵作為輸入，之後的記憶模塊則須加上上個記憶模塊的隱藏層(ht-1)與輸出(Ot-1)作為輸入，這個LSTM module源自於<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2007.15796">AR-Net</a> 2020年。</p>
+<p>b. <strong>Decision making:</strong></p>
+<p><img src="https://hackmd.io/_uploads/BJhXvvBin.png" alt=""></p>
+<p>將ht作為FC層的輸入，在經過<strong>softmax層</strong>即可產出最佳的分辨率，機率分布dt，表示如下<br>
+<img src="https://hackmd.io/_uploads/rylTw7Hjh.png" alt="">，再轉換為one-hot vector，將vector中最大的值變為1其他則為0，可以得到action decision<br>
+<img src="https://hackmd.io/_uploads/BJsHOQri3.png" alt="">。</p>
+<p>但是有一個問題是argmax function沒有一個實際的可微分公式表示，所以會無法使用BP的技巧來更新權重。作者選擇<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.01144">Gumbel-Max/Gumbel-Softmax trick</a>技巧讓模型可以自行訓練，基本概念是原本的dt vector加入noise形成新的 distribution vector = <img src="https://hackmd.io/_uploads/H1sOnXHin.png" alt="">，定義如下：<img src="https://hackmd.io/_uploads/rkHi37Bon.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/B116n7ro2.png" alt=""> noise是一個標準的Gumbel distribution，<img src="https://hackmd.io/_uploads/rkBfpXSo2.png" alt=""><br>
+是採樣來自於uniform istribution(均勻分配) U(0, 1)，藉此作者就能夠產生新的one-hot vector如下：<img src="https://hackmd.io/_uploads/ByrICmri3.png" alt="">，當<img src="https://hackmd.io/_uploads/B1km-EBjh.png" alt="">為最大值時<img src="https://hackmd.io/_uploads/S10tlVBi2.png" alt="">會等於1其他為0。</p>
+<p>在BP的情況下，one-hot vector <img src="https://hackmd.io/_uploads/S10tlVBi2.png" alt=""> to<br>
+<img src="https://hackmd.io/_uploads/rkdrlVrs3.png" alt=""><br>
+其公式為<br>
+<img src="https://hackmd.io/_uploads/BkIoAmSjh.png" alt=""> 這個公式便可以使用BP的技巧進行微分與權重更新，讓模型end-to-end。</p>
+<p>!!!<img src="https://hackmd.io/_uploads/BkOH1Vrs2.png" alt=""> 是 temperature parameter</p>
+<hr>
+<p>補充說明：當<img src="https://hackmd.io/_uploads/BkOH1Vrs2.png" alt="">趨近於無限大decision vector<img src="https://hackmd.io/_uploads/rkdrlVrs3.png" alt="">傾向為uniform one；當<img src="https://hackmd.io/_uploads/BkOH1Vrs2.png" alt="">趨近於0則約等於one-hot vector <img src="https://hackmd.io/_uploads/S10tlVBi2.png" alt="">。</p>
+<hr>
+</li>
+<li>
+<p><strong>Fine Feature Extraction Stage:</strong></p>
+<p>最終得到一個action decision vector <img src="https://hackmd.io/_uploads/SkaQ4Nri2.png" alt="">，以此為例的話，模型會將此frame pairs在投入BBNet1模型裡產生一個新的全域特徵 <img src="https://hackmd.io/_uploads/rkGe7BSi2.png" alt="">。</p>
+<p>[1, 0, 0, 0]對應BBNet0，[0, 0, 1, 0]對應BBNet2，[0, 0, 0, 1]對應BBNet3。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Training Details:</strong></p>
+<p>這部份是要了解loss function的部分，loss function L定義如下：<br>
+<img src="https://hackmd.io/_uploads/HJhWHrBoh.png" alt=""></p>
+<p><strong>Lacc</strong>是標準的cross-entropy loss(分類問題)，Ground-truth是點雲影片的動作標籤。</p>
+<p><strong>Leff</strong>是APSnet的運算量複雜度，以the number of floating point operations(#FLOPs)作為表示。</p>
+<p>要先了解一個t-th frame pair的#FLOPs怎麼算：</p>
+<p><img src="https://hackmd.io/_uploads/Sk73tSHsn.png" alt=""></p>
+<p>Beta會等於每個BBNeti(i = 1~3)的運算量。</p>
+<p><img src="https://hackmd.io/_uploads/S1vWqrBsh.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/SJ3NpHBj2.png" alt="">是decision making module的運算量，包含LSTM module跟FC。</p>
+<p><strong>平均所有的frame pairs的運算量</strong>可以得到<img src="https://hackmd.io/_uploads/ryNV18Hs2.png" alt="">，公式如下：<img src="https://hackmd.io/_uploads/r12I1UHo2.png" alt=""></p>
+<p>計算出<img src="https://hackmd.io/_uploads/ryNV18Hs2.png" alt="">後，作者利用<img src="https://hackmd.io/_uploads/H15R-LBjn.png" alt=""><br>
+來控制APSNet的複雜度，公式如下：</p>
+<p><img src="https://hackmd.io/_uploads/Hk0wfUBoh.png" alt=""></p>
+<p>舉例來說，當FLOPpair &gt; FLOPtarget時，作者使用較大的<img src="https://hackmd.io/_uploads/SkdNmLSs3.png" alt=""><br>
+來產生大的loss，促使優化器更新權重使分辨率決策往低分辨率調整；反之，則會使loss變小找到該點雲影片最佳分辨率。</p>
+</li>
+</ul>
+<h2 id="white-check-mark-THE-DETAILED-ARCHITECTURE-OF-MULTI-RESOLUTION-BACKBONE-NETWORKS">:white_check_mark: THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS</h2>
+<ul>
+<li>The network structure of backbone network at the highest resolution (i.e., BBNet3)</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/H1O8pIBj2.png" alt=""></p>
+<ul>
+<li>
+<p>The Structure of <strong>BBNet3</strong>:</p>
+<ul>
+<li>farthest point sampling (FPS) = (˜N, N): (1024, 128)</li>
+<li>set abstraction module: S = 2</li>
+<li>MLP(<strong>first</strong> set abstraction module) <img src="https://hackmd.io/_uploads/ByjdqLSi2.png" alt="">: 64, 64, 128</li>
+<li>MLP(<strong>second</strong> set abstraction module) <img src="https://hackmd.io/_uploads/Skkn9IHs3.png" alt="">: 128, 128, 256</li>
+<li>MLP(local feature extraction): <img src="https://hackmd.io/_uploads/H1e4iUBih.png" alt="">: 128, 128, 256</li>
+<li>MLP(global feature extraction): <img src="https://hackmd.io/_uploads/H1_YsLBih.png" alt="">: 256, 512, 1024</li>
+</ul>
+</li>
+<li>
+<p>The Structure of <strong>BBNet2</strong>:</p>
+<ul>
+<li>farthest point sampling (FPS) = (˜N, N): (512, 128)</li>
+<li>set abstraction module: S = 1</li>
+<li>MLP(<strong>one</strong> set abstraction module) <img src="https://hackmd.io/_uploads/ByjdqLSi2.png" alt="">: 128, 128, 256</li>
+<li>MLP(local feature extraction): <img src="https://hackmd.io/_uploads/H1e4iUBih.png" alt="">: 128, 128, 256</li>
+<li>MLP(global feature extraction): <img src="https://hackmd.io/_uploads/H1_YsLBih.png" alt="">: 256, 512, 1024</li>
+</ul>
+</li>
+<li>
+<p>The Structure of <strong>BBNet1</strong>:</p>
+<ul>
+<li>farthest point sampling (FPS) = (˜N, N): (256, 128)</li>
+<li>set abstraction module: S = 1</li>
+<li>MLP(<strong>one</strong> set abstraction module) <img src="https://hackmd.io/_uploads/ByjdqLSi2.png" alt="">: 96, 96, 192</li>
+<li>MLP(local feature extraction): <img src="https://hackmd.io/_uploads/H1e4iUBih.png" alt="">: 96, 96, 192</li>
+<li>MLP(global feature extraction): <img src="https://hackmd.io/_uploads/H1_YsLBih.png" alt="">: 192, 384, 768</li>
+</ul>
+</li>
+<li>
+<p>The Structure of <strong>BBNet0</strong>:</p>
+<ul>
+<li>farthest point sampling (FPS) = (˜N, N): (128, 64)</li>
+<li>set abstraction module: S = 1</li>
+<li>MLP(<strong>one</strong> set abstraction module) <img src="https://hackmd.io/_uploads/ByjdqLSi2.png" alt="">: 64, 64, 128</li>
+<li>MLP(local feature extraction): <img src="https://hackmd.io/_uploads/H1e4iUBih.png" alt="">: 64, 64, 128</li>
+<li>MLP(global feature extraction): <img src="https://hackmd.io/_uploads/H1_YsLBih.png" alt="">: 128, 256, 512</li>
+</ul>
+</li>
+</ul>
+<h2 id="white-check-mark-EXPERIMENTS">:white_check_mark: EXPERIMENTS</h2>
+<h3 id="1-資料集">1. 資料集</h3>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/paper/ntu-rgbd-a-large-scale-dataset-for-3d-human">NTU RGB+D 60</a>:</p>
+</blockquote>
+<ul>
+<li>60種動作類別</li>
+<li>40位受測者</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/paper/ntu-rgbd-120-a-large-scale-benchmark-for-3d">NTU RGB+D 120</a>:</p>
+</blockquote>
+<ul>
+<li>120種動作類別</li>
+<li>106位受測者</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">NTU</span>源自於新加坡南洋理工大學 (Nanyang Technological University)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/n-ucla">Northwestern-UCLA Multiview Action3D(N-UCLA)</a>:</p>
+</blockquote>
+<ul>
+<li>10種動作類別</li>
+<li>10位受測者</li>
+<li>3種拍攝視角</li>
+<li>將2種視角作為training data，剩餘一種作為testing data</li>
+</ul>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">西北大學洛杉磯分校多視圖動作 <span class="number">3</span><span class="built_in">D</span> 數據集</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ieee-dataport.org/documents/uwa-3d-multiview-activity-ii-dataset">UWA3D Multiview Activity II(UWA3DII)</a>:</p>
+</blockquote>
+<ul>
+<li>30種動作類別</li>
+<li>10位受測者</li>
+<li>4種拍攝視角</li>
+<li>將2種視角作為training data，其他2種作為testing data</li>
+</ul>
+<h3 id="2-資料集處理細節">2. 資料集處理細節</h3>
+<blockquote>
+<p>共同超參數：</p>
+</blockquote>
+<ul>
+<li>number of sampled frames (2T): <strong>8</strong> (i.e., T = 4)</li>
+<li>optimizer: <strong>SGD</strong> (with the <strong>cosine</strong> learning rate decay strategy)</li>
+</ul>
+<blockquote>
+<p>NTU RGB+D 60 and NTU RGB+D 120 datasets</p>
+</blockquote>
+<ul>
+<li>learning rate: <strong>0.05</strong></li>
+<li>weight decay: <strong>0.0005</strong></li>
+<li>batch size: <strong>256</strong></li>
+<li>epoch: <strong>48000</strong>(NTU RGB+D 60)、<strong>96000</strong>(NTU RGB+D 120)</li>
+</ul>
+<p>在訓練過程中，作者隨機沿 X 軸和 Y 軸旋轉每個點雲並比照<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.05501">3DV</a>執行抖動和隨機丟失操作輸入點雲視頻。</p>
+<blockquote>
+<p>N-UCLA and UWA3DII datasets</p>
+</blockquote>
+<ul>
+<li>learning rate: <strong>0.005</strong></li>
+<li>weight decay: <strong>0.005</strong></li>
+<li>batch size: <strong>64</strong></li>
+<li>epoch: 沒有說明</li>
+</ul>
+<ol>
+<li>首先預訓練BBNet0、BBNet1、BBNet2、BBNet3，這四個不同解析度的backbone networks。</li>
+<li>訓練決策模塊，以lr = <strong>0.005</strong>，batch size = <strong>160</strong>，optimizer = <strong>SGD (cosine)</strong>，temperature parameter (<img src="https://hackmd.io/_uploads/B18KQs1s3.png" alt="">) = <strong>5</strong>，每個 epoch 結束會乘上 exp(−0.045) 大約 <strong>0.956</strong> (我個人猜測是為了幫助收斂)，epoch = <strong>60,000</strong>(NTU RGB+D 60)、<strong>20,000</strong>(NTU RGB+D 120)。</li>
+</ol>
+<h3 id="3-實驗結果">3. 實驗結果</h3>
+<blockquote>
+<p>NTU RGB+D 60、NTU RGB+D 120 benchmark</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/r1FM131s3.png" alt=""></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Backbone</span> BBNet<span class="number">3</span> (alternative setting)是比照<span class="number">3</span>DV-PointNet++的參數進行訓練</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>N-UCLA benchmark</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/r1omb2ki3.png" alt=""></p>
+<blockquote>
+<p>UWA3DII benchmark</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/SJQBb2Jo3.png" alt=""></p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">作者有提到APSNet是設計給大規模dataset，但投入<span class="built_in">N</span>-UCLA、UWA3DII這兩個小規模dataset也取得很好的效果</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不同解析度的backbone network比較(BBNet0~3，4種)，NTU RGB+D 60、NTU RGB+D 120 datasets</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/Bk5yB2Jsh.png" alt=""></p>
+<blockquote>
+<p>不同解析度的backbone network比較(BBNet1~3，4種)，因為BBNet0的結果較差，所以僅採用1到3種進行比較</p>
+<p>NTU RGB+D 60、NTU RGB+D 120 datasets</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/SJoKD2ks2.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/rk59P2yo2.png" alt=""></p>
+<blockquote>
+<p>N-UCLA dataset</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/rJBiPhkin.png" alt=""></p>
+<blockquote>
+<p>跟benchmark比較準確度、#FLOPs(平均運算量)、運算時間</p>
+<p>值得注意的是3DV-PointNet++雖然#FLOPs較少，但其花費的運算時間非常高</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/rkzush1o3.png" alt=""></p>
+<h3 id="4-實驗設備">4. 實驗設備</h3>
+<blockquote>
+<p>one Nvidia RTX 2080Ti GPU.</p>
+</blockquote>
+<h3 id="5-Ablation-Study-for-Backbone-Network-都以NTU-PGB-D-60-CROSS-SUBJECT為測試資料集">5. Ablation Study for Backbone Network(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</h3>
+<ul>
+<li><strong>幾何與動作信息對於Backbone Network的影響：</strong></li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/BkqDk6Jsn.png" alt=""></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">表示幾何與動作信息都是有效被用於Backbone Network裡，BTW w/o是<span class="keyword">without</span>的意思</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>比較不同變體對於Backbone Network的影響：</strong></p>
+<ol>
+<li>
+<p><img src="https://hackmd.io/_uploads/BkLJE6kj3.png" alt=""></p>
+<p>原本<img src="https://hackmd.io/_uploads/ry5VzZrj2.png" alt="">，改成<img src="https://hackmd.io/_uploads/HyvgbOHo3.png" alt="">多了<img src="https://hackmd.io/_uploads/B1WNbdBo2.png" alt=""><br>
+的維度資訊。</p>
+<ul>
+<li>alternative: 90.5%(acc)、10.20G(FLOPs)</li>
+<li>original: <strong>90.3%(acc)</strong>、<strong>9.40G(FLOPs)</strong></li>
+</ul>
+</li>
+<li>
+<p><img src="https://hackmd.io/_uploads/HyeNVp1in.png" alt=""></p>
+<p><img src="https://hackmd.io/_uploads/rkq5CPrj3.png" alt="">跟<img src="https://hackmd.io/_uploads/BJUC0DSjh.png" alt=""><br>
+的聯集作為input(投入8個frame pairs訓練)。</p>
+<ul>
+<li>alternative: 90.5%(acc)、12.64G(FLOPs)</li>
+<li>original: 90.3%(acc)、9.40G(FLOPs)</li>
+</ul>
+</li>
+<li>
+<p><img src="https://hackmd.io/_uploads/B1Fv4Tyin.png" alt=""></p>
+<ul>
+<li>alternative: 90.6%(acc)、17.60G(FLOPs)</li>
+<li>original: 90.3%(acc)、9.40G(FLOPs)</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>比較不同採樣幀數(2T)對於Backbone Network的影響：</strong></p>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/BkTabdBs3.png" alt=""></p>
+<h3 id="5-Ablation-Study-for-APSNet-都以NTU-PGB-D-60-CROSS-SUBJECT為測試資料集">5. Ablation Study for APSNet(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</h3>
+<ul>
+<li>
+<p><strong>比較不同數量的Backbone Network對於APSNet的影響：</strong></p>
+<ul>
+<li>3 BBNets (i.e., BBNet0, BBNet2, and BBNet3)</li>
+<li>5 BBNets (i.e., BBNet0, BBNet1, BBNet2, BBNet3, and BBNet4)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/r1FkS_Hin.png" alt=""></p>
+<ul>
+<li><strong>比較有無LSTM Module對於APSNet的影響：</strong></li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/rkJDS_Hjn.png" alt=""></p>
+<ul>
+<li>
+<p><strong>使用最低分辨率當作粗層次的信息就足夠用於決策了嗎？</strong></p>
+<p>作者也有嘗試以BBNet1(256, 128)作為，decision making module輸入的結果，並用        BBNet0、BBNet2和BBNet3作為fine feature extraction。</p>
+<ul>
+<li>alternative: 89.1%(acc)、7.42G(FLOPs)</li>
+<li>original: 90.8%(acc)、7.21G(FLOPs)</li>
+</ul>
+  <figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">作者給出的想法是，在decision-making階段使用 BBNet1 提取特徵會需要更多的#FLOPs,</span><br><span class="line">which limits the #FLOPs allocated at the fine feature extraction stage </span><br><span class="line"><span class="keyword">in</span> this alternative <span class="function"><span class="keyword">method</span> <span class="title">and</span> <span class="title">thus</span> <span class="title">degrades</span> <span class="title">its</span> <span class="title">performance</span>.<span class="params">(我看不太懂...)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>為了進一步展示作者的 APSNet 的有效性，比較其他 APSNet 有兩個變體：APSNet-Rand、APSNet-MultiScale</strong></p>
+</li>
+</ul>
+<p><strong>APSNet-Rand:</strong> 在每個frame pair的decision making module使用隨機的方式選擇分辨率進行訓練。<br>
+<strong>APSNet-MultiScale:</strong> 對所有分辨率的結果進行平均，並用此產生最終預測結果。(我猜應該就不需要decision making module了)</p>
+<p><img src="https://hackmd.io/_uploads/ryrfw_Bs3.png" alt=""></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">APSNet-<span class="selector-tag">A</span>和APSNet-<span class="selector-tag">B</span>是由作者的APSNet用兩種不同計算複雜度，去得到準確度與<span class="selector-id">#FLOPs</span>。</span><br><span class="line">沒有說明如何進行複雜度的計算方式，可以看出作者本身的模型效果還是比較好。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><img src="https://hackmd.io/_uploads/SkdNmLSs3.png" alt="">在公式中對於APSNet的影響：</strong></li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/BJKr8OSo2.png" alt=""></p>
+<h3 id="6-Algorithm-Analysis-都以NTU-PGB-D-60-CROSS-SUBJECT為測試資料集">6. Algorithm Analysis(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</h3>
+<ul>
+<li><strong>每個frame pair選擇最佳分辨率的有效性 in APSNet</strong></li>
+<li><strong>每個frame pair的限制是FLOPtarget = 0.8G or 1.8G</strong></li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/SklyPYBs3.png" alt=""></p>
+<p>【投擲】的視覺化點雲圖，<strong>在不同複雜度限制下</strong>：</p>
+<p><img src="https://hackmd.io/_uploads/B1ErPKBo3.png" alt=""></p>
+<p>【握手】的視覺化點雲圖，<strong>在不同複雜度限制下</strong>：</p>
+<p><img src="https://hackmd.io/_uploads/HJxoDFSs3.png" alt=""></p>
+<h2 id="white-check-mark-CONCLUSION">:white_check_mark: CONCLUSION</h2>
+<p>在這項論文中，作者研究了設計3D動作網絡結構的準確性與效率。作者引入骨幹網絡並提出自適應點採樣網絡（APSNet）3D動作識別。在給定任意的計算複雜度約束(FLOPtarget)，作者的 APSNet 也可以自適應地為每個點雲影片中的frame pairs選擇出最佳分辨率（即最佳點數）。綜合多個基準數據集的實驗證明了新提出的 APSNet 對於高效 3D 的有效性動作識別。</p>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/it-blog/i_want_to_graduate/" data-toggle="tooltip" data-placement="top" title="學習寫論文的小工具 - 我好想畢業">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=APSNet論文介紹&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/APSNet_paper_review/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition(來源自IEEE)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">自適應點採樣的高效3D動作辨識(APSNet)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Date-2023-08-01"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">:small_blue_diamond: Date: 2023&#x2F;08&#x2F;01</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Time-15-00"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">:small_blue_diamond: Time: 15:00</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E7%8F%BE%E6%9C%893D%E5%8B%95%E4%BD%9C%E8%BE%A8%E8%AD%98%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">:white_check_mark: 現有3D動作辨識遇到的問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E7%8F%BE%E6%9C%89-3D-%E5%8B%95%E4%BD%9C%E8%BE%A8%E8%AD%98%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96%E5%8B%95%E4%BD%9C%E4%BF%A1%E6%81%AF%E7%9A%84%E6%95%88%E7%8E%87%E4%B8%8D%E5%A4%A0%E5%A5%BD"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">1. 現有 3D 動作辨識模型提取動作信息的效率不夠好</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%B8%8C%E6%9C%9B%E8%A8%AD%E8%A8%88%E4%B8%80%E5%80%8Bend-to-end-%E7%AB%AF%E5%88%B0%E7%AB%AF-%E7%9A%84%E7%B6%B2%E8%B7%AF%E7%B5%90%E6%A7%8B"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">2. 希望設計一個end-to-end(端到端)的網路結構</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E9%BB%9E%E9%9B%B2%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%81%8B%E7%AE%97%E9%87%8F%E5%A4%A7%EF%BC%8C%E6%9C%9F%E6%9C%9B%E9%AB%98%E6%95%88%E7%9A%84%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">3. 點雲模型的運算量大，期望高效的網路架構</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E7%8F%BE%E6%9C%89%E7%9A%843D%E5%8B%95%E4%BD%9C%E8%AD%98%E5%88%A5%E6%96%B9%E6%B3%95%E9%80%9A%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E5%88%86%E8%BE%A8%E7%8E%87%E9%80%B2%E8%A1%8C%E8%BE%A8%E8%AD%98"><span class="toc-nav-number">2.1.4.</span> <span class="toc-nav-text">4. 現有的3D動作識別方法通常使用相同的分辨率進行辨識</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">:white_check_mark: 論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Backbone-Network-%E6%9E%B6%E6%A7%8B%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">:white_check_mark: Backbone Network 架構介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E4%BD%9C%E8%80%85%E7%9A%84-APSNet-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%A7%8B%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">:white_check_mark: 作者的 APSNet 模型架構介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-THE-DETAILED-ARCHITECTURE-OF-MULTI-RESOLUTION-BACKBONE-NETWORKS"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">:white_check_mark: THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-EXPERIMENTS"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">:white_check_mark: EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">2.6.1.</span> <span class="toc-nav-text">1. 資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E8%B3%87%E6%96%99%E9%9B%86%E8%99%95%E7%90%86%E7%B4%B0%E7%AF%80"><span class="toc-nav-number">2.6.2.</span> <span class="toc-nav-text">2. 資料集處理細節</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E5%AF%A6%E9%A9%97%E7%B5%90%E6%9E%9C"><span class="toc-nav-number">2.6.3.</span> <span class="toc-nav-text">3. 實驗結果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E5%AF%A6%E9%A9%97%E8%A8%AD%E5%82%99"><span class="toc-nav-number">2.6.4.</span> <span class="toc-nav-text">4. 實驗設備</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-Ablation-Study-for-Backbone-Network-%E9%83%BD%E4%BB%A5NTU-PGB-D-60-CROSS-SUBJECT%E7%82%BA%E6%B8%AC%E8%A9%A6%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">2.6.5.</span> <span class="toc-nav-text">5. Ablation Study for Backbone Network(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-Ablation-Study-for-APSNet-%E9%83%BD%E4%BB%A5NTU-PGB-D-60-CROSS-SUBJECT%E7%82%BA%E6%B8%AC%E8%A9%A6%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">2.6.6.</span> <span class="toc-nav-text">5. Ablation Study for APSNet(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-Algorithm-Analysis-%E9%83%BD%E4%BB%A5NTU-PGB-D-60-CROSS-SUBJECT%E7%82%BA%E6%B8%AC%E8%A9%A6%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">2.6.7.</span> <span class="toc-nav-text">6. Algorithm Analysis(都以NTU PGB+D 60 CROSS-SUBJECT為測試資料集)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-CONCLUSION"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">:white_check_mark: CONCLUSION</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<!-- anchorjs end -->
+
+
+
+		<!-- Footer (contains ThemeColor、viewer) -->
+		<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          
+
+          
+            <li>
+              <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy;
+          @ntust-simslab
+          2023
+          <br>
+          Theme by
+          <a target="_blank" rel="noopener" href="http://beantech.org">BeanTech</a>
+          <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span>
+          re-Ported by
+          <a target="_blank" rel="noopener" href="https://v-vincen.life/">Live My Life</a>
+          |
+          <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=V-Vincen&repo=V-Vincen.github.io&type=star&count=true"></iframe>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a id="rocket" href="#top" class=""></a>
+
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="/it-blog/js/jquery.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/bootstrap.min.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/hux-blog.min.js"></script>
+  <!-- catalog -->
+  <script async="true" type="text/javascript" src="/js/catalog.js"></script>
+  <!-- totop(rocket) -->
+  <script async="true" type="text/javascript" src="/js/totop.js"></script>
+
+  
+    <!-- Busuanzi JavaScript -->
+    <script async="async" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <!-- Scroll start -->
+    <script async="async" type="text/javascript" src="/it-blog/js/scroll.js"></script>
+    <!-- Scroll end -->
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+<script>
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function (e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  // fastClick.js
+  async ("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+    var $nav = document.querySelector("nav");
+    if ($nav)
+      FastClick.attach($nav);
+    }
+  )
+</script>
+
+<!-- Because of the native support for backtick-style fenced code blocks right within the Markdown is landed in Github Pages, From V1.6, There is no need for Highlight.js, so Huxblog drops it officially. -
+https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0 - https://help.github.com/articles/creating-and-highlighting-code-blocks/ -->
+<!-- <script> async ("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () { hljs.initHighlightingOnLoad(); }) </script> <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet"> -->
+
+<!-- jquery.tagcloud.js -->
+<!-- <script> // only load tagcloud.js in tag.html if ($('#tag_cloud').length !== 0) { async ("https://ntust-sims-lab.github.io/it-blog/js/jquery.tagcloud.js", function () { $.fn.tagcloud.defaults = { // size: { start: 1, end: 1, unit: 'em' }, color: {
+start: '#bbbbee', end: '#0085a1' } }; $('#tag_cloud a').tagcloud(); }) } </script> -->
+
+
+		<!-- Search -->
+		
+		<div class="popup search-popup local-search-popup">
+  <span class="popup-btn-close">
+    ESC
+  </span>
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col-md-9 col-md-offset-1"> -->
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 local-search-content">
+
+        <div class="local-search-header clearfix">
+
+          <div class="local-search-input-wrapper">
+            <span class="search-icon">
+              <i class="fa fa-search fa-lg" style="margin: 25px 10px 25px 20px;"></i>
+            </span>
+            <input autocomplete="off" placeholder="SEARCH..." type="text" id="local-search-input">
+          </div>
+        </div>
+        <div id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    <script src="/it-blog/js/ziploader.js"></script>
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.json";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    // monitor main search box;
+    var onPopupClose = function (e) {
+      $('.popup').fadeOut(300);
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $('.popup').fadeIn(300);
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // get search zip version
+    $.get('/it-blog/searchVersion.json?t=' + (+new Date()), function (res) {
+      if (localStorage.getItem('searchVersion') !== res) {
+        localStorage.setItem('searchVersion', res);
+        initSearchJson();
+      }
+    });
+
+    function initSearchJson() {
+      initLoad(['/it-blog/search.flv'], {
+        loadOptions: {
+          success: function (obj) {
+            localStorage.setItem('searchJson', obj['search.json'])
+          },
+          error: function (e) {
+            return console.log(e)
+          }
+        },
+        returnOptions: {
+          'json': TYPE_TEXT
+        },
+        mimeOptions: {
+          'json': 'application/json'
+        }
+      })
+    }
+    // search function;
+    var searchFunc = function (search_id, content_id) {
+      'use strict';
+      isfetched = true;
+      var datas = JSON.parse(localStorage.getItem('searchJson'));
+      // console.log(search_id)
+      var input = document.getElementById(search_id);
+      var resultContent = document.getElementById(content_id);
+      var inputEventFunction = function () {
+        var searchText = input.value.trim().toLowerCase();
+        var keywords = searchText.split(/[\s\-]+/);
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        var resultItems = [];
+        if (searchText.length > 0) {
+          // perform local searching
+          datas.forEach(function (data) {
+            var isMatch = false;
+            var hitCount = 0;
+            var searchTextCount = 0;
+            var title = data.title
+              ? data.title.trim()
+              : '';
+            var titleInLowerCase = title.toLowerCase();
+            var content = data.content
+              ? data.content.trim().replace(/<[^>]+>/g, "")
+              : '';
+            var contentInLowerCase = content.toLowerCase();
+            var articleUrl = decodeURIComponent(data.url);
+
+            var date = data.date;
+            var dateTime = date.replace(/T/, " ").replace(/.000Z/, "");
+            var imgUrl = data.header_img;
+            
+
+
+            var indexOfTitle = [];
+            var indexOfContent = [];
+            // only match articles with not empty titles
+            keywords.forEach(function (keyword) {
+              function getIndexByWord(word, text, caseSensitive) {
+                var wordLen = word.length;
+                if (wordLen === 0) {
+                  return [];
+                }
+                var startPosition = 0,
+                  position = [],
+                  index = [];
+                if (!caseSensitive) {
+                  text = text.toLowerCase();
+                  word = word.toLowerCase();
+                }
+                while ((position = text.indexOf(word, startPosition)) > -1) {
+                  index.push({position: position, word: word});
+                  startPosition = position + wordLen;
+                }
+                return index;
+              }
+              indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+              indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+            });
+            if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+              isMatch = true;
+              hitCount = indexOfTitle.length + indexOfContent.length;
+            }
+            // show search results
+            if (isMatch) {
+              // sort index by position of keyword
+              [indexOfTitle, indexOfContent].forEach(function (index) {
+                index.sort(function (itemLeft, itemRight) {
+                  if (itemRight.position !== itemLeft.position) {
+                    return itemRight.position - itemLeft.position;
+                  } else {
+                    return itemLeft.word.length - itemRight.word.length;
+                  }
+                });
+              });
+              // merge hits into slices
+              function mergeIntoSlice(text, start, end, index) {
+                var item = index[index.length - 1];
+                var position = item.position;
+                var word = item.word;
+                var hits = [];
+                var searchTextCountInSlice = 0;
+                while (position + word.length <= end && index.length != 0) {
+                  if (word === searchText) {
+                    searchTextCountInSlice++;
+                  }
+                  hits.push({position: position, length: word.length});
+                  var wordEnd = position + word.length;
+                  // move to next position of hit
+                  index.pop();
+                  while (index.length != 0) {
+                    item = index[index.length - 1];
+                    position = item.position;
+                    word = item.word;
+                    if (wordEnd > position) {
+                      index.pop();
+                    } else {
+                      break;
+                    }
+                  }
+                }
+                searchTextCount += searchTextCountInSlice;
+                return {hits: hits, start: start, end: end, searchTextCount: searchTextCountInSlice};
+              }
+              var slicesOfTitle = [];
+              if (indexOfTitle.length != 0) {
+                slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+              }
+              var slicesOfContent = [];
+              while (indexOfContent.length != 0) {
+                var item = indexOfContent[indexOfContent.length - 1];
+                var position = item.position;
+                var word = item.word;
+                // cut out 100 characters
+                var start = position - 20;
+                var end = position + 80;
+                if (start < 0) {
+                  start = 0;
+                }
+                if (end < position + word.length) {
+                  end = position + word.length;
+                }
+                if (end > content.length) {
+                  end = content.length;
+                }
+                slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+              }
+              // sort slices in content by search text's count and hits' count
+              slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                  return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                  return sliceRight.hits.length - sliceLeft.hits.length;
+                } else {
+                  return sliceLeft.start - sliceRight.start;
+                }
+              });
+              // select top N slices in content
+              var upperBound = parseInt('1');
+              if (upperBound >= 0) {
+                slicesOfContent = slicesOfContent.slice(0, upperBound);
+              }
+              // highlight title and content
+              function highlightKeyword(text, slice) {
+                var result = '';
+                var prevEnd = slice.start;
+                slice.hits.forEach(function (hit) {
+                  result += text.substring(prevEnd, hit.position);
+                  var end = hit.position + hit.length;
+                  result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                  prevEnd = end;
+                });
+                result += text.substring(prevEnd, slice.end);
+                return result;
+              }
+              var resultItem = '';
+
+              // if (slicesOfTitle.length != 0) {   resultItem += "<li><a target='_blank' href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>"; } else {   resultItem += "<li><a target='_blank' href='" +
+              // articleUrl + "' class='search-result-title'>" + title + "</a>"; } slicesOfContent.forEach(function (slice) {   resultItem += "<a target='_blank' href='" + articleUrl + "'><p class=\"search-result\">" + highlightKeyword(content, slice) +
+              // "...</p></a>"; }); resultItem += "</li>";
+
+              if (slicesOfTitle.length != 0) {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              } else {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + title + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              }
+              slicesOfContent.forEach(function (slice) {
+                resultItem += "<p class=\"search-result-content\">" + highlightKeyword(content, slice) + "...</p>";
+              });
+              resultItem += "</div><div class='search-result-right'><img class='media-image' src='" + imgUrl + "' width='64px' height='48px'></img></div></a>";
+
+              resultItems.push({item: resultItem, searchTextCount: searchTextCount, hitCount: hitCount, id: resultItems.length});
+            }
+          })
+        };
+
+        if (keywords.length === 1 && keywords[0] === "") {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else if (resultItems.length === 0) {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else {
+          resultItems.sort(function (resultLeft, resultRight) {
+            if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+              return resultRight.searchTextCount - resultLeft.searchTextCount;
+            } else if (resultLeft.hitCount !== resultRight.hitCount) {
+              return resultRight.hitCount - resultLeft.hitCount;
+            } else {
+              return resultRight.id - resultLeft.id;
+            }
+          });
+          var searchResultList = '<div class=\"search-result-list\">';
+          resultItems.forEach(function (result) {
+            searchResultList += result.item;
+          })
+          searchResultList += "</div>";
+          resultContent.innerHTML = searchResultList;
+        }
+      }
+      if ('auto' === 'auto') {
+        input.addEventListener('input', inputEventFunction);
+      } else {
+        $('.search-icon').click(inputEventFunction);
+        input.addEventListener('keypress', function (event) {
+          if (event.keyCode === 13) {
+            inputEventFunction();
+          }
+        });
+      }
+      // remove loading animation
+      $('body').css('overflow', '');
+      proceedsearch();
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function (e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc('local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function (e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 && $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      var _con = document.querySelector(".local-search-content");
+      if (_con) {
+        if (!_con.contains(e.target)) {
+          onPopupClose();
+        }
+      }
+    });
+  </script>
+
+
+		
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
