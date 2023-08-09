@@ -39,7 +39,7 @@ categories:
 3. 多個基準的綜合實驗數據集證明了作者骨幹網絡(Backbone Network) 和 APSNet 3D 動作辨識的有效性和效率。
 
 ## :white_check_mark: Backbone Network 架構介紹
-* **模型的總架構圖：**
+* **Backbone Network的架構圖：**
 
     ![](https://hackmd.io/_uploads/Skj_nR4s3.png)
 
