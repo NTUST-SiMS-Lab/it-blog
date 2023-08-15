@@ -11,8 +11,15 @@ categories:
 
 # 自適應點採樣的高效3D動作辨識(APSNet)
 
-### 🔹 **Date:** 2023/08/01 
-### 🔹 **Time:** 15:00
+### 🔹 Journal reference: 
+*IEEE, Transactions on Image Processing, Volume 31, 2022, pp 5287–5302*
+### 🔹 Authors: 
+*Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge*
+
+## ✅ 論文重點整理
+1. 提出了一個自適應點採樣的設計架構。
+2. 端到端的動作辨識模型，點雲to動作辨識結果。
+3. 相較Benchmark降低點雲模型運算量，並維持一定的準確度。
 
 ## ✅ 現有3D動作辨識遇到的問題
 
