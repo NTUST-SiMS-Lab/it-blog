@@ -27,6 +27,8 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: npm install
+      - name: Change Mathjs URL
+        run: sed -i 's|http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML|https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML|g' node_modules/hexo-renderer-mathjax/mathjax.html
       - name: Build
         run: npm run build
       - name: Deploy
