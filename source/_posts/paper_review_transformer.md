@@ -1,14 +1,17 @@
 ---
-title: [Paper Review] Transformer: Attention Is All You Need
+title: 【論文研讀】Transformer - Attention Is All You Need
 catalog: true
 date: 2023-08-15
 author: Frances Kao
 categories:
-- paper-review
+- paper review
 - transformer
 ---
 
 # 【論文研讀】Transformer: Attention Is All You 
+
+[![hackmd-github-sync-badge](https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w/badge)](https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w)
+
 
 論文連結: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
