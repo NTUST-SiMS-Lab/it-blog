@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/404.html">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_transformer/">
   <title>
     
-      SiMS Lab | IT Blog
+      Paper Review - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -276,19 +276,19 @@
     .body--light {
       /* intro-header */
       --intro-header-background-image-url-home: url('/it-blog/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: url('img/header_img/404_bg.jpg');
-      --intro-header-background-image-url-page: url('/it-blog/img/header_img/404_bg.jpg');
+      --intro-header-background-image-url-post: url('');
+      --intro-header-background-image-url-page: url('/it-blog/img/header_img/archive_bg2.jpg');
     }
     .body--dark {
       --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/home.jpg');
-      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('img/header_img/404_bg.jpg');
-      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/404_bg.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/archive_bg2.jpg');
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/404_bg.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -298,6 +298,58 @@
 
 
 
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>Paper Review</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by Frances Kao on
+              2023-08-15
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">8</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">2.4k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</header>
 
 
 
@@ -312,39 +364,308 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<style type="text/css">
-  
-    .body--light {
-      /* intro-header */
-      --intro-header-background-image-url-404: url('/it-blog/img/header_img/404_bg.jpg');
-    }
-    .body--dark {
-      --intro-header-background-image-url-404: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/404_bg.jpg');
-    }
-    header.intro-header {
-      background-image: var(--intro-header-background-image-url-404);
-    }
-  
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
+        <h1>【論文研讀】Transformer: Attention Is All You</h1>
+<p>論文連結: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></p>
+<h1>Transformer</h1>
+<p>先前的序列轉換模型是基於複雜的RNN與CNN，其中包含編碼器與解碼器的組合，而作者發現<strong>通過注意力機制連接編碼器與解碼器的模型表現較佳</strong>。因此，此研究提出一簡單的網路架構Transformer，僅<strong>僅基於注意力機制</strong>而不使用RNN或CNN架構，使模型單純且訓練時間縮短、泛化能力佳。主要用於翻譯或句法分析等語言相關的任務上，近年來也發展多種應用。其主要優點如下：</p>
+<ul>
+<li>架構單純：由於僅使用注意力機制，其架構相對較為簡單且易於理解。</li>
+<li>透過自注意力機制，對輸入序列的不同位置進行加權處理，可關注到輸入序列中的重要資訊。</li>
+<li>透過自注意力機制，可捕捉到長距離依賴關係（Long-range dependence, LRD），處理輸入序列中的上下文信息和語義關係。</li>
+<li>透過多頭注意力機制進行並行計算，以提高計算效率與泛化能力，可處理更長的輸入序列或更大量的詞彙。</li>
+<li>主要用於處理語言相關的任務，例如翻譯(Translation)、句法分析(Syntactic Parsing)等。由於其強大的表現和泛化能力，近年來也在其他領域得到廣泛應用，例如圖像生成、語音識別等，延伸技術也有應用於圖像分類的Vision Transformer。</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/HJyu0owjh.png" alt=""></p>
+<hr>
+<h2 id="Encoder-Decoder">Encoder &amp; Decoder</h2>
+<p>在Transformer中，encoder和decoder由<a href="#Self-Attention">自注意力機制</a>與<a href="#Position-wise-Feed-Forward-Networks">逐點全連接層</a>堆疊而成。encoder負責將輸入序列作為特徵表示symbol representations($x_1, …, x_n$)與連續表示continuous representations($z_1, …, z_n$)進行匹配。而decoder則一次性地生成一輸出序列($y_z, …, y_n$)，每次模型皆會進行回歸，利用前次所生成的表示（symbols）作為額外輸入。</p>
+<blockquote>
+<p>逐點(point-wise)指對輸入的每個數據點皆進行相同計算。例如計算兩向量之相似度或將每一詞嵌入向量相加以獲得一句子的表示（symbols）。</p>
+</blockquote>
+<h3 id="Encoder">Encoder</h3>
+<ul>
+<li>輸入: symbol representations($x_1, …, x_n$)</li>
+<li>輸出: $x_1, …, x_n$與$z_1, …, z_n$匹配的序列結果</li>
+<li>包含$N=6$層相同的layer</li>
+<li>layer中包含兩個子層，即多頭注意力機制與位置逐元前饋神經網路(Position-Wise Feed-Forward Network, FFN)，<a href="#Position-wise-Feed-Forward-Networks">FFN</a>用來增強模型之非線性表達能力。</li>
+<li>通過<code>Add</code>(殘差連接)與<code>layer normalization</code>(層標準化)。殘差連接有助於模型關注差異特徵。層標準化則穩定隱藏層，例如避免梯度消失或爆炸。</li>
+<li>所有子層的輸出維度皆為512，以簡化模型。</li>
+</ul>
+<h3 id="Decoder">Decoder</h3>
+<ul>
+<li>輸入: 目標序列表示（即ground truth）; 其中比encoder多了一子層的多頭注意力，將encoder之輸出納入該層之輸入。</li>
+<li>輸出: 預測的目標序列表示$y_z, …, y_n$</li>
+<li>包含$N=6$層相同的layer</li>
+<li>除了與encoder相同的兩個子層外，另加上一個子層對encoder之輸出進行多頭注意力，以捕捉上下文訊息(context)。</li>
+<li><code>Masked Multi-Head Attention</code>用以避免序列之不同位置共享位置資訊，即$position_ｉ$僅會利用$position_i$以前(含)的資訊。透過防止當前位置的訊息向後流動，以保持其自回歸的能力，確保生成目標序列的正確性。</li>
+</ul>
+<hr>
+<h2 id="Self-Attention">Self-Attention</h2>
+<p>自注意力機制會對序列中的不同位置進行關注，計算該位置的表示(representation)。</p>
+<ul>
+<li>傳統注意力機制通常為<strong>一整個序列對另一個序列</strong>進行關注。</li>
+<li>自注意力則是將<strong>單個序列中的不同位置相互關聯</strong>，以得到更為全面的關聯資訊。<br>
+<img src="https://hackmd.io/_uploads/rJ9tkfdo2.png" alt=""></li>
+</ul>
+<h3 id="Scaled-Dot-Product-Attention">Scaled Dot-Product Attention</h3>
+<p>Dot-Product (multiplicative) Attention的延伸，再加上了縮放因子(scaling factor) $\dfrac{1}{\sqrt{d_k}}$。$d_k$為query和key的維度時，點積的值會極大，因此利用縮放因子以避免softmax的輸入過大，導致梯度變得極小，而造成模型難以學習或輸出數值不穩定。該縮放因子的作用也能提升模型效率。<br>
+$Attention(Q, K, V)=softmax(\dfrac{QK^T}{\sqrt{d_k}})V$</p>
+<blockquote>
+<p>公式的實際運算可以看李宏毅老師的影片介紹會較詳細</p>
+</blockquote>
+<h3 id="Multi-Head-Attention">Multi-Head Attention</h3>
+<p>使用單個注意力機制時，模型僅能關注單一子空間的表示，而無法充分捕捉不同子空間之間的交互資訊。而多頭注意力機制使每一注意力頭擁有自己的權重，使模型以不同角度捕捉特徵資訊，進而提高模型表現與泛化能力。多頭注意力機制運作如下:</p>
+<ol>
+<li>將Query、Key和Value分別進行線性變換，得到$h$個Query向量、Key向量和Value向量，其中$h$是注意力頭的數量。</li>
+<li>對每個注意力頭$Head_i$，計算Query向量$Q_i$和Key向量$K_i$的點積(dot product)，並將該點積除以縮放因子$\sqrt{d_k}$，其中$d_k$為Query和Key向量的維度。</li>
+<li>將縮放後的點積作為softmax的輸入，以獲得值的<strong>權重</strong>。</li>
+<li>將權重與Value向量$V_i$相乘並加權，得到每一注意力頭的輸出向量<strong>注意力分數</strong>。</li>
+<li>所有的輸出向量拼接。</li>
+<li>將上述拼接的向量透過權重$W^O$進行線性變換映射至另一向量空間中得到最終輸出$Z$。在此輸出矩陣$Z$和輸入矩陣$X$的維度相同，以便後續的全連接層處理。<br>
+$MultiHead(Q, K, V) = Concat(head_1, …, head_h)W^O$<br>
+$head_i = Attention(QW^Q_i, KW^K_i, VW^V_i$)</li>
+</ol>
+<blockquote>
+<p>Query向量$Q_i$和Key向量$K_i$的點積意即兩者是否相似、相關；經過softmax則是兩者的cosine相似度，即視為「相關性」。</p>
+</blockquote>
+<blockquote>
+<p>Query、Key和Value是怎麼來的？<br>
+我們的輸入序列為一矩陣，這個輸入序列各乘上三種不同的權重矩陣$W^Q$、$W^K$、$W^V$，就得到$Q$、$K$和$V$這三個向量了。這些權重矩陣是經過線性轉換訓練來的。而這些權重會有$i$組，如本篇論文所述有8 layers的話就是$i=8$。</p>
+</blockquote>
+<p>本論文的注意力機制有以下特色：</p>
+<ul>
+<li>encoder-decoder層中，Query來自於前一層decoder，而Key-Value則為encoder的輸出。因此，decoder所有位置皆可關注到輸入序列(即encoder)的所有位置的資訊。</li>
+<li>encoder自注意力層中，Query、Key、Value皆來自於前一層encoder的輸出。因此，encoder所有位置皆可關注到前層encoder所有位置的資訊，也就是可以同時關注到不同位置間的依賴關係。</li>
+<li>decoder的Masked多頭自注意力使decoder所有位置皆可關注到該位置以前(含)所有位置的資訊。</li>
+</ul>
+<hr>
+<h2 id="Position-wise-Feed-Forward-Networks">Position-wise Feed-Forward Networks</h2>
+<p>FFN為由兩層全連接層組成，它會對每個位置的隱藏層獨立進行非線性轉換。第一層線性轉換，其隱藏層維度為2048，並且通過激活函數ReLU以捕捉序列中的非線性關係與局部特徵；而第二層則不使用激活函數，直接將維度映射回原本的維度，因此FFN的輸入與輸出維度相同。</p>
+<p>$FFN(x) = max(0, xW_1 + b_1)W_2 + b_2$</p>
+<hr>
+<h2 id="Input">Input</h2>
+<h3 id="Embedding-嵌入層">Embedding(嵌入層)</h3>
+<p>嵌入層將輸入和輸出序列中的token轉換為向量表示，它使用學習到的嵌入矩陣將每個token映射到一個$d_{model}$維的向量空間中。這個向量空間的維度通常是512(此為hyper-parameter)。其將離散的token轉換為連續的向量表示，使模型能夠更好處理輸入和輸出序列中的語義信息和上下文關係。</p>
+<blockquote>
+<p>白話就是，假設我們的輸入是個句子，我們將每個單詞都向量化(Word Embedding)作為Transformer的輸入，向量化的方法有很多，如word2vec就是一種。</p>
+</blockquote>
+<hr>
+<h3 id="Position-Encoding-位置編碼">Position Encoding(位置編碼)</h3>
+<p>位置編碼與嵌入層的維度相同，因此兩者可相加。</p>
+<p>$PE_{(pos, 2i)} = sin(pos/10000^{2i}/d_{model})$<br>
+$PE_{(pos, 2i+1)} = cos(pos/10000^{2i}/d_{model})$</p>
+<blockquote>
+<p>作者實驗過使用以上公式和使用訓練位置嵌入層以獲得位置編碼，但得到的結果相近，因此採用了泛化性較高的正弦公式。如此，要是遇到比訓練資料中更長的序列資料時，會較好進行處理。</p>
+</blockquote>
+<hr>
+<h2 id="實驗設定">實驗設定</h2>
+<ul>
+<li>dataset:
+<ul>
+<li>WMT 2014 English-German dataset</li>
+<li>WMT 2014 English-French dataset</li>
+</ul>
+</li>
+<li>hardware: 8 NVIDIA P100 GPUs</li>
+<li>Training scheule: 100,000 steps(12 hours)</li>
+<li>optimizer: Adam</li>
+<li>regularization
+<ul>
+<li>residual dropout: 1)每一子層輸入前的Norm之前，以及2)嵌入層和位置編碼加總後</li>
+<li>label smoothing
+<blockquote>
+<p>標籤平滑：將訓練數據中的one-hot標籤向量進行平滑化，即將標籤向量中的1分配到正確的標籤上，將剩餘的概率分配給其他標籤。這樣做的目的是使得模型在訓練過程中不會過於自信地預測某個標籤，而是對其他標籤也有一定的預測概率，從而減少模型對訓練數據中噪聲和不確定性的過擬合。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>備註：實驗結果主要是翻譯任務，這邊不再深入探討。</p>
+<hr>
+<h2 id="Reference">Reference</h2>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">Transformer模型详解（图解最完整版）</a><br>
+<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&amp;index=61">Transformer(上)</a><br>
+<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=N6aRv06iv2g&amp;list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&amp;index=13">Transformer(下)</a><br>
+<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=yHoAq1IT_og&amp;list=PLJV_el3uVTsPM2mM-OQzJXziCGJa8nJL8&amp;index=6">Self-attention</a><br>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/148737297">https://zhuanlan.zhihu.com/p/148737297</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43210957/article/details/121843999">https://blog.csdn.net/qq_43210957/article/details/121843999</a><br>
+<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/m/articles/10270016">https://ithelp.ithome.com.tw/m/articles/10270016</a></p>
+<hr>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/it-blog/APSNet_paper_review/" data-toggle="tooltip" data-placement="top" title="APSNet論文介紹">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=Paper Review&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_transformer/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">【論文研讀】Transformer: Attention Is All You</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Transformer</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Encoder-Decoder"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Encoder &amp; Decoder</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Encoder"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Encoder</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Decoder"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Decoder</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Self-Attention"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Self-Attention</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Scaled-Dot-Product-Attention"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Scaled Dot-Product Attention</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Multi-Head-Attention"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Multi-Head Attention</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Position-wise-Feed-Forward-Networks"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Position-wise Feed-Forward Networks</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Input"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Input</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Embedding-%E5%B5%8C%E5%85%A5%E5%B1%A4"><span class="toc-nav-number">2.4.1.</span> <span class="toc-nav-text">Embedding(嵌入層)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Position-Encoding-%E4%BD%8D%E7%BD%AE%E7%B7%A8%E7%A2%BC"><span class="toc-nav-number">2.4.2.</span> <span class="toc-nav-text">Position Encoding(位置編碼)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%AF%A6%E9%A9%97%E8%A8%AD%E5%AE%9A"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">實驗設定</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">Reference</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
 </style>
 
-<!-- Page Header -->
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>404</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">I&#39;m sorry there is nothing that you want , but you can enjoy the scenery here ...</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<script>
-    document.body.classList.add('page-fullscreen');
-</script>
+<!-- anchorjs end -->
+
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->

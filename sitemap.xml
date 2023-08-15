@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/404.html</loc>
+    
+    <lastmod>2023-08-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
     <lastmod>2023-08-15</lastmod>
@@ -23,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/404.html</loc>
+    <loc>https://ntust-sims-lab.github.io/paper_review_transformer/</loc>
     
     <lastmod>2023-08-15</lastmod>
     
@@ -77,6 +84,20 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/research-paper/</loc>
+    <lastmod>2023-08-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/</loc>
+    <lastmod>2023-08-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
     <lastmod>2023-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

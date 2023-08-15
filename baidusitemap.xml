@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_transformer/</loc>
+    <lastmod>2023-08-15</lastmod>
+  </url>
+  <url>
     <loc>https://ntust-sims-lab.github.io/it-blog/APSNet_paper_review/</loc>
     <lastmod>2023-08-08</lastmod>
   </url>
