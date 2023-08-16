@@ -1,27 +1,19 @@
----
-title: APSNet論文介紹
-catalog: true
-date: 2023-08-08
-author: Chao-Hung Huang
-categories:
-- point cloud, pointnet, action recognition
----
-
-# [APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition](https://ieeexplore.ieee.org/document/9844448)(來源自IEEE)
+# [APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition](https://ieeexplore.ieee.org/document/9844448)(IEEE)
 
 # 自適應點採樣的高效3D動作辨識(APSNet)
 
-### 🔹 Journal reference: 
+### :small_blue_diamond: Journal reference: 
 *IEEE, Transactions on Image Processing, Volume 31, 2022, pp 5287–5302*
-### 🔹 Authors: 
-*Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge*
 
-## ✅ 論文重點整理
+### :small_blue_diamond: Authors: 
+*Jiaheng Liu, Jinyang Guo, and Dong Xu*
+
+## :white_check_mark: 論文重點整理
 1. 提出了一個自適應點採樣的設計架構。
 2. 端到端的動作辨識模型，點雲to動作辨識結果。
 3. 相較Benchmark降低點雲模型運算量，並維持一定的準確度。
 
-## ✅ 現有3D動作辨識遇到的問題
+## :white_check_mark: 現有3D動作辨識遇到的問題
 
 ### 1. 現有 3D 動作辨識模型提取動作信息的效率不夠好
 以近期的[3DV-PointNet++ network](https://arxiv.org/abs/2005.05501) (2020年)為例，它需要花費大量時間對點雲數據進行體素化並通過時間排序池預先計算運動信息。
@@ -37,7 +29,7 @@ categories:
 
 ![](https://hackmd.io/_uploads/rkS8_0Nih.png)
 
-## ✅ 論文主要貢獻
+## :white_check_mark: 論文主要貢獻
 
 1. 作者引入高效的骨幹網絡並提出**端到端的自適應點採樣**基於此主幹的網絡（APSNet）架構網絡，專為高效3D而設計的動作辨識模型。
 
@@ -45,10 +37,14 @@ categories:
 
 3. 多個基準的綜合實驗數據集證明了作者骨幹網絡(Backbone Network) 和 APSNet 3D 動作辨識的有效性和效率。
 
-## ✅ Backbone Network 架構介紹
-* **Backbone Network的架構圖：**
+## :white_check_mark: Backbone Network 架構介紹
+* **APSNet的架構圖：**
 
-    ![](https://hackmd.io/_uploads/Skj_nR4s3.png)
+![](https://hackmd.io/_uploads/B1jj9zrsh.png)
+
+* **Coarse feature extraction的架構圖：**
+
+    ![](https://hackmd.io/_uploads/r15gC4f3n.png)
 
     1. Input: 點雲影片(三維點雲資訊)
     2. Frame sampling(得到成雙的frame pairs)
@@ -148,7 +144,7 @@ categories:
 
     最終結合所有的T frame pairs的幾何與動作特徵，再使用分類器來預測影片的動作。
 
-## ✅ 作者的 APSNet 模型架構介紹
+## :white_check_mark: 作者的 APSNet 模型架構介紹
 它與Backbone Network的差異在於，由下圖可知：
 
 ![](https://hackmd.io/_uploads/B1jj9zrsh.png)
@@ -246,7 +242,7 @@ categories:
     舉例來說，當FLOPpair > FLOPtarget時，作者使用較大的![](https://hackmd.io/_uploads/SkdNmLSs3.png)
 來產生大的loss，促使優化器更新權重使分辨率決策往低分辨率調整；反之，則會使loss變小找到該點雲影片最佳分辨率。 
 
-## ✅ THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS
+## :white_check_mark: THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS
 * The network structure of backbone network at the highest resolution (i.e., BBNet3)
 
 ![](https://hackmd.io/_uploads/H1O8pIBj2.png)
@@ -287,7 +283,7 @@ categories:
 
 
 
-## ✅ EXPERIMENTS
+## :white_check_mark: EXPERIMENTS
 ### 1. 資料集
 > [NTU RGB+D 60](https://paperswithcode.com/paper/ntu-rgbd-a-large-scale-dataset-for-3d-human):
 * 60種動作類別
@@ -476,6 +472,14 @@ APSNet-A和APSNet-B是由作者的APSNet用兩種不同計算複雜度，去得�
 
 ![](https://hackmd.io/_uploads/HJxoDFSs3.png)
 
-## ✅ CONCLUSION
+## :white_check_mark: CONCLUSION
 
 在這項論文中，作者研究了設計3D動作網絡結構的準確性與效率。作者引入骨幹網絡並提出自適應點採樣網絡（APSNet）3D動作識別。在給定任意的計算複雜度約束(FLOPtarget)，作者的 APSNet 也可以自適應地為每個點雲影片中的frame pairs選擇出最佳分辨率（即最佳點數）。綜合多個基準數據集的實驗證明了新提出的 APSNet 對於高效 3D 的有效性動作識別。
+
+優點：提出了一個自適應點採樣的設計架構，可以區別複雜與簡單動作幀，複雜的動作才使用較高的分辨率辨別，反之，以低分辨率節省不必要的運算量。
+
+缺點：沒辦法一開始就決定要選擇何種分辨率進行動作辨識，必須先經過至少一次的低分辨率運算，才能做去分辨率的選擇，會造成多餘的運算。
+
+
+
+
