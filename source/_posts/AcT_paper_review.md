@@ -12,39 +12,37 @@ categories:
 
 # [Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition](https://arxiv.org/abs/2107.00606)(arXiv)
 
-### :small_blue_diamond: Journal reference: 
+### Journal reference: 
 *Pattern Recognition, Volume 124, **April 2022**, 108487*
 
-### :small_blue_diamond: Authors: 
+### Authors: 
 *Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge*
 
-### :small_blue_diamond: MPOSE2021:
 [MPOSE2021 github](https://github.com/PIC4SeR/MPOSE2021_Dataset)
 
-### :small_blue_diamond: AcT:
 [AcT github](https://github.com/PIC4SeR/AcT)
 
-## :white_check_mark: 論文重點整理
+## 論文重點整理
 1. 作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。
 2. 在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。
 3. 作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。
 
 
 
-## :white_check_mark: 論文主要貢獻
+## 論文主要貢獻
 
 1. 作者研究了 Transformer encoder 在基於 2D 人體姿態辨識應用，並提出了新穎的 AcT 模型，證明完全自注意力架構可以優於其他 HAR 現有的卷積和循環模型。
 
 2. 作者引入了 MPOSE2021 資料集，一個實時短時 HAR 數據集，適用於基於姿勢和RGB的方法。它包含 15429 個樣本，100 名受試者分別執行 20 種動作，擁有不同的場景，每個場景的幀數有限（20 到 30 之間）。與其他公開可用的數據集相比，在幀數的有限性下，刺激了以低延遲和高吞吐量執行 HAR 的實時方法的開發。
 
-## :white_check_mark: Related works
+## Related works
 ### 1. 作者專注於視頻(2D)的分析方式優點
 在視頻分析的方面，可通過 OpenPose 和 PoseNet 等姿勢檢測身體關節作為 2D 坐標，其方法廣泛應用於簡單的 RGB 相機。相反，3D 骨架數據需要特定的傳感器來獲取，例如 Kinect 或其他立體相機。這帶來了很大的限制，例如可用性、成本、有限的工作範圍（Kinect 的情況下可達 5-6 m）以及室外環境中的性能下降。
 
 ### 2. 專門為短時 HAR 設計的架構與數據集
 相比於先前的方法，作者提出了一種完全基於 Transformer encoder的 HAR 架構，沒有任何卷積層或循環層。MPOSE2021 數據集包括時間持續時間最多為 30 幀的樣本，使其成為更合適測試短時 HAR 模型和低延遲性的基準。
 
-## :white_check_mark: The MPOSE2021 dataset
+## The MPOSE2021 dataset
 * 從先前流行的 HAR 數據集收集數據：
 `Weizmann, i3DPost, IXMAS, KTH, UTKinetic-Action3D (RGB only), UTD-MHAD (RGB only), ISLD, and ISLD-Additional-Sequences(共8個)。`~~要再去了解部分資料集的內容~~
 
@@ -52,7 +50,7 @@ categories:
 
 * 由於不同數據集的操作存在異質性，標籤被重新映射到 20 個常見類別的列表，無法相應地重新映射的操作將被丟棄。可以被映射的動作，視頻就被分為每個30幀的非重疊樣本（剪輯），並保留超過20幀的尾部樣本。
 
-## :white_check_mark: Action Transformer 架構介紹
+## Action Transformer 架構介紹
 * **Overview of the Action Transformer architecture:**
 
     ![](https://hackmd.io/_uploads/HkM6P-rn3.png)
@@ -89,7 +87,7 @@ categories:
     ![](https://hackmd.io/_uploads/HyMANkUnn.png)
 
 
-## :white_check_mark: EXPERIMENTS
+## EXPERIMENTS
 ### 1. MPOSE2021資料集
 T = 20~30 and P = 52(OpenPose) or 68(PoseNet) features
 * OpenPose: 13 個關節點，4個參數 (position x, y and velocities Vx , Vy )
@@ -135,7 +133,7 @@ T = 20~30 and P = 52(OpenPose) or 68(PoseNet) features
 
 此圖測試了 Intel CPU 和 ARM CPU 的延遲。基於 Transformer 的架構的巨大計算效率，而卷積網絡和循環網絡會導致 CPU 使用率更高。
 
-## :white_check_mark: Conclusion and future work
+## Conclusion and future work
 以下是作者提供的優缺點以及未來研究：
 
 優點：
