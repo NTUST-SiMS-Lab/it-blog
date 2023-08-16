@@ -1,3 +1,15 @@
+---
+title: 【論文研讀】AcT - Action Transformer
+catalog: true
+date: 2023-08-16
+author: Kevin Huang
+categories:
+- paper review
+- transformer
+---
+
+[![hackmd-github-sync-badge](https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w/badge)](https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w)
+
 # [Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition](https://arxiv.org/abs/2107.00606)(arXiv)
 
 ### :small_blue_diamond: Journal reference: 
