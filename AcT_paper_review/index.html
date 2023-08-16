@@ -374,21 +374,19 @@
 
         <p><a target="_blank" rel="noopener" href="https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w"><img src="https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w/badge" alt="hackmd-github-sync-badge"></a></p>
 <h1><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.00606">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition</a>(arXiv)</h1>
-<h3 id="small-blue-diamond-Journal-reference">:small_blue_diamond: Journal reference:</h3>
+<h3 id="Journal-reference">Journal reference:</h3>
 <p><em>Pattern Recognition, Volume 124, <strong>April 2022</strong>, 108487</em></p>
-<h3 id="small-blue-diamond-Authors">:small_blue_diamond: Authors:</h3>
+<h3 id="Authors">Authors:</h3>
 <p><em>Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge</em></p>
-<h3 id="small-blue-diamond-MPOSE2021">:small_blue_diamond: MPOSE2021:</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/MPOSE2021_Dataset">MPOSE2021 github</a></p>
-<h3 id="small-blue-diamond-AcT">:small_blue_diamond: AcT:</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/AcT">AcT github</a></p>
-<h2 id="white-check-mark-論文重點整理">:white_check_mark: 論文重點整理</h2>
+<h2 id="論文重點整理">論文重點整理</h2>
 <ol>
 <li>作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。</li>
 <li>在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。</li>
 <li>作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。</li>
 </ol>
-<h2 id="white-check-mark-論文主要貢獻">:white_check_mark: 論文主要貢獻</h2>
+<h2 id="論文主要貢獻">論文主要貢獻</h2>
 <ol>
 <li>
 <p>作者研究了 Transformer encoder 在基於 2D 人體姿態辨識應用，並提出了新穎的 AcT 模型，證明完全自注意力架構可以優於其他 HAR 現有的卷積和循環模型。</p>
@@ -397,12 +395,12 @@
 <p>作者引入了 MPOSE2021 資料集，一個實時短時 HAR 數據集，適用於基於姿勢和RGB的方法。它包含 15429 個樣本，100 名受試者分別執行 20 種動作，擁有不同的場景，每個場景的幀數有限（20 到 30 之間）。與其他公開可用的數據集相比，在幀數的有限性下，刺激了以低延遲和高吞吐量執行 HAR 的實時方法的開發。</p>
 </li>
 </ol>
-<h2 id="white-check-mark-Related-works">:white_check_mark: Related works</h2>
+<h2 id="Related-works">Related works</h2>
 <h3 id="1-作者專注於視頻-2D-的分析方式優點">1. 作者專注於視頻(2D)的分析方式優點</h3>
 <p>在視頻分析的方面，可通過 OpenPose 和 PoseNet 等姿勢檢測身體關節作為 2D 坐標，其方法廣泛應用於簡單的 RGB 相機。相反，3D 骨架數據需要特定的傳感器來獲取，例如 Kinect 或其他立體相機。這帶來了很大的限制，例如可用性、成本、有限的工作範圍（Kinect 的情況下可達 5-6 m）以及室外環境中的性能下降。</p>
 <h3 id="2-專門為短時-HAR-設計的架構與數據集">2. 專門為短時 HAR 設計的架構與數據集</h3>
 <p>相比於先前的方法，作者提出了一種完全基於 Transformer encoder的 HAR 架構，沒有任何卷積層或循環層。MPOSE2021 數據集包括時間持續時間最多為 30 幀的樣本，使其成為更合適測試短時 HAR 模型和低延遲性的基準。</p>
-<h2 id="white-check-mark-The-MPOSE2021-dataset">:white_check_mark: The MPOSE2021 dataset</h2>
+<h2 id="The-MPOSE2021-dataset">The MPOSE2021 dataset</h2>
 <ul>
 <li>從先前流行的 HAR 數據集收集數據：<br>
 <code>Weizmann, i3DPost, IXMAS, KTH, UTKinetic-Action3D (RGB only), UTD-MHAD (RGB only), ISLD, and ISLD-Additional-Sequences(共8個)。</code><s>要再去了解部分資料集的內容</s></li>
@@ -411,7 +409,7 @@
 <ul>
 <li>由於不同數據集的操作存在異質性，標籤被重新映射到 20 個常見類別的列表，無法相應地重新映射的操作將被丟棄。可以被映射的動作，視頻就被分為每個30幀的非重疊樣本（剪輯），並保留超過20幀的尾部樣本。</li>
 </ul>
-<h2 id="white-check-mark-Action-Transformer-架構介紹">:white_check_mark: Action Transformer 架構介紹</h2>
+<h2 id="Action-Transformer-架構介紹">Action Transformer 架構介紹</h2>
 <ul>
 <li>
 <p><strong>Overview of the Action Transformer architecture:</strong></p>
@@ -454,7 +452,7 @@
 <p><img src="https://hackmd.io/_uploads/HyMANkUnn.png" alt=""></p>
 </li>
 </ul>
-<h2 id="white-check-mark-EXPERIMENTS">:white_check_mark: EXPERIMENTS</h2>
+<h2 id="EXPERIMENTS">EXPERIMENTS</h2>
 <h3 id="1-MPOSE2021資料集">1. MPOSE2021資料集</h3>
 <p>T = 20~30 and P = 52(OpenPose) or 68(PoseNet) features</p>
 <ul>
@@ -493,7 +491,7 @@
 </blockquote>
 <p><img src="https://hackmd.io/_uploads/By-dD0L22.png" alt=""></p>
 <p>此圖測試了 Intel CPU 和 ARM CPU 的延遲。基於 Transformer 的架構的巨大計算效率，而卷積網絡和循環網絡會導致 CPU 使用率更高。</p>
-<h2 id="white-check-mark-Conclusion-and-future-work">:white_check_mark: Conclusion and future work</h2>
+<h2 id="Conclusion-and-future-work">Conclusion and future work</h2>
 <p>以下是作者提供的優缺點以及未來研究：</p>
 <p>優點：</p>
 <ol>
@@ -623,7 +621,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Journal-reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">:small_blue_diamond: Journal reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">:small_blue_diamond: Authors:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-MPOSE2021"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">:small_blue_diamond: MPOSE2021:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-AcT"><span class="toc-nav-number">1.0.4.</span> <span class="toc-nav-text">:small_blue_diamond: AcT:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">:white_check_mark: 論文重點整理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">:white_check_mark: 論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">:white_check_mark: Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E4%BD%9C%E8%80%85%E5%B0%88%E6%B3%A8%E6%96%BC%E8%A6%96%E9%A0%BB-2D-%E7%9A%84%E5%88%86%E6%9E%90%E6%96%B9%E5%BC%8F%E5%84%AA%E9%BB%9E"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 作者專注於視頻(2D)的分析方式優點</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%B0%88%E9%96%80%E7%82%BA%E7%9F%AD%E6%99%82-HAR-%E8%A8%AD%E8%A8%88%E7%9A%84%E6%9E%B6%E6%A7%8B%E8%88%87%E6%95%B8%E6%93%9A%E9%9B%86"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 專門為短時 HAR 設計的架構與數據集</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-The-MPOSE2021-dataset"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">:white_check_mark: The MPOSE2021 dataset</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Action-Transformer-%E6%9E%B6%E6%A7%8B%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">:white_check_mark: Action Transformer 架構介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-EXPERIMENTS"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">:white_check_mark: EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-MPOSE2021%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">1. MPOSE2021資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-Openpose"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">2. 短時 HAR 不同 Benchmark 比較(Openpose)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-PoseNet"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">3. 短時 HAR 不同 Benchmark 比較(PoseNet)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Latency-measurements"><span class="toc-nav-number">1.6.4.</span> <span class="toc-nav-text">4. Latency measurements</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Conclusion-and-future-work"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">:white_check_mark: Conclusion and future work</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Journal-reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">Journal reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">Authors:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">論文重點整理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E4%BD%9C%E8%80%85%E5%B0%88%E6%B3%A8%E6%96%BC%E8%A6%96%E9%A0%BB-2D-%E7%9A%84%E5%88%86%E6%9E%90%E6%96%B9%E5%BC%8F%E5%84%AA%E9%BB%9E"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 作者專注於視頻(2D)的分析方式優點</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%B0%88%E9%96%80%E7%82%BA%E7%9F%AD%E6%99%82-HAR-%E8%A8%AD%E8%A8%88%E7%9A%84%E6%9E%B6%E6%A7%8B%E8%88%87%E6%95%B8%E6%93%9A%E9%9B%86"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 專門為短時 HAR 設計的架構與數據集</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#The-MPOSE2021-dataset"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">The MPOSE2021 dataset</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Action-Transformer-%E6%9E%B6%E6%A7%8B%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Action Transformer 架構介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#EXPERIMENTS"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-MPOSE2021%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">1. MPOSE2021資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-Openpose"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">2. 短時 HAR 不同 Benchmark 比較(Openpose)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-PoseNet"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">3. 短時 HAR 不同 Benchmark 比較(PoseNet)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Latency-measurements"><span class="toc-nav-number">1.6.4.</span> <span class="toc-nav-text">4. Latency measurements</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion-and-future-work"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">Conclusion and future work</span></a></li></ol></li></ol>
         
         </div>
       </aside>
