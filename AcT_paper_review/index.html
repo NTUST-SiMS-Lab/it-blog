@@ -88,7 +88,7 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/paper-review/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/">
   <title>
     
       SiMS Lab | IT Blog
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1></h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by @ntust-simslab on
+              2023-08-16
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">7</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">1.9k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,245 +364,324 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.00606">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition</a>(arXiv)</h1>
+<h3 id="small-blue-diamond-Journal-reference">:small_blue_diamond: Journal reference:</h3>
+<p><em>Pattern Recognition, Volume 124, <strong>April 2022</strong>, 108487</em></p>
+<h3 id="small-blue-diamond-Authors">:small_blue_diamond: Authors:</h3>
+<p><em>Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge</em></p>
+<h3 id="small-blue-diamond-MPOSE2021">:small_blue_diamond: MPOSE2021:</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/MPOSE2021_Dataset">MPOSE2021 github</a></p>
+<h3 id="small-blue-diamond-AcT">:small_blue_diamond: AcT:</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/AcT">AcT github</a></p>
+<h2 id="white-check-mark-論文重點整理">:white_check_mark: 論文重點整理</h2>
+<ol>
+<li>作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。</li>
+<li>在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。</li>
+<li>作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。</li>
+</ol>
+<h2 id="white-check-mark-論文主要貢獻">:white_check_mark: 論文主要貢獻</h2>
+<ol>
+<li>
+<p>作者研究了 Transformer encoder 在基於 2D 人體姿態辨識應用，並提出了新穎的 AcT 模型，證明完全自注意力架構可以優於其他 HAR 現有的卷積和循環模型。</p>
+</li>
+<li>
+<p>作者引入了 MPOSE2021 資料集，一個實時短時 HAR 數據集，適用於基於姿勢和RGB的方法。它包含 15429 個樣本，100 名受試者分別執行 20 種動作，擁有不同的場景，每個場景的幀數有限（20 到 30 之間）。與其他公開可用的數據集相比，在幀數的有限性下，刺激了以低延遲和高吞吐量執行 HAR 的實時方法的開發。</p>
+</li>
+</ol>
+<h2 id="white-check-mark-Related-works">:white_check_mark: Related works</h2>
+<h3 id="1-作者專注於視頻-2D-的分析方式優點">1. 作者專注於視頻(2D)的分析方式優點</h3>
+<p>在視頻分析的方面，可通過 OpenPose 和 PoseNet 等姿勢檢測身體關節作為 2D 坐標，其方法廣泛應用於簡單的 RGB 相機。相反，3D 骨架數據需要特定的傳感器來獲取，例如 Kinect 或其他立體相機。這帶來了很大的限制，例如可用性、成本、有限的工作範圍（Kinect 的情況下可達 5-6 m）以及室外環境中的性能下降。</p>
+<h3 id="2-專門為短時-HAR-設計的架構與數據集">2. 專門為短時 HAR 設計的架構與數據集</h3>
+<p>相比於先前的方法，作者提出了一種完全基於 Transformer encoder的 HAR 架構，沒有任何卷積層或循環層。MPOSE2021 數據集包括時間持續時間最多為 30 幀的樣本，使其成為更合適測試短時 HAR 模型和低延遲性的基準。</p>
+<h2 id="white-check-mark-The-MPOSE2021-dataset">:white_check_mark: The MPOSE2021 dataset</h2>
+<ul>
+<li>從先前流行的 HAR 數據集收集數據：<br>
+<code>Weizmann, i3DPost, IXMAS, KTH, UTKinetic-Action3D (RGB only), UTD-MHAD (RGB only), ISLD, and ISLD-Additional-Sequences(共8個)。</code><s>要再去了解部分資料集的內容</s></li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/HJc4Z043n.png" alt=""></p>
+<ul>
+<li>由於不同數據集的操作存在異質性，標籤被重新映射到 20 個常見類別的列表，無法相應地重新映射的操作將被丟棄。可以被映射的動作，視頻就被分為每個30幀的非重疊樣本（剪輯），並保留超過20幀的尾部樣本。</li>
+</ul>
+<h2 id="white-check-mark-Action-Transformer-架構介紹">:white_check_mark: Action Transformer 架構介紹</h2>
+<ul>
+<li>
+<p><strong>Overview of the Action Transformer architecture:</strong></p>
+<p><img src="https://hackmd.io/_uploads/HkM6P-rn3.png" alt=""></p>
+<ol>
+<li>Input: RBG 影片(T frames of dimension H × W)。</li>
+<li>使用預訓練好的 OpenPose 或 PoseNet 模型，逐幀找出 2D pose 的關節點。</li>
+<li>Linear Projection of Pose Features，將每幀所有骨架點特徵 (骨架點數量乘上每個骨架特徵共4個) 轉換成 1D 的 token (有幾個 T 就有幾個 token)。</li>
+<li>承第三個步驟得到的陣列，加上 positional information 的 token，position 的數量對應為 n+1 (n 為 input 影片幀數)，【*】為起始資訊的 token，position 為 0。</li>
+<li>所有 token 投入 Transformer Encoder 裡，再經過 MLP 與 Softmax 輸出動作分類結果。</li>
+</ol>
+</li>
+<li>
+<p><strong>Transformer encoder layer architecture (left) and schematic overview of a multi-head self-attention block (right):</strong></p>
+<p><img src="https://hackmd.io/_uploads/Sk9NObH33.png" alt=""></p>
+<p>Transformer Encoder(左圖) x <strong>L層</strong>:</p>
+<ol>
+<li>Input: 每幀關節點轉換成的 token，以及*起始資訊的token。</li>
+<li>Multi-Head Self-Attention</li>
+<li>Dropout</li>
+<li>先做residual connections(<a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/ejn4omn.html">殘差連接</a>), 再做<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395855181">Layernorm</a></li>
+<li>Feed Forward:
+<ul>
+<li>第一層擴增維度從Dmodel 到 Dmlp(4 · Dmodel)。(MLP + <a target="_blank" rel="noopener" href="https://medium.com/@shauryagoel/gelu-gaussian-error-linear-unit-4ec59fb2e47c">GeLu non-linearity</a>(激活函數))</li>
+<li>第二層進行降維從Dmlp to Dmodel。(還原成原本的維度)</li>
+</ul>
+</li>
+<li>Dropout</li>
+<li>先做residual connections(<a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/ejn4omn.html">殘差連接</a>), 再做<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395855181">Layernorm</a></li>
+</ol>
+<p>Multi-Head Self-Attention(右圖):</p>
+<ol>
+<li>Input: 每幀關節點轉換成的 token，以及*起始資訊的token。</li>
+<li>Split: 將 token 額外乘上 H x W 個權重(Q、K、V都一樣)</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/BkeLWAr3n.png" alt=""></p>
+</li>
+<li>
+<p>Action Transformer 四種不同版本的參數調整：</p>
+<p><img src="https://hackmd.io/_uploads/HyMANkUnn.png" alt=""></p>
+</li>
+</ul>
+<h2 id="white-check-mark-EXPERIMENTS">:white_check_mark: EXPERIMENTS</h2>
+<h3 id="1-MPOSE2021資料集">1. MPOSE2021資料集</h3>
+<p>T = 20~30 and P = 52(OpenPose) or 68(PoseNet) features</p>
+<ul>
+<li>OpenPose: 13 個關節點，4個參數 (position x, y and velocities Vx , Vy )<br>
+–&gt;velocities Vx , Vy沒有說明是如何取得的。</li>
+<li>PoseNet: 17 個關節點，4個參數 (position x, y and velocities Vx , Vy )<br>
+–&gt;velocities Vx , Vy沒有說明是如何取得的。</li>
+</ul>
+<p>訓練模型的超參數設置：<img src="https://hackmd.io/_uploads/B1SlGT8hn.png" alt=""></p>
+<ul>
+<li>實驗設備：on a PC with <strong>32-GB RAM</strong>, an <strong>Intel i7-9700K CPU</strong>, and an <strong>Nvidia 2080 Super GP-GPU</strong>.</li>
+</ul>
+<h3 id="2-短時-HAR-不同-Benchmark-比較-Openpose">2. 短時 HAR 不同 Benchmark 比較(Openpose)</h3>
+<blockquote>
+<p>OpenPose vs PoseNet:</p>
+<p><strong>PoseNet</strong> 專為在瀏覽器或移動設備等輕量級設備上運行而構建(<a target="_blank" rel="noopener" href="https://wiseocean.tech/edge-ai-semi-opportunities/">Edge AI</a>)，而 <strong>OpenPose</strong> 更加準確，並且旨在在 GPU 驅動的系統上運行。</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/S11MNaUh3.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/BkkfraUn3.png" alt=""></p>
+<blockquote>
+<p>Split: Split 1、Split 2、Split 3</p>
+</blockquote>
+<p>隨機抽取21位受測者作為testing，其餘的人作為training<br>
+<img src="https://hackmd.io/_uploads/BJWw7ALhh.png" alt=""></p>
+<blockquote>
+<p>Balanced %:</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/HynvfC83n.png" alt=""></p>
+<h3 id="3-短時-HAR-不同-Benchmark-比較-PoseNet">3. 短時 HAR 不同 Benchmark 比較(PoseNet)</h3>
+<p><img src="https://hackmd.io/_uploads/BkkrE082h.png" alt=""></p>
+<h3 id="4-Latency-measurements">4. Latency measurements</h3>
+<blockquote>
+<p>使用<a target="_blank" rel="noopener" href="https://www.tensorflow.org/lite/performance/measurement">TFLite Benchmark tool</a>進行延遲評測</p>
+<p>基準測試：使用 8 個線程執行 10 次預熱運行，然後執行 100 次連續前向傳遞。</p>
+<p>2種CPUS: Intel i7-9700K(PC) &amp; ARM-based HiSilicon Kirin 970(mobile phone)</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/By-dD0L22.png" alt=""></p>
+<p>此圖測試了 Intel CPU 和 ARM CPU 的延遲。基於 Transformer 的架構的巨大計算效率，而卷積網絡和循環網絡會導致 CPU 使用率更高。</p>
+<h2 id="white-check-mark-Conclusion-and-future-work">:white_check_mark: Conclusion and future work</h2>
+<p>以下是作者提供的優缺點以及未來研究：</p>
+<p>優點：</p>
+<ol>
+<li>作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。</li>
+<li>在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。</li>
+<li>作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。</li>
+</ol>
+<p>缺點：</p>
+<ol>
+<li>沒有利用關節點之間的關係信息(不像GCN會考量點與點之間連結性)。</li>
+</ol>
+<p>未來研究：</p>
+<ol>
+<li>具有 3D 骨架(點雲)和長序列輸入的 AcT 架構</li>
+<li>嘗試將骨架圖作為預先知識納入positional embedding中，並不影響延遲。</li>
+</ol>
+<p>以下是我自己的想法跟疑問：</p>
+<p>缺點：</p>
+<ol>
+<li>作者沒有呈現出實時部份的實驗結果。(在 github 上有一個動圖，但也沒有表明是否為 Act 網路的實測演示)</li>
+</ol>
+<p>未來研究：</p>
+<ol>
+<li>可以嘗試其他較細微的關節點作為特徵投入，如：手部or臉部資訊。</li>
+</ol>
+<p>疑問：</p>
+<ol>
+<li>作者有提到每個關節點都會有4個特徵(position x, y and velocities Vx , Vy)，作者沒有說明 Vx 跟 Vy 是怎麼取得的。</li>
+<li>作者也有提到Benchmark裡有些模型會使用，<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10247936">集成架構(Ensemble Models)</a>的方式來減少模型<a target="_blank" rel="noopener" href="https://jason-chen-1992.weebly.com/home/-bias-variance-tradeoff">方差</a>，因此作者也分別創建三個集成版本，分別具有 2、5 和 10 個 AcT-μ 實例，但我不知道作者是用什麼方法如何建立集成架構。</li>
+</ol>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                Untitled
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="previous">
+            <a href="/it-blog/APSNet_paper_review/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
           </li>
           
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                Untitled
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/paper_review_transformer/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Transformer - Attention Is All You Need">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../APSNet_paper_review/">
-      <li>(no title)</li>
-    </a>
-    
-    <a href="../../AcT_paper_review/">
-      <li>(no title)</li>
-    </a>
-    
-    <a href="../../paper_review_transformer/">
-      <li>【論文研讀】Transformer - Attention Is All You Need</li>
-    </a>
-    
-    <a href="../../i_want_to_graduate/">
-      <li>學習寫論文的小工具 - 我好想畢業</li>
-    </a>
-    
-    <a href="../../hello_world/">
-      <li>如何在 Hackmd 中 push 自己的文章至 Github</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">August 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
