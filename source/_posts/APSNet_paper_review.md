@@ -12,18 +12,18 @@ categories:
 
 # 自適應點採樣的高效3D動作辨識(APSNet)
 
-### :small_blue_diamond: Journal reference: 
+### Journal reference: 
 *IEEE, Transactions on Image Processing, Volume 31, 2022, pp 5287–5302*
 
 ### :small_blue_diamond: Authors: 
 *Jiaheng Liu, Jinyang Guo, and Dong Xu*
 
-## :white_check_mark: 論文重點整理
+## 論文重點整理
 1. 提出了一個自適應點採樣的設計架構。
 2. 端到端的動作辨識模型，點雲to動作辨識結果。
 3. 相較Benchmark降低點雲模型運算量，並維持一定的準確度。
 
-## :white_check_mark: 現有3D動作辨識遇到的問題
+## 現有3D動作辨識遇到的問題
 
 ### 1. 現有 3D 動作辨識模型提取動作信息的效率不夠好
 以近期的[3DV-PointNet++ network](https://arxiv.org/abs/2005.05501) (2020年)為例，它需要花費大量時間對點雲數據進行體素化並通過時間排序池預先計算運動信息。
@@ -39,7 +39,7 @@ categories:
 
 ![](https://hackmd.io/_uploads/rkS8_0Nih.png)
 
-## :white_check_mark: 論文主要貢獻
+## 論文主要貢獻
 
 1. 作者引入高效的骨幹網絡並提出**端到端的自適應點採樣**基於此主幹的網絡（APSNet）架構網絡，專為高效3D而設計的動作辨識模型。
 
@@ -47,7 +47,7 @@ categories:
 
 3. 多個基準的綜合實驗數據集證明了作者骨幹網絡(Backbone Network) 和 APSNet 3D 動作辨識的有效性和效率。
 
-## :white_check_mark: Backbone Network 架構介紹
+## Backbone Network 架構介紹
 * **APSNet的架構圖：**
 
 ![](https://hackmd.io/_uploads/B1jj9zrsh.png)
@@ -154,7 +154,7 @@ categories:
 
     最終結合所有的T frame pairs的幾何與動作特徵，再使用分類器來預測影片的動作。
 
-## :white_check_mark: 作者的 APSNet 模型架構介紹
+## 作者的 APSNet 模型架構介紹
 它與Backbone Network的差異在於，由下圖可知：
 
 ![](https://hackmd.io/_uploads/B1jj9zrsh.png)
@@ -252,7 +252,7 @@ categories:
     舉例來說，當FLOPpair > FLOPtarget時，作者使用較大的![](https://hackmd.io/_uploads/SkdNmLSs3.png)
 來產生大的loss，促使優化器更新權重使分辨率決策往低分辨率調整；反之，則會使loss變小找到該點雲影片最佳分辨率。 
 
-## :white_check_mark: THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS
+## THE DETAILED ARCHITECTURE OF MULTI-RESOLUTION BACKBONE NETWORKS
 * The network structure of backbone network at the highest resolution (i.e., BBNet3)
 
 ![](https://hackmd.io/_uploads/H1O8pIBj2.png)
@@ -293,7 +293,7 @@ categories:
 
 
 
-## :white_check_mark: EXPERIMENTS
+## EXPERIMENTS
 ### 1. 資料集
 > [NTU RGB+D 60](https://paperswithcode.com/paper/ntu-rgbd-a-large-scale-dataset-for-3d-human):
 * 60種動作類別
@@ -482,7 +482,7 @@ APSNet-A和APSNet-B是由作者的APSNet用兩種不同計算複雜度，去得�
 
 ![](https://hackmd.io/_uploads/HJxoDFSs3.png)
 
-## :white_check_mark: CONCLUSION
+## CONCLUSION
 
 在這項論文中，作者研究了設計3D動作網絡結構的準確性與效率。作者引入骨幹網絡並提出自適應點採樣網絡（APSNet）3D動作識別。在給定任意的計算複雜度約束(FLOPtarget)，作者的 APSNet 也可以自適應地為每個點雲影片中的frame pairs選擇出最佳分辨率（即最佳點數）。綜合多個基準數據集的實驗證明了新提出的 APSNet 對於高效 3D 的有效性動作識別。
 
