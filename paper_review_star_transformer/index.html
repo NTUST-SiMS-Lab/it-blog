@@ -322,11 +322,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">11</span> Minutes
+              Estimated Reading Time <span class="post-count">10</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">2.7k</span> In Total
+              Words <span class="post-count">2.5k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -372,7 +372,8 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.07503">STAR-Transformer: A Spatio-temporal Cross Attention Transformer for Human Action Recognition</a></p>
+        <p><a target="_blank" rel="noopener" href="https://hackmd.io/i9DwNzkbR5-e2nPl5HrjoQ"><img src="https://hackmd.io/i9DwNzkbR5-e2nPl5HrjoQ/badge" alt="hackmd-github-sync-badge"></a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.07503">STAR-Transformer: A Spatio-temporal Cross Attention Transformer for Human Action Recognition</a></p>
 <ul>
 <li>Journal reference: 2023 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</li>
 <li>Author: Dasom Ahn, Sangwon Kim, Hyunsu Hong, Byoung Chul Ko*</li>
@@ -424,13 +425,13 @@
 補充: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/340149804">ViT</a></p>
 <h2 id="Cross-Modal-Learning">Cross-Modal Learning</h2>
 <p>跨模態的部分包含了三種資訊，即全域性、局部性、以及合併資訊，因此在類別上也會有三種。其中在特徵提取使用了預訓練模型ResNet-MC18 (mixed convolution 18)[43]，透過其不同層之特徵圖得到全域與局部的特徵再以Transformer加以提取與結合。</p>
-<h3 id="Global-grid-token-GG-token-mathbb-T-t-g">Global grid token (GG-token) $\mathbb{T}^{t}_{g}$</h3>
+<h3 id="Global-grid-token-GG-token-mathbb-T-t-g">Global grid token (GG-token)  $\mathbb{T}^{t}_{g}$</h3>
 <ul>
-<li>提取ResNet18之<strong>最後一層</strong>作為全域特徵，得$h \times w$之特徵圖，並且將其flatten為$hw$ (即$P$)之向量，即得到$\mathbb{T}^{t}<em>{g}$中$g^{t}</em>{1,…,P}$之各元素：$\mathbb{T}^{t}<em>{g} = { g^{t}</em>{1}, …, g^{t}_{P} }$</li>
+<li>提取ResNet18之<strong>最後一層</strong>作為全域特徵，得 $h \times w$ 之特徵圖，並且將其flatten為 $hw$ (即 $P$ )之向量，即得到 $\mathbb{T}^{t}<em>{g}$ 中 $g^{t}</em>{1,…,P}$ 之各元素： $\mathbb{T}^{t}<em>{g} = { g^{t}</em>{1}, …, g^{t}_{P} }$</li>
 </ul>
-<h3 id="Joint-map-token-JM-tokem-mathbb-T-t-j">Joint map token (JM-tokem) $\mathbb{T}^{t}_{j}$</h3>
+<h3 id="Joint-map-token-JM-tokem-mathbb-T-t-j">Joint map token (JM-tokem)  $\mathbb{T}^{t}_{j}$</h3>
 <ul>
-<li>提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}<em>{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}</em>{n}$的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為$h’ \times w’$：$\mathbb{T}^{t}<em>{j} = { j^{t}</em>{1}, …, j^{t}_{N} }$, where $N$ is the number of joint heat map<br>
+<li>提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}<em>{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}</em>{n}$ 的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為 $h’ \times w’$ ： $\mathbb{T}^{t}<em>{j} = { j^{t}</em>{1}, …, j^{t}_{N} }$, where $N$ is the number of joint heat map <br><br>
 <img src="https://hackmd.io/_uploads/S1rvvvLc3.png" alt=""></li>
 </ul>
 <h3 id="Multi-class-token-Z">Multi-class token $Z$</h3>
@@ -444,23 +445,23 @@ $Z = \mathbb{T}</em>{g} \oplus \mathbb{T}<em>{j} \oplus CLS</em>{total}$<br>
 <h2 id="Spatio-temporal-cross-attention">Spatio-temporal cross attention</h2>
 <p><img src="https://hackmd.io/_uploads/BkTyMuIqn.png" alt=""></p>
 <h3 id="FAttn-full-spatical-temperal-attantion">FAttn (full spatical-temperal attantion)</h3>
-<p>該輸入包含了所有空間維度與時間維度的資訊，其複雜性為$T^{2}S^{2}$。而另外設計的兩個注意力機制將$T$的部分拆為兩份分別給了Q向量和KV向量，因此其複雜性僅為FAttn的四分之一倍。<br>
+<p>該輸入包含了所有空間維度與時間維度的資訊，其複雜性為$T^{2}S^{2}$。而另外設計的兩個注意力機制將$T$的部分拆為兩份分別給了Q向量和KV向量，因此其複雜性僅為FAttn的四分之一倍。 <br><br>
 $FAttn(Q, K, V) = \displaystyle\sum^{T}<em>{t} \displaystyle\sum^{S}</em>{s} Softmax{\dfrac{Q_{s,t} \cdot K_{s, t}}{\sqrt{d_{h}}}} V_{s,t}$</p>
 <h3 id="ZAttn-zigzag-spatical-temperal-attantion">ZAttn (zigzag spatical-temperal attantion)</h3>
-<p>Q與K和V套用了交叉幀資訊之解藕，即將$T$資訊分為基偶數幀，並且交互計算出$a’$和$a’‘$再將其合併。首先，$a’$以所有TS之基數幀作為Q向量而偶數幀則為K和V向量；而$a’'$則反之，以所有TS之基數幀作為K和V向量而偶數幀則為Q向量。如此作法是希望能捕捉到特徵中的細微變動。</p>
-<p>$a’ = \displaystyle\sum^{T/2}<em>{t} \displaystyle\sum^{S}</em>{s} Softmax{\dfrac{Q’<em>{s,t} \cdot K’</em>{s, t}}{\sqrt{d_{h}}}} V’<em>{s,t}$<br>
-$a’’ = \displaystyle\sum^{T/2}</em>{t} \displaystyle\sum^{S}<em>{s} Softmax{\dfrac{Q’'</em>{s,t} \cdot K’‘<em>{s, t}}{\sqrt{d</em>{h}}}} V’‘_{s,t}$<br>
-$ZAttn(Q, K, V) = a’ \oplus a’'$</p>
+<p>Q與K和V套用了交叉幀資訊之解藕，即將$T$資訊分為基偶數幀，並且交互計算出$a’$和$a’‘$再將其合併。首先，$a’$以所有TS之基數幀作為Q向量而偶數幀則為K和V向量；而$a’'$則反之，以所有TS之基數幀作為K和V向量而偶數幀則為Q向量。如此作法是希望能捕捉到特徵中的細微變動。 <br></p>
+<p>$a’ = \displaystyle\sum^{T/2}<em>{t} \displaystyle\sum^{S}</em>{s} Softmax{\dfrac{Q’<em>{s,t} \cdot K’</em>{s, t}}{\sqrt{d_{h}}}} V’<em>{s,t}$ <br><br>
+$a’’ = \displaystyle\sum^{T/2}</em>{t} \displaystyle\sum^{S}<em>{s} Softmax{\dfrac{Q’'</em>{s,t} \cdot K’‘<em>{s, t}}{\sqrt{d</em>{h}}}} V’‘_{s,t}$ <br><br>
+$ZAttn(Q, K, V) = a’ \oplus a’'$ <br></p>
 <p>註：zigzag意指曲折的線段，指的就是在此方法上會將資訊以Z行曲折的方式拆分開來。</p>
 <h3 id="BAttn-binary-spatical-temperal-attantion">BAttn (binary spatical-temperal attantion)</h3>
-<p>BAttn之注意力機制同樣將原來的TS資訊分為前後段，並分配予Q向量與K、V向量。<br>
+<p>BAttn之注意力機制同樣將原來的TS資訊分為前後段，並分配予Q向量與K、V向量。 <br><br>
 $BAttn(Q, K, V) = b’ \oplus b’'$</p>
 <h2 id="Encoder-Decoder">Encoder &amp; Decoder</h2>
-<p>本研究提出的Transformer encoder-decoder結構是以一般的Transformer為基礎，而非處理影像的ViT那樣僅有encoder。<br>
-$\bar{Z}<em>{l} = LN{FSTA(z</em>{l-1})+z_{l-1}}$<br>
-$z’<em>{l}, z’'</em>{l} = Decoupling(\bar{Z}<em>{l})$<br>
-$\hat{Z}</em>{l} =LN{(STA(z’<em>{l})+z’</em>{l}) \oplus (STA(z’'<em>{l})+z’'</em>{l})}$<br>
-$z_{l} = LN{MLP(\bar{z}<em>{l}) + \bar{z}</em>{l}}$<br>
+<p>本研究提出的Transformer encoder-decoder結構是以一般的Transformer為基礎，而非處理影像的ViT那樣僅有encoder。 <br><br>
+$\bar{Z}<em>{l} = LN{FSTA(z</em>{l-1})+z_{l-1}}$ <br><br>
+$z’<em>{l}, z’'</em>{l} = Decoupling(\bar{Z}<em>{l})$ <br><br>
+$\hat{Z}</em>{l} =LN{(STA(z’<em>{l})+z’</em>{l}) \oplus (STA(z’'<em>{l})+z’'</em>{l})}$ <br><br>
+$z_{l} = LN{MLP(\bar{z}<em>{l}) + \bar{z}</em>{l}}$ <br><br>
 如此經過STAR Transformer的多類別token便會透過平均、餵入MLP推測動作標籤，即將多類別的特徵類別融合為單一類別。</p>
 <hr>
 <h1>Results</h1>
@@ -546,30 +547,6 @@ $z_{l} = LN{MLP(\bar{z}<em>{l}) + \bar{z}</em>{l}}$<br>
 <ul>
 <li>設計更有效率的模型，例如可使用較少量的資料進行訓練</li>
 <li>將模型修改為可同時進行骨架特徵與動作辨識的端到端模型</li>
-</ul>
-<hr>
-<h1>Reference</h1>
-<ul>
-<li>ViT
-<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2010.11929">An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</a></li>
-<li>實作: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/594622901">https://zhuanlan.zhihu.com/p/594622901</a></li>
-<li>[9] J. Chen and C. M. Ho. Mm-vit: Multi-modal video transformer for compressed video action recognition. In The Winter Conference on Applications of Computer Vision (WACV), pages 1910–1921, 2022.</li>
-</ul>
-</li>
-<li>Cross-modal
-<ul>
-<li>[14] S. Das, S. Sharma, R. Dai, F. Bremond, and M. Thonnat. Vpn: Learning video-pose embedding for activities of daily living. In The European Conference on Computer Vision (ECCV), pages 72–90. Springer, 2020.</li>
-<li>[15] M. Davoodikakhki and K. Yin. Hierarchical action classification with network pruning. In International Symposium on Visual Computing, pages 291–305. Springer, 2020.</li>
-<li>[39] L. Su, C. Hu, G. Li, and D. Cao. Msaf: Multimodal split attention fusion. arXiv preprint arXiv:2012.07175, 2020.</li>
-<li>[35] V. Reza, H. Joze, A. Shaban, M. L Iuzzolino, and K. Koishida. Mmtm: Multimodal transfer module for cnn fusion. In The Conference on Computer Vision and Pattern Recognition (CVPR), pages 13289–13299, 2020.</li>
-</ul>
-</li>
-<li>limitation
-<ul>
-<li>[27] Y. Liang, P. Zhou, R. Zimmermann, and S. Yan. Dualformer: Local-global stratified transformer for efficient video recognition. arXiv preprint arXiv:2112.04674, 2021.</li>
-</ul>
-</li>
 </ul>
 <hr>
 <h2 id="補充問題">補充問題</h2>
@@ -690,7 +667,7 @@ $z_{l} = LN{MLP(\bar{z}<em>{l}) + \bar{z}</em>{l}}$<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Introduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%8F%BE%E4%BB%8AHAR%E6%8A%80%E8%A1%93%E9%9D%A2%E8%87%A8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">現今HAR技術面臨的問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9C%AC%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">本研究主要貢獻</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Cross-Modal-Learning"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Cross-Modal Learning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Global-grid-token-GG-token-mathbb-T-t-g"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Global grid token (GG-token) $\mathbb{T}^{t}_{g}$</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Joint-map-token-JM-tokem-mathbb-T-t-j"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Joint map token (JM-tokem) $\mathbb{T}^{t}_{j}$</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Multi-class-token-Z"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">Multi-class token $Z$</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Spatio-temporal-cross-attention"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Spatio-temporal cross attention</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FAttn-full-spatical-temperal-attantion"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">FAttn (full spatical-temperal attantion)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ZAttn-zigzag-spatical-temperal-attantion"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">ZAttn (zigzag spatical-temperal attantion)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BAttn-binary-spatical-temperal-attantion"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">BAttn (binary spatical-temperal attantion)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Encoder-Decoder"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Encoder &amp; Decoder</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Results</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Datasets"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Datasets</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Implemetation-details"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Implemetation details</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Quantitative-analysis-Penn-Action"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Quantitative analysis: Penn-Action</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Quantitative-analysis-NTU-RGB-D"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Quantitative analysis: NTU RGB+D</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Qualitative-analysis-Ablation-study"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Qualitative analysis (Ablation study)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Future works</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Reference</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%A3%9C%E5%85%85%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">補充問題</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Introduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%8F%BE%E4%BB%8AHAR%E6%8A%80%E8%A1%93%E9%9D%A2%E8%87%A8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">現今HAR技術面臨的問題</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9C%AC%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">本研究主要貢獻</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Cross-Modal-Learning"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Cross-Modal Learning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Global-grid-token-GG-token-mathbb-T-t-g"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Global grid token (GG-token)  $\mathbb{T}^{t}_{g}$</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Joint-map-token-JM-tokem-mathbb-T-t-j"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Joint map token (JM-tokem)  $\mathbb{T}^{t}_{j}$</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Multi-class-token-Z"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">Multi-class token $Z$</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Spatio-temporal-cross-attention"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Spatio-temporal cross attention</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FAttn-full-spatical-temperal-attantion"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">FAttn (full spatical-temperal attantion)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ZAttn-zigzag-spatical-temperal-attantion"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">ZAttn (zigzag spatical-temperal attantion)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BAttn-binary-spatical-temperal-attantion"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">BAttn (binary spatical-temperal attantion)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Encoder-Decoder"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Encoder &amp; Decoder</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Results</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Datasets"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Datasets</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Implemetation-details"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Implemetation details</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Quantitative-analysis-Penn-Action"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Quantitative analysis: Penn-Action</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Quantitative-analysis-NTU-RGB-D"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Quantitative analysis: NTU RGB+D</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Qualitative-analysis-Ablation-study"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Qualitative analysis (Ablation study)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Future works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%A3%9C%E5%85%85%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">補充問題</span></a></li></ol></li></ol>
         
         </div>
       </aside>
