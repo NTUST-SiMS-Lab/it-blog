@@ -4,28 +4,35 @@
   <url>
     <loc>https://ntust-sims-lab.github.io/tags/index.html</loc>
     
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/APSNet_paper_review/</loc>
+    
+    <lastmod>2023-08-16</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/404.html</loc>
     
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/index.html</loc>
     
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>https://ntust-sims-lab.github.io/paper_review_transformer/</loc>
     
     <lastmod>2023-08-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/APSNet_paper_review/</loc>
-    
-    <lastmod>2023-08-08</lastmod>
     
   </url>
   
@@ -60,7 +60,7 @@
 
   <url>
     <loc>https://ntust-sims-lab.github.io/</loc>
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -69,36 +69,29 @@
 
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/point-cloud-pointnet-action-recognition/</loc>
-    <lastmod>2023-08-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/categories/it-blog/</loc>
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/research-paper/</loc>
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/</loc>
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
-    <lastmod>2023-08-15</lastmod>
+    <lastmod>2023-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
