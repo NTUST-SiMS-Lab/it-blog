@@ -1,3 +1,13 @@
+---
+title: 【論文研讀】APSNet - Toward Adaptive Point Sampling
+catalog: true
+date: 2023-08-16
+author: Kevin Huang
+categories:
+- paper review
+- point cloud, pointnet
+---
+
 # [APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition](https://ieeexplore.ieee.org/document/9844448)(IEEE)
 
 # 自適應點採樣的高效3D動作辨識(APSNet)
