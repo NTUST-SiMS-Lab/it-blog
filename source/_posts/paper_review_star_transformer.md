@@ -9,6 +9,9 @@ categories:
 - HAR
 ---
 
+[![hackmd-github-sync-badge](https://hackmd.io/i9DwNzkbR5-e2nPl5HrjoQ/badge)](https://hackmd.io/i9DwNzkbR5-e2nPl5HrjoQ)
+
+
 [STAR-Transformer: A Spatio-temporal Cross Attention Transformer for Human Action Recognition](https://arxiv.org/abs/2210.07503)
 * Journal reference: 2023 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)
 * Author: Dasom Ahn, Sangwon Kim, Hyunsu Hong, Byoung Chul Ko*
@@ -52,11 +55,11 @@ categories:
 ## Cross-Modal Learning
 跨模態的部分包含了三種資訊，即全域性、局部性、以及合併資訊，因此在類別上也會有三種。其中在特徵提取使用了預訓練模型ResNet-MC18 (mixed convolution 18)[43]，透過其不同層之特徵圖得到全域與局部的特徵再以Transformer加以提取與結合。
 
-### Global grid token (GG-token) $\mathbb{T}^{t}_{g}$
-* 提取ResNet18之**最後一層**作為全域特徵，得$h \times w$之特徵圖，並且將其flatten為$hw$ (即$P$)之向量，即得到$\mathbb{T}^{t}_{g}$中$g^{t}_{1,...,P}$之各元素：$\mathbb{T}^{t}_{g} = \{ g^{t}_{1}, ..., g^{t}_{P} \}$
+### Global grid token (GG-token)  $\mathbb{T}^{t}_{g}$ 
+* 提取ResNet18之**最後一層**作為全域特徵，得 $h \times w$ 之特徵圖，並且將其flatten為 $hw$ (即 $P$ )之向量，即得到 $\mathbb{T}^{t}_{g}$ 中 $g^{t}_{1,...,P}$ 之各元素： $\mathbb{T}^{t}_{g} = \{ g^{t}_{1}, ..., g^{t}_{P} \}$
 
-### Joint map token (JM-tokem) $\mathbb{T}^{t}_{j}$
-* 提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}_{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}_{n}$的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為$h' \times w'$：$\mathbb{T}^{t}_{j} = \{ j^{t}_{1}, ..., j^{t}_{N} \}$, where $N$ is the number of joint heat map
+### Joint map token (JM-tokem)  $\mathbb{T}^{t}_{j}$ 
+* 提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}_{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}_{n}$ 的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為 $h' \times w'$ ： $\mathbb{T}^{t}_{j} = \{ j^{t}_{1}, ..., j^{t}_{N} \}$, where $N$ is the number of joint heat map <br>
     ![](https://hackmd.io/_uploads/S1rvvvLc3.png)
     
 ### Multi-class token $Z$
@@ -70,29 +73,29 @@ Vanilla Vit主要以單一類別學習全域關聯性(下圖(a))，而此研究�
 ![](https://hackmd.io/_uploads/BkTyMuIqn.png)
 
 ### FAttn (full spatical-temperal attantion)
-該輸入包含了所有空間維度與時間維度的資訊，其複雜性為$T^{2}S^{2}$。而另外設計的兩個注意力機制將$T$的部分拆為兩份分別給了Q向量和KV向量，因此其複雜性僅為FAttn的四分之一倍。
+該輸入包含了所有空間維度與時間維度的資訊，其複雜性為$T^{2}S^{2}$。而另外設計的兩個注意力機制將$T$的部分拆為兩份分別給了Q向量和KV向量，因此其複雜性僅為FAttn的四分之一倍。 <br>
 $FAttn(Q, K, V) = \displaystyle\sum^{T}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q_{s,t} \cdot K_{s, t}}{\sqrt{d_{h}}}} V_{s,t}$
 
 ### ZAttn (zigzag spatical-temperal attantion)
-Q與K和V套用了交叉幀資訊之解藕，即將$T$資訊分為基偶數幀，並且交互計算出$a'$和$a''$再將其合併。首先，$a'$以所有TS之基數幀作為Q向量而偶數幀則為K和V向量；而$a''$則反之，以所有TS之基數幀作為K和V向量而偶數幀則為Q向量。如此作法是希望能捕捉到特徵中的細微變動。
+Q與K和V套用了交叉幀資訊之解藕，即將$T$資訊分為基偶數幀，並且交互計算出$a'$和$a''$再將其合併。首先，$a'$以所有TS之基數幀作為Q向量而偶數幀則為K和V向量；而$a''$則反之，以所有TS之基數幀作為K和V向量而偶數幀則為Q向量。如此作法是希望能捕捉到特徵中的細微變動。 <br>
 
-$a' = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q'_{s,t} \cdot K'_{s, t}}{\sqrt{d_{h}}}} V'_{s,t}$
-$a'' = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q''_{s,t} \cdot K''_{s, t}}{\sqrt{d_{h}}}} V''_{s,t}$
-$ZAttn(Q, K, V) = a' \oplus a''$
+$a' = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q'_{s,t} \cdot K'_{s, t}}{\sqrt{d_{h}}}} V'_{s,t}$ <br>
+$a'' = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q''_{s,t} \cdot K''_{s, t}}{\sqrt{d_{h}}}} V''_{s,t}$ <br>
+$ZAttn(Q, K, V) = a' \oplus a''$ <br>
 
 註：zigzag意指曲折的線段，指的就是在此方法上會將資訊以Z行曲折的方式拆分開來。
 
 ### BAttn (binary spatical-temperal attantion)
-BAttn之注意力機制同樣將原來的TS資訊分為前後段，並分配予Q向量與K、V向量。
+BAttn之注意力機制同樣將原來的TS資訊分為前後段，並分配予Q向量與K、V向量。 <br>
 $BAttn(Q, K, V) = b' \oplus b''$
 
 ## Encoder & Decoder
 
-本研究提出的Transformer encoder-decoder結構是以一般的Transformer為基礎，而非處理影像的ViT那樣僅有encoder。
-$\bar{Z}_{l} = LN\{FSTA(z_{l-1})+z_{l-1}\}$
-$z'_{l}, z''_{l} = Decoupling(\bar{Z}_{l})$
-$\hat{Z}_{l} =LN\{(STA(z'_{l})+z'_{l}) \oplus (STA(z''_{l})+z''_{l})\}$
-$z_{l} = LN\{MLP(\bar{z}_{l}) + \bar{z}_{l}\}$
+本研究提出的Transformer encoder-decoder結構是以一般的Transformer為基礎，而非處理影像的ViT那樣僅有encoder。 <br>
+$\bar{Z}_{l} = LN\{FSTA(z_{l-1})+z_{l-1}\}$ <br>
+$z'_{l}, z''_{l} = Decoupling(\bar{Z}_{l})$ <br>
+$\hat{Z}_{l} =LN\{(STA(z'_{l})+z'_{l}) \oplus (STA(z''_{l})+z''_{l})\}$ <br>
+$z_{l} = LN\{MLP(\bar{z}_{l}) + \bar{z}_{l}\}$ <br>
 如此經過STAR Transformer的多類別token便會透過平均、餵入MLP推測動作標籤，即將多類別的特徵類別融合為單一類別。
 
 ---
@@ -148,22 +151,6 @@ $z_{l} = LN\{MLP(\bar{z}_{l}) + \bar{z}_{l}\}$
 
 * 設計更有效率的模型，例如可使用較少量的資料進行訓練
 * 將模型修改為可同時進行骨架特徵與動作辨識的端到端模型
-
----
-
-# Reference
-
-* ViT
-    * [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
-    * 實作: https://zhuanlan.zhihu.com/p/594622901
-    * [9] J. Chen and C. M. Ho. Mm-vit: Multi-modal video transformer for compressed video action recognition. In The Winter Conference on Applications of Computer Vision (WACV), pages 1910–1921, 2022.
-* Cross-modal
-    * [14] S. Das, S. Sharma, R. Dai, F. Bremond, and M. Thonnat. Vpn: Learning video-pose embedding for activities of daily living. In The European Conference on Computer Vision (ECCV), pages 72–90. Springer, 2020.
-    * [15] M. Davoodikakhki and K. Yin. Hierarchical action classification with network pruning. In International Symposium on Visual Computing, pages 291–305. Springer, 2020.
-    * [39] L. Su, C. Hu, G. Li, and D. Cao. Msaf: Multimodal split attention fusion. arXiv preprint arXiv:2012.07175, 2020.
-    * [35] V. Reza, H. Joze, A. Shaban, M. L Iuzzolino, and K. Koishida. Mmtm: Multimodal transfer module for cnn fusion. In The Conference on Computer Vision and Pattern Recognition (CVPR), pages 13289–13299, 2020.
-* limitation
-    * [27] Y. Liang, P. Zhou, R. Zimmermann, and S. Yan. Dualformer: Local-global stratified transformer for efficient video recognition. arXiv preprint arXiv:2112.04674, 2021.
 
 ---
 
