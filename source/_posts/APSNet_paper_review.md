@@ -15,7 +15,7 @@ categories:
 ### Journal reference: 
 *IEEE, Transactions on Image Processing, Volume 31, 2022, pp 5287–5302*
 
-### :small_blue_diamond: Authors: 
+### Authors: 
 *Jiaheng Liu, Jinyang Guo, and Dong Xu*
 
 ## 論文重點整理
