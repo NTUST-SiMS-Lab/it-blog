@@ -9,7 +9,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/Simslab-server_guide/</loc>
+    <loc>https://ntust-sims-lab.github.io/404.html</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -30,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/404.html</loc>
+    <loc>https://ntust-sims-lab.github.io/Simslab-server_guide/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -98,6 +98,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/</loc>
+    <lastmod>2023-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/server/</loc>
     <lastmod>2023-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
