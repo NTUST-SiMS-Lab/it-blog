@@ -5,7 +5,8 @@ date: 2023-08-16
 author: Kevin Huang
 categories:
 - paper review
-- point cloud, pointnet
+- point cloud
+- pointnet
 ---
 
 # [APSNet: Toward Adaptive Point Sampling for Efficient 3D Action Recognition](https://ieeexplore.ieee.org/document/9844448)(IEEE)
