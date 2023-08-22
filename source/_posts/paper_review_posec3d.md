@@ -13,6 +13,7 @@ categories:
 
 
 論文出處:2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)
+
 作者:Haodong Duan, Yue Zhao, Kai Chen; Dahua Lin; Bo Dai
 * [原文連結](
 https://arxiv.org/pdf/2104.13586.pdf)
@@ -20,13 +21,13 @@ https://arxiv.org/pdf/2104.13586.pdf)
 * [github](https://github.com/kennymckormick/pyskl)
 * [youtube](https://www.youtube.com/watch?v=Zk_sqJHiSjk)
 
-## 補:
+## 代補:
 * 自己的心得
 * 精簡內文
 * 3DCNN詳細介紹
 
 
-# 1. Introduction
+# Introduction
 在現有的研究中，發表了多種video-based的辨識方式，如RGB、光流(optical
 flows)、[聲波](https://arxiv.org/abs/2001.08740)(audio waves)(蠻新的之前沒聽過)和人體骨架。skeleton-based的動作辨識因為其穩健性近年來受到越來越多的關注。骨架通常表示為關節坐標與骨骼，由於只包含骨架信息，較不受背景變化和光照變化等環境干擾。而在skeleton-based中的方法又以GCN占多數，但GCN會出現以下的問題:
 1. 穩健性(Robustness):雖然GCN可直接處理人體關節坐標，**但其識別能力會受到坐標偏移或消失的嚴重影響**，而在使用不同的骨架推論模型獲取坐標時，坐標分佈偏移往往會發生。坐標的擾動會導致完全不同的預測結果
@@ -41,12 +42,12 @@ flows)、[聲波](https://arxiv.org/abs/2001.08740)(audio waves)(蠻新的之前
 * PoseConv3D與GCN的差異
 ![](https://hackmd.io/_uploads/HJZpBiIo2.png =80%x)
 
-# 2. Related Work 
+# Related Work 
 1. GCN-based:ST-GCN是著名baseline，但會有上述提到的問題 (穩健性、互通性、擴展性)
 2. CNN-based:不管是2D-CNN或3D-CNN(直接整合成3D或以偽影像堆疊的方式)都會有訊息丟失的問題，導致效果較差，如[PoTion](https://openaccess.thecvf.com/content_cvpr_2018/html/Choutas_PoTion_Pose_MoTion_CVPR_2018_paper.html)將骨架點序列以color coding 的方式繪製在一張圖上，並用2D-CNN進行處理，而在這時序壓縮過程中導致信息丟失
 ![](https://hackmd.io/_uploads/SJmuxe3jh.png =70%x)
 
-# 3. frame work
+# frame work
 ![](https://hackmd.io/_uploads/ByQjcuIjn.png)
 模型主要有兩個模塊，分別為**骨架模塊(PoseConv3D)** 以及 **骨架+RGB模塊(RGB PoseConv3D)**，強調模型的互通性(interoperability)
 首先使用兩階段骨架推論器(**Faster-RCNN偵測+HRNet_w32推論**)來進行2D人體骨架估計，然後沿著時間維度堆疊關鍵點或骨架的熱圖,並對生成的3D Heatmap Volumes進行預處理，最後使用MMAction2提供的[3D ConvNets](https://github.com/open-mmlab/mmaction2)對3D Heatmap Volumes進行動作分類
@@ -106,7 +107,7 @@ wd 表示更寬的網絡，雙通道尺寸
   為了避免過擬合，RGBPose-Conv3D在訓練時對每條通路分別採用了兩個單獨的交叉熵損失，實驗發現通過橫向連接實現的早期特徵融合與僅通過後期融合實現的特徵融合相比，具有一致的改進效果
 ![](https://hackmd.io/_uploads/BkWq9K6ih.jpg)
 
-# 4.Experiments
+# Experiments
 ## 4.1 使用的數據集
 {%youtube oS7fX9Eg2ws %}
 共使用六個數據集:Fine GYM、NTURGB+D(#1/RGB+Pose)、Kinetics 400、UCF101、HMDB51、Volleyball(#1/Pose Only)
