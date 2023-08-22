@@ -1,3 +1,11 @@
+---
+title: 【實驗室資源】Simslab-server使用指南
+catalog: true
+date: 2023-08-22
+author: David Chen
+categories:
+- server
+---
 # 伺服器位置
 ## 上面那台
 localhost : simslab-server@140.118.1.26
