@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag (contains Google-Analytics、Baidu-Tongji)-->
+<head>
+  <!-- Google Analytics -->
+  
+
+  <!-- Baidu Tongji -->
+  
+
+  <!-- Baidu Push -->
+  
+
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <meta name="google-site-verification" content="lxDfCplOZbIzjhG34NuQBgu2gdyRlAtMB4utP5AgEBc"/>
+  <meta name="baidu-site-verification" content="PpzM9WxOJU"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="It&#39;s an IT blog for simslaber"/>
+  <meta name="keyword" content="NTUST,SiMS Lab,IT Blog"/>
+  <link rel="shortcut icon" href="/it-blog/img/avatar/ntust-simslab.png"/>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async="async" defer="defer" src="https://buttons.github.io/buttons.js"></script>
+
+  
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/it-blog/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/it-blog/css/beantech.min.css"/>
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/it-blog/css/highlight.css"/>
+    <link rel="stylesheet" href="/it-blog/css/widget.css"/>
+    <link rel="stylesheet" href="/it-blog/css/rocket.css"/>
+    <link rel="stylesheet" href="/it-blog/css/signature.css"/>
+    <link rel="stylesheet" href="/it-blog/css/catalog.css"/>
+    <link rel="stylesheet" href="/it-blog/css/livemylife.css"/>
+
+    
+
+    
+      <!-- top start (article top hot config) -->
+      <link rel="stylesheet" href="/it-blog/css/top.css"/>
+      <!-- top end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/scroll.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+      <!-- Search start -->
+      <link rel="stylesheet" href="/it-blog/css/search.css"/>
+      <!-- Search end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/themecolor.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+  
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Hux Delete, sad but pending in China <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <link
+  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/ css'> -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_posec3d/">
+  <title>
+    
+      【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D) - SiMS Lab | IT Blog
+    
+  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+
+	<body ontouchstart="" class="body--light body--light">
+
+
+		<!-- ThemeColor -->
+		
+		<!-- ThemeColor -->
+<style type="text/css">
+  .body--light {
+    --light-mode: none;
+    --dark-mode: block;
+  }
+  .body--dark {
+    --light-mode: block;
+    --dark-mode: none;
+  }
+  i.mdui-icon.material-icons.light-mode {
+    display: var(--light-mode);
+  }
+  i.mdui-icon.material-icons.dark-mode {
+    display: var(--dark-mode);
+  }
+</style>
+<div class="toggle" onclick="document.body.classList.toggle('body--dark')">
+  <i class="mdui-icon material-icons light-mode"></i>
+  <i class="mdui-icon material-icons dark-mode"></i>
+</div>
+<script>
+  //getCookieValue
+  function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b
+      ? b.pop()
+      : '';
+  }
+  let themeMode = 'light';
+  if (getCookieValue('sb-color-mode') && (getCookieValue('sb-color-mode') !== themeMode)) {
+    let dbody = document.body.classList;
+    themeMode === 'dark' ? dbody.remove('body--dark') : dbody.add('body--dark');
+  }
+
+  //setCookieValue
+  var toggleBtn = document.querySelector(".toggle");
+  toggleBtn.addEventListener("click", function () {
+    var e = document.body.classList.contains("body--dark");
+    var cookieString = e
+      ? "dark"
+      : "light";
+    var exp = new Date();
+    exp.setTime(exp.getTime() + 3 * 24 * 60 * 60 * 1000); //3天过期
+    document.cookie = "sb-color-mode=" + cookieString + ";expires=" + exp.toGMTString() + ";path=/";
+  });
+</script>
+
+		
+
+		<!-- Gitter -->
+		
+
+		<!-- Navigation (contains search)-->
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/it-blog/">SiMS Lab</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux: <nav>'s height woule be hold on by its content. so, when navbar scale out, the <nav> will cover tags. also mask any touch event of tags, unfortunately. -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/it-blog/">HOME</a>
+          </li>
+
+          
+          
+          
+          
+          <li>
+            <a href="/it-blog/archive/">
+              
+              ARCHIVES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/categories/">
+              
+              CATEGORIES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/tags/">
+              
+              TAGS
+              
+              
+            </a>
+          </li>
+          
+          
+
+          
+          <li>
+            <a class="popup-trigger">
+              <span class="search-icon"></span>SEARCH</a>
+          </li>
+          
+
+          <!-- LangSelect -->
+          
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<!-- progress -->
+<div id="progress">
+  <div class="line" style="width: 0%;"></div>
+</div>
+
+<script>
+  // Drop Bootstarp low-performance Navbar Use customize navbar with high-quality material design animation in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector('.navbar-toggle');
+  var $navbar = document.querySelector('#huxblog_navbar');
+  var $collapse = document.querySelector('.navbar-collapse');
+
+  $toggle.addEventListener('click', handleMagic)
+
+  function handleMagic(e) {
+    if ($navbar.className.indexOf('in') > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function() {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf('in') < 0) {
+          $collapse.style.height = "0px"
+        }
+      }, 400)
+    } else {
+      // OPEN
+      $collapse.style.height = "auto"
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+		<!-- Post Header (contains intro-header、signature、wordcount、busuanzi、waveoverlay) -->
+		<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+
+  <style type="text/css">
+    .body--light {
+      /* intro-header */
+      --intro-header-background-image-url-home: url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: url('');
+      --intro-header-background-image-url-page: url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+    .body--dark {
+      --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+
+    header.intro-header {
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
+      
+    }
+
+    
+  </style>
+
+
+
+
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by Frank Liou on
+              2023-08-16
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">22</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">6k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</header>
+
+
+
+		<!-- Main Content (Post contains
+	Pager、
+	tip、
+	socialshare、
+	gitalk、gitment、disqus-comment、
+	Catalog、
+	Sidebar、
+	Featured-Tags、
+	Friends Blog、
+	anchorjs、
+	) -->
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <h1>Revisiting Skeleton-based Action Recognition(PoseC3D)</h1>
+<p>論文出處:2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)<br>
+作者:Haodong Duan, Yue Zhao, Kai Chen; Dahua Lin; Bo Dai</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2104.13586.pdf">原文連結</a></li>
+<li><a target="_blank" rel="noopener" href="https://paperswithcode.com/paper/revisiting-skeleton-based-action-recognition">papers with code</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kennymckormick/pyskl">github</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Zk_sqJHiSjk">youtube</a></li>
+</ul>
+<h2 id="補">補:</h2>
+<ul>
+<li>自己的心得</li>
+<li>精簡內文</li>
+<li>3DCNN詳細介紹</li>
+</ul>
+<h1>1. Introduction</h1>
+<p>在現有的研究中，發表了多種video-based的辨識方式，如RGB、光流(optical<br>
+flows)、<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2001.08740">聲波</a>(audio waves)(蠻新的之前沒聽過)和人體骨架。skeleton-based的動作辨識因為其穩健性近年來受到越來越多的關注。骨架通常表示為關節坐標與骨骼，由於只包含骨架信息，較不受背景變化和光照變化等環境干擾。而在skeleton-based中的方法又以GCN占多數，但GCN會出現以下的問題:</p>
+<ol>
+<li>穩健性(Robustness):雖然GCN可直接處理人體關節坐標，<strong>但其識別能力會受到坐標偏移或消失的嚴重影響</strong>，而在使用不同的骨架推論模型獲取坐標時，坐標分佈偏移往往會發生。坐標的擾動會導致完全不同的預測結果</li>
+<li>互通性(Interoperability):RGB、光流和骨架等不同模態的特徵是互補的。因此將這些模態<strong>有效的</strong>結合起來，往往能提高動作辯識的性能。然而，GCN是在骨架的非歐幾里得幾何圖形上運行的，因此很難與通常在歐幾里得幾何網格上表示的其他模態融合</li>
+<li>擴展性(Scalability):由於GCN將每個關節視為一個節點，因此<strong>GCN的複雜度與人數成線性關係</strong>，這限制了它在涉及多人的場景(如群體活動識別)中的適用性。</li>
+</ol>
+<p>對比GCN-based的方法，PoseConv3D主要有以下優勢：</p>
+<ol>
+<li>使用3D Heatmap Volumes<strong>對上游的骨架推論更具穩健性</strong>，實驗發現PoseConv3D在通過不同方法獲得的輸入骨架上具有良好的通用性</li>
+<li>PoseConv3D依賴於skeleton heatmap，並具有CNN架構的特性，更容易與其他模態集成到多通道CNN中，這特性為進一步提高辨識性能開闢了很大的設計空間。</li>
+<li>PoseConv3D可以處理不同數量的人，而不會增加計算量，因為3D Heatmap Volumes的複雜性與人數無關(作者有分析不同方法，最後發現直接疊加多人的3D Heatmap Volumes最為有效)</li>
+</ol>
+<ul>
+<li>PoseConv3D與GCN的差異<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/HJZpBiIo2.png">https://hackmd.io/_uploads/HJZpBiIo2.png</a> =80%x)</li>
+</ul>
+<h1>2. Related Work</h1>
+<ol>
+<li>GCN-based:ST-GCN是著名baseline，但會有上述提到的問題 (穩健性、互通性、擴展性)</li>
+<li>CNN-based:不管是2D-CNN或3D-CNN(直接整合成3D或以偽影像堆疊的方式)都會有訊息丟失的問題，導致效果較差，如<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/html/Choutas_PoTion_Pose_MoTion_CVPR_2018_paper.html">PoTion</a>將骨架點序列以color coding 的方式繪製在一張圖上，並用2D-CNN進行處理，而在這時序壓縮過程中導致信息丟失<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/SJmuxe3jh.png">https://hackmd.io/_uploads/SJmuxe3jh.png</a> =70%x)</li>
+</ol>
+<h1>3. frame work</h1>
+<p><img src="https://hackmd.io/_uploads/ByQjcuIjn.png" alt=""><br>
+模型主要有兩個模塊，分別為<strong>骨架模塊(PoseConv3D)</strong> 以及 <strong>骨架+RGB模塊(RGB PoseConv3D)</strong>，強調模型的互通性(interoperability)<br>
+首先使用兩階段骨架推論器(<strong>Faster-RCNN偵測+HRNet_w32推論</strong>)來進行2D人體骨架估計，然後沿著時間維度堆疊關鍵點或骨架的熱圖,並對生成的3D Heatmap Volumes進行預處理，最後使用MMAction2提供的<a target="_blank" rel="noopener" href="https://github.com/open-mmlab/mmaction2">3D ConvNets</a>對3D Heatmap Volumes進行動作分類</p>
+<blockquote>
+<p>在某些情況下，即使骨架估計的質量很差，只要其中包含與目標動作相關的模式，那也足以用來進行動作辨識。如HRNet在Fine GYM數據集上的辨識效果實際不佳，但依賴於其所估計的關鍵點，依然能在動作辨識任務上取得出色的效果</p>
+</blockquote>
+<h2 id="3-1-input">3.1 input</h2>
+<p>![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/ryTr1MEj2.png">https://hackmd.io/_uploads/ryTr1MEj2.png</a> =80%x)</p>
+<p>PoseConv3D使用2D骨架(不具深度資訊)作為輸入，因為通常2D骨架辨識比3D來得好，<strong>2D骨架是由骨架關節的熱圖表示，而不是整張圖的座標點</strong>，會先使用uniform sampling選出隨機T幀，每一幀都會生成K×H×W的3D Heatmap Volumes。<br>
+使用帶有ResNet50的<a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper_files/paper/2015/file/14bfa6bb14875e45bba028a21ed38046-Paper.pdf">Faster-RCNN</a>進行人體檢測，再使用COCO pre-trained過的<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Deep_High-Resolution_Representation_Learning_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">HRNet_w32</a>進行人體骨架推論。最後PoseConv3D在3D Heatmap Volumes的基礎下採用3D-CNN來辨識動作。</p>
+<ul>
+<li>驗證2D與3D模型在資料集準確度 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395588459">未標出處</a></li>
+</ul>
+<p>![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/ry-cocUi2.png">https://hackmd.io/_uploads/ry-cocUi2.png</a> =80%x)</p>
+<h2 id="3-2-Pose-Extraction">3.2 Pose Extraction</h2>
+<p>採用<strong>2D自上而下的骨架推論器</strong>，並使用(x,y,c)的方式儲存關鍵點。(x,y)為關鍵點座標，c為對應的熱圖分數，2D Heatmap的大小為K×H×W(關節數×高×寬)<br>
+如果只有骨架推論器的座標與置信度，則可以設第k個關鍵點座標為(Xk，yk)，置信度為Ck，依公式生成關鍵點熱圖數值，並以σ控制標準差，J值藉於0-1間<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/Bk7ZSZns3.png">https://hackmd.io/_uploads/Bk7ZSZns3.png</a> =60%x)<br>
+介於ak、bk兩點間的骨架熱圖依下列公式生成，D代表該點(i,j)與線段ak,bk的垂直距離，L介於0-1間<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/BkelHZhjn.png">https://hackmd.io/_uploads/BkelHZhjn.png</a> =80%x)</p>
+<blockquote>
+<p>雖然上述過程假設每一幀都是一個人,但PoseConv3D可以將其擴展到多人的情況，在這種情況下直接累加所有人的第k個高斯圖，而無需放大熱圖或增加K值，最後,通過沿時間維度堆積所有熱圖可得到3D Heatmap Volumes，大小為K × T × H × W<br>
+K:關結數(17)<br>
+T:幀數(32)<br>
+H,W:高,寬(56,56)</p>
+</blockquote>
+<h2 id="3-3-3D-CNN-for-Action-Recognition">3.3 3D-CNN for Action Recognition</h2>
+<p>為了證明3D-CNN在動作辨識的有效性，但在這方面較少研究，因此設計了兩個模塊</p>
+<ul>
+<li>
+<p><strong>PoseConv3D</strong><br>
+專注於人體骨架資訊上，以3D Heatmap Volumes作為input，使3D-CNN適應skeleton-based動作辨識需要進行兩點修改，基於以下兩點，分別對三種3D-CNN進行了調整：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_iccv_2015/papers/Tran_Learning_Spatiotemporal_Features_ICCV_2015_paper.pdf">C3D</a>、<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Feichtenhofer_SlowFast_Networks_for_Video_Recognition_ICCV_2019_paper.pdf">SlowOnly</a>和<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Feichtenhofer_X3D_Expanding_Architectures_for_Efficient_Video_Recognition_CVPR_2020_paper.pdf">X3D</a><br>
+此外，採用輕量級的3D-CNN可以顯著降低<a target="_blank" rel="noopener" href="https://www.wikiwand.com/zh-tw/FLOPS">FLOPs</a>與參數量，但性能些微下降(差距小於0.3%)，而因為SlowOnly的簡單性(直接從ResNet生成)和良好的性能，使用SlowOnly作為默認網路，且與其他RGB-based的動作辯識模型之間的互性使人體骨架更容易使用於多模態融合</p>
+<ol>
+<li>因為3D Heatmap Volumes的<a target="_blank" rel="noopener" href="https://www.anymp4.com/zh-TW/photo-editing/images-resolution.html">空間分辨率</a>不需要像RGB那麼大(比RGB小4倍)，因此移除3D-CNN的下採樣階段</li>
+<li>較淺(較少layers)和較薄(較少channels)的網路足以用於動作辨識，因為3D Heatmap Volumes已經是經過預處理的中級特徵</li>
+</ol>
+</li>
+<li>
+<p>PoseConv3D優點:</p>
+<ol>
+<li>相比RGM輕很多</li>
+<li>input需要較小的空間尺寸和較長的時間長度</li>
+<li>所需網路更薄且更輕</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/ryPBcFTs2.jpg" alt=""></p>
+<p>![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/Syj72wpi2.png">https://hackmd.io/_uploads/Syj72wpi2.png</a> =70%x)</p>
+<blockquote>
+<p>s 表示淺層(層數較少)<br>
+HR 表示高分辨率(雙倍高度和寬度)<br>
+wd 表示更寬的網絡，雙通道尺寸</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>RGB Pose-Conv3D</strong><br>
+為了展示PoseConv3D的互通性，提出RGBPose-Conv3D，用於人體骨架和RGB的融合，這是一個雙流3D-CNN，有兩條路徑分別處理 RGB和骨架</p>
+<ol>
+<li>由於兩種模態的特性不同，因此兩條路徑是不對稱的，與RGB路徑相比，骨架路徑的通道寬度較少、網路深度較淺，inpute空間分辨率也較小</li>
+</ol>
+<ol start="2">
+<li>受到SlowFast的啟發，兩條路徑之間增加了雙向橫向連接(Time stride convolutions)，以促進兩種模態之間的早期特徵融合</li>
+</ol>
+<p>為了避免過擬合，RGBPose-Conv3D在訓練時對每條通路分別採用了兩個單獨的交叉熵損失，實驗發現通過橫向連接實現的早期特徵融合與僅通過後期融合實現的特徵融合相比，具有一致的改進效果<br>
+<img src="https://hackmd.io/_uploads/BkWq9K6ih.jpg" alt=""></p>
+</li>
+</ul>
+<h1>4.Experiments</h1>
+<h2 id="4-1-使用的數據集">4.1 使用的數據集</h2>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/oS7fX9Eg2ws" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<p>共使用六個數據集:Fine GYM、NTURGB+D(#1/RGB+Pose)、Kinetics 400、UCF101、HMDB51、Volleyball(#1/Pose Only)<br>
+除了Fine-GYM數據集外，所有數據集的骨架都是RGB輸入自上而下的骨架推論器來獲得。並報告了Fine GYM的平均Top-1精度和其他數據集的Top-1精度。在實驗中採用了在MMAction2中實現的3D ConvNets。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/finegym"><strong>FineGYM</strong></a> 是一個細粒度(<a target="_blank" rel="noopener" href="https://baubimedi.medium.com/%E9%80%9F%E8%A8%98ai%E8%AA%B2%E7%A8%8B-convolutional-neural-networks-for-computer-vision-applications-%E4%BA%8C-d5fbb995ffd7">fine-grained</a>)動作辨識數據集，包含99個細粒度體操動作類別，2.9萬個影片。在姿勢提取過程中，有三種不同的人物邊界框：
+<ol>
+<li>檢測器預測的人物邊界框(Detection)</li>
+<li>第一幀中運動員的GT邊界框，其餘幀的跟踪框(Tracking)</li>
+<li>所有幀中運動員的GT邊界框(GT)，<strong>在實驗中使用第三種邊界框提取的人體姿勢</strong></li>
+</ol>
+</li>
+<li><strong>NTU-60</strong> 包含60個動作的5.7萬個影片，而NTU-120包含120個動作的11.4萬個影片<br>
+數據集以三種方式分割:跨主體(X-Sub)、跨視角(X-View/NTU-60)、跨設置(X-Set/NTU-120)，其中動作主體、攝像機視角、攝像機設置在訓練和驗證集中是不同的，<strong>在實驗中使用NTU-60和NTU-120的X-sub</strong></li>
+<li><strong>Kinetics 400</strong> 是一個大型視頻數據集，包含400個動作類別的30萬個視頻</li>
+<li><a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/ucf101"><strong>UCF101</strong></a>和 <a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/hmdb51"><strong>HMDB51</strong></a>的規模較小，分別包含101個類別的1.3萬個視頻和51個類別的6700個視頻</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1511.06040v2.pdf"><strong>Volleyball</strong></a>是一個多人動作辨識數據集，包含8個多人動作類別的4830個視頻。每幀約12人，而只有中心幀有GT人物框lable，使用跟踪框進行骨架提取</li>
+</ul>
+<h2 id="4-2-PoseConv3D與MS-G3D比較">4.2 PoseConv3D與<a target="_blank" rel="noopener" href="https://paperswithcode.com/paper/disentangling-and-unifying-graph-convolutions">MS-G3D</a>比較</h2>
+<p>MS-G3D是GCN-based的多維模型，兩個模型採用完全相同的輸入(GCN採用三維坐標(x,y,c)，PoseConv3D採用由坐標生成的熱圖)，input的尺寸為<strong>48×56×56(很怪的數字，不曉得為什麼)</strong>，並使用1&amp;10 clip testing</p>
+<blockquote>
+<p>clip testing是指將一個長視頻分成多個短視頻片段(稱為clip)，然後對每個clip進行單獨的測試。這樣做的目的是為了更好地評估模型的性能，因為它可以測試模型對不同動作片段的辨識能力，1-clip testing是從每個影片中隨機選擇一個片段進行測試，而10-clip testing則是從每個影片中選擇10個片段進行測試。<br>
+此外，clip testing還可以幫助減少過擬合現象，因為模型需要在不同的clip上進行測試，而不是在整個長視頻上進行測試。使用 uniform sampling的1-clip testing在某些情況下可以達到比使用fixed stride sampling的10-clip testing更好的結果<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/BJrVKwRsn.png">https://hackmd.io/_uploads/BJrVKwRsn.png</a> =80%x)</p>
+</blockquote>
+<blockquote></blockquote>
+<ul>
+<li><strong>性能與效率(Performance&amp;Efficiency)</strong><br>
+在多數資料集上，PoseConv3D在表現優於MS-G3D，參數量和FLOPs方面都比MS-G3D輕，因為PoseConv3D能利用多視角測試的優勢，它能對每個inpute的整個heatmap volumes進行Pooling，且只有PoseConv3D可以受益於多clip testing，因其採樣一個子集而非全部幀以構成輸入。<br>
+<img src="https://hackmd.io/_uploads/S1gzvE0i2.png" alt=""></li>
+</ul>
+<blockquote>
+<p>PoseConv3D在不同數據集上使用相同的架構和超參數，而GCN則需要在不同數據集上對架構和超參數進行調整(但MS-G3D在<a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/assembly101">Assembly101</a>排名#1，或許可以參考)</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>穩健性(Robustness)</strong><br>
+為了測試兩種模型的穩健性，在輸入骨架中放棄一部分的關鍵點，以此觀察擾動會對準確度產生什麼影響，關鍵點包括左右的bow(肩膀??)、手腕、膝蓋、腳踝，由於這些關鍵點對體操來說比軀幹或臉部關鍵點更為重要，通過在每一幀中以機率p隨機刪除一個關鍵點來測試這兩個模型<br>
+可以看到PoseConv3D對這種擾動具有很高的穩健性，Mean-Top1的適度下降0.9%，而GCN下降14.3%。可以用噪聲輸入來訓練GCN，如加入dropout layer 。然而，在p=1的情況下，GCN的Mean-Top1準確率仍然下降了 1.4%，以此表明PoseConv3D在動作辯識的穩健性明顯優於GCN<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/S1zHiB0s2.png">https://hackmd.io/_uploads/S1zHiB0s2.png</a> =80%x)</p>
+</li>
+<li>
+<p><strong>通用性(Generalization)</strong><br>
+為了比較GCN和3D-CNN的泛化效果，在Fine GYM上設計了一個交叉驗證方式，使用兩個模型，分別為HRNet(Higher Quality，簡稱HQ)和Mobile Net(Lower Quality，LQ)進行骨架推論，並分別在頂部訓練兩個PoseConv3D。<br>
+<strong>在訓練/ 測試時分別使用不同方式提取的人體骨架</strong>。例如，在訓練時使用HRNet(HQ)模型提取出的人體骨骼，而在測試時使用MobileNet(LQ)模型提取出的人體骨骼，將LQ的結果輸入到使用HQ訓練的模型中，反之亦然。在這種設定下，PoseConv3D的表現一致好於GCN，使用PoseConv3D進行訓練和測試時，使用低質量姿勢時，精確度下降較少。<strong>也可以改變人員框的來源</strong>，使用GT框(HQ)或Track(LQ)進行訓練和測試，PoseConov3D的性能下降也比GCN小得多。<br>
+<img src="https://hackmd.io/_uploads/S176NyJh2.png" alt=""></p>
+</li>
+<li>
+<p><strong>擴展性(Scalability)</strong><br>
+GCN的計算量隨影片中人數的增加而線性遞增，因此在多人動作辨識方面效率較低。排球數據集中的每段視頻包含13個人和20個幀，對於GCN來說，相應的輸入形狀將是13×20×17×3，比一個人的輸入大13倍。在這種配置下，GCN的參數數和FLOPs分別為2.8M和7.2G。<br>
+對於 PoseConv3D，可以使用一個形狀為17×12×56×56的3D Heatmap Volumes來表示所有13人。Pose-SlowOnly的基本通道寬度設置為16，因此只需0.52M參數和1.6GFLOPs。儘管參數和 FLOPs少，PoseConv3D在排球驗證中的Top-1準確率仍達到 91.3%，比GCN-based的方法高出2.1%。</p>
+</li>
+</ul>
+<blockquote>
+<p>在實驗中發現，在使用Pose Conv3D進行群體動作辨識時，用單一3D Heatmap Volumes表示所有人是最佳做法。在排球數據集上，還探索了分別處理不同人物熱圖的三種替代方案：<br>
+A.對於每個關節為N個人分配N個通道。這樣，PoseConv3D輸入就有N×K個通道<br>
+B.為每個人生成三維熱圖卷(K×T×H×W)，並使用PoseConv3D(N人共享權重)分別提取骨架特徵。使用平均池法將N個人的特徵匯總為一個特徵向量<br>
+C.在B的基礎上，在平均池化之前插入幾個(1到3個)編碼器層(從頭開始或通過B預訓練)，以進行人與人之間的建模。<br>
+<img src="https://hackmd.io/_uploads/H1wzCSCo2.png" alt=""><br>
+對於A方案，高維的輸入會導致嚴重的過擬合，Top-1的準確率僅為75.3%。對於B、C方案，儘管消耗了大量計算量，但辨識性能並不令高，Top-1準確率分別為85.7%和87.9%，仍然遠遠低於累加熱圖(91.3%)。累加熱圖是一種簡單而相對較好的解決方案，可以在復雜性和有效性之間取得平衡。更複雜的設計可能會帶來進一步的改進，這有待於今後的工作。</p>
+</blockquote>
+<h2 id="4-3-使用RGB-PoseConv3D多模態融合">4.3 使用RGB PoseConv3D多模態融合</h2>
+<p>PoseConv3D的3D-CNN架構使其能夠更靈活地通過一些融合方式，將骨架與其他模態融合，在RGB Pose-Conv3D中，Time stride convolutions(文章沒有細講)被用於RGB和骨架的channel的雙向橫向連接中(bi-directional lateral connections)，目的是多模態的特徵融合，而由於RGB幀是低級特徵，因此路徑的幀率較小，channel寬度較大。相反，骨架路徑的幀率較大，channel寬度較小<br>
+首先會先分別對RGB和骨架模型進行預訓練當作初始化，再繼續對SlowOnly網路進行finetune，以訓練橫向連接，最終的預測結果將通過後期融合兩條路徑的預測得分來實現，RGBPose-Conv3D 可以通過早期+晚期融合獲得更好的效果。<br>
+在訓練時，每條路徑分別使用了兩個單獨的損失，因為從兩種模態聯合學習的單一損失會導致嚴重的過擬合<br>
+<img src="https://hackmd.io/_uploads/BkWq9K6ih.jpg" alt=""></p>
+<blockquote>
+<p>看不懂這張表QQ</p>
+<blockquote></blockquote>
+</blockquote>
+<p>![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/SJG2-wAo2.png">https://hackmd.io/_uploads/SJG2-wAo2.png</a> =80%x)</p>
+<blockquote>
+<p>在FineGYM中，骨架模式比RGB更為重要，而在NTU-60中則相反。然而，通過早期+後期融合，這兩種模式的性能都有所提高<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/ByCW9P0oh.png">https://hackmd.io/_uploads/ByCW9P0oh.png</a> =80%x)<br>
+實驗發現雙向特徵融合比單向特徵融合效果更好，且<strong>1-clip testing的早期+晚期融合效果優於10-clip testing的晚期融合效果</strong><br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/BJVqzDRi3.png">https://hackmd.io/_uploads/BJVqzDRi3.png</a> =80%x)</p>
+</blockquote>
+<h2 id="4-4-與其他SOTA模型比較">4.4 與其他SOTA模型比較</h2>
+<p><img src="https://hackmd.io/_uploads/r1sDLqCi2.png" alt=""></p>
+<ul>
+<li>
+<p><strong>Skeleton-based Action Recognition</strong><br>
+將PoseConv3D與之前skeleton-based的動作辨識技術進行了比較。先前的模型(表上半部)在NTURGB+D中使用Kinect採集的3D骨架，在Kinetics中使用OpenPose提取的2D骨架(Fine GYM骨架數據尚不清楚)。PoseConv3D採用的是第3.1節中介紹的所提取的2D骨架(Faster-RCNN偵測+HRNet_w32)。將形狀為48×56×56的3D Heatmap Volumes作為輸入，使用PoseConv3D與SlowOnly辨識，並使用10-clip testing獲得的準確率。<br>
+為了進行公平比較，還使用二維人體骨架(MS-G3D++)對最先進的MS-G3D進行了評估﹑MS-G3D++ 直接將提取的坐標三元組(x,y,c)作為輸入，而PoseConv3D則將從坐標三元組生成的熱圖作為輸入。在使用高質量二維人體骨架的情況下，MS-G3D++ 和PoseConv3D的性能都遠遠優於之前的先進技術，這表明了基於骨骼的動作辨識中姿勢提取方法的重要性。當兩者都將高質量的二維姿勢作為輸入時，PoseConv3D在6個基準測試中的5個測試中都優於最先進的MS-G3D，顯示了其強大的時空特徵學習能力。<br>
+在4項NTURGB+D基準測試中，PoseConv3D有3項取得了迄今為止最好的成積。在Kinetics基准上，PoseConv3D明顯超越了MS-G3D++ ，顯著優於之前的所有方法。除了文獻中報告的基線外，之前沒有任何研究以FineGYM上基於骨骼的動作辨識為目標，研究首次將性能提高到了一個不錯的水平。</p>
+</li>
+<li>
+<p><strong>多模態融合(Multi-modality Fusion)</strong></p>
+<p>與多模態動作辨識SOTA模型相比，多模態融合技術在多個基準測試中取得了優異的識別性能</p>
+<p>作為一種強大的表示方法，骨架本身也是其他模態(如RGB外觀)的補充。通過多模態融合(RGBPose-Conv3D或LateFusion)，我們在8個不同的視頻識別基準中取得了最先進的結果。<br>
+我們將提議的RGBPose-Conv3D應用於FineGYM和4個NTURGB+D基準，使用R50作為骨幹；16、48作為RGB/Pose-Pathway的時間長度。表9a顯示，我們的早期+晚期融合在各種基準測試中都取得了優異的性能。<br>
+我們還嘗試用LateFusion將PoseConv3D的預測結果直接與其他模態融合。表9b顯示，與Pose模式的後期融合可以將識別精度提高到一個新水平。我們在三個動作識別基准上達到了新的水平：Kinetics400,UCF101和HMDB51。在具有挑戰性的Kinetics400基准上，與PoseConv3D預測融合後，識別精度比最新水平提高了0.6%，這有力地證明了Pose模式的互補性。<br>
+<img src="https://hackmd.io/_uploads/HJIsy2Rjh.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/HyV3Jh0i3.png" alt=""></p>
+</li>
+</ul>
+<blockquote>
+<p>R、F、P表示RGB、Flow、Pose</p>
+</blockquote>
+<h2 id="4-5熱圖預處理的消融-ablation">4.5熱圖預處理的消融(ablation)</h2>
+<ol>
+<li>Subject centered cropping:<br>
+由於數據集中人物的體型和位置可能會有很大差異，希望能在H×W的input內盡可能聚焦於行動主體。此方法是逐幀找到所有2D骨架的最小bounding box，然後根據找到的bounding box取得<strong>最小外接框</strong>來裁剪所有幀，並將裁剪後的熱圖重新縮放至特定大小。<br>
+在輸入大小為32×56×56的Fine GYM數據集上進行了兩次實驗，分別使用或不使用此方式，以主體為中心的裁剪有助於數據預處理，可將平均值Top1從91.7%提升至92.7%，NTU-60則是從92.2%提升至93.2%</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/HyFzPK6sn.jpg" alt=""><br>
+2. Uniform sampling:<br>
+使用temporal window時，較小temporal window的輸入可能無法捕捉到人類的全部動作，希望模型能更加專注於整體動作並降低過擬和。此方法是需要採N幀時，先將整個視頻均分為長度相同的N段，並在每段中隨機選取一幀，此方式對骨架動作辨識尤其適用<br>
+在FineGYM和NTU-60上進行了實驗</p>
+<ul>
+<li>固定步長採樣(fixed stride sampling)是從一個固定大小為32幀的temporal window採樣，設採樣步長為2、3、4，從中取得對應幀數</li>
+<li>均勻採樣(uniform sampling)是從整個片段中均勻採樣32個幀</li>
+</ul>
+<p>均勻採樣始終優於固定步長採樣結果，在均勻採樣的情況下，1-clip testing 結果甚至比固定步長採樣10-clip testing結果更好。</p>
+<p><img src="https://hackmd.io/_uploads/SyZi5Who2.png" alt=""></p>
+<blockquote>
+<p>除了Uni-32[1c]使用1-clip testing外，其他皆使用10-clip testing (固定步長採樣怎麼用??)</p>
+</blockquote>
+<p>值得注意的是，NTU-60和Fine GYM中的視頻長度變化很大，通過分析發現，均勻採樣主要提高了數據集中<strong>長視頻</strong>的識別性能。此外，在這兩個數據集上，均勻採樣在RGB-based的識別上也優於固定步長採樣</p>
+<p><img src="https://hackmd.io/_uploads/rJBe3hAs2.png" alt=""></p>
+<blockquote>
+<p>在NTU-60和GYM上將均勻採樣應用於RGB-based的動作辨識，使用 SlowOnly-R50作為骨幹，並將輸入長度設為16幀。<br>
+在兩個數據集上RGB-based的辯識中，均勻採樣也優於固定步長採樣，在1-clip testing中，均勻採樣的準確率優於10-clip testing中固定步長採樣的準確率。<br>
+均勻採樣的優勢主要歸因於這兩個數據集的視頻長度變化很大。相反，在 Kinetics4008上應用均勻採樣時，準確率略有下降，對於輸入長度為8幀的 SlowOnly-R50，Top-1的準確率從75.6%下降到75.2%。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Joints和Limbs的偽熱圖(Pseudo Heatmaps)</strong><br>
+用於skeleton-based的動作識別的GCN方法通常將多個流(關節、骨骼等)的結果集合在一起以獲得更好的識別性能。這種做法對於PoseConv3D也是可行的。根據坐標(x,y,c)可以生成Joints和Limbs的偽熱圖。一般來說，Joints Heatmaps和Limbs Heatmaps都是3D-CNN的良好輸入。<br>
+將Joints-PoseConv3D和Limbs-PoseConv3D(即PoseConv3D(J+L))的結果組合在一起，可以顯著且持續提高性能。</p>
+</li>
+<li>
+<p><strong>3D Heatmap Volumes v.s 2D Heatmap Aggregations.</strong><br>
+3D Heatmap Volumes 是一種更加<strong>無損(lossless)</strong> 的2D骨架表示法，而2D偽影像則是將熱圖與著色或時間卷積聚合在一起，<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/html/Choutas_PoTion_Pose_MoTion_CVPR_2018_paper.html">PoTion</a>和<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Yan_PA3D_Pose-Action_3D_Machine_for_Video_Recognition_CVPR_2019_paper.pdf">PA3D</a>沒有在skeleton-based的動作辯識的流行基准上進行評估，也沒有公開的實施方案，在初步研究中，PoTion的準確率(85%)遠低於GCN或PoseConv3D(均為 90%)。並在UCF101、HMDB51和NTURGB+D上對它們進行了評估，PoseConv3D 使用3D Heatmap Volumes實現的辯識結果比使用2D heatmap aggregations作為輸入的2D-CNN好得多。在使用輕量級X3D時，PoseConv3D 的表現明顯優於2D-CNNs，其FLOP值與2D-CNNs相當，而參數卻少得多<br>
+<img src="https://hackmd.io/_uploads/BkwzzC0j3.png" alt=""></p>
+<ul>
+<li>PA3D的2D heatmap aggregations<br>
+![](<a target="_blank" rel="noopener" href="https://hackmd.io/_uploads/HyamkA0sh.png">https://hackmd.io/_uploads/HyamkA0sh.png</a> =70%x)</li>
+</ul>
+</li>
+</ul>
+<p>其他值得改善的地方</p>
+<ol>
+<li>相對GCN，所需計算量還是較多：使用基於R50的3D網絡，其算力消耗僅能做到與GCN中的較heavy方法MS-G3D相當，多於其他一些更輕量的GCN方法</li>
+<li>如輸入為3D點的情況下，目前只能將其先投影到2D，存在信息損失</li>
+<li>目前還不能realtime辨識</li>
+</ol>
+<p>問題:</p>
+<ol>
+<li>關於3D的第三維度是T還是K?:第三個維度是K，T幀的辨識與前後幀無關</li>
+<li>3D-CNN的詳細內容，ResNet</li>
+<li>什麼是GT框?</li>
+<li>Time stride convolutions</li>
+</ol>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          <li class="previous">
+            <a href="/it-blog/AcT_paper_review/" data-toggle="tooltip" data-placement="top" title="【論文研讀】AcT - Action Transformer">&larr; Previous Post</a>
+          </li>
+          
+          
+          <li class="next">
+            <a href="/it-blog/paper_review_star_transformer/" data-toggle="tooltip" data-placement="top" title="【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_posec3d/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Revisiting Skeleton-based Action Recognition(PoseC3D)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%A3%9C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">補:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1. Introduction</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2. Related Work</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">3. frame work</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-1-input"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">3.1 input</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-2-Pose-Extraction"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">3.2 Pose Extraction</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-3-3D-CNN-for-Action-Recognition"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3.3 3D-CNN for Action Recognition</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4.Experiments</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-1-%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B8%E6%93%9A%E9%9B%86"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">4.1 使用的數據集</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-2-PoseConv3D%E8%88%87MS-G3D%E6%AF%94%E8%BC%83"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">4.2 PoseConv3D與MS-G3D比較</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-3-%E4%BD%BF%E7%94%A8RGB-PoseConv3D%E5%A4%9A%E6%A8%A1%E6%85%8B%E8%9E%8D%E5%90%88"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">4.3 使用RGB PoseConv3D多模態融合</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-4-%E8%88%87%E5%85%B6%E4%BB%96SOTA%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BC%83"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">4.4 與其他SOTA模型比較</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-5%E7%86%B1%E5%9C%96%E9%A0%90%E8%99%95%E7%90%86%E7%9A%84%E6%B6%88%E8%9E%8D-ablation"><span class="toc-nav-number">5.5.</span> <span class="toc-nav-text">4.5熱圖預處理的消融(ablation)</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<!-- anchorjs end -->
+
+
+
+		<!-- Footer (contains ThemeColor、viewer) -->
+		<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          
+
+          
+            <li>
+              <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy;
+          @ntust-simslab
+          2023
+          <br>
+          Theme by
+          <a target="_blank" rel="noopener" href="http://beantech.org">BeanTech</a>
+          <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span>
+          re-Ported by
+          <a target="_blank" rel="noopener" href="https://v-vincen.life/">Live My Life</a>
+          |
+          <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=V-Vincen&repo=V-Vincen.github.io&type=star&count=true"></iframe>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a id="rocket" href="#top" class=""></a>
+
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="/it-blog/js/jquery.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/bootstrap.min.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/hux-blog.min.js"></script>
+  <!-- catalog -->
+  <script async="true" type="text/javascript" src="/js/catalog.js"></script>
+  <!-- totop(rocket) -->
+  <script async="true" type="text/javascript" src="/js/totop.js"></script>
+
+  
+    <!-- Busuanzi JavaScript -->
+    <script async="async" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <!-- Scroll start -->
+    <script async="async" type="text/javascript" src="/it-blog/js/scroll.js"></script>
+    <!-- Scroll end -->
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+<script>
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function (e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  // fastClick.js
+  async ("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+    var $nav = document.querySelector("nav");
+    if ($nav)
+      FastClick.attach($nav);
+    }
+  )
+</script>
+
+<!-- Because of the native support for backtick-style fenced code blocks right within the Markdown is landed in Github Pages, From V1.6, There is no need for Highlight.js, so Huxblog drops it officially. -
+https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0 - https://help.github.com/articles/creating-and-highlighting-code-blocks/ -->
+<!-- <script> async ("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () { hljs.initHighlightingOnLoad(); }) </script> <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet"> -->
+
+<!-- jquery.tagcloud.js -->
+<!-- <script> // only load tagcloud.js in tag.html if ($('#tag_cloud').length !== 0) { async ("https://ntust-sims-lab.github.io/it-blog/js/jquery.tagcloud.js", function () { $.fn.tagcloud.defaults = { // size: { start: 1, end: 1, unit: 'em' }, color: {
+start: '#bbbbee', end: '#0085a1' } }; $('#tag_cloud a').tagcloud(); }) } </script> -->
+
+
+		<!-- Search -->
+		
+		<div class="popup search-popup local-search-popup">
+  <span class="popup-btn-close">
+    ESC
+  </span>
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col-md-9 col-md-offset-1"> -->
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 local-search-content">
+
+        <div class="local-search-header clearfix">
+
+          <div class="local-search-input-wrapper">
+            <span class="search-icon">
+              <i class="fa fa-search fa-lg" style="margin: 25px 10px 25px 20px;"></i>
+            </span>
+            <input autocomplete="off" placeholder="SEARCH..." type="text" id="local-search-input">
+          </div>
+        </div>
+        <div id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    <script src="/it-blog/js/ziploader.js"></script>
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.json";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    // monitor main search box;
+    var onPopupClose = function (e) {
+      $('.popup').fadeOut(300);
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $('.popup').fadeIn(300);
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // get search zip version
+    $.get('/it-blog/searchVersion.json?t=' + (+new Date()), function (res) {
+      if (localStorage.getItem('searchVersion') !== res) {
+        localStorage.setItem('searchVersion', res);
+        initSearchJson();
+      }
+    });
+
+    function initSearchJson() {
+      initLoad(['/it-blog/search.flv'], {
+        loadOptions: {
+          success: function (obj) {
+            localStorage.setItem('searchJson', obj['search.json'])
+          },
+          error: function (e) {
+            return console.log(e)
+          }
+        },
+        returnOptions: {
+          'json': TYPE_TEXT
+        },
+        mimeOptions: {
+          'json': 'application/json'
+        }
+      })
+    }
+    // search function;
+    var searchFunc = function (search_id, content_id) {
+      'use strict';
+      isfetched = true;
+      var datas = JSON.parse(localStorage.getItem('searchJson'));
+      // console.log(search_id)
+      var input = document.getElementById(search_id);
+      var resultContent = document.getElementById(content_id);
+      var inputEventFunction = function () {
+        var searchText = input.value.trim().toLowerCase();
+        var keywords = searchText.split(/[\s\-]+/);
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        var resultItems = [];
+        if (searchText.length > 0) {
+          // perform local searching
+          datas.forEach(function (data) {
+            var isMatch = false;
+            var hitCount = 0;
+            var searchTextCount = 0;
+            var title = data.title
+              ? data.title.trim()
+              : '';
+            var titleInLowerCase = title.toLowerCase();
+            var content = data.content
+              ? data.content.trim().replace(/<[^>]+>/g, "")
+              : '';
+            var contentInLowerCase = content.toLowerCase();
+            var articleUrl = decodeURIComponent(data.url);
+
+            var date = data.date;
+            var dateTime = date.replace(/T/, " ").replace(/.000Z/, "");
+            var imgUrl = data.header_img;
+            
+
+
+            var indexOfTitle = [];
+            var indexOfContent = [];
+            // only match articles with not empty titles
+            keywords.forEach(function (keyword) {
+              function getIndexByWord(word, text, caseSensitive) {
+                var wordLen = word.length;
+                if (wordLen === 0) {
+                  return [];
+                }
+                var startPosition = 0,
+                  position = [],
+                  index = [];
+                if (!caseSensitive) {
+                  text = text.toLowerCase();
+                  word = word.toLowerCase();
+                }
+                while ((position = text.indexOf(word, startPosition)) > -1) {
+                  index.push({position: position, word: word});
+                  startPosition = position + wordLen;
+                }
+                return index;
+              }
+              indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+              indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+            });
+            if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+              isMatch = true;
+              hitCount = indexOfTitle.length + indexOfContent.length;
+            }
+            // show search results
+            if (isMatch) {
+              // sort index by position of keyword
+              [indexOfTitle, indexOfContent].forEach(function (index) {
+                index.sort(function (itemLeft, itemRight) {
+                  if (itemRight.position !== itemLeft.position) {
+                    return itemRight.position - itemLeft.position;
+                  } else {
+                    return itemLeft.word.length - itemRight.word.length;
+                  }
+                });
+              });
+              // merge hits into slices
+              function mergeIntoSlice(text, start, end, index) {
+                var item = index[index.length - 1];
+                var position = item.position;
+                var word = item.word;
+                var hits = [];
+                var searchTextCountInSlice = 0;
+                while (position + word.length <= end && index.length != 0) {
+                  if (word === searchText) {
+                    searchTextCountInSlice++;
+                  }
+                  hits.push({position: position, length: word.length});
+                  var wordEnd = position + word.length;
+                  // move to next position of hit
+                  index.pop();
+                  while (index.length != 0) {
+                    item = index[index.length - 1];
+                    position = item.position;
+                    word = item.word;
+                    if (wordEnd > position) {
+                      index.pop();
+                    } else {
+                      break;
+                    }
+                  }
+                }
+                searchTextCount += searchTextCountInSlice;
+                return {hits: hits, start: start, end: end, searchTextCount: searchTextCountInSlice};
+              }
+              var slicesOfTitle = [];
+              if (indexOfTitle.length != 0) {
+                slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+              }
+              var slicesOfContent = [];
+              while (indexOfContent.length != 0) {
+                var item = indexOfContent[indexOfContent.length - 1];
+                var position = item.position;
+                var word = item.word;
+                // cut out 100 characters
+                var start = position - 20;
+                var end = position + 80;
+                if (start < 0) {
+                  start = 0;
+                }
+                if (end < position + word.length) {
+                  end = position + word.length;
+                }
+                if (end > content.length) {
+                  end = content.length;
+                }
+                slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+              }
+              // sort slices in content by search text's count and hits' count
+              slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                  return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                  return sliceRight.hits.length - sliceLeft.hits.length;
+                } else {
+                  return sliceLeft.start - sliceRight.start;
+                }
+              });
+              // select top N slices in content
+              var upperBound = parseInt('1');
+              if (upperBound >= 0) {
+                slicesOfContent = slicesOfContent.slice(0, upperBound);
+              }
+              // highlight title and content
+              function highlightKeyword(text, slice) {
+                var result = '';
+                var prevEnd = slice.start;
+                slice.hits.forEach(function (hit) {
+                  result += text.substring(prevEnd, hit.position);
+                  var end = hit.position + hit.length;
+                  result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                  prevEnd = end;
+                });
+                result += text.substring(prevEnd, slice.end);
+                return result;
+              }
+              var resultItem = '';
+
+              // if (slicesOfTitle.length != 0) {   resultItem += "<li><a target='_blank' href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>"; } else {   resultItem += "<li><a target='_blank' href='" +
+              // articleUrl + "' class='search-result-title'>" + title + "</a>"; } slicesOfContent.forEach(function (slice) {   resultItem += "<a target='_blank' href='" + articleUrl + "'><p class=\"search-result\">" + highlightKeyword(content, slice) +
+              // "...</p></a>"; }); resultItem += "</li>";
+
+              if (slicesOfTitle.length != 0) {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              } else {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + title + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              }
+              slicesOfContent.forEach(function (slice) {
+                resultItem += "<p class=\"search-result-content\">" + highlightKeyword(content, slice) + "...</p>";
+              });
+              resultItem += "</div><div class='search-result-right'><img class='media-image' src='" + imgUrl + "' width='64px' height='48px'></img></div></a>";
+
+              resultItems.push({item: resultItem, searchTextCount: searchTextCount, hitCount: hitCount, id: resultItems.length});
+            }
+          })
+        };
+
+        if (keywords.length === 1 && keywords[0] === "") {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else if (resultItems.length === 0) {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else {
+          resultItems.sort(function (resultLeft, resultRight) {
+            if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+              return resultRight.searchTextCount - resultLeft.searchTextCount;
+            } else if (resultLeft.hitCount !== resultRight.hitCount) {
+              return resultRight.hitCount - resultLeft.hitCount;
+            } else {
+              return resultRight.id - resultLeft.id;
+            }
+          });
+          var searchResultList = '<div class=\"search-result-list\">';
+          resultItems.forEach(function (result) {
+            searchResultList += result.item;
+          })
+          searchResultList += "</div>";
+          resultContent.innerHTML = searchResultList;
+        }
+      }
+      if ('auto' === 'auto') {
+        input.addEventListener('input', inputEventFunction);
+      } else {
+        $('.search-icon').click(inputEventFunction);
+        input.addEventListener('keypress', function (event) {
+          if (event.keyCode === 13) {
+            inputEventFunction();
+          }
+        });
+      }
+      // remove loading animation
+      $('body').css('overflow', '');
+      proceedsearch();
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function (e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc('local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function (e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 && $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      var _con = document.querySelector(".local-search-content");
+      if (_con) {
+        if (!_con.contains(e.target)) {
+          onPopupClose();
+        }
+      }
+    });
+  </script>
+
+
+		
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
