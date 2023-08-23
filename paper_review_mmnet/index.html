@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_mmnet/">
   <title>
     
-      【論文研讀】AcT - Action Transformer - SiMS Lab | IT Blog
+      【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -310,10 +310,10 @@
             <div class="tags">
               
             </div>
-            <h1>【論文研讀】AcT - Action Transformer</h1>
+            <h1>【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by Kevin Huang on
+              Posted by Frances Kao on
               2023-08-16
             </span>
 
@@ -322,11 +322,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">7</span> Minutes
+              Estimated Reading Time <span class="post-count">14</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">1.9k</span> In Total
+              Words <span class="post-count">3.5k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -372,156 +372,233 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <p><a target="_blank" rel="noopener" href="https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w"><img src="https://hackmd.io/OmkcmbXoRxS6KPY6ll3k2w/badge" alt="hackmd-github-sync-badge"></a></p>
-<h1><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.00606">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition</a>(arXiv)</h1>
-<h3 id="Journal-reference">Journal reference:</h3>
-<p><em>Pattern Recognition, Volume 124, <strong>April 2022</strong>, 108487</em></p>
-<h3 id="Authors">Authors:</h3>
-<p><em>Vittorio Mazzia, Simone Angarano, Francesco Salvetti, Federico Angelini, Marcello Chiaberge</em></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/MPOSE2021_Dataset">MPOSE2021 github</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/PIC4SeR/AcT">AcT github</a></p>
-<h2 id="論文重點整理">論文重點整理</h2>
+        <h1><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9782511?casa_token=ZGe_P3bVP_8AAAAA:TRqz91pF4uPIwDLzFCz0pgQgennYjUJe67ml7-Nb5qTOeDT3ee4O4WDKw07YnBK6CB9Xqcs">MMNet: A Model-Based Multimodal Network for Human Action Recognition in RGB-D Videos</a></h1>
+<ul>
+<li>Journal reference: IEEE Transactions on Pattern Analysis and Machine Intelligence (VOL.45, NO.3, MARCH 2023)</li>
+<li>Authors: Bruce X.B. Yu, Yan Liu, Xiang Zhang, Sheng-hua Zhong, and Keith C.C. Chan</li>
+<li>Github: <a target="_blank" rel="noopener" href="https://github.com/bruceyo/MMNet">https://github.com/bruceyo/MMNet</a></li>
+</ul>
+<hr>
+<h2 id="Introduction">Introduction</h2>
+<p>本研究建構一RGB模態資料，其假設為「當有一定時序內提供足夠的空間和外觀特徵時，人類即可輕鬆識別動作。」以此前提，使機器模擬人類識別動作的方式。人類在識別動作時，也會同時關注與人互動的物件。也就是說，我們會關注人體動作的移動，以及物件的外觀特徵，並將其連結以得知該動作類別。因此，作者構建一時空感知區域 (spatiotemporal region of interest, ST-ROI) 之特徵圖，透過關注RGB影像中<strong>有變化的</strong>外觀特徵，以減少處理影片資料時的高運算量問題。<br><br>
+然而，直接將直接將ST-ROI餵入這些VGG或ResNet等深度學習模型時，容易造成過擬合，而未能達到令人滿意的結果。因此，作者提出了一方法，透過骨架模態的知識轉移（Knowledge transferring），以提升RGB模態的動作辨識能力。具體而言，MMNet透過注意力遮罩的設計，針對可提供互補特徵的ST-ROI區域進行關注。</p>
+<h3 id="Contributions">Contributions</h3>
 <ol>
-<li>作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。</li>
-<li>在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。</li>
-<li>作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。</li>
+<li>提出了一種多模態深度學習架構，該架構在模型級別融合了不同的數據模態，並使用骨骼骨頭流(skeleton bone stream)和注意力機制，以提升RGB-D影片中的動作辨識。</li>
+<li>在三個基準數據集（NTU RGB + D 120 [10]，PKU-MMD [23]和Northwestern-UCLA Multiview [24]）上展示了該方法的優異性能，大大提高了現有技術的水平。</li>
+<li>通過分析所提出的MMNet的兩個關鍵參數，進一步驗證了該方法的有效性。</li>
 </ol>
-<h2 id="論文主要貢獻">論文主要貢獻</h2>
+<h3 id="現有技術遇到的困難">現有技術遇到的困難</h3>
 <ol>
-<li>
-<p>作者研究了 Transformer encoder 在基於 2D 人體姿態辨識應用，並提出了新穎的 AcT 模型，證明完全自注意力架構可以優於其他 HAR 現有的卷積和循環模型。</p>
-</li>
-<li>
-<p>作者引入了 MPOSE2021 資料集，一個實時短時 HAR 數據集，適用於基於姿勢和RGB的方法。它包含 15429 個樣本，100 名受試者分別執行 20 種動作，擁有不同的場景，每個場景的幀數有限（20 到 30 之間）。與其他公開可用的數據集相比，在幀數的有限性下，刺激了以低延遲和高吞吐量執行 HAR 的實時方法的開發。</p>
-</li>
+<li>僅透過單模態資料作為人體動作辨識之輸入的結果過於狹隘，例如RGB-based方法欠缺3D結構資訊，易受到背景或角度影響；而skeleton-based則欠缺紋理和色彩資訊，使骨架動向相像的動作會難以辨別。如下圖，相似動作的骨架構成相同，僅透過骨架進行辨識將會忽略動作間的細微差異。<br>
+<img src="https://hackmd.io/_uploads/HkaYxg9h2.png" alt=""></li>
+<li>多項研究指出，使用多模態資料確實提升了HAR結果。然而，要如何有效地結合多模態資料以提升HAR之準確度，仍是個值得探討的議題。</li>
 </ol>
-<h2 id="Related-works">Related works</h2>
-<h3 id="1-作者專注於視頻-2D-的分析方式優點">1. 作者專注於視頻(2D)的分析方式優點</h3>
-<p>在視頻分析的方面，可通過 OpenPose 和 PoseNet 等姿勢檢測身體關節作為 2D 坐標，其方法廣泛應用於簡單的 RGB 相機。相反，3D 骨架數據需要特定的傳感器來獲取，例如 Kinect 或其他立體相機。這帶來了很大的限制，例如可用性、成本、有限的工作範圍（Kinect 的情況下可達 5-6 m）以及室外環境中的性能下降。</p>
-<h3 id="2-專門為短時-HAR-設計的架構與數據集">2. 專門為短時 HAR 設計的架構與數據集</h3>
-<p>相比於先前的方法，作者提出了一種完全基於 Transformer encoder的 HAR 架構，沒有任何卷積層或循環層。MPOSE2021 數據集包括時間持續時間最多為 30 幀的樣本，使其成為更合適測試短時 HAR 模型和低延遲性的基準。</p>
-<h2 id="The-MPOSE2021-dataset">The MPOSE2021 dataset</h2>
-<ul>
-<li>從先前流行的 HAR 數據集收集數據：<br>
-<code>Weizmann, i3DPost, IXMAS, KTH, UTKinetic-Action3D (RGB only), UTD-MHAD (RGB only), ISLD, and ISLD-Additional-Sequences(共8個)。</code><s>要再去了解部分資料集的內容</s></li>
-</ul>
-<p><img src="https://hackmd.io/_uploads/HJc4Z043n.png" alt=""></p>
-<ul>
-<li>由於不同數據集的操作存在異質性，標籤被重新映射到 20 個常見類別的列表，無法相應地重新映射的操作將被丟棄。可以被映射的動作，視頻就被分為每個30幀的非重疊樣本（剪輯），並保留超過20幀的尾部樣本。</li>
-</ul>
-<h2 id="Action-Transformer-架構介紹">Action Transformer 架構介紹</h2>
-<ul>
-<li>
-<p><strong>Overview of the Action Transformer architecture:</strong></p>
-<p><img src="https://hackmd.io/_uploads/HkM6P-rn3.png" alt=""></p>
+<hr>
+<h2 id="Related-Works">Related Works</h2>
+<h3 id="Unimodal-HAR">Unimodal HAR</h3>
 <ol>
-<li>Input: RBG 影片(T frames of dimension H × W)。</li>
-<li>使用預訓練好的 OpenPose 或 PoseNet 模型，逐幀找出 2D pose 的關節點。</li>
-<li>Linear Projection of Pose Features，將每幀所有骨架點特徵 (骨架點數量乘上每個骨架特徵共4個) 轉換成 1D 的 token (有幾個 T 就有幾個 token)。</li>
-<li>承第三個步驟得到的陣列，加上 positional information 的 token，position 的數量對應為 n+1 (n 為 input 影片幀數)，【*】為起始資訊的 token，position 為 0。</li>
-<li>所有 token 投入 Transformer Encoder 裡，再經過 MLP 與 Softmax 輸出動作分類結果。</li>
+<li>Skeleton-based HAR: 欠缺紋理和色彩資訊，因此骨架動向相像的動作會難以辨別。</li>
+<li>RGB Video-based HAR: 欠缺3D結構資訊</li>
 </ol>
-</li>
-<li>
-<p><strong>Transformer encoder layer architecture (left) and schematic overview of a multi-head self-attention block (right):</strong></p>
-<p><img src="https://hackmd.io/_uploads/Sk9NObH33.png" alt=""></p>
-<p>Transformer Encoder(左圖) x <strong>L層</strong>:</p>
+<h3 id="Multimodal-HAR">Multimodal HAR</h3>
+<p>其他多模態方法如: 結合骨架點位與其連接(joint &amp; bone)、不同感測器資料之結合</p>
 <ol>
-<li>Input: 每幀關節點轉換成的 token，以及*起始資訊的token。</li>
-<li>Multi-Head Self-Attention</li>
-<li>Dropout</li>
-<li>先做residual connections(<a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/ejn4omn.html">殘差連接</a>), 再做<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395855181">Layernorm</a></li>
-<li>Feed Forward:
-<ul>
-<li>第一層擴增維度從Dmodel 到 Dmlp(4 · Dmodel)。(MLP + <a target="_blank" rel="noopener" href="https://medium.com/@shauryagoel/gelu-gaussian-error-linear-unit-4ec59fb2e47c">GeLu non-linearity</a>(激活函數))</li>
-<li>第二層進行降維從Dmlp to Dmodel。(還原成原本的維度)</li>
-</ul>
-</li>
-<li>Dropout</li>
-<li>先做residual connections(<a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/ejn4omn.html">殘差連接</a>), 再做<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395855181">Layernorm</a></li>
+<li>Fusion-Based Multimodal HAR (data fusion[14])</li>
 </ol>
-<p>Multi-Head Self-Attention(右圖):</p>
-<ol>
-<li>Input: 每幀關節點轉換成的 token，以及*起始資訊的token。</li>
-<li>Split: 將 token 額外乘上 H x W 個權重(Q、K、V都一樣)</li>
-</ol>
-<p><img src="https://hackmd.io/_uploads/BkeLWAr3n.png" alt=""></p>
-</li>
-<li>
-<p>Action Transformer 四種不同版本的參數調整：</p>
-<p><img src="https://hackmd.io/_uploads/HyMANkUnn.png" alt=""></p>
-</li>
-</ul>
-<h2 id="EXPERIMENTS">EXPERIMENTS</h2>
-<h3 id="1-MPOSE2021資料集">1. MPOSE2021資料集</h3>
-<p>T = 20~30 and P = 52(OpenPose) or 68(PoseNet) features</p>
 <ul>
-<li>OpenPose: 13 個關節點，4個參數 (position x, y and velocities Vx , Vy )<br>
-–&gt;velocities Vx , Vy沒有說明是如何取得的。</li>
-<li>PoseNet: 17 個關節點，4個參數 (position x, y and velocities Vx , Vy )<br>
-–&gt;velocities Vx , Vy沒有說明是如何取得的。</li>
-</ul>
-<p>訓練模型的超參數設置：<img src="https://hackmd.io/_uploads/B1SlGT8hn.png" alt=""></p>
+<li>可依據融合的資料分為以下三種：
 <ul>
-<li>實驗設備：on a PC with <strong>32-GB RAM</strong>, an <strong>Intel i7-9700K CPU</strong>, and an <strong>Nvidia 2080 Super GP-GPU</strong>.</li>
+<li>data-level fusion: 在資料層次進行融合，將不同模態的資料進行結合，形成一個新的資料集。這種方法通常用於資料模態相同或相似的情況下，例如將RGB和HSV的圖像資料合併。</li>
+<li>feature-level fusion: 在特徵層次進行融合，將不同模態的特徵進行結合，形成一個新的特徵集。這種方法通常用於資料模態不同但有相似特徵的情況下，例如將RGB圖像和深度圖像的特徵進行結合。常見方法為在全連接層進行特徵融合。</li>
+<li>decision-level fusion: 在決策層次進行融合，將不同模態的決策結果進行結合，形成一個新的決策結果。這種方法通常用於資料模態不同且沒有相似特徵的情況下。常見方法為將softmax層得結果整合，例如將RGB影像與聲音資料的決策結果進行結合。</li>
 </ul>
-<h3 id="2-短時-HAR-不同-Benchmark-比較-Openpose">2. 短時 HAR 不同 Benchmark 比較(Openpose)</h3>
+</li>
+<li>亦可依據其表示方式分為以下兩種[18]：
+<ul>
+<li>joint representations：在特徵空間中將不同模態的特徵進行連接。</li>
+<li>coordinated representations：將不同模態之間的表示進行對齊後，在進行連接。例如，將不同模態的特徵映射到同一個空間中，或者進行相關性分析。</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>OpenPose vs PoseNet:</p>
-<p><strong>PoseNet</strong> 專為在瀏覽器或移動設備等輕量級設備上運行而構建(<a target="_blank" rel="noopener" href="https://wiseocean.tech/edge-ai-semi-opportunities/">Edge AI</a>)，而 <strong>OpenPose</strong> 更加準確，並且旨在在 GPU 驅動的系統上運行。</p>
+<p>Our multimodal setting is distinct from that in [48], where not all data modalities were available in the testing phase. Instead, we focus on a case where all data modalities were available for the training and testing phases, leading to a multimodal learning setting called multimodal fusion [50].</p>
 </blockquote>
-<p><img src="https://hackmd.io/_uploads/S11MNaUh3.png" alt=""><br>
-<img src="https://hackmd.io/_uploads/BkkfraUn3.png" alt=""></p>
+<ol start="2">
+<li>Model-Based Multimodal HAR</li>
+</ol>
+<ul>
+<li>透過專注於對骨架模態帶來互補特徵的身體區域，從RGB模態中學習其表示(symbol)。即先提取不同模態之特徵表示後，再將其加以融合。</li>
+<li>概念上像co-learning[18]，將不同模態之間的資訊互補或相互學習、融合，以提高模型的準確性。</li>
+</ul>
 <blockquote>
-<p>Split: Split 1、Split 2、Split 3</p>
+<p>Barsoum et al. [37] developed a sequence-to-sequence model for probabilistic human motion prediction, which predicts multiple plausible future human poses from the same input. However, it is not yet clear whether the generated data can be used to enhance HAR models’ generalization abilities or accuracy.</p>
 </blockquote>
-<p>隨機抽取21位受測者作為testing，其餘的人作為training<br>
-<img src="https://hackmd.io/_uploads/BJWw7ALhh.png" alt=""></p>
+<hr>
+<h2 id="Method">Method</h2>
+<p><img src="https://hackmd.io/_uploads/ryAsVWqnn.png" alt=""></p>
+<h3 id="MODEL-BASED-MULTIMODAL-NETWORK">MODEL-BASED MULTIMODAL NETWORK</h3>
+<ul>
+<li>模型輸入:
+<ul>
+<li>skeleton joint: 人體3D點位由深度相機(kinect)提供</li>
+<li>skeleton bone: 由skeleton joint轉換而來</li>
+<li>RGB video: 後續將對影像針對人體部位進行ROI裁切，但此處的人體骨架點位是另外由pose estimation model取得而非kinect</li>
+</ul>
+</li>
+<li>模型輸出:<br>
+$\hat{y} = G_J(O_J, J) + G_B(O_B, B) + G_V(O_V, V)$</li>
+</ul>
+<h4 id="ST-ROI-Construct-ST-ROI-From-RGB-Modality">ST-ROI (Construct ST-ROI From RGB Modality)</h4>
+<ul>
+<li>透過OpenPose取得人體骨架點位，再藉由transformation function $g$ 將點位轉換成ROI。其公式中的 $f^{(i)}<em>{t}$ 為影片 $V^i$ 的第 $i$ 幀，而 $o^{(i)}</em>{tj}$ 則是在第 $i$ 幀時OpenPose的第 $j$ 個點位。其中， $j$ 的數量不會超過OpenPose全部點位數量，僅取$M’$ 個我們感興趣的點位： <br></li>
+</ul>
+<p>$\begin{gather*} R^{(i)}<em>{tj} = g(f^{(i)}</em>{t}, o^{(i)}_{tj}) \end{gather*}$</p>
+<ul>
+<li>以時序採樣的方式，選取 $L$ 個代表幀，再將其垂直合併為 $R^{(i)<em>{t}}$ ；同樣地，於不同幀地不同骨架點位轉換為一正方形的ROI $R^{(i)}</em>{tj}$ 後，也會被水平地合併為 $R^{(i)<em>{j}}$ 。這兩組資料合併後即構成一幀方形的ST-ROI，其每一行代表一幀資訊（垂直），每一列代表一骨架資訊（水平）。因此，最後會以 $R^{i}$ 作為 $V^{(i)}$ 的代表，其中每一幀皆由 $M’ \times L$ 大小的 子ST-ROI $R^{(i)}</em>{tj}$ 作為代表。<br>
+<img src="https://hackmd.io/_uploads/BkGVrz5hn.png" alt=""></li>
+</ul>
+<h4 id="Joint-Weights-Learn-Joint-Weights-From-Skeleton-Modality">Joint Weights (Learn Joint Weights From Skeleton Modality)</h4>
+<ul>
+<li>
+<p>骨架的輸入如fig. 4所示，基本上與GCN模型相同，透過Graph Convolution整合了鄰近骨架點位的資訊（joint vertices），以計算特徵表示。這裡所得到的權重會根據joint vertice間的距離與joint vertice在圖中的級別位置而定。<br>
+<img src="https://hackmd.io/_uploads/rJyj2rQp2.png" alt=""><br>
+$\begin{gather*} \hat{J^{(i)}} = \sum \Lambda^{-1/2} A \Lambda ^{-1/2}f_{in}(J^{(i)}) W_k \odot M_{k}  \end{gather*}$　<br><br>
+其中 $M_k$ 為attention map，用以表示每一vertex的重要性。而 $\hat{J}^{(i)}$ 為一形狀 $(c, t, M)$　的tensor（其維度分別輸出channel數、時序長度、vertice數量），用來推論動作類別；以外，也會被轉換為joint weight，提供RGB模態關注資訊，公式如下，即為一個代表Ｍ個不同骨架點位的權重矩陣：<br><br>
+$\begin{gather*} w^{(i)} = \dfrac{1}{ct} \sum^{c}<em>{1} \sum^{t}</em>{1} \sqrt{(\hat{J}_{ct}^{(i)})^2} \end{gather*}$</p>
+</li>
+<li>
+<p>透過GCN模型進行骨架模態的關節權重(Joint Weights)學習，其設定同ST-GCN <code>[1][2]</code>。</p>
 <blockquote>
-<p>Balanced %:</p>
+<p>ST-GCN模型中，每個vertex都有一個特徵向量，以表示該關節(joint)在動作辨識任務中的重要性。因此，可透過分析節點，從而進行關節權重的學習。</p>
 </blockquote>
-<p><img src="https://hackmd.io/_uploads/HynvfC83n.png" alt=""></p>
-<h3 id="3-短時-HAR-不同-Benchmark-比較-PoseNet">3. 短時 HAR 不同 Benchmark 比較(PoseNet)</h3>
-<p><img src="https://hackmd.io/_uploads/BkkrE082h.png" alt=""></p>
-<h3 id="4-Latency-measurements">4. Latency measurements</h3>
+</li>
+</ul>
+<h4 id="Model-Based-Fusion">Model-Based Fusion</h4>
+<ul>
+<li>作者提出一基於空間權重機制的RGB幀融合方法，使機器更好地關注有提供重要訊息的RGB特徵。</li>
+<li>其他研究通常基於注意力機制的方法，從RGB模態本身計算出關注權重。而本研究作者則是使用從骨架模態得到的關節權重，與ST-ROI（自RGB模態取得）相乘後，再得到正規過後的RGB模態資訊。<br>
+<img src="https://hackmd.io/_uploads/SkxKa3Qq3h.png" alt=""></li>
+</ul>
+<h4 id="Objective-Function">Objective Function</h4>
+<p>根據skeleton joint, skeleton bone, 和RGB video input個別的預測結果，設計目標函數為三者的cross-entropy加總: $L = L_J(\hat{y}^J, y) + L_B(\hat{y}^B, y) + L_V(\hat{y}^V, y)$</p>
+<ul>
+<li>skeleton joint<br>
+$\hat{y}^{j^{(i)}} = \sigma(G_J(O_J, J^{(i)}))$<br>
+其中， $G_J$ 為GCN； $O_J$ 為此GCN模型的可學習參數; $J^{(i)}$ 為骨架點位輸入的資料。</li>
+<li>skeleton bone<br>
+即skeleton joint資料的一種變形，會將兩個joint vector連接起來。<br>
+$\hat{y}^{B^{(i)}} = \sigma(G_B(O_B, B^{(i)}))$<br>
+其中， $G_B$ 為GCN； $O_B$ 為此GCN模型的可學習參數; $B^{(i)}$ 為skeleton bone input的資料。
 <blockquote>
-<p>使用<a target="_blank" rel="noopener" href="https://www.tensorflow.org/lite/performance/measurement">TFLite Benchmark tool</a>進行延遲評測</p>
-<p>基準測試：使用 8 個線程執行 10 次預熱運行，然後執行 100 次連續前向傳遞。</p>
-<p>2種CPUS: Intel i7-9700K(PC) &amp; ARM-based HiSilicon Kirin 970(mobile phone)</p>
+<p>假設有兩個joint vector， $\upsilon_{t1} = (x_1, y_1, z_1)$ 和 $\upsilon_{t2} = (x_2, y_2, z_2)$ ，則bone vector為 $B_{t1} = \varepsilon_{t1} = \upsilon_{t1} - \upsilon_{t2} = (x_1 - x_2, y_1 - y_2, z_1 - z_3)$。</p>
 </blockquote>
-<p><img src="https://hackmd.io/_uploads/By-dD0L22.png" alt=""></p>
-<p>此圖測試了 Intel CPU 和 ARM CPU 的延遲。基於 Transformer 的架構的巨大計算效率，而卷積網絡和循環網絡會導致 CPU 使用率更高。</p>
-<h2 id="Conclusion-and-future-work">Conclusion and future work</h2>
-<p>以下是作者提供的優缺點以及未來研究：</p>
-<p>優點：</p>
+</li>
+<li>RGB video input<br>
+透過ResNet對ST-ROI提取特徵。<br>
+$\hat{y}^{V^{(i)}} = \sigma(G_V(R’^{(i)}, O_V) + R’^{(i)})$<br>
+其中，$G_V(R’^{(i)}, O_V)$ 為需要學習的殘差映射(residual mapping)，利用殘差連接的方式關注差異處，可減少運算量； $O_V$ 為ResNet層的可學習參數。</li>
+</ul>
+<p>以上的 $\sigma$ 表示一線性層，用來將模型的輸出形狀轉換為one hot表示。</p>
+<h4 id="Training-and-Optimization">Training and Optimization</h4>
+<ul>
+<li>透過joint weight的原方法(從RGB獲取權重)與本研究提出的方法(從skeleton獲取權重)，以驗證MMNet的有效性。</li>
+<li>skeleton joint子模塊 $G_J$
+<ul>
+<li>$O_J$ 可先自行訓練並固定權重(pretrained and then fixed)，再進行 RGB vedio子模塊 $G_V$ 的訓練( $O_V$ )；</li>
+<li>亦可 $O_J$ 和 $O_V$ 兩者同時訓練。</li>
+</ul>
+</li>
+<li>skeleton bone子模塊 $G_B$ 則是完全分開訓練。</li>
+<li>MMNet的優化流程如下圖表示:
 <ol>
-<li>作者引入了 AcT 網絡，它具有簡單且完全自註意力的架構，其性能顯著優於常用的 HAR 模型。</li>
-<li>在之前的 HAR 和姿態估計研究的基礎上，所提出的方法利用短時間序列的 2D 骨架作為特徵，為實時應用提供準確且低延遲。特別是在有限制的計算與設備情況下，AcT 的卓越效率可用於邊緣 AI，即使在計算能力有限的設備上也能實現良好的性能。</li>
-<li>作者引入了 MPOSE2021，這是一個用於短時人類動作識別的大型開源數據集，試圖為該主題的未來研究建立正式的基準。</li>
+<li>輸入skeleton joint $J$ 訓練子模型 $G_J$ , 並且獲得joint weights $w$</li>
+<li>透過RGB video $V$ 建構 $M’ \times L$ 大小的ST-ROI $R$</li>
+<li>透過 $w$ 和 $R$ 建構skeleton-focused ST-ROI $R’$</li>
+<li>輸入 $R’$ 訓練子模型 $G_V$</li>
+<li>輸入 skeleton bone $B$ 訓練子模型 $G_B$</li>
+<li>將三個子模型的預測結果合併<br>
+<img src="https://hackmd.io/_uploads/HyEEw9g6h.png" alt=""></li>
 </ol>
-<p>缺點：</p>
-<ol>
-<li>沒有利用關節點之間的關係信息(不像GCN會考量點與點之間連結性)。</li>
-</ol>
-<p>未來研究：</p>
-<ol>
-<li>具有 3D 骨架(點雲)和長序列輸入的 AcT 架構</li>
-<li>嘗試將骨架圖作為預先知識納入positional embedding中，並不影響延遲。</li>
-</ol>
-<p>以下是我自己的想法跟疑問：</p>
-<p>缺點：</p>
-<ol>
-<li>作者沒有呈現出實時部份的實驗結果。(在 github 上有一個動圖，但也沒有表明是否為 Act 網路的實測演示)</li>
-</ol>
-<p>未來研究：</p>
-<ol>
-<li>可以嘗試其他較細微的關節點作為特徵投入，如：手部or臉部資訊。</li>
-</ol>
-<p>疑問：</p>
-<ol>
-<li>作者有提到每個關節點都會有4個特徵(position x, y and velocities Vx , Vy)，作者沒有說明 Vx 跟 Vy 是怎麼取得的。</li>
-<li>作者也有提到Benchmark裡有些模型會使用，<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10247936">集成架構(Ensemble Models)</a>的方式來減少模型<a target="_blank" rel="noopener" href="https://jason-chen-1992.weebly.com/home/-bias-variance-tradeoff">方差</a>，因此作者也分別創建三個集成版本，分別具有 2、5 和 10 個 AcT-μ 實例，但我不知道作者是用什麼方法如何建立集成架構。</li>
-</ol>
+</li>
+</ul>
+<blockquote>
+<p>Several other loss terms could be adopted for joint weights to pursue high recognition accuracy. For instance, according to the findings in [44], both the loss that encourages joint weights to maintain diversity and the loss that leads to joint weights with temporal variance can elicit slight recognition improvements.</p>
+</blockquote>
+<hr>
+<h2 id="Results">Results</h2>
+<h3 id="Datasets">Datasets</h3>
+<ul>
+<li>NTU RGB+D 60 (96 pixels)</li>
+<li>NTU RGB+D 120 (96 pixels)</li>
+<li>PKU-MMD (96 pixels)</li>
+<li>Northwestern-UCLA (48 pixels)</li>
+<li>Toyota Smarthome (48 pixels)</li>
+</ul>
+<h3 id="Implemetation-Details">Implemetation Details</h3>
+<ul>
+<li>ST-ROI: $M’ \times L$ 的 ST-ROI會先resize為225x225並且正歸化後，才會餵入ResNet18。而Northwestern-UCLA 和 Toyota Smarthome資料相對較小，因此會另外執行隨機翻轉的處理。</li>
+<li>$G_J$ : 1) 使用了GCN模型計算空間權重(spatial weight) [1]; 2) 為了減輕時間位置(mean values of temporal positions)對於關節權重的影響，作者選擇了前15個權重值最大的時間位置來計算關節權重</li>
+<li>optimizer: SGD (learning rate=0.1; 10th epoch=0.01; 50th epoch=0.001)</li>
+<li>early stop: 80th epoch</li>
+<li>minibatch size: 64</li>
+<li>GPU: 4 GTX 1080 Ti GPUs</li>
+</ul>
+<h3 id="Experiments">Experiments</h3>
+<h4 id="RGB-D-60">RGB+D 60</h4>
+<ul>
+<li>針對RGB Video融合上，做了權重更新的ablation study如下：
+<ul>
+<li>without joint weight：不使用skeleton modality學習來的權重，也就是在 $G_V$ 中沒有學習骨架資訊</li>
+<li>dynamic joint weight：骨架子模組 $G_J$ 和RGB子模塊 $G_V$ (ResNet18)同時訓練，即$O_J$ 和 $O_V$ 會一起變動</li>
+<li>fixed joint weight：訓練骨架子模組 $G_J$ 後固定權重( $O_J$ )(pretrained “GCN-Joints”)，再進行RGB子模塊 $G_V$ (ResNet18)的訓練( $O_V$ )</li>
+</ul>
+</li>
+<li>除了以ResNet作為ST-ROI特徵提取，作者也嘗試Inception-v3和EfficientNet等backbone，並且取得更優異的表現。</li>
+<li>相較於VPN++，雖然MMNet在此資料集的表現較為遜色，但在其他大型資料集如RGB+D 120或Northwestern-UCLA Multiview都超過其表現。<br>
+<img src="https://hackmd.io/_uploads/SyiOccepn.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/S1EdLsla3.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/BySR8sl6h.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/BkStUjean.png" alt=""></li>
+</ul>
+<h4 id="RGB-D-120">RGB+D 120</h4>
+<p><img src="https://hackmd.io/_uploads/SyRq8ixT3.png" alt=""></p>
+<ul>
+<li>比較了MS-G3D加入ST-ROI(fixed weights)的表現<br>
+<img src="https://hackmd.io/_uploads/H1-9IjgT2.png" alt=""></li>
+<li>特別與VPN進行比較，可以明顯看出在運行時間與資源占用上，MMNet是較為出色的。<br>
+<img src="https://hackmd.io/_uploads/r1ssIiga2.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/Skivb3e63.png" alt=""></li>
+</ul>
+<blockquote>
+<p>其他資料集的實驗結果大同小異，這邊不加以探討</p>
+</blockquote>
+<h4 id="Analysis-of-Joint-Weights">Analysis of Joint Weights</h4>
+<ul>
+<li>$G_J$ 可學習到骨架點位於特定時間點的重要性，顯現出一動作區間中骨架資訊會隨時間改變。若我們利用<a href="#Joint-Weights-(Learn-Joint-Weights-From-Skeleton-Modality)">joint weights公式</a>將所有時序位置資訊直接取平均值來獲取權重，便會失去特定重要時序上的特徵。</li>
+<li>因此作者打算取前N個最重要的時序位置來計算joint weights，但作者發現在同個時序位置上的RGB資訊和骨架資訊並非同等重要，導致直接從兩模態融合的資訊來取前N個重要時序位置的資訊，效果並不好。</li>
+<li>作者決定改以在每一人體部位( $J^{(i)}_{tj}$ )都取前15個最重要的時序位置，(即神經元激活值(neuron activation values)最大的前15個時序位置，他們代表了動作辨識中資訊的重要程度，用來計算其所對應身體部位的joint weights)。</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/HkO143x63.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/Sk_e43l6h.png" alt=""></p>
+<h4 id="Analysis-of-Skeleton-Focused-Representation">Analysis of Skeleton-Focused Representation</h4>
+<p><img src="https://hackmd.io/_uploads/BycW4ngpn.png" alt=""><br>
+<img src="https://hackmd.io/_uploads/SkGPwng62.png" alt=""></p>
+<hr>
+<h2 id="Conclusion">Conclusion</h2>
+<h3 id="Future-Works">Future Works</h3>
+<ul>
+<li>其他模態之研究: depth, optical flow</li>
+<li>outdoor action: 考慮背景資訊, 以符合真實場景應用</li>
+</ul>
+<hr>
+<h2 id="Discussion">Discussion</h2>
+<ul>
+<li>因RGB模態的模型需要待skeleton joint模態的模型訓練後得到joint weight參數才可繼續訓練，若要應用在即時且實際場景的辨識上將是一挑戰。</li>
+<li>在RGB模態中，須額外使用姿態辨識模型推論骨架，而不是直接使用kinect所提供的骨架資訊，使方法複雜化。</li>
+<li>若將skeleton input的資訊3D改為2D，是否會有明顯差異？若能調整為僅使用2D相機並且透過姿態辨識模型推論骨架，亦可較好將模型進行整合。</li>
+<li>在此方法中，三種模態的資料需要各自進行模型訓練，再以essemble方式輸出辨識結果，可能相當耗時。是否為每種動作皆需要三種模態資料進行辨識, 可再加以探討。</li>
+</ul>
 
 
         <hr>
@@ -529,12 +606,12 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/it-blog/APSNet_paper_review/" data-toggle="tooltip" data-placement="top" title="【論文研讀】APSNet - Toward Adaptive Point Sampling">&larr; Previous Post</a>
+            <a href="/it-blog/AcT_paper_review/" data-toggle="tooltip" data-placement="top" title="【論文研讀】AcT - Action Transformer">&larr; Previous Post</a>
           </li>
           
           
           <li class="next">
-            <a href="/it-blog/paper_review_mmnet/" data-toggle="tooltip" data-placement="top" title="【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos">Next Post &rarr;</a>
+            <a href="/it-blog/paper_review_posec3d/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -583,7 +660,7 @@
       </a>
     </li> -->
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】AcT - Action Transformer&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_mmnet/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -621,7 +698,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Action Transformer: A Self-Attention Model for Short-Time Pose-Based Human Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Journal-reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">Journal reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">Authors:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">論文重點整理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E4%BD%9C%E8%80%85%E5%B0%88%E6%B3%A8%E6%96%BC%E8%A6%96%E9%A0%BB-2D-%E7%9A%84%E5%88%86%E6%9E%90%E6%96%B9%E5%BC%8F%E5%84%AA%E9%BB%9E"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 作者專注於視頻(2D)的分析方式優點</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%B0%88%E9%96%80%E7%82%BA%E7%9F%AD%E6%99%82-HAR-%E8%A8%AD%E8%A8%88%E7%9A%84%E6%9E%B6%E6%A7%8B%E8%88%87%E6%95%B8%E6%93%9A%E9%9B%86"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 專門為短時 HAR 設計的架構與數據集</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#The-MPOSE2021-dataset"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">The MPOSE2021 dataset</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Action-Transformer-%E6%9E%B6%E6%A7%8B%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Action Transformer 架構介紹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#EXPERIMENTS"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-MPOSE2021%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">1. MPOSE2021資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-Openpose"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">2. 短時 HAR 不同 Benchmark 比較(Openpose)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E7%9F%AD%E6%99%82-HAR-%E4%B8%8D%E5%90%8C-Benchmark-%E6%AF%94%E8%BC%83-PoseNet"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">3. 短時 HAR 不同 Benchmark 比較(PoseNet)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Latency-measurements"><span class="toc-nav-number">1.6.4.</span> <span class="toc-nav-text">4. Latency measurements</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion-and-future-work"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">Conclusion and future work</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MMNet: A Model-Based Multimodal Network for Human Action Recognition in RGB-D Videos</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Introduction"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Introduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Contributions"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Contributions</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%8F%BE%E6%9C%89%E6%8A%80%E8%A1%93%E9%81%87%E5%88%B0%E7%9A%84%E5%9B%B0%E9%9B%A3"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">現有技術遇到的困難</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Related-Works"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Related Works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Unimodal-HAR"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Unimodal HAR</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Multimodal-HAR"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Multimodal HAR</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Method"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MODEL-BASED-MULTIMODAL-NETWORK"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">MODEL-BASED MULTIMODAL NETWORK</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ST-ROI-Construct-ST-ROI-From-RGB-Modality"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">ST-ROI (Construct ST-ROI From RGB Modality)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Joint-Weights-Learn-Joint-Weights-From-Skeleton-Modality"><span class="toc-nav-number">1.3.1.2.</span> <span class="toc-nav-text">Joint Weights (Learn Joint Weights From Skeleton Modality)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Model-Based-Fusion"><span class="toc-nav-number">1.3.1.3.</span> <span class="toc-nav-text">Model-Based Fusion</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Objective-Function"><span class="toc-nav-number">1.3.1.4.</span> <span class="toc-nav-text">Objective Function</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Training-and-Optimization"><span class="toc-nav-number">1.3.1.5.</span> <span class="toc-nav-text">Training and Optimization</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Results"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Results</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Datasets"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Datasets</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Implemetation-Details"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">Implemetation Details</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Experiments"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">Experiments</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#RGB-D-60"><span class="toc-nav-number">1.4.3.1.</span> <span class="toc-nav-text">RGB+D 60</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#RGB-D-120"><span class="toc-nav-number">1.4.3.2.</span> <span class="toc-nav-text">RGB+D 120</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Analysis-of-Joint-Weights"><span class="toc-nav-number">1.4.3.3.</span> <span class="toc-nav-text">Analysis of Joint Weights</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Analysis-of-Skeleton-Focused-Representation"><span class="toc-nav-number">1.4.3.4.</span> <span class="toc-nav-text">Analysis of Skeleton-Focused Representation</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Conclusion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Future-Works"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">Future Works</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Discussion"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Discussion</span></a></li></ol></li></ol>
         
         </div>
       </aside>
