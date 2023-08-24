@@ -1,7 +1,7 @@
 ---
 title: 【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
 catalog: true
-date: 2023-08-16
+date: 2023-08-22
 author: Frances Kao
 categories:
 - paper review
@@ -9,6 +9,9 @@ categories:
 ---
 
 # [MMNet: A Model-Based Multimodal Network for Human Action Recognition in RGB-D Videos](https://ieeexplore.ieee.org/abstract/document/9782511?casa_token=ZGe_P3bVP_8AAAAA:TRqz91pF4uPIwDLzFCz0pgQgennYjUJe67ml7-Nb5qTOeDT3ee4O4WDKw07YnBK6CB9Xqcs)
+
+[![hackmd-github-sync-badge](https://hackmd.io/NsbTaEWHQH-UJm-heBaFkg/badge)](https://hackmd.io/NsbTaEWHQH-UJm-heBaFkg)
+
 * Journal reference: IEEE Transactions on Pattern Analysis and Machine Intelligence (VOL.45, NO.3, MARCH 2023)
 * Authors: Bruce X.B. Yu, Yan Liu, Xiang Zhang, Sheng-hua Zhong, and Keith C.C. Chan
 * Github: https://github.com/bruceyo/MMNet
@@ -71,17 +74,16 @@ $\hat{y} = G_J(O_J, J) + G_B(O_B, B) + G_V(O_V, V)$
 
 #### ST-ROI (Construct ST-ROI From RGB Modality)
 * 透過OpenPose取得人體骨架點位，再藉由transformation function $g$ 將點位轉換成ROI。其公式中的 $f^{(i)}_{t}$ 為影片 $V^i$ 的第 $i$ 幀，而 $o^{(i)}_{tj}$ 則是在第 $i$ 幀時OpenPose的第 $j$ 個點位。其中， $j$ 的數量不會超過OpenPose全部點位數量，僅取$M'$ 個我們感興趣的點位： <br>
-
-$\begin{gather*} R^{(i)}_{tj} = g(f^{(i)}_{t}, o^{(i)}_{tj}) \end{gather*}$
+$R^{(i)}_{tj} = g(f^{(i)}_{t}, o^{(i)}_{tj})$
 * 以時序採樣的方式，選取 $L$ 個代表幀，再將其垂直合併為 $R^{(i)_{t}}$ ；同樣地，於不同幀地不同骨架點位轉換為一正方形的ROI $R^{(i)}_{tj}$ 後，也會被水平地合併為 $R^{(i)_{j}}$ 。這兩組資料合併後即構成一幀方形的ST-ROI，其每一行代表一幀資訊（垂直），每一列代表一骨架資訊（水平）。因此，最後會以 $R^{i}$ 作為 $V^{(i)}$ 的代表，其中每一幀皆由 $M' \times L$ 大小的 子ST-ROI $R^{(i)}_{tj}$ 作為代表。
 ![](https://hackmd.io/_uploads/BkGVrz5hn.png)
 
 #### Joint Weights (Learn Joint Weights From Skeleton Modality)
 * 骨架的輸入如fig. 4所示，基本上與GCN模型相同，透過Graph Convolution整合了鄰近骨架點位的資訊（joint vertices），以計算特徵表示。這裡所得到的權重會根據joint vertice間的距離與joint vertice在圖中的級別位置而定。
 ![](https://hackmd.io/_uploads/rJyj2rQp2.png)
-$\begin{gather*} \hat{J^{(i)}} = \sum \Lambda^{-1/2} A \Lambda ^{-1/2}f_{in}(J^{(i)}) W_k \odot M_{k}  \end{gather*}$　<br>
+$\hat{J^{(i)}} = \sum \Lambda^{-1/2} A \Lambda ^{-1/2}f_{in}(J^{(i)}) W_k \odot M_{k}$　<br>
 其中 $M_k$ 為attention map，用以表示每一vertex的重要性。而 $\hat{J}^{(i)}$ 為一形狀 $(c, t, M)$　的tensor（其維度分別輸出channel數、時序長度、vertice數量），用來推論動作類別；以外，也會被轉換為joint weight，提供RGB模態關注資訊，公式如下，即為一個代表Ｍ個不同骨架點位的權重矩陣：<br>
-$\begin{gather*} w^{(i)} = \dfrac{1}{ct} \sum^{c}_{1} \sum^{t}_{1} \sqrt{(\hat{J}_{ct}^{(i)})^2} \end{gather*}$
+$w^{(i)} = \dfrac{1}{ct} \sum^{c}_{1} \sum^{t}_{1} \sqrt{(\hat{J}_{ct}^{(i)})^2}$
 
 * 透過GCN模型進行骨架模態的關節權重(Joint Weights)學習，其設定同ST-GCN `[1][2]`。
     > ST-GCN模型中，每個vertex都有一個特徵向量，以表示該關節(joint)在動作辨識任務中的重要性。因此，可透過分析節點，從而進行關節權重的學習。
