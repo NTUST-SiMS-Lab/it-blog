@@ -4,28 +4,28 @@
   <url>
     <loc>https://ntust-sims-lab.github.io/tags/index.html</loc>
     
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/404.html</loc>
     
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/index.html</loc>
     
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     
   </url>
   
@@ -95,7 +95,7 @@
 
   <url>
     <loc>https://ntust-sims-lab.github.io/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -105,63 +105,63 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/</loc>
-    <lastmod>2023-08-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/point-cloud/</loc>
-    <lastmod>2023-08-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/point-cloud/pointnet/</loc>
-    <lastmod>2023-08-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/server/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/it-blog/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/point-cloud/</loc>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/research-paper/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
+    <lastmod>2023-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/point-cloud/pointnet/</loc>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
-    <lastmod>2023-08-24</lastmod>
+    <lastmod>2023-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
