@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/paper-review/point-cloud/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/">
   <title>
     
-      SiMS Lab | IT Blog
+      【論文研讀】Action recognition of construction workers under occlusion - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】Action recognition of construction workers under occlusion</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by David Chen on
+              2023-09-05
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">9</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">2.4k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,346 +364,394 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1>Action recognition of construction workers under occlusion</h1>
+<ul>
+<li>Journal reference: Journal of Building Engineering (VOL.45, January 2022)</li>
+<li>Authors: Ziqi Li, Dongsheng Li</li>
+<li>Github: None</li>
+<li>論文連結: <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S2352710221012109">Action recognition of construction workers under occlusion</a></li>
+</ul>
+<hr>
+<h2 id="Introduction">Introduction</h2>
+<p>當前大多數動作識別模型在出現遮擋問題時往往會失去其有效性。<br>
+為了解決這個問題，本文提出了一種基於骨架的動作識別方法。<br>
+本文的目標在於準確的辨識被遮擋的工人，若可以將此研究的抗遮擋成果移植到手部動作辨識模型上，可以提升模型在實際場域的準確率。<br>
+該方法主要包含三個部分。</p>
+<ul>
+<li>矩陣編碼技術的骨架，它利用更高判別性的幾何特徵進行數據轉換。</li>
+<li>基於GAN的數據插補模型，它使用LSTM作為生成器來更好地推算</li>
+</ul>
+<p>的矩陣信息，並添加注意力機制使模型更加關注缺失的部分。</p>
+<ul>
+<li>Resnet分類模型，用於對推算矩陣進行分類。<br>
+<img src="https://hackmd.io/_uploads/H1BRKAzAh.png" alt="Flowchart of the proposed action recognition method"></li>
+</ul>
+<hr>
+<h2 id="Methodology">Methodology</h2>
+<h3 id="Process">Process</h3>
+<ol>
+<li>將建築工人的視頻準備為數據集。</li>
+<li>提取工人關節坐標並構建特徵矩陣。</li>
+<li>補全缺失數據。</li>
+<li>建立Resnet分類模型並用估算數據對其進行訓練。</li>
+<li>根據訓練好的模型預測建築工人的動作。</li>
+</ol>
+<hr>
+<h3 id="Skeleton-to-matrix-encoding-technique">Skeleton to matrix encoding technique</h3>
+<ul>
+<li>使用OpenPose來獲取2D骨架資訊</li>
+<li>當身體被遮擋時，CNN會因特徵缺失而無法計算骨架坐標。</li>
+<li>將缺失坐標替換為0。</li>
+<li>提出一種可以將骨架數據轉化為特徵矩陣的編碼方法。</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/H1aKSH703.png" alt=""></p>
+<hr>
+<p>該方法主要利用四種特徵：</p>
+<ul>
+<li>骨架長度$γ_i^t$，表示相鄰兩個關節的長度；</li>
+<li>骨架餘弦$λ_i^t$，表示骨架與水平方向夾角的餘弦；</li>
+<li>頭部到各關節點向量的長度$ς_i^t$，表示頭部到各關節點的距離；</li>
+<li>頭部到各關節向量的餘弦$κ_i^t$，表示頭部到各關節點的連線與水平方向夾角的餘弦。<br>
+<img src="https://hackmd.io/_uploads/ByrFKr7C3.png" alt=""></li>
+</ul>
+<p>這四種特徵的變換公式如下：<br>
+骨架長度：<br>
+$$γ_i^t=‖(x_i^t, y_i^t) - (x_j^t, y_j^t)‖$$</p>
+<ul>
+<li>
+<p>骨架長度特徵向量為：<br>
+$$F_γ^t=[γ_1^t, γ_2^t,…, γ_n^t]$$</p>
+</li>
+<li>
+<p>為了防止$γ_i^t=0$時，$λ_i^t=0$無法計算的情況，骨架角度特徵如下：<br>
+$$λ_i^t=\frac{|x_i^t-x_j^t|}{γ_i^t}$$</p>
+</li>
+<li>
+<p>角度特徵向量為：<br>
+$$F_λ^t=[λ_1^t, λ_2^t,…, λ_n^t]$$</p>
+</li>
+<li>
+<p>頭部節點到身體節點的長度特徵為：<br>
+$$ς_i^t=‖(x_i^t, y_i^t) - (x_0^t, y_0^t)‖$$</p>
+</li>
+<li>
+<p>頭部節點到身體節點的長度特徵向量為：<br>
+$$F_ς^t=[ς_1^t, ς_2^t,…, ς_n^t]$$</p>
+</li>
+<li>
+<p>為了防止$ς_i^t=0$時，$κ_i^t=0$無法計算的情況，頭部節點與身體節點的角度特徵如下：(未定義解釋 $e^\beta$ )<br>
+$$κ_i^t=\frac{x_i^t-x_0^t}{ς_i^t+e^\beta}$$</p>
+</li>
+<li>
+<p>頭部節點與身體節點的角度特徵向量為：<br>
+$$F_κ^t=\begin{bmatrix}κ_1^t, κ_2^t,…, κ_n^t\end{bmatrix}$$</p>
+</li>
+<li>
+<p>最終特徵矩陣為：<br>
+$$F=<br>
+\begin{bmatrix}<br>
+F^1 \<br>
+F^2 \<br>
+\vdots \<br>
+F^t<br>
+\end{bmatrix}$$</p>
+</li>
+<li>
+<p>以上特徵分別會生成四個特徵矩陣，分別是$F_λ、F_γ、F_ς、F_κ$，為了得到兩幀之間的骨骼信息等級，將四個特徵矩陣分別與Sobel算子相乘，得到特徵矩陣的梯度矩陣，下列為Sobel算子：<br>
+$$G_y=\begin{bmatrix}<br>
+1&amp;2&amp;1 \<br>
+0&amp;0&amp;0 \<br>
+-1&amp;-2&amp;-1 \<br>
+\end{bmatrix}$$</p>
+</li>
+<li>
+<p>最後將特徵矩陣與其之梯度矩陣結合起來生成一個可用於分類的特徵矩陣</p>
+</li>
+</ul>
+<p>$$\widehat{F}=\begin{bmatrix}<br>
+F_λF_γF_ςF_κG_λG_γG_ςG_κ<br>
+\end{bmatrix}$$</p>
+<hr>
+<h3 id="GAN-based-data-imputation-model">GAN-based data imputation model</h3>
+<p>現有的缺失值處理方法：</p>
+<ul>
+<li>跳過缺失值直接計算(Xgboost 和 LightGBM)</li>
+<li>使用平均值、中位數和復數來代替缺失值(統計評估方法)</li>
+<li>使用 K-NN，基於特徵相似性對缺失數據進行計算</li>
+</ul>
+<hr>
+<p>由於施工人員<strong>遮擋面積較大，有的會超過50%</strong>，那些不處理缺失或簡單填充的方法無法完全恢復數據的原始特徵，因此作者提出此數據差補模型。</p>
+<p>模型包含三部分：</p>
+<ul>
+<li>生成器：用於觀察真實數據的每一個細節，然後根據觀察結果對缺失數據進行插補，插補後輸出插補矩陣。
+<ul>
+<li>由LSTM網路組成</li>
+<li>添加注意力模組，模組包含：
+<ul>
+<li>空間注意力部分</li>
+<li>時間注意力部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>鑑別器：用來區分真正觀察到的數據部分和插補的部分
+<ul>
+<li>imput：生成器輸出的插補矩陣與提示矩陣</li>
+</ul>
+</li>
+<li>提示矩陣：
+<ul>
+<li>提供了原始數據缺失部分的一些信息，使鑑別器能夠更加關注該部分，並迫使生成器生成更接近真實數據的數據以進行插補。</li>
+<li>如下圖中 Hint Matrix 所示，0值的位置代表缺失值對應的位置，1值的位置代表真實值對應的位置</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/SkHxrE402.png" alt=""></p>
+<p>透過輸入第i幀到第t-1幀的特徵來獲得第t幀的插補矩陣，作者通過最小化第t幀插補矩陣與缺失矩陣的MSE來訓練生成器</p>
+<p>在時間注意力模型中，$\begin{bmatrix}q_1,…, q_m\end{bmatrix}$是一個m維隨機向量，m是數據維度，向量qm是輸入數據的權重，由訓練得到。</p>
+<hr>
+<h3 id="Classification-network">Classification network</h3>
+<p>作者採用用單通道Resnet-50網絡進行訓練，訓練前將特徵矩陣標準化為0到255。</p>
+<hr>
+<h2 id="Experiments">Experiments</h2>
+<p>此研究進行了三組實驗：</p>
+<ol>
+<li>使用NTU RGB + D來測試所提出的方法在常見情況下的動作識別能力。</li>
+<li>重點研究不同動作識別方法在本文數據集上的表現，並以PB-GCN動作識別網絡作為基準。</li>
+<li>實驗關注不同遮擋區域對所提方法識別效果的影響。</li>
+</ol>
+<p>作者的私有數據集是從大連的一個建築工地收集的。</p>
+<p>該數據集總共包含 254 分鐘，每個剪輯有一到兩個工作人員，<strong>每個剪輯僅包含一類動作</strong>。</p>
+<p>它包含8個不同的動作，相應的代碼如下表所示<br>
+<img src="https://hackmd.io/_uploads/Sk_UG8ECn.png" alt=""></p>
+<p>每種動作分為兩種情況，遮擋情況和非遮擋情況。</p>
+<p>下圖說明每個動作的遮擋的示例圖片。</p>
+<p><img src="https://hackmd.io/_uploads/rk5CM8VCn.png" alt=""></p>
+<p>訓練過程使用NVIDIA RTX 2080Ti和AMD Ryzen 2700 × 3.7 GHz<br>
+所以有機會可以在普通家機上實現，是否能在邊緣設備運算尚須確認。</p>
+<hr>
+<h2 id="Experimental-results-and-analysis">Experimental results and analysis</h2>
+<h3 id="Experimental-results-of-NTU-RGB-D">Experimental results of NTU RGB + D</h3>
+<p>根據下表的內容，所提出的方法在NTU RGB + D數據集中達到了中等水平，並且在面對遮擋時達到了state-of-the-art。</p>
+<p><img src="https://hackmd.io/_uploads/HyzqEI403.png" alt=""></p>
+<hr>
+<h3 id="Different-methods-of-action-recognition">Different methods of action recognition</h3>
+<p>為了證明該方法估算骨骼信息的能力，作者將所提出的方法與基於骨骼的動作識別方法PB-GCN進行了比較。</p>
+<p>數據集分成遮擋情況和非遮擋情況。<br>
+每個部份又分成訓練集、驗證集和測試集，比例為 0.7 : 0.1 : 0.2</p>
+<p>訓練時應確保每個樣本大於16幀，最終得到遮擋和無遮擋情況下的混淆矩陣。</p>
+<p>本文提出的方法在作者的數據集上的可視化結果如下圖所示</p>
+<p><img src="https://hackmd.io/_uploads/B1T2IUNC2.png" alt=""></p>
+<hr>
+<p>下圖為該方法和PB-GCN在<strong>遮擋</strong>和<strong>未遮擋</strong>狀態下的歸一化混淆矩陣。</p>
+<p><img src="https://hackmd.io/_uploads/ByLZP8NRh.png" alt=""></p>
+<p>從上圖可以看出，在沒有遮擋的情況下，該方法的準確率略低於PB-GCN，但在存在部分遮擋時，該方法的準確率高於PB-GCN。</p>
+<p><strong>簡而言之，在面對遮擋時，所提出的方法比一般方法更好。</strong></p>
+<hr>
+<h3 id="Comparison-of-the-recognition-effects-when-facing-different-occlusion-rates">Comparison of the recognition effects when facing different occlusion rates</h3>
+<p>針對遮擋情況下的動作識別進行了一組實驗，原理是遮擋導致視頻中工人身體部位缺失，從而導致OpenPose丟失了一些關節坐標，實驗設置了四種遮擋率：11%、50%、72%和94%分別代表遮擋區域的四種大小，如下圖所示。</p>
+<p><img src="https://hackmd.io/_uploads/H1eVuUE0n.png" alt=""></p>
+<p>每種情況的遮擋區域中的關節坐標都被刪除，使用所提出的基於GAN的模型來填補缺失的關節信息，最終識別動作。</p>
+<hr>
+<p>如下圖所示，隨著遮擋面積的增加，所提出方法和PB-GCN模型的準確率逐漸下降，但是PB-GCN 比所提出方法以更高的速度下降。</p>
+<p><img src="https://hackmd.io/_uploads/ryzeFLNA3.png" alt=""></p>
+<p>作者提出的方法在第二種和第三種情況下明顯優於PB-GCN。</p>
+<hr>
+<h2 id="Contributions-and-limitations">Contributions and limitations</h2>
+<h3 id="Contributions">Contributions</h3>
+<ul>
+<li>提出了一種動作識別方法，包括三個步驟：</li>
+</ul>
+<ol>
+<li>特徵轉換</li>
+<li>特徵插補</li>
+<li>特徵分類</li>
+</ol>
+<p>所提出的方法在存在遮擋的情況下能夠實現 86.62% 的動作識別準確率。</p>
+<ul>
+<li>提出了一種基於GAN的特徵插補模型：使用 LSTM 作為生成器，而不是常規的全連接網絡，並加入時空注意力機制。<br>
+這使的模型對時間序列更加敏感，且能透過注意力機制更好地學習缺失矩陣的時空特徵。</li>
+</ul>
+<h3 id="Limitations">Limitations</h3>
+<p>根據實驗結果，該方法只有在38.5%~79.6%的遮擋率的情況下結果會優於其他模型，且目前尚不能實時化。</p>
+<p>作者測試時使用了54幀影片，消耗時間為17.946s，離real-time還差的遠。</p>
+<hr>
+<h2 id="Conclusion">Conclusion</h2>
+<p>作者提出的特徵轉換與數據插補模型可以在遮擋的情況下得到不錯的準確率，但是計算需求對於我們目前的專案(圓展)還是太大，若想使用抗遮擋相關技術，若基於此篇論文，則必須將數據插補模型中的GAN以其他較輕量化的模型取代。</p>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/Simslab-server_guide/" data-toggle="tooltip" data-placement="top" title="【實驗室資源】Simslab-server使用指南">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Action recognition of construction workers under occlusion&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Action recognition of construction workers under occlusion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Introduction"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Introduction</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Methodology"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Methodology</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Process"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Process</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Skeleton-to-matrix-encoding-technique"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Skeleton to matrix encoding technique</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#GAN-based-data-imputation-model"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">GAN-based data imputation model</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Classification-network"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Classification network</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Experiments"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Experiments</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Experimental-results-and-analysis"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Experimental results and analysis</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Experimental-results-of-NTU-RGB-D"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Experimental results of NTU RGB + D</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Different-methods-of-action-recognition"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">Different methods of action recognition</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Comparison-of-the-recognition-effects-when-facing-different-occlusion-rates"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">Comparison of the recognition effects when facing different occlusion rates</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Contributions-and-limitations"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Contributions and limitations</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Contributions"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">Contributions</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Limitations"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">Limitations</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Conclusion</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../../paper_review_Action_recognition_of_construction_workers_under_occlusion/">
-      <li>【論文研讀】Action recognition of construction workers under occlusion</li>
-    </a>
-    
-    <a href="../../../Simslab-server_guide/">
-      <li>【實驗室資源】Simslab-server使用指南</li>
-    </a>
-    
-    <a href="../../../paper_review_mmnet/">
-      <li>【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos</li>
-    </a>
-    
-    <a href="../../../APSNet_paper_review/">
-      <li>【論文研讀】APSNet - Toward Adaptive Point Sampling</li>
-    </a>
-    
-    <a href="../../../AcT_paper_review/">
-      <li>【論文研讀】AcT - Action Transformer</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/09/">September 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
