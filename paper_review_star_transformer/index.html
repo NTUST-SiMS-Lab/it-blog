@@ -427,30 +427,30 @@
 <p>跨模態的部分包含了三種資訊，即全域性、局部性、以及合併資訊，因此在類別上也會有三種。其中在特徵提取使用了預訓練模型ResNet-MC18 (mixed convolution 18)[43]，透過其不同層之特徵圖得到全域與局部的特徵再以Transformer加以提取與結合。</p>
 <h3 id="Global-grid-token-GG-token-mathbb-T-t-g">Global grid token (GG-token)  $\mathbb{T}^{t}_{g}$</h3>
 <ul>
-<li>提取ResNet18之<strong>最後一層</strong>作為全域特徵，得 $h \times w$ 之特徵圖，並且將其flatten為 $hw$ (即 $P$ )之向量，即得到 $\mathbb{T}^{t}<em>{g}$ 中 $g^{t}</em>{1,…,P}$ 之各元素： $\mathbb{T}^{t}<em>{g} = { g^{t}</em>{1}, …, g^{t}_{P} }$</li>
+<li>提取ResNet18之<strong>最後一層</strong>作為全域特徵，得 $h \times w$ 之特徵圖，並且將其flatten為 $hw$ (即 $P$ )之向量，即得到 $\mathbb{T}^{t}_{g}$ 中 $g^{t}_{1,…,P}$ 之各元素： $\mathbb{T}^{t}_{g} = { g^{t}_{1}, …, g^{t}_{P} }$</li>
 </ul>
 <h3 id="Joint-map-token-JM-tokem-mathbb-T-t-j">Joint map token (JM-tokem)  $\mathbb{T}^{t}_{j}$</h3>
 <ul>
-<li>提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}<em>{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}</em>{n}$ 的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為 $h’ \times w’$ ： $\mathbb{T}^{t}<em>{j} = { j^{t}</em>{1}, …, j^{t}_{N} }$, where $N$ is the number of joint heat map <br><br>
+<li>提取ResNet18之中間層作為局部特徵，以獲得較細節之特徵，當中的元素 $j^{t}_{n}$ 來自於local feature map $F$ 與第n張joint heat map $h^{t}_{n}$ 的合併(concatenate)；首先擷取local feature map $F$ 後，第n張joint heat map $h_{n}$ 即為在一暫時性特徵映射圖上的第n個joint結果，其經過高斯模糊縮放(scaled at $\sigma$)後的大小為 $h’ \times w’$ ： $\mathbb{T}^{t}_{j} = { j^{t}_{1}, …, j^{t}_{N} }$, where $N$ is the number of joint heat map <br><br>
 <img src="https://hackmd.io/_uploads/S1rvvvLc3.png" alt=""></li>
 </ul>
 <h3 id="Multi-class-token-Z">Multi-class token $Z$</h3>
-<p>Vanilla Vit主要以單一類別學習全域關聯性(下圖(a))，而此研究則加入各個模態資料的類別標記，也就是在總類別 $CLS_{total}$ 加上 $\mathbb{T}<em>{g}$ 和 $\mathbb{T}</em>{j}$ 兩者token，其中僅有$\mathbb{T}_{j}$保有位置編碼（此與一般ViT位置編碼方法有所不同處，這邊作者主張位置資訊對JM特別重要），詳細其公式如下：</p>
+<p>Vanilla Vit主要以單一類別學習全域關聯性(下圖(a))，而此研究則加入各個模態資料的類別標記，也就是在總類別 $CLS_{total}$ 加上 $\mathbb{T}_{g}$ 和 $\mathbb{T}_{j}$ 兩者token，其中僅有$\mathbb{T}_{j}$保有位置編碼（此與一般ViT位置編碼方法有所不同處，這邊作者主張位置資訊對JM特別重要），詳細其公式如下：</p>
 <blockquote>
-<p>$\mathbb{T}<em>{g} = CLS</em>{global} \oplus \mathbb{T}<em>{g}$<br>
-$\mathbb{T}</em>{j} = CLS_{joint} \oplus (\mathbb{T}<em>{j} + pos)$<br>
-$Z = \mathbb{T}</em>{g} \oplus \mathbb{T}<em>{j} \oplus CLS</em>{total}$<br>
+<p>$\mathbb{T}_{g} = CLS_{global} \oplus \mathbb{T}_{g}$<br>
+$\mathbb{T}_{j} = CLS_{joint} \oplus (\mathbb{T}_{j} + pos)$<br>
+$Z = \mathbb{T}_{g} \oplus \mathbb{T}_{j} \oplus CLS_{total}$<br>
 <img src="https://hackmd.io/_uploads/r1Duw2fth.png" alt=""></p>
 </blockquote>
 <h2 id="Spatio-temporal-cross-attention">Spatio-temporal cross attention</h2>
 <p><img src="https://hackmd.io/_uploads/BkTyMuIqn.png" alt=""></p>
 <h3 id="FAttn-full-spatical-temperal-attantion">FAttn (full spatical-temperal attantion)</h3>
 <p>該輸入包含了所有空間維度與時間維度的資訊，其複雜性為$T^{2}S^{2}$。而另外設計的兩個注意力機制將$T$的部分拆為兩份分別給了Q向量和KV向量，因此其複雜性僅為FAttn的四分之一倍。 <br><br>
-$FAttn(Q, K, V) = \displaystyle\sum^{T}<em>{t} \displaystyle\sum^{S}</em>{s} Softmax{\dfrac{Q_{s,t} \cdot K_{s, t}}{\sqrt{d_{h}}}} V_{s,t}$</p>
+$FAttn(Q, K, V) = \displaystyle\sum^{T}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q_{s,t} \cdot K_{s, t}}{\sqrt{d_{h}}}} V_{s,t}$</p>
 <h3 id="ZAttn-zigzag-spatical-temperal-attantion">ZAttn (zigzag spatical-temperal attantion)</h3>
 <p>Q與K和V套用了交叉幀資訊之解藕，即將$T$資訊分為基偶數幀，並且交互計算出$a’$和$a’‘$再將其合併。首先，$a’$以所有TS之基數幀作為Q向量而偶數幀則為K和V向量；而$a’'$則反之，以所有TS之基數幀作為K和V向量而偶數幀則為Q向量。如此作法是希望能捕捉到特徵中的細微變動。 <br></p>
-<p>$a’ = \displaystyle\sum^{T/2}<em>{t} \displaystyle\sum^{S}</em>{s} Softmax{\dfrac{Q’<em>{s,t} \cdot K’</em>{s, t}}{\sqrt{d_{h}}}} V’<em>{s,t}$ <br><br>
-$a’’ = \displaystyle\sum^{T/2}</em>{t} \displaystyle\sum^{S}<em>{s} Softmax{\dfrac{Q’'</em>{s,t} \cdot K’‘<em>{s, t}}{\sqrt{d</em>{h}}}} V’‘_{s,t}$ <br><br>
+<p>$a’ = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q’_{s,t} \cdot K’_{s, t}}{\sqrt{d_{h}}}} V’_{s,t}$ <br><br>
+$a’’ = \displaystyle\sum^{T/2}_{t} \displaystyle\sum^{S}_{s} Softmax{\dfrac{Q’‘_{s,t} \cdot K’‘_{s, t}}{\sqrt{d_{h}}}} V’‘_{s,t}$ <br><br>
 $ZAttn(Q, K, V) = a’ \oplus a’'$ <br></p>
 <p>註：zigzag意指曲折的線段，指的就是在此方法上會將資訊以Z行曲折的方式拆分開來。</p>
 <h3 id="BAttn-binary-spatical-temperal-attantion">BAttn (binary spatical-temperal attantion)</h3>
@@ -458,10 +458,10 @@ $ZAttn(Q, K, V) = a’ \oplus a’'$ <br></p>
 $BAttn(Q, K, V) = b’ \oplus b’'$</p>
 <h2 id="Encoder-Decoder">Encoder &amp; Decoder</h2>
 <p>本研究提出的Transformer encoder-decoder結構是以一般的Transformer為基礎，而非處理影像的ViT那樣僅有encoder。 <br><br>
-$\bar{Z}<em>{l} = LN{FSTA(z</em>{l-1})+z_{l-1}}$ <br><br>
-$z’<em>{l}, z’'</em>{l} = Decoupling(\bar{Z}<em>{l})$ <br><br>
-$\hat{Z}</em>{l} =LN{(STA(z’<em>{l})+z’</em>{l}) \oplus (STA(z’'<em>{l})+z’'</em>{l})}$ <br><br>
-$z_{l} = LN{MLP(\bar{z}<em>{l}) + \bar{z}</em>{l}}$ <br><br>
+$\bar{Z}_{l} = LN{FSTA(z_{l-1})+z_{l-1}}$ <br><br>
+$z’_{l}, z’‘_{l} = Decoupling(\bar{Z}_{l})$ <br><br>
+$\hat{Z}_{l} =LN{(STA(z’_{l})+z’_{l}) \oplus (STA(z’‘_{l})+z’'_{l})}$ <br><br>
+$z_{l} = LN{MLP(\bar{z}_{l}) + \bar{z}_{l}}$ <br><br>
 如此經過STAR Transformer的多類別token便會透過平均、餵入MLP推測動作標籤，即將多類別的特徵類別融合為單一類別。</p>
 <hr>
 <h1>Results</h1>
