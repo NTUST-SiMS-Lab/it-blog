@@ -3,17 +3,28 @@ name: Pages
 on:
   push:
     branches:
-      - master  # default branch
+      - master
 
 jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
+      # Checkout -----------------
       - uses: actions/checkout@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
+      
+      # Python --------------------      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      
+      - name: Refactor Markdownfile
+        run: bash ref_markdownfile.sh
+
+      # Hexo ----------------------
       - name: Use Node.js 17
         uses: actions/setup-node@v2
         with:
