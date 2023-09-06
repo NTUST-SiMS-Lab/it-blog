@@ -7,7 +7,7 @@ args = parser.parse_args()
 
 file_name = args.file
 
-# 正則表達式模式來匹配`$`或`$$`包起來的LaTeX代碼
+# 正則表達式模式來尋找 `$` 或 `$$` 包起來的 LaTeX 程式
 latex_pattern = r'(\$+)([^\$]+)\1'
 
 with open(f"source/_posts/{file_name}", 'r', encoding='utf-8') as f:
@@ -15,7 +15,7 @@ with open(f"source/_posts/{file_name}", 'r', encoding='utf-8') as f:
 
 matches = re.findall(latex_pattern, markdown_text)
 
-# 將LaTeX代碼中的底線替換為反斜杠加底線
+# 將 LaTeX 中的底線替換為反斜杠加底線
 for match in matches:
     latex_code = match[1]
     latex_code = latex_code.replace('_', r'\_')
