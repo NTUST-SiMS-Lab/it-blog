@@ -6,15 +6,17 @@ author: Hsiangj-Jen Li
 categories:
 - research paper
 ---
-
+<div align='left'>
+    
 [![hackmd-github-sync-badge](https://hackmd.io/87iVO5BdR7Sxc6MNDnLGoA/badge)](https://hackmd.io/87iVO5BdR7Sxc6MNDnLGoA)
+</div>
 
 > 祝各位在寫論文的路上可以少走一些歪路。
 > 以下內容如有錯誤歡迎直接在 Hackmd 上指正，歡迎共編，感謝。
 
 
 # 🚀 [Journal Citation Reports™](https://jcr.clarivate.com/jcr/home)
-用來評斷該 paper 是否為掠奪性期刊/會議，可以看它 **JIF QUARTILE** 的數值，Q1 代表是這個領域的 Tier 1 期刊/會議；**Impact Factor** 也是其中一個指標，越高越好，在閱讀文獻的時候可以參考這些數值來排文獻的閱讀先後順序。
+用來評斷該 paper 是否為[掠奪性期刊](https://libraryfile.lib.ntust.edu.tw/web/Investigative/Investigative.html)，可以看它 [**JIF QUARTILE**](http://www.chimei.org.tw/main/cmh_department/54110/news/JCR202211新平台使用說明.pdf) 的數值，Q1 代表是這個領域的 Tier 1 期刊；**Impact Factor** 也是其中一個指標，越高越好，在閱讀文獻的時候可以參考這些數值來排文獻的閱讀先後順序。
 ![](https://hackmd.io/_uploads/BJbHT0fch.png)
 
 
@@ -57,3 +59,16 @@ LaTeX是一種專業的排版系統，雖然 word 已經是非常方便的寫論
 - [數學公式 - KaTex Cheat Sheet](https://katex.org/docs/supported.html)
 
 > 🌟 注意：如果內文會使用到中文，compiler 請選擇 XeLaTex。
+
+
+---
+### 其他小提醒：
+1. 建立寫論文的順序為 Literature review => Methodology => Result => Conclustion => Introduction => Abstract
+2. Endnote可以最後一次用就好，因為和老師報告進度的中間可能會加上或砍掉不少，但記得自己先整理好資料
+3. 每個段落講一件事情，可以延伸，但不要混雜很多重點在裡面
+4. 第一次找老師報論文進度的時候，可以做幾張ppt，其中包含論文的整個架構圖
+5. 開始寫論文時直接跟學長姐要論文的模板來進行修改，會省一點時間
+6. 文獻探討很花時間，甚至到研究都做完了還會動，建議在找文獻前先想好大概論文會有哪幾個小節，每個小節要寫些什麼
+
+
+
