@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/404.html</loc>
-    
-    <lastmod>2023-09-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
     <lastmod>2023-09-11</lastmod>
@@ -24,6 +17,20 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-09-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/404.html</loc>
+    
+    <lastmod>2023-09-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/DokerfileAndDocker/</loc>
     
     <lastmod>2023-09-11</lastmod>
     
@@ -118,14 +125,14 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/server/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/docker/</loc>
     <lastmod>2023-09-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/it-blog/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/server/</loc>
     <lastmod>2023-09-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -139,6 +146,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/it-blog/</loc>
+    <lastmod>2023-09-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/research-paper/</loc>
     <lastmod>2023-09-11</lastmod>
     <changefreq>daily</changefreq>
@@ -146,14 +160,14 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
     <lastmod>2023-09-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/</loc>
     <lastmod>2023-09-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
