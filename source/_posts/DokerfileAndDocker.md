@@ -1,5 +1,5 @@
 ---
-title: 基本Dockerdfile寫法與Command Line
+title: 基本Dockerfile寫法與Command Line
 catalog: true
 date: 2023-09-11
 author: BO-CHENG SU # 填上你的姓名
