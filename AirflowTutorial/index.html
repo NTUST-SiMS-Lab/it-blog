@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/archives/2023/archives/2/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/AirflowTutorial/">
   <title>
     
-      SiMS Lab | IT Blog
+      【技術分享】Airflow快速入門及如何在Docker上安裝 - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【技術分享】Airflow快速入門及如何在Docker上安裝</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by BO-CHENG SU on
+              2023-09-18
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">6</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">1.7k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,380 +364,286 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1>什麼是Airflow？</h1>
+<p>先簡單介紹一下什麼是Airflow。 Airflow原先由 Airbnb 開發的開元軟體，現為Apache頂級專案，並且具有GUI介面供使用者使用，是以 Python 寫成的工作流程管理系統（Workflow Management System）。</p>
+<h3 id="你可能會問，Airflow可以拿來做什麼？">你可能會問，Airflow可以拿來做什麼？</h3>
+<p>近年不管是資料科學家、資料工程師還是任何需要處理數據的軟體工程師，Airflow 都是他們用來建構可靠的 ETL 以及定期處理批量資料的首選之一。</p>
+<h3 id="在使用Airflow之前你必須先了解…">在使用Airflow之前你必須先了解…</h3>
+<p>一般而言，我們會將相關的工作設計為一個「<strong>有向無循環圖</strong>」 DAG（Directed Acyclic Graph），顧名思義就是有<strong>方向性</strong>且<strong>無回向</strong>造成循環的結構。因此，往後在使用Airflow進行開發的同時，不要忘記確保工作之間的相依性（Dependencies）好讓 Airflow 這種工作流程管理系統幫我們管理工作流程。</p>
+<h3 id="Airflow的好處">Airflow的好處</h3>
+<ol>
+<li>定期執行工作流程，解決自動化的痛點</li>
+<li>維護相依性，確保工作流程從上游到下游執行，不會在上游沒完成前執行到下游</li>
+<li>各個工作失敗時自動重試（墨菲定律，所有你認為邏輯上萬無一失的工作都會因為各種無法預期的情況失敗）</li>
+<li>簡單易懂的 Web UI 方便管理工作流程</li>
+</ol>
+<p>接下來就來教大家如何在Docker上安裝Airflow吧！</p>
+<h1>在Docker上安裝Airflow</h1>
+<h3 id="環境準備">環境準備</h3>
+<p>在環境部分建議使用Linux系統，我的Ubuntu環境是20.04 LTS。也可以使用Windows的Linux子系統。此外，請預先安裝好：</p>
+<ol>
+<li>安裝 Docker</li>
+<li>安裝 Docker-Compose</li>
+</ol>
+<p>當環境準備好了以後，就可以開始準備安裝啦！</p>
+<h3 id="安裝">安裝</h3>
+<p>以下提供給大家兩種方法：</p>
+<ol>
+<li>
+<p>我已經幫大家準備好Dockerfile及示範的程式碼啦~如果覺得以下步驟麻煩的可以去載我的repo！<br>
+step 1:</p>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/angus2292/</span>Airflow_Quick_Start.git</span><br></pre></td></tr></table></figure>
+<p>step 2:<br>
+cd到repo的資料夾(應該會看到Dockerfile)輸入：</p>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> build -t airflow_demo:<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> .</span><br></pre></td></tr></table></figure>
+<p>step 3:<br>
+當image建好以後，執行：</p>
+ <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker compose up -d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>參考官方說明文檔操作過程如下：<br>
+step 1:<br>
+開一個資料夾，下載最新版的<code>docker-compose.yaml</code></p>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">curl</span> -LfO &#x27;https://airflow.apache.org/docs/apache-airflow/<span class="number">2</span>.<span class="number">7</span>.<span class="number">1</span>/docker-compose.yaml&#x27;</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/r1Kuj0DkT.png" alt=""><br>
+step 2:<br>
+在剛剛建的資料夾下新增3個子資料夾，分別為dags, logs, plugins。並配置user id<br>
+(Note：其他作業系統可能會報錯&quot;沒有設置AIRFLOW_UID&quot;，直接手動建立<code>.env</code>並將其內容修改成<code>AIRFLOW_UID=50000</code>後儲存)</p>
+ <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="string">./dags</span> <span class="string">./logs</span> <span class="string">./plugins</span> <span class="string">./config</span> ＃ 創資料夾</span><br><span class="line"><span class="keyword">echo</span> -e <span class="string">&quot;AIRFLOW_UID=$(id -u)&quot;</span> &gt; <span class="string">.env</span> ＃ 配置user id</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/S1ff2Rw1p.png" alt=""><br>
+step 3:<br>
+接下來可以依照需求選擇要不要寫Dockerfile，主要是看你的DAG有沒有需要其他相依的套件。</p>
+<ul>
+<li>無需其他相依套件，直接執行：  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker compose up -d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>需其它相依套件：
+<ol>
+<li>準備好Dockerfile</li>
+<li>執行 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker build -<span class="built_in">t</span> &lt;<span class="built_in">na</span><span class="symbol">me:ve</span>rsion&gt; .</span><br><span class="line">例如：</span><br><span class="line">docker build -<span class="built_in">t</span> airflow\_de<span class="symbol">mo:0</span>.<span class="number">0.1</span> .</span><br></pre></td></tr></table></figure>
+<img src="https://hackmd.io/_uploads/SkJlG1u16.png" alt=""></li>
+<li>將 <code>docker-compose.yaml</code>中，<code>images: $&#123;AIRFLOW_IMAGE_NAME:-apache/airflow:2.0.0&#125;</code>改成上步驟所建的image<br>
+<img src="https://hackmd.io/_uploads/HJykm1dJ6.png" alt=""><br>
+（在官方docker-compose.yaml其實有提到可以註解此行並改成<code>build: .</code>後直接執行<code>docker compose up</code>，但實際執行後發現會build許多相同id的images，因此改成上述作法）</li>
+<li>執行 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker compose up -d</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>這樣就完成Airflow的安裝囉！趕緊去網頁輸入<code>localhost:8080</code>看能不能登入網頁！初始帳號與密碼皆為<code>airflow</code>。<br>
+<img src="https://hackmd.io/_uploads/rJvNmkukT.png" alt=""></p>
+<p>修但幾咧！！！前面前置作業那麼多，我該如何去寫我自己的DAG呢？接下來不只會給你code，而且會給你很多code！</p>
+<h1>如何用Python撰寫DAG？</h1>
+<p>事實上，一個 DAG 是由多個 Tasks 組成，每個 Task 是分開執行的，Task 是 Airflow 執行基礎單位。而 Task 是由 Operator 所定義，最常使用的 Operator 有：</p>
+<ul>
+<li><strong>SimpleHttpOperator</strong>:執行HTTP請求的操作器，可以用於呼叫外部API或網站。</li>
+<li><strong>PythonOperator</strong>:許執行自定義Python函數的操作器，用於任何需要Python代碼執行的任務。</li>
+<li><strong>PostgresOperator</strong>:執行PostgreSQL數據庫上的SQL操作的操作器，例如執行查詢或數據庫更改。</li>
+</ul>
+<p>而 PythonOperator 是 Airflow 內最常用到的 Operator 即使你不熟 Airflow 內建或是第三方寫好的 plugin，幾乎都可以在 PythonOperator 內自己寫出來。以下示範最基本的DAG組成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> airflow <span class="keyword">import</span> DAG</span><br><span class="line"><span class="keyword">from</span> airflow.operators.python <span class="keyword">import</span> PythonOperator</span><br><span class="line"></span><br><span class="line">default_args = &#123;</span><br><span class="line">    <span class="string">&#x27;owner&#x27;</span>: <span class="string">&#x27;Angus Su&#x27;</span>, <span class="comment"># 誰擁有這個DAG</span></span><br><span class="line">    <span class="string">&#x27;start_date&#x27;</span>: days_ago(<span class="number">1</span>), <span class="comment"># 從何時開始執行</span></span><br><span class="line">    <span class="string">&quot;retries&quot;</span>: <span class="number">1</span>, <span class="comment"># 報錯時自動重試</span></span><br><span class="line">    <span class="string">&quot;retry_delay&quot;</span>: timedelta(minutes=<span class="number">5</span>) <span class="comment"># 自動重試的間隔</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task1</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;task 1&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task2</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;task2&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> DAG(<span class="string">&#x27;example_dag&#x27;</span>, default_args = default_args) <span class="keyword">as</span> dag: </span><br><span class="line"></span><br><span class="line">    t1 = PythonOperator(</span><br><span class="line">        task_id = <span class="string">&#x27;task_1&#x27;</span>  <span class="comment"># 在airflow上顯示的 task 名稱</span></span><br><span class="line">        python_callable = task1() <span class="comment"># 呼叫 python 函式</span></span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    t2 = PythonOperator(</span><br><span class="line">        task_id = <span class="string">&#x27;task_2&#x27;</span></span><br><span class="line">        python_callable = task2()</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    t1 &gt;&gt; t2</span><br></pre></td></tr></table></figure>
+<p>上述程式碼就是最簡單的DAG，所有語法都是使用Python撰寫，為我們開發上帶來許多便利！</p>
+<h1>TaskFlow</h1>
+<p>什麼是 Task flow？</p>
+<p>在Airflow 2.0 中引入了TaskFlow API作為新的DAG編寫範例，透過使用TaskFlow，開發者可以更容易、更簡單地管理DAG的依賴關係和使用XCom。</p>
+<p>怎麼說很方便呢？在過往DAG中的Task資料的溝通可能需要透過XCom：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ProcessData</span>(<span class="params">**kwargs</span>):</span></span><br><span class="line">	<span class="comment">#... 資料處理的步驟</span></span><br><span class="line">	result = get_result()</span><br><span class="line">    push_result_to_xcom(result)</span><br><span class="line">	  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">LoadData</span>(<span class="params">**kwargs</span>):</span></span><br><span class="line">    data = get_data_from_xcom()</span><br><span class="line">    <span class="comment">#...do something</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> DAG(<span class="string">&#x27;123&#x27;</span>, deafult_args= deafult_args) <span class="keyword">as</span> dag:</span><br><span class="line">    p = PythonOperator(</span><br><span class="line">        ....</span><br><span class="line">        provide _context = <span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    l = PythonOperator(</span><br><span class="line">        ....</span><br><span class="line">        provide _context = <span class="literal">True</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>在Airflow 2.0之後，我們只須在def前加上<code>@task</code>即可。因此，上述程式碼可以改寫成：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_task_flow</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line"></span><br><span class="line">    @task</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">ProcessData</span><span class="params">()</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="comment">#... 資料處理的步驟</span></span><br><span class="line">        result = get_result()</span><br><span class="line">        <span class="keyword">return</span>  result</span><br><span class="line"></span><br><span class="line">    @task</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">LoadData</span><span class="params">(result)</span></span><span class="symbol">:</span></span><br><span class="line">        data = get_data_from_xcom()</span><br><span class="line">        <span class="comment">#...do something</span></span><br><span class="line">        <span class="keyword">return</span> data</span><br><span class="line">    </span><br><span class="line">    res = ProcessData</span><br><span class="line">    LoadData(res)</span><br><span class="line"></span><br><span class="line">example_task_flow()</span><br></pre></td></tr></table></figure>
+<p>是不是跟我們原先Python寫法很像呢～除此之外，程式碼也更加的直觀了！</p>
+<p>總結一下TaskFlow：</p>
+<ul>
+<li>Airflow 的一個新功能，可以用裝飾器 <code>@task</code> 來簡化 PythonOperator 的寫法，並且自動處理 XCom 的資料傳遞。</li>
+<li>讓程式碼更乾淨，易讀，並且可以直接使用 context 內的參數，而不需要提供 context 參數或是用 template 定義。</li>
+</ul>
+<h1>總結</h1>
+<p>在本文中，我們簡略介紹了：</p>
+<ul>
+<li>什麼Airflow</li>
+<li>如何在Docker上安裝Airflow</li>
+<li>如何撰寫自己的DAG</li>
+<li>TaskFlow</li>
+</ul>
+<p>Airflow真的是非常好用的自動化工具，也希望我的分享可以對大家有幫助！<br>
+此外，我也有準備PTT股票板的爬蟲案例(與<a href="#%E5%AE%89%E8%A3%9D">安裝</a>的連結一致)：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">curl</span> -LfO &#x27;https://airflow.apache.org/docs/apache-airflow/<span class="number">2</span>.<span class="number">7</span>.<span class="number">1</span>/docker-compose.yaml&#x27;</span><br></pre></td></tr></table></figure>
+<p>在 <code>dags</code> 資料夾中，包含了 <code>crawling.py</code> 與 <code>crawling_task_flow.py</code> 分別演示了有無使用TaskFlow的兩種撰寫方式，供大家參考。</p>
+<p>感謝大家！</p>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            09-18
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
-              <span>
-                【技術分享】Airflow快速入門及如何在Docker上安裝
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            09-11
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
-              <span>
-                【技術分享】基本Dockerfile寫法與Command Line
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/DokerfileAndDocker/" data-toggle="tooltip" data-placement="top" title="【技術分享】基本Dockerfile寫法與Command Line">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【技術分享】Airflow快速入門及如何在Docker上安裝&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/AirflowTutorial/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">什麼是Airflow？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%A0%E5%8F%AF%E8%83%BD%E6%9C%83%E5%95%8F%EF%BC%8CAirflow%E5%8F%AF%E4%BB%A5%E6%8B%BF%E4%BE%86%E5%81%9A%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">你可能會問，Airflow可以拿來做什麼？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8%E4%BD%BF%E7%94%A8Airflow%E4%B9%8B%E5%89%8D%E4%BD%A0%E5%BF%85%E9%A0%88%E5%85%88%E4%BA%86%E8%A7%A3%E2%80%A6"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">在使用Airflow之前你必須先了解…</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Airflow%E7%9A%84%E5%A5%BD%E8%99%95"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">Airflow的好處</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">在Docker上安裝Airflow</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%92%B0%E5%A2%83%E6%BA%96%E5%82%99"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">環境準備</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">安裝</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何用Python撰寫DAG？</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">TaskFlow</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">總結</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../../../AirflowTutorial/">
-      <li>【技術分享】Airflow快速入門及如何在Docker上安裝</li>
-    </a>
-    
-    <a href="../../../../DokerfileAndDocker/">
-      <li>【技術分享】基本Dockerfile寫法與Command Line</li>
-    </a>
-    
-    <a href="../../../../paper_review_Action_recognition_of_construction_workers_under_occlusion/">
-      <li>【論文研讀】Action recognition of construction workers under occlusion</li>
-    </a>
-    
-    <a href="../../../../Simslab-server_guide/">
-      <li>【實驗室資源】Simslab-server使用指南</li>
-    </a>
-    
-    <a href="../../../../paper_review_mmnet/">
-      <li>【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../09/">September 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#docker">
-      <li>docker</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#airflow">
-      <li>airflow</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
