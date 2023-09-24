@@ -12,7 +12,7 @@ categories:
 - occlusion
 ---
 # Action recognition of construction workers under occlusion
-
+[![hackmd-github-sync-badge](https://hackmd.io/svOOtawSQae4nDIQhL79vQ/badge)](https://hackmd.io/svOOtawSQae4nDIQhL79vQ)
 * Journal reference: Journal of Building Engineering (VOL.45, January 2022)
 * Authors: Ziqi Li, Dongsheng Li
 * Github: None
@@ -38,7 +38,7 @@ categories:
 
 ### Process
 1. 將建築工人的視頻準備為數據集。
-2. 提取工人關節坐標並構建特徵矩陣。
+2. 使用OpenPose提取工人關節坐標並構建特徵矩陣。
 3. 補全缺失數據。
 4. 建立Resnet分類模型並用估算數據對其進行訓練。
 5. 根據訓練好的模型預測建築工人的動作。
@@ -62,7 +62,7 @@ categories:
 ![](https://hackmd.io/_uploads/ByrFKr7C3.png)
 
 這四種特徵的變換公式如下：
-骨架長度：
+- 骨架長度：
 $$γ_i^t=‖(x_i^t, y_i^t) - (x_j^t, y_j^t)‖$$
 
 - 骨架長度特徵向量為：
@@ -95,7 +95,7 @@ F^2 \\
 F^t
 \end{bmatrix}$$
 
-- 以上特徵分別會生成四個特徵矩陣，分別是$F_λ、F_γ、F_ς、F_κ$，為了得到兩幀之間的骨骼信息等級，將四個特徵矩陣分別與Sobel算子相乘，得到特徵矩陣的梯度矩陣，下列為Sobel算子：
+- 以上特徵分別會生成四個特徵矩陣，分別是$F_λ、F_γ、F_ς、F_κ$，為了得到兩幀之間的骨骼信息等級，將四個特徵矩陣分別與[Sobel算子](https://zh.wikipedia.org/zh-tw/%E7%B4%A2%E4%BC%AF%E7%AE%97%E5%AD%90)相乘，得到特徵矩陣的梯度矩陣，下列為Sobel算子：
 $$G_y=\begin{bmatrix}
 1&2&1 \\
 0&0&0 \\
@@ -125,7 +125,7 @@ F_λF_γF_ςF_κG_λG_γG_ςG_κ
         * 空間注意力部分
         * 時間注意力部分
 * 鑑別器：用來區分真正觀察到的數據部分和插補的部分
-    * imput：生成器輸出的插補矩陣與提示矩陣
+    * input：生成器輸出的插補矩陣與提示矩陣
 * 提示矩陣：
     * 提供了原始數據缺失部分的一些信息，使鑑別器能夠更加關注該部分，並迫使生成器生成更接近真實數據的數據以進行插補。
     * 如下圖中 Hint Matrix 所示，0值的位置代表缺失值對應的位置，1值的位置代表真實值對應的位置
@@ -233,3 +233,38 @@ F_λF_γF_ςF_κG_λG_γG_ςG_κ
 ## Conclusion
 
 作者提出的特徵轉換與數據插補模型可以在遮擋的情況下得到不錯的準確率，但是計算需求對於我們目前的專案(圓展)還是太大，若想使用抗遮擋相關技術，若基於此篇論文，則必須將數據插補模型中的GAN以其他較輕量化的模型取代。
+
+--- 
+# GAN-based data imputation model Additional information
+
+* Journal reference: International Conference on Machine Learning (VOL.80, 2018)
+* Authors: Jinsung Yoon, James Jordon, Mihaela van der Schaar
+* Github: Paper with code 有整理許多版本: [GAIN: Missing Data Imputation using Generative Adversarial Nets](https://paperswithcode.com/paper/gain-missing-data-imputation-using-generative)
+
+---
+## Introduction
+作者提出了一種通過採用生成對抗網絡框架來估算缺失數據的新方法 => 生成對抗插補網絡(Generative Adversarial Imputation Nets, GAIN)
+
+---
+## Methodology
+![](https://hackmd.io/_uploads/HJW2Uf8y6.png)
+原論文使用隨機生成的Mask matrix來對原圖進行挖空，並將原圖依照Mask matrix的分布，分別生成Data matrix與Random matrix。
+
+* Data matrix: 若Mask matrix的值為1，則該pixel的值直接從原圖搬過去；若值為0，則該pixel的值為0
+* Random matrix: 若Mask matrix的值為1，則該pixel的值為零；若值為0，則該pixel的值為一隨機雜訊
+
+---
+## Generator
+負責將Random matrix中的雜訊生成插補值並插補到Data matrix中。
+
+生成器會通過兩個Loss Function進行優化：
+* MSE Loss：插補值與原圖進行均方誤差
+* Cross Entropy：鑑別器的計算結果
+
+---
+## Discriminator
+用於鑑別pixel是真實存在還是由生成器插補的
+
+---
+### Hint Generator
+輸入Mask matrix以生成一個Hint matrix，用於提示鑑別器，讓鑑別器能更好的關注那些需要被插補的pixel。
