@@ -9,7 +9,7 @@ categories:
 ---
 
 # 什麼是Airflow？
-先簡單介紹一下什麼是Airflow。 Airflow原先由 Airbnb 開發的開元軟體，現為Apache頂級專案，並且具有GUI介面供使用者使用，是以 Python 寫成的工作流程管理系統（Workflow Management System）。
+先簡單介紹一下什麼是Airflow。 Airflow原先由 Airbnb 開發的開源軟體，現為Apache頂級專案，並且具有GUI介面供使用者使用，是以 Python 寫成的工作流程管理系統（Workflow Management System）。
 
 ### 你可能會問，Airflow可以拿來做什麼？
 
@@ -204,7 +204,7 @@ example_task_flow()
 Airflow真的是非常好用的自動化工具，也希望我的分享可以對大家有幫助！
 此外，我也有準備PTT股票板的爬蟲案例(與[安裝](#安裝)的連結一致)：
 ```
-curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.7.1/docker-compose.yaml'
+git clone https://github.com/angus2292/Airflow_Quick_Start.git
 ```
 在 `dags` 資料夾中，包含了 `crawling.py` 與 `crawling_task_flow.py` 分別演示了有無使用TaskFlow的兩種撰寫方式，供大家參考。
 
