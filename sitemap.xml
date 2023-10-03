@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/404.html</loc>
-    
-    <lastmod>2023-10-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
     <lastmod>2023-10-03</lastmod>
@@ -24,6 +17,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-10-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/404.html</loc>
     
     <lastmod>2023-10-03</lastmod>
     
@@ -40,6 +40,13 @@
     <loc>https://ntust-sims-lab.github.io/install_gpu_docker_ubuntu2004/</loc>
     
     <lastmod>2023-09-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/</loc>
+    
+    <lastmod>2023-09-24</lastmod>
     
   </url>
   
@@ -195,6 +202,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/</loc>
+    <lastmod>2023-10-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/</loc>
     <lastmod>2023-10-03</lastmod>
     <changefreq>daily</changefreq>
@@ -209,6 +223,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/</loc>
+    <lastmod>2023-10-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/</loc>
     <lastmod>2023-10-03</lastmod>
     <changefreq>daily</changefreq>
@@ -217,6 +238,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
+    <lastmod>2023-10-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/Removal/</loc>
     <lastmod>2023-10-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
