@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/404.html</loc>
+    
+    <lastmod>2023-10-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/archive/index.html</loc>
     
     <lastmod>2023-10-03</lastmod>
@@ -17,13 +24,6 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/index.html</loc>
-    
-    <lastmod>2023-10-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/404.html</loc>
     
     <lastmod>2023-10-03</lastmod>
     
@@ -216,6 +216,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
+    <lastmod>2023-10-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/</loc>
     <lastmod>2023-10-03</lastmod>
     <changefreq>daily</changefreq>
@@ -231,13 +238,6 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/Feature-matrix/occlusion/</loc>
-    <lastmod>2023-10-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
     <lastmod>2023-10-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
