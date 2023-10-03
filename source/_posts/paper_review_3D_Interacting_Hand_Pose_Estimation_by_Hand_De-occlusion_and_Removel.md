@@ -10,6 +10,9 @@ categories:
 ---
 # 3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
 
+[![hackmd-github-sync-badge](https://hackmd.io/Uy6hxfpOS3KL6O0LHhiT-A/badge)](https://hackmd.io/Uy6hxfpOS3KL6O0LHhiT-A)
+
+
 * Journal reference: ECCV 2022
 * Authors: Hao Meng, Sheng Jin, Wentao Liu, Chen Qian, Mengxiang Lin, Wanli Ouyang, Ping Luo 
 * Github: [HDR](https://github.com/MengHao666/HDR)
