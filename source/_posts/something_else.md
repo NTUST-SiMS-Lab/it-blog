@@ -11,9 +11,12 @@ categories:
 
 # Something-Else: Compositional Action Recognition with Spatial-Temporal Interaction Networks
 
-Journal reference: CVPR2020
-Author: Materzynska, Joanna and Xiao, Tete and Herzig, Roei and Xu, Huijuan and Wang, Xiaolong and Darrell, Trevor
-Github: https://github.com/joaanna/something_else
+[![hackmd-github-sync-badge](https://hackmd.io/wavzvcNCTGO4g0cQbiwCsA/badge)](https://hackmd.io/wavzvcNCTGO4g0cQbiwCsA)
+
+
+- Journal reference: CVPR2020
+- Author: Materzynska, Joanna and Xiao, Tete and Herzig, Roei and Xu, Huijuan and Wang, Xiaolong and Darrell, Trevor
+- Github: https://github.com/joaanna/something_else
 
 ## Introduction
 以RGB-based HAR模型而言，輸入資料中的物件被模型視為非獨立物件，但事實上**它們為動作的一部分，應被視為獨立物件一同考慮**。因此作者提出方法，嘗試完整**捕捉動作與物件間的組成**。前提是現今HAR方法本是基於空間資訊再進行延伸，應更加注重空間特徵來提升動作辨識效果。
@@ -21,7 +24,7 @@ Github: https://github.com/joaanna/something_else
 ### Spatial-Temporal Interaction Network (STIN)
 一動作辨識模型，其將動作中的主體(Subject)和物體(Object)之間的幾何關係納入模型考慮。STIN會追溯根據偵測與追蹤結果得來的候選稀疏圖。
 
-輸入: 物體和主體的位置和形狀
+1. 輸入: 物體和主體的位置和形狀
 1. 對輸入資料進行空間交互作用推理（spatial interaction reasoning）
 2. 對沿著相同軌跡的框進行時間交互作用推理（temporal interaction reasoning），即針對物體的變換和主體與物體之間的關係兩者進行編碼。
 3. 接著，再組合主體與物體的軌跡，以進行動作辨識。
@@ -66,7 +69,7 @@ $\begin{gather*} X = (x^1_1, ..., x^1_N, x^2_1, ..., x^2_N, x^T_1, ..., x^T_N) \
 $f(x^t_n) = ReLU(W^T_f)[x^t_n, \dfrac{1}{N-1} \displaystyle\sum_{j!=n}x^t_j ]$
 - $[,]$ 表示 $x^t_n$ 與其他 $N-1$ 個物件之特徵合併
 - $W^T_f$ 為一可學習權重
-![](https://hackmd.io/_uploads/SyrIKiIga.png)
+</br> ![](https://hackmd.io/_uploads/SyrIKiIga.png)
 
 #### Temporal interaction module
 $p(X) = W^T_p h(\{g(x^1_n, ..., x^T_n)\}^N_{n=1})$
