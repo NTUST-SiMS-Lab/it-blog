@@ -9,6 +9,9 @@ categories:
 - Diffusion Model
 ---
 # DiffPose: SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
+
+[![hackmd-github-sync-badge](https://hackmd.io/wG_eWUUeTiyDWfiBTsGhyg/badge)](https://hackmd.io/wG_eWUUeTiyDWfiBTsGhyg)
+
 * Journal reference: ICCV 2023
 * Authors: Runyang Feng, Yixing Gao, Tze Ho Elden Tse, Xueqing Ma, Hyung Jin Chang
 * Github: None
@@ -176,4 +179,9 @@ $$ \mathcal{L} = \left \| \mathbf{H}^i_t - \hat{\mathbf{H}}^i_t\right \|^2_2 $$
 
 ## Experiments
 
+以下為 DiffPose 處理具有挑戰性的場景（例如相互遮蔽和快速運動）的 Demo。
+![](https://hackmd.io/_uploads/BkzoiS6xp.png)
+
+以下為 DiffPose 與當前 SOTA 的方法 b) FAMI-Pose 和 c) HRNet 的並排比較處理具有挑戰性的場景（例如相互遮蔽和快速運動）的能力。
+![](https://hackmd.io/_uploads/Hy0OcSpg6.png)
 
