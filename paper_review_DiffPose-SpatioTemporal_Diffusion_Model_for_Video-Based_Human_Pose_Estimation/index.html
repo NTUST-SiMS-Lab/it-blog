@@ -413,10 +413,10 @@ $$ \mathcal{L}_{x_0} = \left | f_{\theta}(x_t,,  t) - x_0\right | $$</p>
 <p>接著 concat 所有 token，透過可學習的 position embedding $E_{POS}$ 來保留它們的空間訊息，並將它們輸入級聯的 Transformer 編碼器，其中每個編碼器由多頭自注意力層(MHSA)和前饋神經網路(FFN)組成。</p>
 <p>最後用MLP把所有幀的 encoded 深度特徵 aggregated 起來，以產生時空特徵 $\mathbb{F}^i_t$。</p>
 <p>上述過程可以表述為：</p>
-<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br>
-\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \<br>
-\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \<br>
-\qquad\qquad\vdots \<br>
+<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br><br>
+\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \<br><br>
+\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \<br><br>
+\qquad\qquad\vdots \<br><br>
 \mathbb{F}^i_t = MLP(LN(\tilde{F}^L_t)) \end{array}<br>
 $$</p>
 <p>上標 $l\in [1,2,\dots,L]$ 表示第 $l$ 個 Transformer 層的輸出，$\tilde{F}^0_t$ 表示初始特徵。</p>
@@ -463,9 +463,9 @@ $$</p>
 <li>使用 attention mask $A^1$ 來檢索對應的時空特徵 $\bar{\mathbb{F}}^{i,1}_t$。</li>
 <li>透過級聯 Transformer 來對 $\bar{\mathbb{F}}^{i,1}_t$ 和 $\mathbb{F}^{i,1}_t$ 進行連接和處理，然後對解析度進行上採樣以輸出特徵 $\mathcal{F}^{i,1}_t$。<br>
 上述過程可以表述為：<br>
-$$ \begin{array}{lcl} \bar{\bar{x}}^1_t = SeRef(\bar{x}^1_t), \<br>
-A^1 = Sigmoid(Sq(\bar{\bar{x}}^1_t)), \<br>
-\bar{\mathbb{F}}^{i,1}_t = A^1 \odot \mathbb{F}^{i,1}_t, \<br>
+$$ \begin{array}{lcl} \bar{\bar{x}}^1_t = SeRef(\bar{x}^1_t), \<br><br>
+A^1 = Sigmoid(Sq(\bar{\bar{x}}^1_t)), \<br><br>
+\bar{\mathbb{F}}^{i,1}_t = A^1 \odot \mathbb{F}^{i,1}_t, \<br><br>
 \mathcal{F}^{i,1}_t = Up(Trans(\bar{\mathbb{F}}^{i,1}_t \oplus \mathbb{F}^{i,1}_t))<br>
 \end{array} $$</li>
 </ol>
