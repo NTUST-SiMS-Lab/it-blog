@@ -74,10 +74,10 @@ $$ \mathcal{L}_{x_0} = \left \| f_{\theta}(x_t,\,  t) - x_0\right \| $$
 
 上述過程可以表述為：
 
-$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} \, +\, E^{t-δ}_{POS},\, ...,\, \bar{F}^i_{t+δ}\,+\,E^{t-δ}_{POS}), \\  
-\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \\  
-\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \\  
-\qquad\qquad\vdots \\  
+$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} \, +\, E^{t-δ}_{POS},\, ...,\, \bar{F}^i_{t+δ}\,+\,E^{t-δ}_{POS}), \\<br>
+\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \\<br>
+\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \\<br>
+\qquad\qquad\vdots \\<br>
 \mathbb{F}^i_t = MLP(LN(\tilde{F}^L_t)) \end{array}
 $$
 
@@ -135,9 +135,9 @@ LMSFI主要由兩個過程組成：
     3. 使用 attention mask $A^1$ 來檢索對應的時空特徵 $\bar{\mathbb{F}}^{i,1}_t$。
     4. 透過級聯 Transformer 來對 $\bar{\mathbb{F}}^{i,1}_t$ 和 $\mathbb{F}^{i,1}_t$ 進行連接和處理，然後對解析度進行上採樣以輸出特徵 $\mathcal{F}^{i,1}_t$。
     上述過程可以表述為：
-    $$ \begin{array}{lcl} \bar{\bar{x}}^1_t = SeRef(\bar{x}^1_t), \\
-    A^1 = Sigmoid(Sq(\bar{\bar{x}}^1_t)), \\
-    \bar{\mathbb{F}}^{i,1}_t = A^1 \odot \mathbb{F}^{i,1}_t, \\
+    $$ \begin{array}{lcl} \bar{\bar{x}}^1_t = SeRef(\bar{x}^1_t), \\<br>
+    A^1 = Sigmoid(Sq(\bar{\bar{x}}^1_t)), \\<br>
+    \bar{\mathbb{F}}^{i,1}_t = A^1 \odot \mathbb{F}^{i,1}_t, \\<br>
     \mathcal{F}^{i,1}_t = Up(Trans(\bar{\mathbb{F}}^{i,1}_t \oplus \mathbb{F}^{i,1}_t))
     \end{array} $$
 
