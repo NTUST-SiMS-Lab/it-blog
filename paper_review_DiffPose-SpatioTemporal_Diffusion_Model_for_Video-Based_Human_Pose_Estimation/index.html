@@ -413,7 +413,7 @@ $$ \mathcal{L}_{x_0} = \left | f_{\theta}(x_t,,  t) - x_0\right | $$</p>
 <p>接著 concat 所有 token，透過可學習的 position embedding $E_{POS}$ 來保留它們的空間訊息，並將它們輸入級聯的 Transformer 編碼器，其中每個編碼器由多頭自注意力層(MHSA)和前饋神經網路(FFN)組成。</p>
 <p>最後用MLP把所有幀的 encoded 深度特徵 aggregated 起來，以產生時空特徵 $\mathbb{F}^i_t$。</p>
 <p>上述過程可以表述為：</p>
-<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br>
+<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}),<br>
 \tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \<br>
 \tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \<br>
 \qquad\qquad\vdots \<br>
