@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/docker/airflow/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/">
   <title>
     
-      SiMS Lab | IT Blog
+      【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by David Chen on
+              2023-10-05
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">9</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">2.3k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,456 +364,304 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1>DiffPose: SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</h1>
+<ul>
+<li>Journal reference: ICCV 2023</li>
+<li>Authors: Runyang Feng, Yixing Gao, Tze Ho Elden Tse, Xueqing Ma, Hyung Jin Chang</li>
+<li>Github: None</li>
+<li>論文連結: <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/ICCV2023/html/Feng_DiffPose_SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation_ICCV_2023_paper.html">DiffPose: SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</a></li>
+</ul>
+<hr>
+<p>Diffusion Model 是目前影像生成任務中最火的模型，並且也在其他CV任務有不錯的成效，但是因為影片有額外的時間維度，所以沒辦法將 Diffusion Model 直接擴展到 Video-base 的人體姿勢估計任務。</p>
+<p>而且學習 Focus 在人體關鍵點區域在人體姿勢估計任務中很重要，但是怎麼在基於擴散的方法實現這個目標還不清楚。</p>
+<p>作者在此論文中提出一個 Diffsion 架構，把 Video-base 的人體姿勢估計看作是一個條件熱圖生成問題<br>
+<img src="https://hackmd.io/_uploads/rkT52Onxa.png" alt=""></p>
+<p><strong>並且為了更好地利用時間信息，作者提出了 SpatioTemporal Representation Learner，它聚合跨幀的視覺證據，並使用每個去噪步驟中的結果特徵作為條件。</strong></p>
+<p>提出了 <strong>Lookup-based Multi Scale Feature Interaction</strong> ，用於確定跨多個尺度的局部關節和全局上下文之間的相關性。</p>
+<p>主要貢獻：</p>
+<ul>
+<li>作者是第一個從生成建模的角度研究基於視頻的人體姿勢估計的人。</li>
+<li>提出了第一個將擴散模型應用於多幀人體姿勢估計的模型，DiffPose。</li>
+<li>成為 Pose Track2017、PoseTrack2018 和 PoseTrack21資料集目前的SOTA方法。</li>
+</ul>
+<hr>
+<h2 id="Method">Method</h2>
+<p>首先使用現成的物件偵測器來獲得每幀 $I_t$ 中的所有人體邊界框，並把每個邊界框放大 25%，以在連續幀中裁剪同一個人，$\mathcal{I} ^i_t =〈I^i_{t-δ}, …, I^i_{t}, …, I^i_{t+δ}〉$ ，$δ$ 為預先設定的時間步長，這樣就得到這個人 $i$ 以 $I_t$ 為關鍵幀的影片 $\mathcal{I} ^i_t$，我們的目標是估計 $I^i_t$ 的關鍵點熱圖。</p>
+<hr>
+<h3 id="DiffPose">DiffPose</h3>
+<p>DiffPose 旨在調整普通擴散模型以合併時間資訊並關注關鍵點區域線索，以適應多幀人體姿勢估計的任務。<br>
+<img src="https://hackmd.io/_uploads/SkL_Utnxa.png" alt=""></p>
+<p>黃色框框中，Diffusion Model 的 Ground truth 為熱圖 $x_0 = H^i_t$。</p>
+<p>此熱圖是使用以註釋的關節位置為中心的 2D 高斯產生的。</p>
+<p>接著作者訓練一個 <strong>Pose-Decoder</strong> $f_{\theta}(x_t,, \mathbb{F}^i_t,, t)$，透過以 <strong>STRL</strong> 產生的輸入序列 $\mathbb{F}^i_t$ 的時空特徵為條件，從雜訊熱圖 $x_t$ 中恢復 $x_0$。</p>
+<p>損失函數如下：<br>
+$$ \mathcal{L}_{x_0} = \left | f_{\theta}(x_t,,  t) - x_0\right | $$</p>
+<hr>
+<h3 id="Spatiotemporal-Representation-Learner-STRL">Spatiotemporal Representation Learner (STRL)</h3>
+<p>作者在這裡使用 <strong>cascaded Transformer</strong> 來捕捉視訊幀之間的時空依賴性。</p>
+<p>將裁剪好的影片 $\mathcal{I}^i_t$ 作為輸入，作者首先用在 ImageNet 上預訓練的 Vision Transformer 作為 Backbone 來對每一幀提取空間特徵$〈F^i_{t-δ}, …, F^i_{t}, …, F^i_{t+δ}〉$。</p>
+<p>接著每個幀特徵在空間上重新排列並輸入到 patch embedding 層，將特徵嵌入至token $〈\bar{F}^i_{t-δ}, …, \bar{F}^i_{t}, …, \bar{F}^i_{t+δ}〉$</p>
+<p>接著 concat 所有 token，透過可學習的 position embedding $E_{POS}$ 來保留它們的空間訊息，並將它們輸入級聯的 Transformer 編碼器，其中每個編碼器由多頭自注意力層(MHSA)和前饋神經網路(FFN)組成。</p>
+<p>最後用MLP把所有幀的 encoded 深度特徵 aggregated 起來，以產生時空特徵 $\mathbb{F}^i_t$。</p>
+<p>上述過程可以表述為：</p>
+<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br>
+\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \<br>
+\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \<br>
+\qquad\qquad\vdots \<br>
+\mathbb{F}^i_t = MLP(LN(\tilde{F}^L_t)) \end{array}<br>
+$$</p>
+<p>上標 $l\in [1,2,\dots,L]$ 表示第 $l$ 個 Transformer 層的輸出，$\tilde{F}^0_t$ 表示初始特徵。</p>
+<p>LN表示LayerNorm層。</p>
+<p><strong>$\star$ 每個 Transformer 層內的空間和通道尺寸保持不變。</strong></p>
+<hr>
+<h3 id="Pose-Decoder">Pose-Decoder</h3>
+<p>在得到 $i$ 先生在以第 $t$ 幀為中心採樣的影片的時空特徵 $\mathbb{F}^i_t$ 後，Pose Decoder 以 $\mathbb{F}^i_t$ 和 <strong>sampling step</strong> $t$ 為條件對熱圖 $x_t$ 進行去噪，並輸出預測熱圖 $\hat{x}_0 = \hat{H}^i_t$。</p>
+<p>詳細步驟如下：</p>
+<ol>
+<li>將<strong>sampling step</strong> $t$ 映射到 embedding 中，並利用 embedding 來重新縮放初始雜訊熱圖 $x_t$，以獲得該幀的自適應版本熱圖 $\bar{x}_t$。</li>
+<li>透過Transformer 或卷積結構對 $\mathbb{F}^i_t$ 和 $\bar{x}_t$ multi scale 的全局相關性進行建模，並獲得 multi scale 特徵 $\mathcal{F}^i_t = {\mathcal{F}^{i,1}_t, \mathcal{F}^{i,2}_t, \mathcal{F}^{i,3}_t}$。</li>
+<li>最後把這些特徵整合起來並傳遞到檢測頭以預測姿勢熱圖 $\hat{H}^i_t$。</li>
+</ol>
+<p>為了鼓勵 $\mathcal{F}^i_t$ 關注關鍵點位區域，作者提出了一種基於查找的多尺度特徵交互機制 (Lookup-based Multi-Scale Feature Interaction mechanism, <strong>LMSFI</strong>) 來歸納 $\mathbb{F}^i_t$ 和 $\bar{x}_t$ 之間的模型相關性。</p>
+<p>LMSFI主要由兩個過程組成：</p>
+<ul>
+<li>產生尺寸相同的成對特徵。</li>
+<li>基於查找的特徵交互。</li>
+</ul>
+<hr>
+<h4 id="Pairwise-size-matched-feature-generation">Pairwise size-matched feature generation</h4>
+<p>分別對不同空間維度的 $\mathbb{F}^i_t\in\mathbb{R}^{C\times H\times W}$ 和 $\bar{x}_t\in\mathbb{R}^{c\times 4H\times 4W}$ 進行上採樣和下採樣以產生大小相同的特徵對 $⟨\mathbb{F}^i_t, \bar{x}_t⟩$。</p>
+<p>詳細步驟如下：</p>
+<ol>
+<li>使用反卷積層對 $\mathbb{F}^i_t$ 進行 $1\times$、$2\times$ 和 $4\times$上取樣，並獲得對應的特徵 $\begin{Bmatrix}\mathbb{F}^{i,1}_t, \mathbb{F}^{i,2}_t, \mathbb{F}^{i,3}_t\end{Bmatrix}$。</li>
+<li>同理，使用卷積層對 $\bar{x}_t$ 進行下取樣，以產生$\begin{Bmatrix}\bar{x}^1_t, \bar{x}^2_t, \bar{x}^3_t\end{Bmatrix}, (\bar{x}_t = \bar{x}^3_t)$</li>
+</ol>
+<p>由以上兩個步驟，可以得到尺寸相同的 multi-scale 特徵對 $⟨\mathbb{F}^{i, J}_t, \bar{x}^J_t⟩$。<br>
+上標 $J = \begin{Bmatrix}1,2,3\end{Bmatrix}$ 代表從低到高不同的解析度。</p>
+<hr>
+<h4 id="Lookup-based-feature-interaction">Lookup-based feature interaction</h4>
+<p>作者在實驗中發現，直接將 $\mathbb{F}^{i, J}_t$ 和 $\bar{x}^J_t$ 整合起來的特徵 $\mathcal{F}^{i,j}_t$ 效果不好。</p>
+<p>在實踐中，熱圖揭示了包含關節的位置的可能性，但是噪聲熱圖 $\bar{x}^J_t$ 被破壞，只能提供微乎其微的有效資訊。</p>
+<p>所以作者決定採用歸納建模策略，首先根據熱圖 $\bar{x}^j_t$ 對時空特徵 $\mathbb{F}^{i,j}_t$ 進行查找，檢索局部聯合特徵 $\bar{\mathbb{F}}^{i,j}_t$ ，然後對局部特徵 $\bar{\mathbb{F}}^{i,j}_t$ 和普通全域上下文 $\mathbb{F}^{i,j}_t$ 之間的相關性進行建模。</p>
+<p>以下詳解：<br>
+考慮到 self-attention 的計算複雜度隨著輸入分辨率的增加呈二次方增加，作者採用了一種複合結構，使用 Transformer 和卷積分別擷取低分辨率和高分辨率下的特徵交互。</p>
+<ul>
+<li>
+<p>對於低解析度特徵對 $⟨\mathbb{F}^{i, 1}_t, \bar{x}^1_t⟩$：</p>
+<ol>
+<li>將雜訊熱圖 $\bar{x}^1_t$ 嵌入到特徵token中，然後利用 Transformer 編碼器執行自我優化以產生 $\bar{\bar{x}}^1_t$。</li>
+<li>在 $\bar{\bar{x}}^1_t$ 上沿著深度維度取最大激活值以將全域通道資訊壓縮到單通道描述符中，然後使用 sigmoid 函數來獲得 attention mask $A^1$，用來表示可能的關鍵點位區域的。</li>
+<li>使用 attention mask $A^1$ 來檢索對應的時空特徵 $\bar{\mathbb{F}}^{i,1}_t$。</li>
+<li>透過級聯 Transformer 來對 $\bar{\mathbb{F}}^{i,1}_t$ 和 $\mathbb{F}^{i,1}_t$ 進行連接和處理，然後對解析度進行上採樣以輸出特徵 $\mathcal{F}^{i,1}_t$。<br>
+上述過程可以表述為：<br>
+$$ \begin{array}{lcl} \bar{\bar{x}}^1_t = SeRef(\bar{x}^1_t), \<br>
+A^1 = Sigmoid(Sq(\bar{\bar{x}}^1_t)), \<br>
+\bar{\mathbb{F}}^{i,1}_t = A^1 \odot \mathbb{F}^{i,1}_t, \<br>
+\mathcal{F}^{i,1}_t = Up(Trans(\bar{\mathbb{F}}^{i,1}_t \oplus \mathbb{F}^{i,1}_t))<br>
+\end{array} $$</li>
+</ol>
+<p>其中 $SeRef(\cdot)$、$Sq(\cdot)$、$\odot$、$\oplus$ 和 $Up$ 分別表示：自優化、壓縮、空間乘法、Concatenation 和 Upsampling。</p>
+</li>
+<li>
+<p>對於高解析度特徵對 $⟨\mathbb{F}^{i, j}_t, \bar{x}^j_t⟩,,, \begin{Bmatrix}j = 2,3\end{Bmatrix}$，使用卷積執行類似過程，差在把自優化跟 Transformer 改成卷積層以避免計算複雜度太高，表述如下：<br>
+$$ \begin{array}{lcl} \bar{\bar{x}}^j_t = Conv(\bar{x}^j_t), \<br>
+A^j = Sigmoid(Sq(\bar{\bar{x}}^j_t)), \<br>
+\bar{\mathbb{F}}^{i,j}_t = A^j \odot \mathbb{F}^{i,j}_t, \<br>
+\mathcal{F}^{i,j}_t = Up(Conv(\bar{\mathbb{F}}^{i,j}_t \oplus \mathbb{F}^{i,j}_t))<br>
+\end{array} $$</p>
+</li>
+</ul>
+<p>以下是作者對以上提出的兩個方法做的消融實驗：<br>
+<img src="https://hackmd.io/_uploads/r1ZNbrpx6.png" alt=""></p>
+<p>以下為進行 <strong>LMSFI</strong> 的前後對比圖，Base line 為未使用 <strong>LMSFI</strong> 的結果：<br>
+<img src="https://hackmd.io/_uploads/rk63bHTlp.png" alt=""></p>
+<hr>
+<h4 id="Heatmap-generation">Heatmap generation</h4>
+<p>最後透過逐元加法整合所有尺度 $\begin{Bmatrix}\mathcal{F}^{i,1}_t, \mathcal{F}^{i,2}_t, \mathcal{F}^{i,3}_t \end{Bmatrix}$ 的特徵，並使用檢測頭 ($3\times3 ;conv$) 來產生預測的熱圖 $\hat{\mathbf{H}}^i_t$。</p>
+<hr>
+<h3 id="Overall-Training-and-Inference-Algorithms">Overall Training and Inference Algorithms</h3>
+<p>以下為 DiffPose 的整體訓練過程：<br>
+<img src="https://hackmd.io/_uploads/H1U0UB6lp.png" alt=""></p>
+<p>根據 $\alpha_t$ 高斯雜訊進行取樣並將它們加入Ground Truth 熱圖中以獲得雜訊樣本。<br>
+每個取樣步驟 $t$ 的參數 $\alpha_t$ 都跟 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2006.11239">DDPM</a> 預先定義的一樣。</p>
+<p>作者採用標準姿態估計損失來監督模型訓練：<br>
+$$ \mathcal{L} = \left | \mathbf{H}^i_t - \hat{\mathbf{H}}^i_t\right |^2_2 $$</p>
+<hr>
+<h2 id="Experiments">Experiments</h2>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            10-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            09-30
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/something_else/" style="color: #0085a1">
-              <span>
-                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
-              <span>
-                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
-              <span>
-                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-18
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
-              <span>
-                【技術分享】Airflow快速入門及如何在Docker上安裝
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-11
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
-              <span>
-                【技術分享】基本Dockerfile寫法與Command Line
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/something_else/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DiffPose: SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Method"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DiffPose"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">DiffPose</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spatiotemporal-Representation-Learner-STRL"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Spatiotemporal Representation Learner (STRL)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Pose-Decoder"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">Pose-Decoder</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Pairwise-size-matched-feature-generation"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">Pairwise size-matched feature generation</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Lookup-based-feature-interaction"><span class="toc-nav-number">1.1.3.2.</span> <span class="toc-nav-text">Lookup-based feature interaction</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Heatmap-generation"><span class="toc-nav-number">1.1.3.3.</span> <span class="toc-nav-text">Heatmap generation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Overall-Training-and-Inference-Algorithms"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">Overall Training and Inference Algorithms</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Experiments"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Experiments</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../../paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/">
-      <li>【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</li>
-    </a>
-    
-    <a href="../../../something_else/">
-      <li>【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks</li>
-    </a>
-    
-    <a href="../../../install_gpu_docker_ubuntu2004/">
-      <li>【技術分享】重灌後，安裝 GPU 驅動以及 Docker</li>
-    </a>
-    
-    <a href="../../../paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/">
-      <li>【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal</li>
-    </a>
-    
-    <a href="../../../AirflowTutorial/">
-      <li>【技術分享】Airflow快速入門及如何在Docker上安裝</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/10/">October 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#docker">
-      <li>docker</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#airflow">
-      <li>airflow</li>
-    </a>
-    
-    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
-      <li>3D Interacting Hand Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Human Pose Estimation">
-      <li>Human Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#De-occlusion">
-      <li>De-occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Diffusion Model">
-      <li>Diffusion Model</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Removal">
-      <li>Removal</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Object-relation HAR">
-      <li>Object-relation HAR</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
