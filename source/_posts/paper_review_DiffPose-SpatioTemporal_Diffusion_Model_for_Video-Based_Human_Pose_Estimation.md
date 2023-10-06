@@ -74,10 +74,10 @@ $$ \mathcal{L}_{x_0} = \left \| f_{\theta}(x_t,\,  t) - x_0\right \| $$
 
 上述過程可以表述為：
 
-$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} \, +\, E^{t-δ}_{POS},\, ...,\, \bar{F}^i_{t+δ}\,+\,E^{t-δ}_{POS}),   
-\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \\
-\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \\ 
-\qquad\qquad\vdots \\
+$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} \, +\, E^{t-δ}_{POS},\, ...,\, \bar{F}^i_{t+δ}\,+\,E^{t-δ}_{POS}), \\  
+\tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \\  
+\tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \\  
+\qquad\qquad\vdots \\  
 \mathbb{F}^i_t = MLP(LN(\tilde{F}^L_t)) \end{array}
 $$
 
