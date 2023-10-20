@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag (contains Google-Analytics、Baidu-Tongji)-->
+<head>
+  <!-- Google Analytics -->
+  
+
+  <!-- Baidu Tongji -->
+  
+
+  <!-- Baidu Push -->
+  
+
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <meta name="google-site-verification" content="lxDfCplOZbIzjhG34NuQBgu2gdyRlAtMB4utP5AgEBc"/>
+  <meta name="baidu-site-verification" content="PpzM9WxOJU"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="It&#39;s an IT blog for simslaber"/>
+  <meta name="keyword" content="NTUST,SiMS Lab,IT Blog"/>
+  <link rel="shortcut icon" href="/it-blog/img/avatar/ntust-simslab.png"/>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async="async" defer="defer" src="https://buttons.github.io/buttons.js"></script>
+
+  
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/it-blog/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/it-blog/css/beantech.min.css"/>
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/it-blog/css/highlight.css"/>
+    <link rel="stylesheet" href="/it-blog/css/widget.css"/>
+    <link rel="stylesheet" href="/it-blog/css/rocket.css"/>
+    <link rel="stylesheet" href="/it-blog/css/signature.css"/>
+    <link rel="stylesheet" href="/it-blog/css/catalog.css"/>
+    <link rel="stylesheet" href="/it-blog/css/livemylife.css"/>
+
+    
+
+    
+      <!-- top start (article top hot config) -->
+      <link rel="stylesheet" href="/it-blog/css/top.css"/>
+      <!-- top end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/scroll.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+      <!-- Search start -->
+      <link rel="stylesheet" href="/it-blog/css/search.css"/>
+      <!-- Search end -->
+    
+
+    
+      <!-- ThemeColor start -->
+      <link rel="stylesheet" href="/it-blog/css/themecolor.css"/>
+      <!-- ThemeColor end -->
+    
+
+    
+
+    
+  
+
+  <!-- Custom Fonts -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <!-- Hux change font-awesome CDN to qiniu -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Hux Delete, sad but pending in China <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <link
+  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/ css'> -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+
+  <!-- ga & ba script hoook -->
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/">
+  <title>
+    
+      【論文研讀】2D Human Pose Estimation - A Survey - SiMS Lab | IT Blog
+    
+  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+
+	<body ontouchstart="" class="body--light body--light">
+
+
+		<!-- ThemeColor -->
+		
+		<!-- ThemeColor -->
+<style type="text/css">
+  .body--light {
+    --light-mode: none;
+    --dark-mode: block;
+  }
+  .body--dark {
+    --light-mode: block;
+    --dark-mode: none;
+  }
+  i.mdui-icon.material-icons.light-mode {
+    display: var(--light-mode);
+  }
+  i.mdui-icon.material-icons.dark-mode {
+    display: var(--dark-mode);
+  }
+</style>
+<div class="toggle" onclick="document.body.classList.toggle('body--dark')">
+  <i class="mdui-icon material-icons light-mode"></i>
+  <i class="mdui-icon material-icons dark-mode"></i>
+</div>
+<script>
+  //getCookieValue
+  function getCookieValue(a) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b
+      ? b.pop()
+      : '';
+  }
+  let themeMode = 'light';
+  if (getCookieValue('sb-color-mode') && (getCookieValue('sb-color-mode') !== themeMode)) {
+    let dbody = document.body.classList;
+    themeMode === 'dark' ? dbody.remove('body--dark') : dbody.add('body--dark');
+  }
+
+  //setCookieValue
+  var toggleBtn = document.querySelector(".toggle");
+  toggleBtn.addEventListener("click", function () {
+    var e = document.body.classList.contains("body--dark");
+    var cookieString = e
+      ? "dark"
+      : "light";
+    var exp = new Date();
+    exp.setTime(exp.getTime() + 3 * 24 * 60 * 60 * 1000); //3天过期
+    document.cookie = "sb-color-mode=" + cookieString + ";expires=" + exp.toGMTString() + ";path=/";
+  });
+</script>
+
+		
+
+		<!-- Gitter -->
+		
+
+		<!-- Navigation (contains search)-->
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/it-blog/">SiMS Lab</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux: <nav>'s height woule be hold on by its content. so, when navbar scale out, the <nav> will cover tags. also mask any touch event of tags, unfortunately. -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/it-blog/">HOME</a>
+          </li>
+
+          
+          
+          
+          
+          <li>
+            <a href="/it-blog/archive/">
+              
+              ARCHIVES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/categories/">
+              
+              CATEGORIES
+              
+              
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/it-blog/tags/">
+              
+              TAGS
+              
+              
+            </a>
+          </li>
+          
+          
+
+          
+          <li>
+            <a class="popup-trigger">
+              <span class="search-icon"></span>SEARCH</a>
+          </li>
+          
+
+          <!-- LangSelect -->
+          
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<!-- progress -->
+<div id="progress">
+  <div class="line" style="width: 0%;"></div>
+</div>
+
+<script>
+  // Drop Bootstarp low-performance Navbar Use customize navbar with high-quality material design animation in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector('.navbar-toggle');
+  var $navbar = document.querySelector('#huxblog_navbar');
+  var $collapse = document.querySelector('.navbar-collapse');
+
+  $toggle.addEventListener('click', handleMagic)
+
+  function handleMagic(e) {
+    if ($navbar.className.indexOf('in') > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function() {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf('in') < 0) {
+          $collapse.style.height = "0px"
+        }
+      }, 400)
+    } else {
+      // OPEN
+      $collapse.style.height = "auto"
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+		<!-- Post Header (contains intro-header、signature、wordcount、busuanzi、waveoverlay) -->
+		<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+
+  <style type="text/css">
+    .body--light {
+      /* intro-header */
+      --intro-header-background-image-url-home: url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: url('');
+      --intro-header-background-image-url-page: url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+    .body--dark {
+      --intro-header-background-image-url-home: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/home.jpg');
+      --intro-header-background-image-url-post: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('');
+      --intro-header-background-image-url-page: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/it-blog/img/header_img/archive_bg2.jpg');
+    }
+
+    header.intro-header {
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
+      
+    }
+
+    
+  </style>
+
+
+
+
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】2D Human Pose Estimation - A Survey</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by David Chen on
+              2023-10-20
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">24</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">6.5k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</header>
+
+
+
+		<!-- Main Content (Post contains
+	Pager、
+	tip、
+	socialshare、
+	gitalk、gitment、disqus-comment、
+	Catalog、
+	Sidebar、
+	Featured-Tags、
+	Friends Blog、
+	anchorjs、
+	) -->
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+
+        <h1>2D Human Pose Estimation: A Survey</h1>
+<p><a target="_blank" rel="noopener" href="https://hackmd.io/Z1dLQGWvQFaNxoCxZf4btg"><img src="https://hackmd.io/Z1dLQGWvQFaNxoCxZf4btg/badge" alt="hackmd-github-sync-badge"></a></p>
+<ul>
+<li>Journal reference: Multimedia Systems, 2022</li>
+<li>Authors: Haoming Chen, Runyang Feng, Sifan Wu, Hao Xu, Fengcheng Zhou, Zhenguang Liu</li>
+<li>Github: None</li>
+<li>論文連結: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2204.07370.pdf">2D Human Pose Estimation: A Survey</a></li>
+</ul>
+<hr>
+<h2 id="Network-Architecture-Design-Method">Network Architecture Design Method</h2>
+<p>2D HPE 通常分為兩個通用框架：</p>
+<ul>
+<li>
+<p><strong>top-down</strong> framework：使用 <strong>two-step</strong> procedure：</p>
+<ol>
+<li>偵測人體邊界框(BBox)</li>
+<li>分別對各個 BBox 進行 Single Person Pose Estimation (SPPE)</li>
+</ol>
+<p>$\Diamond$ <strong>top-down</strong> framework 可以隨著物體檢測器和姿勢偵測器的進步而不斷改進。</p>
+<p><strong>top-down</strong> 可細分為以下幾個類別：</p>
+<ul>
+<li><strong>Regression-Based</strong></li>
+<li><strong>Heatmap-Based</strong></li>
+<li><strong>Video-Based</strong></li>
+<li><strong>Model Compressing-Based</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/SyvuKT3WT.png" alt=""></p>
+<ul>
+<li>
+<p><strong>bottom-up</strong> framework：與 <strong>top-down</strong> 相比，<strong>bottom-up</strong> 透過<strong>不依賴人類檢測，直接執行關鍵點估計</strong>，以達成減少計算量的目的，但就有需要<strong>判斷關節點屬於誰</strong>的問題。</p>
+<p><strong>bottom-up</strong> 可細分為以下幾個類別：</p>
+<ul>
+<li><strong>Human Center Regression-Based</strong></li>
+<li><strong>Associate Embedding-Based</strong></li>
+<li><strong>Part Field-Based</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Top-Down-Framework">Top-Down Framework</h3>
+<h4 id="Regression-Based-Methods">Regression-Based Methods</h4>
+<p><strong>Regression-Based</strong> 很有效，但是他只有輸出每個關節的座標而已，完全不考慮身體部位的面積。<br>
+為了解決這個問題，發展出了 <strong>heatmap-based</strong> 的方法。</p>
+<p>以下為幾個代表性的 <strong>Regression-Based</strong> 方法：</p>
+<ul>
+<li><strong>CNN</strong>：DeepPose 透過級聯 CNN 提取影像特徵，然後透過全連接層回歸關節座標。</li>
+<li><strong>self-correcting model</strong>：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/Carreira_Human_Pose_Estimation_CVPR_2016_paper.pdf">Human Pose Estimation with Iterative Error Feedback</a> 基於 GoogleNet 提出了一種<strong>自校正</strong>模型，逐步改變初始關節座標估計。</li>
+<li><strong>Re-parameterization</strong>：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ICCV_2017/papers/Sun_Compositional_Human_Pose_ICCV_2017_paper.pdf">Compositional Human Pose Regression</a> 提出了一種結構感知回歸方法，該方法利用<strong>結構重參數化</strong>的骨骼姿勢表示，並因為建構在ResNet50之上，模型能夠捕捉更多的人體結構訊息，例如關節連接之類的。</li>
+<li><strong>GCN</strong>：透過合併相鄰節點的特徵來增強節點的特徵，<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2003.10506.pdf">Peeking into occluded joints: A novel framework for crowd pose estimation</a> 將人體視為圖形結構，其中節點代表關節，邊緣代表骨骼，並建議使用<strong>影像引導漸進式 GCN 模組</strong>來估計不可見的關節。</li>
+<li><strong>Transformer</strong>：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Li_Pose_Recognition_With_Cascade_Transformers_CVPR_2021_paper.pdf">Pose Recognition With Cascade Transformers</a> 提出了一個<strong>級聯 Transformer</strong>，執行人體和關鍵點檢測的 end-to-end 回歸，首先檢測所有人的邊界框，然後分別回歸每個人的所有關節座標。<br>
+$\Diamond$ 如果想做 end-to-end 感覺可以看一下這篇。</li>
+</ul>
+<hr>
+<h4 id="Heatmap-Based-Methods">Heatmap-Based Methods</h4>
+<p>熱圖 $H_i$ 通過以第 $i$ 個關節位置$(x_i, y_i)$為中心的 <strong>2D 高斯</strong>產生，編碼該位置是第 i 個關節的機率。<br>
+訓練目標是預測總共 $N$ 個關節的 $N$ 個熱圖 $\begin {Bmatrix}H_1,H_2,…,H_N\end{Bmatrix}$。</p>
+<p><strong>Heatmap-Based</strong> 的準確率會比 <strong>Regression-Based</strong> 來的<strong>高</strong>，但是相對的<strong>需要較多的計算資源</strong>，以及有著不可避免的<strong>量化誤差</strong>。</p>
+<p>以下為幾個代表性的 <strong>Heatmap-Based</strong> 方法：</p>
+<ul>
+<li>
+<p><strong>Iterative Architecture (迭代架構)</strong>：<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/Wei_Convolutional_Pose_Machines_CVPR_2016_paper.pdf">Convolutional Pose Machines</a> 建構了一個<strong>順序預測框架</strong>，該框架採用 <strong>sequential CNN</strong> 來隱式模擬人體部位之間的遠程空間依賴性，並且提出了<strong>中間監督</strong>來緩解迭代架構中梯度消失的固有問題，後來因為 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf">ResNet</a> 出現，把梯度消失/爆炸的問題完美解決了，因此很多大模型就出現了。</p>
+<p>下圖為迭代架構的示意圖，( a )為 <strong>Convolutional Pose Machine</strong> 的架構，( b )為使用 LSTM 對 <strong>Convolutional Pose Machine</strong> 進行延伸的 <strong>LSTM Pose Machines</strong>。</p>
+</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/B1FeHw6-T.png" alt=""></p>
+<ul>
+<li>
+<p><strong>Symmetric Architecture (對稱架構)</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://islab.ulsan.ac.kr/files/announcement/614/Stacked%20Hourglass%20Networks%20for%20Human%20Pose%20Estimation.pdf">Stacked Hourglass Networks for Human Pose Estimation</a> 提出了一種基於<strong>池化</strong>和<strong>上採樣</strong>的連續步驟的新穎的<strong>堆疊沙漏架構</strong>，它結合了<strong>所有尺度</strong>的特徵來捕捉關節之間的各種空間關係。</p>
+<p><strong>堆疊沙漏架</strong>構如下圖( a )所示。</p>
+<p>以下為基於這種<strong>堆疊沙漏架構</strong>的成功變體，這些變體模型都保留了<strong>從高到低和從低到高卷積</strong>之間的對稱結構：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1702.07432v1.pdf">Multi-Context Attention for Human Pose Estimation</a> 進化成<strong>帶有側分支</strong>的沙漏殘差單元，包括具有更大感受野的濾波器，這大大<strong>增加了網絡的感受野</strong>並<strong>自動學習不同尺度的特徵</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1708.01101v1.pdf">Learning Feature Pyramids for Human Pose Estimation</a> 以<strong>金字塔殘差模組</strong>取代了堆疊沙漏中的殘差塊，增強了網路的尺度不變性。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1803.09894v3.pdf">Multi-Scale Structure-Aware Network for Human Pose Estimation</a> 提出了一種<strong>多尺度監督</strong>，結合了所有尺度的關鍵點熱圖，從而獲得豐富的上下文特徵並提高了堆疊沙漏網路的性能。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2003.04030.pdf">Learning Delicate Local Representations for Multi-Person Pose Estimation</a> 設計了一個堆疊的沙漏狀網絡，即<strong>殘差步驟網絡</strong>，它聚合具有相同空間大小的特徵以產生<strong>精緻的局部描述</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Tang_Does_Learning_Specific_Features_for_Related_Parts_Help_Human_Pose_CVPR_2019_paper.pdf">Does Learning Specific Features for Related Parts Help Human Pose Estimation?</a> 採用沙漏網路作為主幹，並提出了一種<strong>基於部分的分支網路來學習特定於不同部分組的表示</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>Asymmetric Architecture (非對稱架構)</strong> ：<br>
+與對稱架構一樣是高到低和低到高的卷積架構，但是非對稱架構<strong>偏重於由高到低</strong>的過程，因此存在<strong>特徵編碼和解碼不平衡</strong>的問題，可能會影響模型表現。</p>
+<p>以下模型採用經典分類網路（<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.1556.pdf">VGGNet</a> 和 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf">ResNet</a>）的子網路進行<strong>從高到低</strong>的卷積，並採用簡單網路進行<strong>從低到高</strong>的卷積：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Bin_Xiao_Simple_Baselines_for_ECCV_2018_paper.pdf">Simple Baselines for Human Pose Estimation and Tracking</a> 透過添加一些<strong>反卷積層</strong>而不是特徵圖插值來擴展 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf">ResNet</a>，如下圖( b )所示。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Cascaded_Pyramid_Network_CVPR_2018_paper.pdf">Cascaded Pyramid Network for Multi-Person Pose Estimation</a> 提出了一個<strong>級聯金字塔網路</strong>，它用 <strong>GlobalNet</strong> 偵測簡單的關鍵點，並用由多個常規卷積組成的 <strong>RefineNet</strong> 整合了 <strong>GlobalNet</strong> 的所有層級的特徵表示以處理困難的關鍵點，如下圖( c )所示。</li>
+</ul>
+</li>
+<li>
+<p><strong>High Resolution Architecture (高解析度架構)</strong>：<br>
+高解析度架構能夠在整個過程中<strong>保持高解析度表示</strong>，<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Deep_High-Resolution_Representation_Learning_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">HRNet</a> 在多個視覺任務上實現最先進的結果，足以證明高解析度表示在人體姿勢估計方面的優越性。</p>
+<p>其中<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3394171.3414041">Pay Attention Selectively and Comprehensively: Pyramid Gating Network for Human Pose Estimation without Pre-training</a> 以 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Deep_High-Resolution_Representation_Learning_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">HRNet</a> 為骨幹網絡，進一步結合<strong>門控機制</strong>和<strong>特徵注意模組</strong>來選擇和融合<strong>判別性和注意力感知特徵</strong>。</p>
+<p><img src="https://hackmd.io/_uploads/ryx1hF6bp.png" alt=""><br>
+$reg. conv.$ = 常規卷積層，$strided \  conv.$ = 用於可學習下採樣的跨步卷積層，<br>
+$trans.conv.$ = 用於可學習上採樣的轉置卷積層，$ele. sum$ = 逐元求和</p>
+</li>
+<li>
+<p><strong>Composed Human Proposal Detection (組合人類提案檢測)</strong>：<br>
+上述模型專注於對從整個圖像中裁剪出的 <strong>Human Proposal</strong> 進行姿勢估計，並簡單地採用現成的 <strong>Human Proposal Detecter</strong> 進行 <strong>Proposal Detection</strong>，且 <strong>Human Proposal 的品質(人類位置和冗餘檢測)會影響姿勢估計器的結果</strong>。<br>
+因此有以下兩派人馬從不同的角度去解決這個問題：</p>
+<ul>
+<li>改善 <strong>Human Proposal</strong> 派：
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Papandreou_Towards_Accurate_Multi-Person_CVPR_2017_paper.pdf">Towards Accurate Multi-Person Pose Estimation in the Wild</a> 提出了一種<strong>多人姿勢估計方法</strong>，該方法採用 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.01497">Faster R-CNN</a> 作為人物檢測器，使用 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf">ResNet-101</a> 作為姿勢檢測器，並另外提出了一種新的關鍵點NonMaximum-Suppression ( NMS）策略來<strong>解決姿勢冗餘問題</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ICCV_2017/papers/Fang_RMPE_Regional_Multi-Person_ICCV_2017_paper.pdf">RMPE</a> 利用 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1512.02325.pdf">SSD-512</a> 作為人體偵測器，使用堆疊沙漏作為單人姿勢偵測器，並進一步提出一種可以<strong>從不準確的邊界框中提取高品質的單人邊界框</strong>的<strong>對稱空間變換網路</strong>以促進人體姿勢估計。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Li_CrowdPose_Efficient_Crowded_Scenes_Pose_Estimation_and_a_New_Benchmark_CVPR_2019_paper.pdf">CrowdPose</a> 利用<strong>聯合候選姿勢偵測器</strong>來預測<strong>具有多個峰值的熱圖</strong>，並使用<strong>圖網路</strong>來執行<strong>全域關節關聯</strong>以解決<strong>單人邊界框包含多人</strong>的問題。</li>
+</ul>
+</li>
+<li>一起處理 <strong>Human Proposal</strong> 和 <strong>pose detection</strong> 派：
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Varamesh_Mixture_Dense_Regression_for_Object_Detection_and_Human_Pose_Estimation_CVPR_2020_paper.pdf">Mixture Dense Regression for Object Detection and Human Pose Estimation</a> 提出了一個以<strong>密集迴歸</strong>方式<strong>同時推斷</strong>人體邊界框和關鍵點位置的混合模型。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.02846.pdf">Point-Set Anchors</a> 引入了一種<strong>模板偏移模型</strong>，該模型首先為人體邊界框和姿勢<strong>提供良好的初始化</strong>，然後<strong>回歸初始化和相應標籤之間的偏移</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Muhammed_Kocabas_MultiPoseNet_Fast_Multi-Person_ECCV_2018_paper.pdf">MultiPoseNet</a> <strong>分別檢測關鍵點和 Human Proposal</strong>，然後採用由殘差多層感知器實現的<strong>姿勢殘差網路</strong>將偵測到的關鍵點<strong>分配給不同的邊界框</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Mao_FCPose_Fully_Convolutional_Multi-Person_Pose_Estimation_With_Dynamic_Instance-Aware_Convolutions_CVPR_2021_paper.pdf">FCPose</a> 是一個結合了<strong>動態實例感知卷積</strong>並<strong>消除邊界框裁切和關鍵點分組過程</strong>的框架。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="Video-Based-Methods">Video-Based Methods</h4>
+<p>使用 <strong>Video-Based Method</strong> 的優缺點如下：</p>
+<ul>
+<li>優點：存在豐富的<strong>時間</strong>線索，如時間依賴性和幾何一致性。</li>
+<li>缺點：影片有可能會因為攝影機移位、快速物體移動和散焦而造成 <strong>frame 品質不良</strong>。</li>
+</ul>
+<p>根據時間資訊的利用方式，<strong>Video-Based</strong> 方法大致可分為：</p>
+<ul>
+<li>
+<p><strong>Optical Flow(光流)</strong>：<br>
+基於<strong>光流</strong>的表示可以在像素層級對運動線索進行建模，這有<strong>利於捕捉有用的時間資訊</strong>，但是<strong>在擷取人體運動資訊之類的有用特徵的同時也將背景的變化也一起蒐集起來了</strong>，因此光流只能提取不純的特徵，並且<strong>對雜訊相當敏感</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_iccv_2015/papers/Pfister_Flowing_ConvNets_for_ICCV_2015_paper.pdf">Flowing ConvNets for Human Pose Estimation in Videos</a> <strong>將卷積網路和光流結合到一個統一的框架中</strong>框架<strong>利用流場來對齊多個幀之間的特徵速度</strong>，並利用對齊的特徵來改進各個幀中的姿態檢測。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Song_Thin-Slicing_Network_A_CVPR_2017_paper.pdf">Thin-Slicing Networks</a> 提出了一種<strong>薄切片網絡</strong>，它<strong>計算每兩個幀之間的密集光流</strong>，以<strong>隨時間傳播關節位置的初始估計</strong>，並<strong>使用基於流的扭曲機制來對齊關節熱圖</strong>，以進行後續的時空推理。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2010.10008.pdf">Towards Accurate Human Pose Estimation in Videos of Crowded Scenes</a> 專注於<strong>擁擠場景中的人體姿態估計</strong>，它結合了前向姿態傳播和後向姿態傳播來<strong>改進當前幀的姿態</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Zhang_PoseFlow_A_Deep_CVPR_2018_paper.pdf">PoseFlow</a> 能夠<strong>揭示影片中的人體運動</strong>，同時抑制一些雜訊，例如背景和運動模糊。</li>
+</ul>
+</li>
+<li>
+<p><strong>RNN(循環神經網路)</strong>：<br>
+<strong>RNN</strong> <strong>可捕獲視訊幀之間的時間上下文</strong>以改進姿勢估計，因此<strong>可以有效地從單人圖像序列中估計人體姿勢</strong>，但截至論文發表為止，<strong>RNN</strong> <strong>尚未應用於多人影片</strong>，作者<strong>推測</strong>可能 <strong>RNN</strong> 在提取每個人的時間上下文時會受到其他人的影響：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1605.02346.pdf">Chained Predictions Using Convolutional Neural Networks</a>提出了一種<strong>Seq2Seq模型</strong>，它採用 <strong>Chained Convolutional Networks</strong> 來處理輸入影像，並<strong>結合歷史隱藏狀態和當前影像來預測當前關鍵點熱圖</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Luo_LSTM_Pose_Machines_CVPR_2018_paper.pdf">LSTM Pose Machines</a>透過使用<strong>卷積LSTM</strong>擴展了卷積姿勢機(Heatmap-Based-Iterative Architecture 有提到)，它<strong>能夠對空間和時間上下文進行建模</strong>以進行姿勢預測。</li>
+</ul>
+</li>
+<li>
+<p><strong>Pose Tracking(姿態追蹤)</strong>：<br>
+<strong>Pose Tracking method</strong> 會為視訊幀中的每個人<strong>建立一個軌跡</strong>，以<strong>過濾不相關資訊的干擾</strong>，並且<strong>在多人場景中表現出強烈的適應性</strong>，但是這些模型需要計算特徵相似性或姿勢相似性來創建軌跡，<strong>計算資源++</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Girdhar_Detect-and-Track_Efficient_Pose_CVPR_2018_paper.pdf">3D Mask R-CNN</a> 為 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ICCV_2017/papers/He_Mask_R-CNN_ICCV_2017_paper.pdf">Mask R-CNN</a> 的擴展，先產生單人小片段，接著<strong>利用小片段內的時間資訊</strong>來產生更準確的預測。</li>
+<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-030-58542-6_41">Temporal Keypoint Matching and Refinement Network for Pose Estimation and Tracking</a> 提出了一種姿態估計框架，由根據<strong>關鍵點相似度</strong>給出可靠的單人姿勢序列的<strong>時間關鍵點匹配模組</strong>和藉由<strong>聚合序列內的姿勢</strong>以糾正原始姿勢的<strong>時間關鍵點細化模組</strong>組成。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Combining_Detection_and_Tracking_for_Human_Pose_Estimation_in_Videos_CVPR_2020_paper.pdf">Combining detection and tracking for human pose estimation in videos</a> 設計了<strong>剪輯追蹤網路</strong>和<strong>視訊追蹤管道</strong>來為每個人<strong>建立軌跡</strong>，並將 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Deep_High-Resolution_Representation_Learning_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">HRNet</a> 擴展到3D-HRNet以對所有軌跡執行<strong>時間姿態估計</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Yang_Learning_Dynamics_via_Graph_Neural_Networks_for_Human_Pose_Estimation_CVPR_2021_paper.pdf">Learning Dynamics via Graph Neural Networks for Human Pose Estimation and Tracking</a> <strong>採用圖神經網路從歷史姿勢序列中學習姿勢動態</strong>，並將姿勢動態<strong>合併到目前影格的姿勢偵測</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>Key Frame Optimization(關鍵影格優化)</strong>：<br>
+<strong>Key Frame Optimization</strong> 的特點在於模型會<strong>選擇一些關鍵影格來改善目前影格的姿態估計</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/Charles_Personalizing_Human_Video_CVPR_2016_paper.pdf">Personalizing Human Video Pose Estimation</a> 提出了一種個人化視訊姿勢估計框架，它<strong>利用一些具有高精度姿勢估計的關鍵影格來微調模型</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1906.04016.pdf">PoseWarper</a> 是一種姿勢扭曲網絡，它<strong>先將標記幀的姿勢扭曲到未標記的（當前）幀，然後聚合所有扭曲的姿勢</strong>以預測當前幀的姿勢熱圖。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.15217.pdf">K-FPN</a> 提出了一個<strong>關鍵幀提議網絡</strong>來選擇有效關鍵幀，並提出了一個<strong>可學習的字典來從所選關鍵幀重建整個姿勢序列</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Liu_Deep_Dual_Consecutive_Network_for_Human_Pose_Estimation_CVPR_2021_paper.pdf">DCPose</a> 為一個能夠充分<strong>利用相鄰幀的時間信息的雙連續幀工作視訊姿勢估計框架</strong>，包含以下三個模組化組件：(跟這篇 Survey 是同一批作者，灌水機率偏高)
+<ul>
+<li>姿勢時間合併器會對關鍵點時空上下文進行編碼以<strong>產生有效的搜尋範圍</strong>。</li>
+<li>姿勢殘差融合模組則<strong>計算雙向加權姿勢殘差</strong>。</li>
+<li>姿勢校正網路用於<strong>重新處理以上兩個模組的輸出</strong>，以改善姿勢估計。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="Model-Compression-Based-Methods">Model Compression-Based Methods</h4>
+<p>上述的方法雖然有效但是模型都偏大，為了可以在手機等輕量設備上實際應用，需要將模型壓縮以達到即時計算：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1908.05593.pdf">FastPose</a> 是一個基於<strong>教師-學生網絡</strong>的快速<strong>姿勢蒸餾模型</strong>，教師網絡採用<strong>8階段沙漏模型</strong>，而學生網絡則採用<strong>緊湊型對應模型（4階段沙漏）</strong>。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Luo_LSTM_Pose_Machines_CVPR_2018_paper.pdf">LSTM Pose Machines</a> 提出了一種輕量級的 LSTM 架構來執行視訊姿態估計。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Yu_Lite-HRNet_A_Lightweight_High-Resolution_Network_CVPR_2021_paper.pdf">Lite-HRNet</a> 提出了兩種減少HRNet參數的方案：</p>
+<ul>
+<li>簡單地應用 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Zhang_ShuffleNet_An_Extremely_CVPR_2018_paper.pdf">Shuffle-Block</a> 來<strong>取代</strong>普通 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Sun_Deep_High-Resolution_Representation_Learning_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">HRNet</a> 中的基本區塊。</li>
+<li>設計一個<strong>條件通道加權模組</strong>，它可以<strong>學習多種解析度的權重</strong>，以取代昂貴的逐點 (1 × 1) 卷積。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Bottom-Up-Framework">Bottom-Up Framework</h3>
+<h4 id="Human-Center-Regression-Based-Methods">Human Center Regression-Based Methods</h4>
+<p><strong>Human Center Regression-Based Method</strong> 利用人體中心點來表示人物實例：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Nie_Single-Stage_Multi-Person_Pose_Machines_ICCV_2019_paper.pdf">Single-Stage Multi-Person Pose Machines</a> <strong>引入根關節（中心偏移點）來表示人物實例</strong>，並且<strong>將身體關節位置編碼到它們的位移中</strong>，<strong>統一了人類實例和身體關節位置表示</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Geng_Bottom-Up_Human_Pose_Estimation_via_Disentangled_Keypoint_Regression_CVPR_2021_paper.pdf">DisEntangled Keypoint Regression</a> 預測人物實例的<strong>人體中心圖</strong>，並<strong>密集地估計中心圖中每個像素</strong> $q$ 可能的姿勢。</li>
+</ul>
+<p><strong>Associate Embedding-Based Method</strong> <strong>為每個關鍵點分配一個關聯嵌入</strong>以區分不同人的實例表示：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1611.05424.pdf">Associative Embedding: End-to-End Learning for Joint Detection and Grouping</a> 開創了嵌入表示，其中<strong>每個預測的關鍵點都有一個額外的嵌入向量</strong>，用作<strong>識別其人類實例分配的標籤</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Jin_Multi-Person_Articulated_Tracking_With_Spatial_and_Temporal_Embeddings_CVPR_2019_paper.pdf">Multi-person Articulated Tracking with Spatial and Temporal Embeddings</a> 提出了 SpatialNet 來<strong>偵測身體部位熱圖</strong>並預測<strong>輸入影像透過關鍵點嵌入來參數化的部位層級資料關聯性</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Cheng_HigherHRNet_Scale-Aware_Representation_Learning_for_Bottom-Up_Human_Pose_Estimation_CVPR_2020_paper.pdf">HigherHRNet</a> 遵循<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1611.05424.pdf">Associative Embedding: End-to-End Learning for Joint Detection and Grouping</a> 中的關鍵點分組，並進一步提出了一個<strong>更高解析度網路來學習高解析度特徵金字塔</strong>，改進了<strong>較小人物的姿態估計</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Luo_Rethinking_the_Heatmap_Regression_for_Bottom-Up_Human_Pose_Estimation_CVPR_2021_paper.pdf">Rethinking the Heatmap Regression for Bottom-up Human Pose Estimation</a> 針對人類<strong>尺度差異大</strong>和<strong>標籤模糊</strong>的問題提出了<strong>尺度自適應熱圖回歸模型</strong>，能夠<strong>自適應調整每個關鍵點的真實高斯核的標準差</strong>，並實現<strong>對不同人體尺度和標籤歧義的高容忍度</strong>。</li>
+</ul>
+<p><strong>Part Field-Based Method</strong> 先偵測關鍵點及其之間的連接，然後根據關鍵點連接進行關鍵點分組：</p>
+<ul>
+<li>代表性工作 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Cao_Realtime_Multi-Person_2D_CVPR_2017_paper.pdf">Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields</a> 提出了<strong>兩分支多層次CNN架構</strong>，其中一支預測<strong>置信圖</strong>以表示關鍵點的位置，另一支預測<strong>部分親和力場</strong>以指示關鍵點之間的連接強度，然後<strong>根據關節之間的連接強度</strong>，用<strong>貪婪演算法</strong>來組裝同一個人的不同關節。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Kreiss_PifPaf_Composite_Fields_for_Human_Pose_Estimation_CVPR_2019_paper.pdf">PifPaf</a> 利用<strong>部位強度場</strong>來定位身體部位，並利用<strong>部位關聯場</strong>將身體部位彼此關聯。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1911.10529.pdf">Simple Pose</a> 提出了一種基於<strong>部位親和力場</strong>的身體部位熱圖的新穎<strong>關鍵點關聯表示</strong>，以實現<strong>有效的關鍵點分組</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/8444436">Multi-Person Pose Estimation via Multi-Layer Fractal Network and Joints Kinship Pattern</a> 提出了一種<strong>多層分形網絡</strong>，它<strong>對關鍵點位置熱圖進行回歸並推斷相鄰關節之間的親緣關係</strong>以確定最佳匹配的關節對。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.11864.pdf">Differentiable Hierarchical Graph Grouping</a> <strong>將關鍵點分組轉換為圖分組問題</strong>，並且<strong>可以與關鍵點檢測網絡進行端到端訓練</strong>。</li>
+</ul>
+<hr>
+<h2 id="Network-Training-Refinement">Network Training Refinement</h2>
+<h3 id="Data-Augmentation-Techniques">Data Augmentation Techniques</h3>
+<p>常見的資料增強技術包括<strong>隨機旋轉</strong>、<strong>隨機縮放</strong>、<strong>隨機截斷</strong>、<strong>水平翻轉</strong>、<strong>隨機資訊丟棄</strong>和<strong>光照變化</strong>。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Peng_Jointly_Optimize_Data_CVPR_2018_paper.pdf">Adversarial Data Augmentation</a> 可以<strong>產生困難的姿勢樣本</strong>來與姿勢估計器競爭。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Tang_Does_Learning_Specific_Features_for_Related_Parts_Help_Human_Pose_CVPR_2019_paper.pdf">Does Learning Specific Features for Related Parts Help Human Pose Estimation?</a> 指出<strong>最先進的人體姿勢估計方法具有類似的誤差分佈</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Moon_PoseFix_Model-Agnostic_General_Human_Pose_Refinement_Network_CVPR_2019_paper.pdf">PoseFix</a> 根據 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Tang_Does_Learning_Specific_Features_for_Related_Parts_Help_Human_Pose_CVPR_2019_paper.pdf">Does Learning Specific Features for Related Parts Help Human Pose Estimation?</a> 中的誤差統計<strong>生成合成姿勢</strong>，並使用合成姿勢來訓練人體姿勢估計網絡。</li>
+<li><a target="_blank" rel="noopener" href="https://islab.ulsan.ac.kr/files/announcement/804/2008.00697.pdf">Adversarial Semantic Data Augmentation</a> 使用 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1406.2661.pdf">GAN</a> 的<strong>對抗語義資料增強</strong>，它<strong>透過貼上具有不同語義粒度的分段身體部位</strong>來增強原始影像。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Wang_When_Human_Pose_Estimation_Meets_Robustness_Adversarial_Algorithms_and_Benchmarks_CVPR_2021_paper.pdf">When Human Pose Estimation Meets Robustness: Adversarial Algorithms and Benchmarks</a> 引入了AdvMix演算法，其中生成器網路<strong>透過混合各種損壞的圖像</strong>來混淆姿勢估計器，並且<strong>知識蒸餾網路將乾淨的姿勢結構知識傳輸到目標姿勢偵測器</strong>。</li>
+</ul>
+<hr>
+<h3 id="Multi-Task-Training-Strategies-有料">Multi-Task Training Strategies(有料)</h3>
+<p>多任務學習旨在<strong>透過在相關視覺任務之間共享表示來捕獲資訊特徵</strong>。</p>
+<p><strong>人體解析</strong>是與人體姿勢估計密切相關的任務，其目標是將人體分割成頭部、手臂和腿等語意部分。</p>
+<p>$\Diamond$ <strong>人體解析</strong>資訊<strong>可提升</strong>人體姿勢估計的效能。</p>
+<ul>
+<li>[ ] <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Xia_Joint_Multi-Person_Pose_CVPR_2017_paper.pdf">Joint Multi-Person Pose Estimation and Semantic Part Segmentation</a> 共同解決了人體解析和姿態估計兩個任務，並<strong>利用部分級片段來指導關鍵點定位</strong>。</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Nie_Human_Pose_Estimation_CVPR_2018_paper.pdf">Human Pose Estimation with Parsing Induced Learner</a> 提出了一個<strong>解析編碼器</strong>和一個<strong>姿勢模型參數適配器</strong>，它們一起學習預測姿勢模型的參數，以提取用於人體姿勢估計的<strong>互補特徵</strong>。</li>
+</ul>
+<h3 id="Loss-Function-Constraints">Loss Function Constraints</h3>
+<ul>
+<li>最常見的損失函數是L2距離。<br>
+L2距離公式：$$L = \frac{1}{N}\sum_{j=1}^N v_j \times \lVert G(j) - P(j)\lVert^2$$<br>
+$G(j), P(j), v(j), N$ 分別代表 Ground Truth 熱圖, Prediction 熱圖, 關節 $j$ 的可見性, 關節的數量。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1803.09894.pdf">Multi-Scale Structure-Aware Network for Human Pose Estimation</a> 提出了一種多尺度的人體結構感知損失，它捕捉人體的結構資訊。<br>
+第 $i$ 個特徵尺度的結構感知損失可以表示如下：$$ L^i = \frac{1}{N}\sum_{j=1}^N \lVert P_j^i - G_j^i\lVert_2 \ + \ \alpha \sum_{i=1}^N \lVert P_{S_j}^i - G_{S_j}^i\lVert_2$$<br>
+$P_j, G_j, P_{S_j}, G_{S_j}$ 分別代表關節 $j$ 的Prediction 熱圖, Ground Truth 熱圖, 關節 $j$ 和他的鄰居的熱圖組。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Cascaded_Pyramid_Network_CVPR_2018_paper.pdf">Cascaded Pyramid Network for Multi-Person Pose Estimation</a> 提出了一種<strong>線上困難關鍵點探勘</strong>，它首先計算所有關鍵點的常規 L2 損失，然後<strong>對前 M 個困難的關鍵點加強懲罰</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3394171.3416278">Combined Distillation Pose</a> 提出了適用於 HR Net 的<strong>組合蒸餾損失</strong>，其中包括<strong>強制網路在早期階段學習人體結構以對抗姿勢遮擋</strong>的結構損失（STLoss）、<strong>緩解了類似關節分類錯誤</strong>的成對抑制損失（PairLoss）和<strong>指導最終熱圖分佈學習</strong>的機率分佈損失（PDLoss）。</li>
+</ul>
+<h3 id="Domain-Adaption-Methods">Domain Adaption Methods</h3>
+<p>在實際應用中，預先訓練的姿態估計模型<strong>通常需要適應沒有標籤或稀疏標籤的新領域</strong>。<br>
+下列領域適應方法<strong>利用有標籤的來源領域來學習一個模型</strong>，使其在無標籤或標籤稀疏的目標領域上表現良好：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2008.05717.pdf">Alleviating Human-level Shift : A Robust Domain Adaptation Method for Multi-person Pose Estimation</a> 提出了一種<strong>既實現了人體級拓撲結構對齊，又實現了不同資料集中的細粒度特徵對齊</strong>的 2D HPE的領域自適應方法。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ECCVW_2018/papers/11130/Guo_Multi-Domain_Pose_Network_for_Multi-Person_Pose_Estimation_and_Tracking_ECCVW_2018_paper.pdf">Multi-Domain Pose Network</a> 能夠<strong>同時在多個資料集上訓練模型</strong>，從而以多域學習方式獲得更好的姿態表示。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2021/papers/Li_From_Synthetic_to_Real_Unsupervised_Domain_Adaptation_for_Animal_Pose_CVPR_2021_paper.pdf">From Synthetic to Real: Unsupervised Domain Adaptation for Animal Pose Estimation</a> 提出了一種能夠軟化標籤雜訊的<strong>在線從粗到精的偽標籤更新策略</strong>，以<strong>減少合成數據與真實數據之間的差距</strong>，這在動物姿態估計方面表現出了強大的泛化能力。</li>
+</ul>
+<hr>
+<h2 id="Post-Processing-Approaches">Post Processing Approaches</h2>
+<p><strong>Post Processing Approaches</strong> 不會立即預測最終關鍵點位置，而是先估計初始姿勢，然後透過一些<strong>後處理操作</strong>進行最佳化。</p>
+<p>作者將這些方法分為兩大類：</p>
+<ul>
+<li><strong>Quantization Error</strong></li>
+<li><strong>Pose Resampling</strong></li>
+</ul>
+<h3 id="Quantization-Error">Quantization Error</h3>
+<p>heatmap based 的模型需要從估計的關鍵點熱圖解碼關節的 2D 座標 (x, y)，且通常會將預測熱圖中<strong>最大活化值</strong>的位置作為關鍵點座標，但是預測的高斯熱圖並<strong>不總是符合標準高斯分佈</strong>，並且可能<strong>包含多個峰值</strong>，這<strong>降低了座標計算的準確性</strong>。</p>
+<ul>
+<li>[ ] <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Zhang_Distribution-Aware_Coordinate_Representation_for_Human_Pose_Estimation_CVPR_2020_paper.pdf">Distribution-Aware Coordinate Representation for Human Pose Estimation</a> 提出了一種<strong>分佈感知架構</strong>，首先執行<strong>熱圖分佈調變</strong>來調整預測熱圖的形狀，然後採用<strong>新的座標解碼方法</strong>來準確地獲得最終的關鍵點位置。</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Huang_The_Devil_Is_in_the_Details_Delving_Into_Unbiased_Data_CVPR_2020_paper.pdf">The Devil is in the Details: Delving into Unbiased Data Processing for Human Pose Estimation</a> <strong>定量分析了2D HPE上常見的偏移數據處理</strong>，並進一步<strong>基於單位長度而不是像素</strong>來處理數據，在推理中<strong>進行翻轉時獲得對齊的姿態結果</strong>，並引入了一種理論上可以將熱圖和座標之間的關鍵點位置<strong>完美轉換的編碼解碼方法</strong>。</li>
+</ul>
+<p>解碼過程中，最大運算的<strong>不可微性質</strong>也會產生<strong>量化誤差</strong>，因此以下研究嘗試設計<strong>可微分演算法</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1710.02322.pdf">Human Pose Regression by Combining Indirect Part Detection and Contextual Information</a> 提出了一種<strong>完全可微且端對端可訓練的迴歸方法</strong>，該方法利用新穎的 Soft argmax 函數<strong>將特徵圖直接轉換為關鍵點座標</strong>。</li>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Xiao_Sun_Integral_Human_Pose_ECCV_2018_paper.pdf">Integral human pose regression</a> 提出了一種<strong>積分方法</strong>來解決熱圖到座標的不可微分問題。</li>
+</ul>
+<h3 id="Pose-Resampling">Pose Resampling</h3>
+<p>很多姿態估計器會直接將模型輸出作為最終估計，以下方法將這些估計值透過與模型無關的 <strong>Pose Resampling</strong> 技術進一步改進。</p>
+<ul>
+<li>
+<p>針對靜態影像設計的 <strong>Pose Resampling</strong>：</p>
+<ul>
+<li><a href="%5BPoseFix%5D(https://openaccess.thecvf.com/content_CVPR_2019/papers/Moon_PoseFix_Model-Agnostic_General_Human_Pose_Refinement_Network_CVPR_2019_paper.pdf)">PoseFix</a> <strong>根據輸入圖像和輸入姿勢的元組估計精細姿勢</strong>，其中輸入姿勢是從現有方法的估計中導出的。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2003.10506.pdf">Peeking into occluded joints: A novel framework for crowd pose estimation</a> 提出先透過現有的姿勢估計器根據視覺資訊定位可見關節，<strong>透過結合影像上下文</strong>和<strong>姿勢結構線索</strong>的<strong>影像引導漸進式 GCN 模組</strong>估計不可見關節。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.10599.pdf">Graph-PCNN</a> 是一個兩階段且與模型無關的框架，<strong>先利用現有的姿態估計器進行粗略關鍵點定位</strong>，再用他們提出的<strong>圖姿態細化模組</strong>以產生更準確定位結果。</li>
+</ul>
+</li>
+<li>
+<p>針對動態影片設計的 <strong>Pose Resampling</strong>：<br>
+以下方法透過<strong>執行姿勢聚合來整合當前幀的多個估計姿勢</strong>以改善估計結果：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Combining_Detection_and_Tracking_for_Human_Pose_Estimation_in_Videos_CVPR_2020_paper.pdf">Combining detection and tracking for human pose estimation in videos</a> 引入了<strong>Dijkstra演算法</strong>來解決最佳關鍵點位置問題，該演算法首先採用<strong>均值平移演算法</strong>將所有姿態假設<strong>分組到各個族群</strong>中，然後<strong>選擇與關鍵點距離最近的關鍵點聚類中心</strong>作為最優結果。</li>
+<li><a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-030-58542-6_41">Temporal Keypoint Matching and Refinement Network for Pose Estimation and Tracking</a> 利用<strong>相鄰幀和當前幀之間的姿勢相似性</strong>來進行<strong>有偏差的聚合特徵</strong>，然後採用卷積神經網路從聚合特徵中解碼當前熱圖。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Evaluation-Metrics">Evaluation Metrics</h2>
+<h3 id="Percentage-of-Correctly-Estimated-Body-Parts-PCP">Percentage of Correctly Estimated Body Parts (PCP)</h3>
+<p>PCP 指標反映了局部身體部位的準確性。</p>
+<p>如果估計的部位的端點位於閾值內，則認為該部位是正確的，該閾值可以是其註釋位置處的地面實況片段長度的一小部分[31]。</p>
+<p>除了所有身體部位的平均 PCP 之外，通常還會報告軀幹、大腿和頭部等單獨的身體肢體 PCP。</p>
+<p>與 PCP 指標類似，PCPm 在整個測試中利用平均真實片段長度的 50% 作為匹配閾值。</p>
+<h3 id="Percentage-of-Correct-Keypoints-PCK">Percentage of Correct Keypoints (PCK)</h3>
+<p>PCK 用於測量局部身體關鍵點的準確性，如果候選關節位於匹配閾值內，則認為它是正確的</p>
+<p>關鍵點位置與地面實況相符的閾值可以定義為人體邊界框大小的一部分（表示為 PCK）和頭部片段長度的 50%（表示為 PCKh）。</p>
+<h3 id="Average-Precision-AP">Average Precision (AP)</h3>
+<p>AP 度量是基於物件關鍵點相似度（OKS）[93] 來定義的，它評估預測關鍵點和真實關鍵點之間的相似性。</p>
+<p>不同 OKS 閾值 N 下的平均精度得分表示為 AP@N。</p>
+<p>對於基於影像的人體姿勢估計，平均精確度 (mAP) 是所有 OKS 閾值下 AP 分數的平均值。</p>
+<p>在基於影片的人體姿態估計中，mAP 每個關節的平均 AP 分數。</p>
+
+
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
+          
+          
+          <li class="next">
+            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" data-toggle="tooltip" data-placement="top" title="【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation">Next Post &rarr;</a>
+          </li>
+          
+        </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】2D Human Pose Estimation - A Survey&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
+      </div>
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">2D Human Pose Estimation: A Survey</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Network-Architecture-Design-Method"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Network Architecture Design Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Top-Down-Framework"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Top-Down Framework</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Regression-Based-Methods"><span class="toc-nav-number">1.1.1.1.</span> <span class="toc-nav-text">Regression-Based Methods</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Heatmap-Based-Methods"><span class="toc-nav-number">1.1.1.2.</span> <span class="toc-nav-text">Heatmap-Based Methods</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Video-Based-Methods"><span class="toc-nav-number">1.1.1.3.</span> <span class="toc-nav-text">Video-Based Methods</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Model-Compression-Based-Methods"><span class="toc-nav-number">1.1.1.4.</span> <span class="toc-nav-text">Model Compression-Based Methods</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Bottom-Up-Framework"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Bottom-Up Framework</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Human-Center-Regression-Based-Methods"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">Human Center Regression-Based Methods</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Network-Training-Refinement"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Network Training Refinement</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-Augmentation-Techniques"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Data Augmentation Techniques</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Multi-Task-Training-Strategies-%E6%9C%89%E6%96%99"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Multi-Task Training Strategies(有料)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Loss-Function-Constraints"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">Loss Function Constraints</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Domain-Adaption-Methods"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Domain Adaption Methods</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Post-Processing-Approaches"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Post Processing Approaches</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Quantization-Error"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">Quantization Error</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Pose-Resampling"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">Pose Resampling</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Evaluation-Metrics"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Evaluation Metrics</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Percentage-of-Correctly-Estimated-Body-Parts-PCP"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Percentage of Correctly Estimated Body Parts (PCP)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Percentage-of-Correct-Keypoints-PCK"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">Percentage of Correct Keypoints (PCK)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Average-Precision-AP"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">Average Precision (AP)</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
+
+<!-- anchorjs end -->
+
+
+
+		<!-- Footer (contains ThemeColor、viewer) -->
+		<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          
+
+          
+            <li>
+              <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+
+        </ul>
+        <p class="copyright text-muted">
+          Copyright &copy;
+          @ntust-simslab
+          2023
+          <br>
+          Theme by
+          <a target="_blank" rel="noopener" href="http://beantech.org">BeanTech</a>
+          <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span>
+          re-Ported by
+          <a target="_blank" rel="noopener" href="https://v-vincen.life/">Live My Life</a>
+          |
+          <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=V-Vincen&repo=V-Vincen.github.io&type=star&count=true"></iframe>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a id="rocket" href="#top" class=""></a>
+
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="/it-blog/js/jquery.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/bootstrap.min.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script type="text/javascript" src="/it-blog/js/hux-blog.min.js"></script>
+  <!-- catalog -->
+  <script async="true" type="text/javascript" src="/js/catalog.js"></script>
+  <!-- totop(rocket) -->
+  <script async="true" type="text/javascript" src="/js/totop.js"></script>
+
+  
+    <!-- Busuanzi JavaScript -->
+    <script async="async" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <!-- Scroll start -->
+    <script async="async" type="text/javascript" src="/it-blog/js/scroll.js"></script>
+    <!-- Scroll end -->
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+<script>
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function (e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  // fastClick.js
+  async ("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function () {
+    var $nav = document.querySelector("nav");
+    if ($nav)
+      FastClick.attach($nav);
+    }
+  )
+</script>
+
+<!-- Because of the native support for backtick-style fenced code blocks right within the Markdown is landed in Github Pages, From V1.6, There is no need for Highlight.js, so Huxblog drops it officially. -
+https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0 - https://help.github.com/articles/creating-and-highlighting-code-blocks/ -->
+<!-- <script> async ("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function () { hljs.initHighlightingOnLoad(); }) </script> <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet"> -->
+
+<!-- jquery.tagcloud.js -->
+<!-- <script> // only load tagcloud.js in tag.html if ($('#tag_cloud').length !== 0) { async ("https://ntust-sims-lab.github.io/it-blog/js/jquery.tagcloud.js", function () { $.fn.tagcloud.defaults = { // size: { start: 1, end: 1, unit: 'em' }, color: {
+start: '#bbbbee', end: '#0085a1' } }; $('#tag_cloud a').tagcloud(); }) } </script> -->
+
+
+		<!-- Search -->
+		
+		<div class="popup search-popup local-search-popup">
+  <span class="popup-btn-close">
+    ESC
+  </span>
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col-md-9 col-md-offset-1"> -->
+      <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 local-search-content">
+
+        <div class="local-search-header clearfix">
+
+          <div class="local-search-input-wrapper">
+            <span class="search-icon">
+              <i class="fa fa-search fa-lg" style="margin: 25px 10px 25px 20px;"></i>
+            </span>
+            <input autocomplete="off" placeholder="SEARCH..." type="text" id="local-search-input">
+          </div>
+        </div>
+        <div id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    <script src="/it-blog/js/ziploader.js"></script>
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.json";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    // monitor main search box;
+    var onPopupClose = function (e) {
+      $('.popup').fadeOut(300);
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $('.popup').fadeIn(300);
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // get search zip version
+    $.get('/it-blog/searchVersion.json?t=' + (+new Date()), function (res) {
+      if (localStorage.getItem('searchVersion') !== res) {
+        localStorage.setItem('searchVersion', res);
+        initSearchJson();
+      }
+    });
+
+    function initSearchJson() {
+      initLoad(['/it-blog/search.flv'], {
+        loadOptions: {
+          success: function (obj) {
+            localStorage.setItem('searchJson', obj['search.json'])
+          },
+          error: function (e) {
+            return console.log(e)
+          }
+        },
+        returnOptions: {
+          'json': TYPE_TEXT
+        },
+        mimeOptions: {
+          'json': 'application/json'
+        }
+      })
+    }
+    // search function;
+    var searchFunc = function (search_id, content_id) {
+      'use strict';
+      isfetched = true;
+      var datas = JSON.parse(localStorage.getItem('searchJson'));
+      // console.log(search_id)
+      var input = document.getElementById(search_id);
+      var resultContent = document.getElementById(content_id);
+      var inputEventFunction = function () {
+        var searchText = input.value.trim().toLowerCase();
+        var keywords = searchText.split(/[\s\-]+/);
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        var resultItems = [];
+        if (searchText.length > 0) {
+          // perform local searching
+          datas.forEach(function (data) {
+            var isMatch = false;
+            var hitCount = 0;
+            var searchTextCount = 0;
+            var title = data.title
+              ? data.title.trim()
+              : '';
+            var titleInLowerCase = title.toLowerCase();
+            var content = data.content
+              ? data.content.trim().replace(/<[^>]+>/g, "")
+              : '';
+            var contentInLowerCase = content.toLowerCase();
+            var articleUrl = decodeURIComponent(data.url);
+
+            var date = data.date;
+            var dateTime = date.replace(/T/, " ").replace(/.000Z/, "");
+            var imgUrl = data.header_img;
+            
+
+
+            var indexOfTitle = [];
+            var indexOfContent = [];
+            // only match articles with not empty titles
+            keywords.forEach(function (keyword) {
+              function getIndexByWord(word, text, caseSensitive) {
+                var wordLen = word.length;
+                if (wordLen === 0) {
+                  return [];
+                }
+                var startPosition = 0,
+                  position = [],
+                  index = [];
+                if (!caseSensitive) {
+                  text = text.toLowerCase();
+                  word = word.toLowerCase();
+                }
+                while ((position = text.indexOf(word, startPosition)) > -1) {
+                  index.push({position: position, word: word});
+                  startPosition = position + wordLen;
+                }
+                return index;
+              }
+              indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+              indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+            });
+            if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+              isMatch = true;
+              hitCount = indexOfTitle.length + indexOfContent.length;
+            }
+            // show search results
+            if (isMatch) {
+              // sort index by position of keyword
+              [indexOfTitle, indexOfContent].forEach(function (index) {
+                index.sort(function (itemLeft, itemRight) {
+                  if (itemRight.position !== itemLeft.position) {
+                    return itemRight.position - itemLeft.position;
+                  } else {
+                    return itemLeft.word.length - itemRight.word.length;
+                  }
+                });
+              });
+              // merge hits into slices
+              function mergeIntoSlice(text, start, end, index) {
+                var item = index[index.length - 1];
+                var position = item.position;
+                var word = item.word;
+                var hits = [];
+                var searchTextCountInSlice = 0;
+                while (position + word.length <= end && index.length != 0) {
+                  if (word === searchText) {
+                    searchTextCountInSlice++;
+                  }
+                  hits.push({position: position, length: word.length});
+                  var wordEnd = position + word.length;
+                  // move to next position of hit
+                  index.pop();
+                  while (index.length != 0) {
+                    item = index[index.length - 1];
+                    position = item.position;
+                    word = item.word;
+                    if (wordEnd > position) {
+                      index.pop();
+                    } else {
+                      break;
+                    }
+                  }
+                }
+                searchTextCount += searchTextCountInSlice;
+                return {hits: hits, start: start, end: end, searchTextCount: searchTextCountInSlice};
+              }
+              var slicesOfTitle = [];
+              if (indexOfTitle.length != 0) {
+                slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+              }
+              var slicesOfContent = [];
+              while (indexOfContent.length != 0) {
+                var item = indexOfContent[indexOfContent.length - 1];
+                var position = item.position;
+                var word = item.word;
+                // cut out 100 characters
+                var start = position - 20;
+                var end = position + 80;
+                if (start < 0) {
+                  start = 0;
+                }
+                if (end < position + word.length) {
+                  end = position + word.length;
+                }
+                if (end > content.length) {
+                  end = content.length;
+                }
+                slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+              }
+              // sort slices in content by search text's count and hits' count
+              slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                  return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                  return sliceRight.hits.length - sliceLeft.hits.length;
+                } else {
+                  return sliceLeft.start - sliceRight.start;
+                }
+              });
+              // select top N slices in content
+              var upperBound = parseInt('1');
+              if (upperBound >= 0) {
+                slicesOfContent = slicesOfContent.slice(0, upperBound);
+              }
+              // highlight title and content
+              function highlightKeyword(text, slice) {
+                var result = '';
+                var prevEnd = slice.start;
+                slice.hits.forEach(function (hit) {
+                  result += text.substring(prevEnd, hit.position);
+                  var end = hit.position + hit.length;
+                  result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                  prevEnd = end;
+                });
+                result += text.substring(prevEnd, slice.end);
+                return result;
+              }
+              var resultItem = '';
+
+              // if (slicesOfTitle.length != 0) {   resultItem += "<li><a target='_blank' href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>"; } else {   resultItem += "<li><a target='_blank' href='" +
+              // articleUrl + "' class='search-result-title'>" + title + "</a>"; } slicesOfContent.forEach(function (slice) {   resultItem += "<a target='_blank' href='" + articleUrl + "'><p class=\"search-result\">" + highlightKeyword(content, slice) +
+              // "...</p></a>"; }); resultItem += "</li>";
+
+              if (slicesOfTitle.length != 0) {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              } else {
+                resultItem += "<a target='_blank' href='" + articleUrl + "' class='search-result'><div class='search-result-left'><div class='search-result-title'>" + title + "</div><time class='search-result-date'>" + dateTime + "</time>";
+              }
+              slicesOfContent.forEach(function (slice) {
+                resultItem += "<p class=\"search-result-content\">" + highlightKeyword(content, slice) + "...</p>";
+              });
+              resultItem += "</div><div class='search-result-right'><img class='media-image' src='" + imgUrl + "' width='64px' height='48px'></img></div></a>";
+
+              resultItems.push({item: resultItem, searchTextCount: searchTextCount, hitCount: hitCount, id: resultItems.length});
+            }
+          })
+        };
+
+        if (keywords.length === 1 && keywords[0] === "") {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else if (resultItems.length === 0) {
+          resultContent.innerHTML = '<div id="no-result"></div>'
+        } else {
+          resultItems.sort(function (resultLeft, resultRight) {
+            if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+              return resultRight.searchTextCount - resultLeft.searchTextCount;
+            } else if (resultLeft.hitCount !== resultRight.hitCount) {
+              return resultRight.hitCount - resultLeft.hitCount;
+            } else {
+              return resultRight.id - resultLeft.id;
+            }
+          });
+          var searchResultList = '<div class=\"search-result-list\">';
+          resultItems.forEach(function (result) {
+            searchResultList += result.item;
+          })
+          searchResultList += "</div>";
+          resultContent.innerHTML = searchResultList;
+        }
+      }
+      if ('auto' === 'auto') {
+        input.addEventListener('input', inputEventFunction);
+      } else {
+        $('.search-icon').click(inputEventFunction);
+        input.addEventListener('keypress', function (event) {
+          if (event.keyCode === 13) {
+            inputEventFunction();
+          }
+        });
+      }
+      // remove loading animation
+      $('body').css('overflow', '');
+      proceedsearch();
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function (e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc('local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function (e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 && $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      var _con = document.querySelector(".local-search-content");
+      if (_con) {
+        if (!_con.contains(e.target)) {
+          onPopupClose();
+        }
+      }
+    });
+  </script>
+
+
+		
+	<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
