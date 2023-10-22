@@ -5,10 +5,12 @@ date: 2023-10-23
 author: David Chen
 categories:
 - paper review
-- Segmentation
-- Transformer
+- Human Pose Estimation
 ---
 # Cascaded Pyramid Network for Multi-Person Pose Estimation
+
+[![hackmd-github-sync-badge](https://hackmd.io/4R4gjQUbSrSVP4jHw0ynvA/badge)](https://hackmd.io/4R4gjQUbSrSVP4jHw0ynvA)
+
 * Journal reference: CVPR 2018
 * Authors: Yilun Chen, Zhicheng Wang, Yuxiang Peng, Zhiqiang Zhang, Gang Yu, Jian Sun
 * Github: [Cascaded Pyramid Network (CPN)](https://github.com/chenyilun95/tf-cpn)
@@ -57,7 +59,7 @@ categories:
 
 隨著網路的訓練，網路通常會更關注那些**相對簡單**的關鍵點，而不太重視**被遮蔽**和**困難**的關鍵點，這兩類關鍵點都應該被關注！
 
-因此在 **RefineNet** 中，作者根據訓練損失在線選擇困難關鍵點（稱為 **online hard keypoints mining** ），並僅從所選關鍵點進行反向傳播。
+因此在 **RefineNet** 中，作者根據訓練損失在線選擇困難關鍵點（作者稱為 **online hard keypoints mining** ），並僅從所選關鍵點進行反向傳播。
 
 #### Online Hard Keypoints Mining
 整個模型中有兩個階段，他們各自的損失為：
