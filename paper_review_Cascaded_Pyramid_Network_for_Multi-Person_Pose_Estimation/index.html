@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
   <title>
     
-      SiMS Lab | IT Blog
+      【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by David Chen on
+              2023-10-23
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">3</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">830</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,494 +364,227 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1>Cascaded Pyramid Network for Multi-Person Pose Estimation</h1>
+<ul>
+<li>Journal reference: CVPR 2018</li>
+<li>Authors: Yilun Chen, Zhicheng Wang, Yuxiang Peng, Zhiqiang Zhang, Gang Yu, Jian Sun</li>
+<li>Github: <a target="_blank" rel="noopener" href="https://github.com/chenyilun95/tf-cpn">Cascaded Pyramid Network (CPN)</a></li>
+<li>論文連結: <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Cascaded_Pyramid_Network_CVPR_2018_paper.pdf">Cascaded Pyramid Network for Multi-Person Pose Estimation</a></li>
+</ul>
+<hr>
+<p>作者提出 <strong>CPN</strong> 來解決關鍵點被遮蔽和複雜背景中的關鍵點偵測錯誤的情況。</p>
+<p><strong>關鍵點被遮蔽</strong>和<strong>背景複雜</strong>無法良好定位的原因如下：</p>
+<ul>
+<li>這些困難關節不能<strong>僅憑外觀特徵</strong>來簡單識別，例如軀幹點。</li>
+<li>這些困難關節在訓練過程中沒有明確解決。</li>
+</ul>
+<h2 id="Method">Method</h2>
+<p><strong>CPN</strong> 主要是由兩個子網路左組成的：</p>
+<ul>
+<li><strong>GlobalNet</strong></li>
+<li><strong>RefineNet</strong></li>
+</ul>
+<p>下圖為 <strong>CPN</strong> 的整體架構。<br>
+<img src="https://hackmd.io/_uploads/SkoQ5hff6.png" alt=""></p>
+<h3 id="GlobalNet">GlobalNet</h3>
+<p><strong>GlobalNet</strong> 為基於<strong>ResNet Backbone</strong> 的網路結構。</p>
+<p>作者將不同卷積特徵 $conv2∼5$ 的最後一個殘差塊分別表示為 $C_2, C_3, …, C_5$。</p>
+<p>如下圖所示，$C_2$ 和$C_3$ 等淺層特徵具有<strong>用於定位的高空間分辨率</strong>(可以看得比較廣)，但<strong>用於識別的語義資訊較低</strong>。<br>
+反之，像 $C_4$ 和 $C_5$ 這樣的深層特徵層<strong>具有更多語義訊息</strong>，但由於跨步卷積（和池化）而導致<strong>空間分辨率較低</strong>(看的比較窄)。<br>
+因此通常會使用一個 <strong>U 形結構</strong>來在特徵層的空間分辨率和語義資訊中<strong>取得一個平衡</strong>。</p>
+<p><img src="https://hackmd.io/_uploads/rkkHsnMfp.png" alt=""></p>
+<p>作者引用了FPN的<strong>特徵金字塔結構</strong>，但是在上採樣過程中，作者先經過了 $1 × 1$ 卷積核然後才進行逐元求和。(上圖一 <strong>elem-sum</strong> 的部分)</p>
+<p>如上圖二所示，基於 <strong>ResNet Backbone</strong> 的 <strong>GlobalNet</strong> 可以有效地定位眼睛等關鍵點，但卻無法精確定位<strong>被遮擋住的臀部</strong>位置。</p>
+<p>作者表示像臀部這樣的關鍵點的定位通常需要<strong>更多的上下文資訊和處理</strong>，而不是附近的外觀特徵，因此單靠上述的 <strong>GlobalNet</strong> 很難直接識別這些<strong>困難關鍵點</strong>，因此作者附加一個 <strong>RefineNet</strong> 來解決<strong>困難關鍵點</strong>。</p>
+<h3 id="RefineNet">RefineNet</h3>
+<p>為了<strong>提高訊息傳輸的效率</strong>並<strong>保持訊息的完整性</strong>，我們的 <strong>RefineNet</strong> 跨不同層級傳輸訊息，最終<strong>透過上取樣和串聯將不同層級的訊息</strong>集成為 <a target="_blank" rel="noopener" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Kong_HyperNet_Towards_Accurate_CVPR_2016_paper.pdf">HyperNet</a>。</p>
+<p><strong>RefineNet</strong> 特點：</p>
+<ul>
+<li>連接了<strong>所有金字塔特徵</strong>，不像堆疊沙漏只有簡單的使用沙漏模組末端的上採樣特徵。</li>
+<li>將更多的 <strong>bottleneck blocks</strong> 堆疊到更深的層中，其較小的空間尺寸實現了有效性和效率之間的良好權衡。</li>
+</ul>
+<p>隨著網路的訓練，網路通常會更關注那些<strong>相對簡單</strong>的關鍵點，而不太重視<strong>被遮蔽</strong>和<strong>困難</strong>的關鍵點，這兩類關鍵點都應該被關注！</p>
+<p>因此在 <strong>RefineNet</strong> 中，作者根據訓練損失在線選擇困難關鍵點（稱為 <strong>online hard keypoints mining</strong> ），並僅從所選關鍵點進行反向傳播。</p>
+<h4 id="Online-Hard-Keypoints-Mining">Online Hard Keypoints Mining</h4>
+<p>整個模型中有兩個階段，他們各自的損失為：</p>
+<ul>
+<li><strong>GlobalNet</strong>：所有 Label 關鍵點的 L2 Loss。</li>
+<li><strong>RefineNet</strong>：只懲罰 Loss 最高的前 N 個關鍵點損失，經過作者的實驗，在 COCO 資料集中的 17 個關鍵點中取 8 個關鍵點可以在困難關鍵點和簡單關鍵點之間達成平衡，得到最佳訓練結果。</li>
+</ul>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            10-23
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            10-20
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" style="color: #0085a1">
-              <span>
-                【論文研讀】2D Human Pose Estimation - A Survey
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-30
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/something_else/" style="color: #0085a1">
-              <span>
-                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
-              <span>
-                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
-              <span>
-                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-18
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
-              <span>
-                【技術分享】Airflow快速入門及如何在Docker上安裝
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-11
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
-              <span>
-                【技術分享】基本Dockerfile寫法與Command Line
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" data-toggle="tooltip" data-placement="top" title="【論文研讀】2D Human Pose Estimation - A Survey">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Cascaded Pyramid Network for Multi-Person Pose Estimation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Method"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#GlobalNet"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">GlobalNet</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#RefineNet"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">RefineNet</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Online-Hard-Keypoints-Mining"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">Online Hard Keypoints Mining</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../../paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
-      <li>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</li>
-    </a>
-    
-    <a href="../../../paper_review_2D_Human_Pose_Estimation_Survey/">
-      <li>【論文研讀】2D Human Pose Estimation - A Survey</li>
-    </a>
-    
-    <a href="../../../paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/">
-      <li>【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation</li>
-    </a>
-    
-    <a href="../../../something_else/">
-      <li>【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks</li>
-    </a>
-    
-    <a href="../../../install_gpu_docker_ubuntu2004/">
-      <li>【技術分享】重灌後，安裝 GPU 驅動以及 Docker</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/10/">October 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#docker">
-      <li>docker</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#airflow">
-      <li>airflow</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Human Pose Estimation">
-      <li>Human Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
-      <li>3D Interacting Hand Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Segmentation">
-      <li>Segmentation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Survey">
-      <li>Survey</li>
-    </a>
-    
-    <a href="/it-blog/categories/#De-occlusion">
-      <li>De-occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Transformer">
-      <li>Transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Diffusion Model">
-      <li>Diffusion Model</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Removal">
-      <li>Removal</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Object-relation HAR">
-      <li>Object-relation HAR</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->

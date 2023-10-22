@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/</loc>
+    <lastmod>2023-10-23</lastmod>
+  </url>
+  <url>
     <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/</loc>
     <lastmod>2023-10-20</lastmod>
   </url>
