@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/">
   <title>
     
-      【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation - SiMS Lab | IT Blog
+      【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -310,11 +310,11 @@
             <div class="tags">
               
             </div>
-            <h1>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</h1>
+            <h1>【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by David Chen on
-              2023-10-23
+              Posted by Frank Liou on
+              2023-10-24
             </span>
 
 
@@ -322,11 +322,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">3</span> Minutes
+              Estimated Reading Time <span class="post-count">15</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">832</span> In Total
+              Words <span class="post-count">4.3k</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -372,67 +372,191 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <h1>Cascaded Pyramid Network for Multi-Person Pose Estimation</h1>
-<p><a target="_blank" rel="noopener" href="https://hackmd.io/4R4gjQUbSrSVP4jHw0ynvA"><img src="https://hackmd.io/4R4gjQUbSrSVP4jHw0ynvA/badge" alt="hackmd-github-sync-badge"></a></p>
+        <style>
+.text-center {
+  text-align: center; //文字置中
+}
+</style>
+<h1>Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</h1>
 <ul>
-<li>Journal reference: CVPR 2018</li>
-<li>Authors: Yilun Chen, Zhicheng Wang, Yuxiang Peng, Zhiqiang Zhang, Gang Yu, Jian Sun</li>
-<li>Github: <a target="_blank" rel="noopener" href="https://github.com/chenyilun95/tf-cpn">Cascaded Pyramid Network (CPN)</a></li>
-<li>論文連結: <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Cascaded_Pyramid_Network_CVPR_2018_paper.pdf">Cascaded Pyramid Network for Multi-Person Pose Estimation</a></li>
+<li>論文出處:arXiv/CVPR 2023</li>
+<li>作者:Fumiaki Sato, Ryo Hachiuma, Taiki Sekii,Konica Minolta,Inc</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.15167">原文連結:https://arxiv.org/abs/2303.15167</a></li>
+<li>github:無</li>
 </ul>
-<hr>
-<p>作者提出 <strong>CPN</strong> 來解決關鍵點被遮蔽和複雜背景中的關鍵點偵測錯誤的情況。</p>
-<p><strong>關鍵點被遮蔽</strong>和<strong>背景複雜</strong>無法良好定位的原因如下：</p>
+<p><strong>摘要:</strong><br>
+本論文提出了一種基於骨架序列與使者文本提示的無監督異常檢測方法，該方法可以在零樣本學習(Zero-Shot)的情況下辨識異常動作<br>
+本研究使用兩個假設:</p>
+<ol>
+<li>用戶可以定義異常動作的類別(如圖中的’violence’)</li>
+<li>觀察到的訓練樣本由正常動作組成</li>
+</ol>
+<p>未觀察到的訓練動作被稱為OoD(Out-of-distribution)，例如圖中的’handshake’,‘pushing’和’punching a person’。當在訓練階段<strong>沒有觀察到足夠多的正常樣本</strong>時，OoD動作包括未被觀察到的正常動作’handshake’，由於沒有出現在正常樣本中而被錯誤地辨識為異常動作。僅從正常樣本中學習的決策邊界（黑色虛線）向嵌入的使用者提示’violence’（紅線）的方向移動，通過使用者定義的文字提示，可以正確地將握手樣本辨識為正常，同時將行走樣本辨識為正常</p>
+<p><img src="https://hackmd.io/_uploads/Skj1_7WGT.png" alt=""></p>
+<p>模型包括三個部分：骨架的特徵提取器、Text encoder和異常檢測器。</p>
 <ul>
-<li>這些困難關節不能<strong>僅憑外觀特徵</strong>來簡單識別，例如軀幹點。</li>
-<li>這些困難關節在訓練過程中沒有明確解決。</li>
+<li>骨架特徵提取器( $F$ ):使用預先訓練的深度學習模型從骨架序列中提取特徵，後續不再更新權重</li>
+<li>Text encoder:將用戶提示轉換為向量，並用其他MLP將其與骨架特徵對齊在共同空間中</li>
+<li>異常檢測器:使用一個基於點雲的深度學習架構來檢測異常動作，能在關節間稀疏的傳遞特徵</li>
 </ul>
-<h2 id="Method">Method</h2>
-<p><strong>CPN</strong> 主要是由兩個子網路左組成的：</p>
+<p>該方法通過使用預訓練的深度學習模型和點雲深度學習，提高了異常動作辨識的準確性和魯棒性。實驗結果表明，該方法在多個數據集上取得了優異的異常檢測效果。</p>
+<h3 id="1-介紹">1.介紹</h3>
+<p>本論文欲克服問題</p>
 <ul>
-<li><strong>GlobalNet</strong></li>
-<li><strong>RefineNet</strong></li>
+<li><strong>目標領域相關的DNN訓練:</strong> 使用模型前需要重新訓練DNN，浪費時間&amp;資源成本</li>
+<li><strong>缺乏可定義的正常樣本:</strong> 在實際應用中，無法獲得各種正常動作來訓練DNN。在這種情況下有些正常動作將被錯誤的視為異常，因此若使用者能夠定義要辨識的目標異常或正常動作，將有助於降低此種誤判</li>
+<li><strong>骨架效果的穩健性:</strong> 如果特徵提取器辨識錯誤或失敗，或環境發生光源變化或遮擋問題，則連帶影響異常辨識精度會降低</li>
 </ul>
-<p>下圖為 <strong>CPN</strong> 的整體架構。<br>
-<img src="https://hackmd.io/_uploads/SkoQ5hff6.png" alt=""></p>
-<h3 id="GlobalNet">GlobalNet</h3>
-<p><strong>GlobalNet</strong> 為基於<strong>ResNet Backbone</strong> 的網路結構。</p>
-<p>作者將不同卷積特徵 $conv2∼5$ 的最後一個殘差塊分別表示為 $C_2, C_3, …, C_5$。</p>
-<p>如下圖所示，$C_2$ 和$C_3$ 等淺層特徵具有<strong>用於定位的高空間分辨率</strong>(可以看得比較廣)，但<strong>用於識別的語義資訊較低</strong>。<br>
-反之，像 $C_4$ 和 $C_5$ 這樣的深層特徵層<strong>具有更多語義訊息</strong>，但由於跨步卷積（和池化）而導致<strong>空間分辨率較低</strong>(看的比較窄)。<br>
-因此通常會使用一個 <strong>U 形結構</strong>來在特徵層的空間分辨率和語義資訊中<strong>取得一個平衡</strong>。</p>
-<p><img src="https://hackmd.io/_uploads/rkkHsnMfp.png" alt=""></p>
-<p>作者引用了FPN的<strong>特徵金字塔結構</strong>，但是在上採樣過程中，作者先經過了 $1 × 1$ 卷積核然後才進行逐元求和。(上圖一 <strong>elem-sum</strong> 的部分)</p>
-<p>如上圖二所示，基於 <strong>ResNet Backbone</strong> 的 <strong>GlobalNet</strong> 可以有效地定位眼睛等關鍵點，但卻無法精確定位<strong>被遮擋住的臀部</strong>位置。</p>
-<p>作者表示像臀部這樣的關鍵點的定位通常需要<strong>更多的上下文資訊和處理</strong>，而不是附近的外觀特徵，因此單靠上述的 <strong>GlobalNet</strong> 很難直接識別這些<strong>困難關鍵點</strong>，因此作者附加一個 <strong>RefineNet</strong> 來解決<strong>困難關鍵點</strong>。</p>
-<h3 id="RefineNet">RefineNet</h3>
-<p>為了<strong>提高訊息傳輸的效率</strong>並<strong>保持訊息的完整性</strong>，我們的 <strong>RefineNet</strong> 跨不同層級傳輸訊息，最終<strong>透過上取樣和串聯將不同層級的訊息</strong>集成為 <a target="_blank" rel="noopener" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Kong_HyperNet_Towards_Accurate_CVPR_2016_paper.pdf">HyperNet</a>。</p>
-<p><strong>RefineNet</strong> 特點：</p>
+<p>為了克服這些限制，作者提出了一種具有文字提示的zero-shot框架，基於骨架的異常動作辨識，且不需要觀察異常行為來訓練DNN。</p>
+<p>針對第一個訓練限制，作者利用skeleton feature extractor $F$ 對骨架特徵進行提取，再去計算正常動作的分配，而F已經在Kinetics-400和NTU-RGB+120上預訓練，<strong>後續用其他資料集訓練模型時不會更新權重，因此獨立於目標域</strong>，也不需要重新訓練</p>
+<p>針對第二個正常樣本限制，作者利用使用者提供的<strong>異常動作提示</strong>來間接補充正常動作的信息，目的是希望減少將正常動作辨識為異常的誤判。<br>
+透過對比學習的方式，將Text encoder和feature extractor $F$ 產生的特徵向量間的餘弦相似性$Cos()$納入異常分數(OoD)計算公式當中，使模型能透過文字了解動作，反之亦然</p>
+<p>最後，基於PointNet，作者引入了一種更簡單的DNN，將骨架關鍵點進行特徵提取，以此提高穩健性，此種架構消除了資料集對輸入骨架的約束，例如輸入關節大小和順序。<br>
+且其能夠將凍結在不同數據集上的預訓練特徵提取器轉移至其他資料集，而不需<br>
+fine-tuning，並能對正常樣本的分配和數據集上的’骨架-文本嵌入空間’進行建模</p>
+<p>主要貢獻如下：</p>
+<ol>
+<li>透過實驗證明，透過使用大規模動作辨識資料集預訓練的骨架特徵表示來消除使用正常樣本的 DNN 訓練</li>
+<li>處理公共空間中的骨架特徵和文字嵌入的Zero-Shot學習範式可以有效地對正常和異常動作的分佈進行建模。 它由全新的統一框架支持，該框架將用戶引導的文本嵌入納入異常分數的計算中</li>
+<li>透過實驗證明，排列不變架構在關節之間稀疏地傳播特徵，可以作為骨架特徵提取器，對正常樣本上的’骨架-文本嵌入空間’進行建模，並增強針對骨架錯誤的穩健性</li>
+</ol>
+<h3 id="2-文獻回顧">2.文獻回顧</h3>
 <ul>
-<li>連接了<strong>所有金字塔特徵</strong>，不像堆疊沙漏只有簡單的使用沙漏模組末端的上採樣特徵。</li>
-<li>將更多的 <strong>bottleneck blocks</strong> 堆疊到更深的層中，其較小的空間尺寸實現了有效性和效率之間的良好權衡。</li>
-</ul>
-<p>隨著網路的訓練，網路通常會更關注那些<strong>相對簡單</strong>的關鍵點，而不太重視<strong>被遮蔽</strong>和<strong>困難</strong>的關鍵點，這兩類關鍵點都應該被關注！</p>
-<p>因此在 <strong>RefineNet</strong> 中，作者根據訓練損失在線選擇困難關鍵點（作者稱為 <strong>online hard keypoints mining</strong> ），並僅從所選關鍵點進行反向傳播。</p>
-<h4 id="Online-Hard-Keypoints-Mining">Online Hard Keypoints Mining</h4>
-<p>整個模型中有兩個階段，他們各自的損失為：</p>
+<li>影片異常檢測<br>
+可以在較短的時間間隔內(逐幀)辨識異常動作
 <ul>
-<li><strong>GlobalNet</strong>：所有 Label 關鍵點的 L2 Loss。</li>
-<li><strong>RefineNet</strong>：只懲罰 Loss 最高的前 N 個關鍵點損失，經過作者的實驗，在 COCO 資料集中的 17 個關鍵點中取 8 個關鍵點可以在困難關鍵點和簡單關鍵點之間達成平衡，得到最佳訓練結果。</li>
+<li>RGB based-圖元變化的直方圖或光流，用於提取外觀特徵</li>
+<li>DL based-3D CNN用於提取時空特徵</li>
+<li>skeleton based-迴圈神經網路或GNN，用於對人體骨架特徵進行建模</li>
 </ul>
+</li>
+<li>異常動作辨識<br>
+可以辨識相對較長時間間隔內的間歇或週期性動作組成的異常動作，對目標的異常行為限制較少</li>
+<li>Zero-Shot動作辨識<br>
+視覺和語言領域一直在積極研究Zero-Shot視覺識別任務，透過描述目標的文本提示來識別視覺數據中未知的目標，例如，Zero-Shot圖像分類任務採用一對圖像及其文本提示來識別訓練期間未見過的類別<br>
+<img src="https://hackmd.io/_uploads/rJIdakHGT.png" alt=""></li>
+</ul>
+<p>視覺問答任務(visual question answering,VQA)通過文本輸入一對圖像及其相應的問題。透過在圖像特徵和從提示中提取的文本嵌入之間引入對比學習，此類任務的性能得到顯著增強<br>
+<img src="https://hackmd.io/_uploads/ByXeJgSGp.png" alt=""></p>
+<p>對比學習(contrastive learning)也被使用到動作辨識中，其利用未知動作的文本提示，透過在訓練時，對齊影片中提取的外觀或骨架特徵與文本提示，以Zero-Shot方式辨識<br>
+本論文將Zero-Shot方法引入到異常動作辨識的任務中，以增強異常動作分布的建模</p>
+<ul>
+<li>基於骨架的動作辨識<br>
+先前已有許多人使用skeleton based的GNN方法來研究時間序列關節之間的關係<br>
+較特別的是，<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.13866">SPIL(Skeleton Points Interaction Learning)</a>將人體骨骼序列視為輸入3D點雲，透過注意力機制來模擬關節之間的密集關係，可以稀疏地傳播關節之間的特徵來提高針對輸入錯誤(例如FP和FN關節或姿勢跟蹤錯誤)的穩健性，並且是一種僅在架構概念上與所提出的方法競爭的技術</li>
+</ul>
+<h3 id="3-方法">3.方法</h3>
+<p>模型架構包括三個部分(下圖不包含Pretrain):</p>
+<ol>
+<li>Pretrain : $F$ 在沒有正常樣本的動作辨識數據集上進行預訓練</li>
+<li>計算正常樣本分配 : 僅計算正常樣本的統計值，而不改變 $F$ 權重</li>
+<li>計算異常分數 : 使用模型沒有看過的的分佈和動作文字來計算異常分數</li>
+</ol>
+<p>首先，在資料集上使用多人骨架偵測器來推論骨架，對Feature extractor $F$進行預訓練，在後續訓練和推理階段凍結權重<br>
+在訓練階段，利用 $F$ 從正常動作的骨架提取特徵，並計算正常特徵向量的平均值與協方差<br>
+在推論階段，計算OoD分數與提示分數，兩者聯合成為異常分數(計算異常分數後如何判斷異常則沒有詳細解釋)<br>
+<img src="https://hackmd.io/_uploads/r1bMXjMz6.png" alt=""></p>
+<h4 id="3-1-Pretraining">3.1 Pretraining</h4>
+<p>作者使用大型動作辨識數據集Kinetics-400和NTU RGB+D 120提出的預訓練DNN，在預訓練階段中，使用從骨架提取的特徵x和從動作名稱中提取的特徵y之間的對比學習。<br>
+在一批N個影片中的總損失 ${L}$ 定義如下，其中包含動作分類損失 ${L}_{cls}$ 和對比損失  ${L}_{cont}$ 組成的</p>
+<p>$$\mathcal {L} = \alpha \sum _{i=1}^{N} \mathcal {L}_{\text {cls},i} + (1 - \alpha ) \mathcal {L}_\text {cont}$$</p>
+<ul>
+<li>${L}_{\text {cls},i}$指的是動作分類ground-truth( $h_i$ )與predict( $l_i$ )間的cross-entropy，$C$為動作類別，</li>
+</ul>
+<p>$$\mathcal {L}_\text{cls} = -\sum _{i=1}^{C}h_i\log\frac {\exp (l_i)}{\sum _{j=1}^{C}{\exp (l_j)}}$$</p>
+<ul>
+<li>$\mathcal {L}_\text {cont}$是基於<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486857682">CLIP（Contrastive Language-Image Pre-training）</a>模型提出的對比損失(contrastive loss)，目的是為了學習到圖片與文字的對應關係</li>
+<li>$\mathcal{L}_{\rm{t2s}}$是batch中骨架特徵與文本特徵的對比損失，$\mathcal{L}_{\rm{s2t}}$與其相反，是文本特徵與骨架特徵的對比(監督對象不一樣)</li>
+</ul>
+<p>$$\mathcal {L}_\text {s2t} = - \sum _{i=1}^{N} \log \frac {\exp (\mathrm {Cos}(f(\mathbf {x}_i), \mathbf {y}_i)/\tau )}{\sum _{j=1}^{N}\exp (\mathrm {Cos}(f(\mathbf {x}_i), \mathbf {y}_j)/\tau )}$$</p>
+<p>$$\mathcal {L}_\text {t2s} = - \sum _{i=1}^{N} \log \frac {\exp (\mathrm {Cos}(f(\mathbf {x}_i)), \mathbf {y}_i)/\tau )}{\sum _{j=1}^{N}\exp (\mathrm {Cos}(f(\mathbf {x}_j), \mathbf {y}_i)/\tau)}$$<br>
+其中，$x_i$ 與對應的動作 $y_i$ 是從影片$i$學習到的</p>
+<h4 id="3-2-骨架特徵提取器">3.2 骨架特徵提取器</h4>
+<p>作者基於PointNet設計了骨架特徵提取器。首先自影像提取骨架後，每一幀會得到J個關鍵點，每個關鍵點可以轉換為$v$，包含7個維度 : 二維關節座標、時間、置信度、關節index和二維質心座標，把$v_1…v_J$當作MLP的輸入，作者單純的使用3層MLP加上Residual後，得到S維度的骨架特徵向量，最後再取MaxPooling，得到特徵向量$x$大小為$1×J$<br>
+<img src="https://hackmd.io/_uploads/HkkYJ37Ma.png" alt=""></p>
+<h4 id="3-3-異常分數定義">3.3 異常分數定義</h4>
+<p>異常分數定義為 : $x$不是正常樣本的機率$p(O|x)$(OoD分數)和 $x$包含使用者指定異常行為的機率$p(T|x)$兩者的聯和機率，$p(O|x)$的參數會對訓練樣本中$x$的分佈進行建模。$p(T|x)$的參數是與$x$相對的文本嵌入:</p>
+<p>$p(O,T|\mathbf {x})=p(O|\mathbf {x})p(T|\mathbf {x})$</p>
+<p>其中，作者用<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46626607#%E9%A9%AC%E6%B0%8F%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89">馬式距離</a>公式來近似OoD分數，其中$( w 1 , w 2 )$是歸一化常數和溫度參數。${\mu}和{\Sigma}$分別是訓練樣本分配的平均值與協方差矩陣。<br>
+$p(O|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\sqrt {( {x}- {\mu})^\intercal  {\Sigma }^{-1}( {x}- {\mu })}^{\frac {1}{w_2}} \right)$</p>
+<p>用餘弦相似度來近似$p ( T ∣ x )$ ，其中$f$表示用於對齊$x$和$y$維度的預訓練MLP，作者並未提及使用了什麼 Text encoder與如何對齊<br>
+$p(T|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\mathrm {PromptScore}(\mathbf {x}|\mathcal {Y})^{\frac {1}{w_2}}\right )$<br>
+其中，${PromptScore}({x}|\mathcal{Y})={max}({Cos}(f({x}),{y}_1),…,{Cos}(f({x}), {y_P}))$</p>
+<p><img src="https://hackmd.io/_uploads/Syzhgy7fT.png" alt=""></p>
+<h3 id="4-實驗">4.實驗</h3>
+<h4 id="4-1數據集">4.1數據集</h4>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/mchengny/RWF2000-Video-Database-for-Violence-Detection">RWF-2000</a> : 是從YouTube收集的暴力辨識數據集，包含暴力或非暴力的兩種動作，以30fps拍攝的5秒影片。有1.6K訓練和0.4K測試，每個影片都標註了兩類標籤<br>
+<img src="https://github.com/mchengny/RWF2000-Video-Database-for-Violence-Detection/raw/master/Images/result_1.gif" alt=""><br>
+在本論文中，非暴力和暴力行為分別被定義為正常和異常，使用非暴力樣本來訓練DNN並凍結，以Zero-Shot辯識暴力行為，使用五種不同的文字提示來表達暴力行為<br>
+<img src="https://hackmd.io/_uploads/rJgN3fNfa.png" alt=""></p>
+</li>
+<li>
+<p>Kinetics-250 : 是Kinetics-400數據集的子集，由具有250個動作類別的影片組成。由於Kinetics-400數據集中包含專注於頭部和手臂的影片，模型準確性會受到這些影片的顯著影響。因此<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1912.11850.pdf">Markovitz等人</a>選擇了具有 250 個動作類別的影片進行評估，這些影片在動作分類準確性方面表現最好，並且可以準確檢測骨骼。<br>
+作者使用使用「少」與「多」來區分，選擇三到五個操作類定義為正常，其餘操作類定義為異常，並分為’隨機分組’和’有意義分組’進行評估，有意義選取按照原論文內主觀選擇，根據動作的物理或環境的一些約束邏輯來分組</p>
+</li>
+</ul>
+<h4 id="4-2骨架偵測器">4.2骨架偵測器</h4>
+<ul>
+<li>PPN：在RWF-2000資料集的實驗中，作者在準確度與多個異常動作辨識的baselines(PointNet++和DGCNN)相似的的條件下，選擇使用低效能的Pose Proposal Networks(PPN)，因為沒有公開的骨架資料(???)，PPN以Bottom-Up的方式從RGB影像中偵測人體骨架，由Pelee backbone組成，並在COCO資料集上訓練。</li>
+</ul>
+<blockquote>
+<p>原文 : In the experiments on the RWF-2000 dataset, we use the low-performance ‘Pose Proposal Networks, PPN’ detector [30] under conditions of similar anomaly action recognition accuracy against several baselines (PointNet++ and DGCNN) because there are no publicly available skeleton data.</p>
+</blockquote>
+<ul>
+<li>HRNet以Top-Down偵測人體骨架，但人體偵測器(Faster R-CNN)在內的計算成本較高。<br>
+在Kinetics-250資料集的實驗中，作者採用了由Haodong等人提供的公開HRNet。<br>
+<img src="https://hackmd.io/_uploads/SyuznzEf6.png" alt=""></li>
+</ul>
+<h4 id="4-3與SoTA方法比較">4.3與SoTA方法比較</h4>
+<p>表2與表3比較了SoTA與本篇論文提出的方法在RWF-2000、Kinetics-250資料集上的準確率，分別僅使用OoD分數/提示分數，及使用異常分數來比較。<br>
+<img src="https://hackmd.io/_uploads/HyHZ3fNfT.png" alt=""></p>
+<blockquote>
+<p>*：使用HRNet骨架作為輸入<br>
+†：採用<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.15270">StructPool</a>作為網路架構</p>
+</blockquote>
+<p>在RWF-2000上，本篇方法在準確性方面優於以前的幾種監督方法，包括PointNet++、DGCNN和ST-GCN。在本方法中，使用了較不準確的骨架偵測器(PPN)，但其準確度也僅比SPIL低7%<br>
+(PPN在COCO驗證集上的準確度率36.4%，baselines使用了較高準確率的RMPE，準確率為<br>
+72.3%)</p>
+<p><img src="https://hackmd.io/_uploads/SkHx2zVfa.png" alt=""></p>
+<p>在Kinetics-250上，本方法的準確率優於SoTA非監督方法。先前的方法需要花費一些時間來訓練 DNN，但本方法的結果是在目標域中無需進行任何 DNN 訓練的情況下實現的。<br>
+only OoD與本方法皆優於先前的無監督方法，由此可知，即使不提供文字提示，所提出的方法在訓練期間凍結DNN權重，也可以以無監督的方式辨識異常動作<br>
+此外，透過使用文字提示，提高了方法的準確性。表示本方法可以透過文字提示來補充異常或正常動作的資訊，減少了將正常動作辨識為異常的誤檢測。</p>
+<p><img src="https://hackmd.io/_uploads/BkIT2MVMa.png" alt=""><br>
+上圖描繪了RWF-2000資料集上異常樣本和正常樣本之間移動的決策邊界。<br>
+相比only prompt與本方法，only prompt在兩個資料集準確率皆下降，但Kinetics-250更明顯(下降17%)，這是因為本方法僅在Kinetics-250資料集上定義了一些正常動作，而沒有直接使用文字提示作為異常動作。因此，即使使用者僅定義正常操作，本方法也可以偵測異常行為</p>
+<h4 id="4-4-消融實驗">4.4 消融實驗</h4>
+<ul>
+<li>針對骨架偵測和追蹤誤差的穩健性比較:<br>
+作者綜合了三種不同類型的骨架檢測誤差：FP、FN 和跟蹤誤差<br>
+FP誤差 : 透過將從正態分佈採樣的雜訊添加到二維關節座標而產生<br>
+FN誤差: 透過將關節置信度得分和關節座標按特定比例替換為0<br>
+例如，如果骨架偵測誤差率為20%，對20%的輸入關節綜合生成FP和FN誤差，並在150幀影片中隨機切換它們的跟蹤索引60幀以生成跟蹤誤差，即使骨架錯誤率上升，本方法的精度也不會降低<br>
+<img src="https://hackmd.io/_uploads/r1Od-BNMa.png" alt=""></li>
+<li>針對場景轉移的穩健性比較<br>
+將RWF-2000訓練數據分為五個子集作為不同的場景，並將每個子集用作單獨的評估<br>
+<img src="https://hackmd.io/_uploads/ByaFWBNfT.png" alt=""></li>
+<li>比較準確性與文本提示的變化<br>
+使用五種不同的文本提示，具有不同的異常分數<br>
+在表2中，本方法準確率(82.5%)高於only OoD(71.8%)，表示使用合理的文本提示可以減少對訓練階段未觀察到的正常動作的誤判<br>
+而在這五個文本提示中，透過加入Ood分數，也可以提高準確率，因此，文本提示辨識異常行為，與從正常數據中收集的資訊相輔相成<br>
+<img src="https://hackmd.io/_uploads/rJgN3fNfa.png" alt=""></li>
+</ul>
+<h4 id="討論">討論</h4>
+<p>Kinetics-250用了什麼提示文本<br>
+到底用什麼模型辨識異常動作，或是計算出異常分數後設定的筏值<br>
+StructPool是作者提出的另一種架構，沒有詳細介紹<br>
+只使用骨架資料而沒有文字預訓練Feature extractor $F$ 有點怪，作者沒有詳細說明Kinetics-400和NTU RGB+D 120中，文字的部分(直接使用label或有其他方式)</p>
 
 
         <hr>
         <!-- Pager -->
         <ul class="pager">
           
-          <li class="previous">
-            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features">&larr; Previous Post</a>
-          </li>
-          
           
           <li class="next">
-            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" data-toggle="tooltip" data-placement="top" title="【論文研讀】2D Human Pose Estimation - A Survey">Next Post &rarr;</a>
+            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -481,7 +605,7 @@
       </a>
     </li> -->
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -519,7 +643,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Cascaded Pyramid Network for Multi-Person Pose Estimation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Method"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#GlobalNet"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">GlobalNet</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#RefineNet"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">RefineNet</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Online-Hard-Keypoints-Mining"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">Online Hard Keypoints Mining</span></a></li></ol></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E4%BB%8B%E7%B4%B9"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">1.介紹</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E6%96%87%E7%8D%BB%E5%9B%9E%E9%A1%A7"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">2.文獻回顧</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E6%96%B9%E6%B3%95"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">3.方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-Pretraining"><span class="toc-nav-number">1.0.3.1.</span> <span class="toc-nav-text">3.1 Pretraining</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-%E9%AA%A8%E6%9E%B6%E7%89%B9%E5%BE%B5%E6%8F%90%E5%8F%96%E5%99%A8"><span class="toc-nav-number">1.0.3.2.</span> <span class="toc-nav-text">3.2 骨架特徵提取器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-%E7%95%B0%E5%B8%B8%E5%88%86%E6%95%B8%E5%AE%9A%E7%BE%A9"><span class="toc-nav-number">1.0.3.3.</span> <span class="toc-nav-text">3.3 異常分數定義</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E5%AF%A6%E9%A9%97"><span class="toc-nav-number">1.0.4.</span> <span class="toc-nav-text">4.實驗</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-1%E6%95%B8%E6%93%9A%E9%9B%86"><span class="toc-nav-number">1.0.4.1.</span> <span class="toc-nav-text">4.1數據集</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-2%E9%AA%A8%E6%9E%B6%E5%81%B5%E6%B8%AC%E5%99%A8"><span class="toc-nav-number">1.0.4.2.</span> <span class="toc-nav-text">4.2骨架偵測器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-3%E8%88%87SoTA%E6%96%B9%E6%B3%95%E6%AF%94%E8%BC%83"><span class="toc-nav-number">1.0.4.3.</span> <span class="toc-nav-text">4.3與SoTA方法比較</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-4-%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97"><span class="toc-nav-number">1.0.4.4.</span> <span class="toc-nav-text">4.4 消融實驗</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%A8%8E%E8%AB%96"><span class="toc-nav-number">1.0.4.5.</span> <span class="toc-nav-text">討論</span></a></li></ol></li></ol></li></ol></li></ol>
         
         </div>
       </aside>

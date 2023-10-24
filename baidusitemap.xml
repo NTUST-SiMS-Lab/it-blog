@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/</loc>
+    <lastmod>2023-10-24</lastmod>
+  </url>
+  <url>
     <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/</loc>
     <lastmod>2023-10-23</lastmod>
   </url>
