@@ -125,15 +125,16 @@ $$\mathcal {L}_\text {t2s} = - \sum _{i=1}^{N} \log \frac {\exp (\mathrm {Cos}(f
 #### 3.3 異常分數定義
 異常分數定義為 : $x$不是正常樣本的機率$p(O|x)$(OoD分數)和 $x$包含使用者指定異常行為的機率$p(T|x)$兩者的聯和機率，$p(O|x)$的參數會對訓練樣本中$x$的分佈進行建模。$p(T|x)$的參數是與$x$相對的文本嵌入:
 
-$p(O,T|\mathbf {x})=p(O|\mathbf {x})p(T|\mathbf {x})$
+$$p(O,T|\mathbf {x})=p(O|\mathbf {x})p(T|\mathbf {x})$$
 
 其中，作者用[馬式距離](https://zhuanlan.zhihu.com/p/46626607#%E9%A9%AC%E6%B0%8F%E8%B7%9D%E7%A6%BB%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89)公式來近似OoD分數，其中$( w 1 , w 2 )$是歸一化常數和溫度參數。${\mu}和{\Sigma}$分別是訓練樣本分配的平均值與協方差矩陣。
-$p(O|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\sqrt {( {x}- {\mu})^\intercal  {\Sigma }^{-1}( {x}- {\mu })}^{\frac {1}{w_2}} \right)$
 
+$$p(O|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\sqrt {( {x}- {\mu})^\intercal  {\Sigma }^{-1}( {x}- {\mu })}^{\frac {1}{w_2}} \right)$$
 
 用餘弦相似度來近似$p ( T ∣ x )$ ，其中$f$表示用於對齊$x$和$y$維度的預訓練MLP，作者並未提及使用了什麼 Text encoder與如何對齊
-$p(T|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\mathrm {PromptScore}(\mathbf {x}|\mathcal {Y})^{\frac {1}{w_2}}\right )$
-其中，${PromptScore}({x}|\mathcal{Y})={max}({Cos}(f({x}),{y}_1),...,{Cos}(f({x}), {y_P}))$
+$$p(T|\mathbf {x})\sim \mathrm {min} \left (1.0, w_1\mathrm {PromptScore}(\mathbf {x}|\mathcal {Y})^{\frac {1}{w_2}}\right )$$
+$${PromptScore}({x}|\mathcal{Y})={max}({Cos}(f({x}),{y}_1),...,{Cos}(f({x}), {y_P}))$$
+
 
 ![](https://hackmd.io/_uploads/Syzhgy7fT.png)
 
