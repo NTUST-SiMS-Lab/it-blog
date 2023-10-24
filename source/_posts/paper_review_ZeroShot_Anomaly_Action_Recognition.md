@@ -9,12 +9,6 @@ categories:
 # 這邊擺放標籤
 ---
 
-<style>
-.text-center {
-  text-align: center; //文字置中
-}
-</style>
-
 # Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features
 
 
