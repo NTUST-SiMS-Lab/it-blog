@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/archives/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/OHPHAR/">
   <title>
     
-      SiMS Lab | IT Blog
+      【論文研讀】Skeleton-based Action Recognition of People Handling Objects - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】Skeleton-based Action Recognition of People Handling Objects</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by Frances Kao on
+              2023-10-19
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">4</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">1.1k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,533 +364,289 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1901.06882.pdf">Skeleton-based Action Recognition of People Handling Objects</a></h1>
+<ul>
+<li>Journal reference: WACV 2019</li>
+<li>Authors: Sunoh Kim, Kimin Yun, Jongyoul Park, Jin Young Choi</li>
+<li>Github: None</li>
+<li>論文連結: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1901.06882.pdf">Skeleton-based Action Recognition of People Handling Objects</a></li>
+</ul>
+<h2 id="Introduction">Introduction</h2>
+<ul>
+<li>取RGB特徵會增加模型運算量, 因此使用骨架資訊作為模型輸入。但部份動作包含了互動物件，該物對動作的判斷有一定的重要性。因此將互動物件加入輸入資料結構中，進行動作辨識。</li>
+</ul>
+<h2 id="Literature-Review">Literature Review</h2>
+<ul>
+<li>Graph convolutional neural networks</li>
+<li>Action recognition</li>
+<li>Skeleton-based action recognition</li>
+</ul>
+<h2 id="Methodology">Methodology</h2>
+<p><img src="https://hackmd.io/_uploads/rykWg2AWa.png" alt=""></p>
+<h3 id="ST-GCN">ST-GCN</h3>
+<p>（略）</p>
+<h3 id="「人體使用物件」追蹤（Objects-handled-by-humans）">「人體使用物件」追蹤（Objects handled by humans）</h3>
+<ul>
+<li>過去追蹤互動物件的方法與其難點：
+<ul>
+<li>偵測與人體重疊的物件 &gt; 不相關的背景物並非人體實際互動的物件</li>
+<li>設計辨識模型來偵測與人互動的物件 &gt; 互動物件種類廣泛，其大小形狀亦有所差異；且對每一幀每一動作類別皆需要一組人與物件的標記資料才可訓練模型</li>
+</ul>
+</li>
+<li>本論文方法：<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/5672785">ViBE algorithm(1444 cites)</a> + OpenPose<br>
+<img src="https://hackmd.io/_uploads/ByVQNbVzT.png" alt=""><br>
+(圖摘自ViBE原論文)
+<blockquote>
+<p>原論文是用C++，這裡有找到一些大神用python寫的版本，雖然速度無法與C++比但也還算能即時，有興趣可以看<a target="_blank" rel="noopener" href="https://github.com/232525/ViBe.python/tree/master">232525/ViBe.python</a></p>
+</blockquote>
+<ul>
+<li>追蹤畫面中移動物，包含人體與物件</li>
+<li>移除人體部份（heatmep），即得到該物件<br>
+<img src="https://hackmd.io/_uploads/Byhvl1Vfa.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h3 id="物件關聯人體姿態辨識（Object-related-human-pose）">物件關聯人體姿態辨識（Object-related human pose）</h3>
+<ul>
+<li>自OpenPose取得25個人體骨架點位，並且<strong>將關聯物件視為第26個點位</strong>，加入資料結構中。<br>
+$V={v_{ti}\ |\ t = 1, …, T;\ i = 1, …, N}$<br>
+$E_S = {e_{tij}\ |\ v_{ti}, v_{tj}\ are\ connected, (i, j) \in o}$<br>
+$E_T = {e_{ti}\ |\ v_{ti}, v_{(t+1)i}\ are\ connected, (i, j) \in o}$<br>
+<img src="https://hackmd.io/_uploads/Bka5NkVz6.png" alt=""></li>
+<li>作者實驗三種資料結構: Body, Limbs, Hands
+<ul>
+<li>OHP + informative samples表現：Hands &gt; Limbs &gt; Body</li>
+</ul>
+</li>
+</ul>
+<h3 id="2sGCNs（OHA-GCN）">2sGCNs（OHA-GCN）</h3>
+<ul>
+<li>將模型設計為Two-stream，包含human pose stream和object-related human pose stream。</li>
+<li>因為物件關聯的動作並不會出現在每一場景中，若欲辨識的非物件關聯動作，則會僅使用human pose stream。</li>
+<li>GCN模型架構：
+<ul>
+<li>GCN layer x 9（channel =  64-64-64-128-128-256-256-256）</li>
+<li>global average pooling <code>&gt;&gt; feature vector</code></li>
+<li>softmax <code>&gt;&gt; action prediction</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="有效幀選取方法（Informative-frame-selection-strategy）">有效幀選取方法（Informative frame selection strategy）</h3>
+<ul>
+<li>作者使用的骨架也與傳統方法一樣出自RGB序列，因此也會有不正常、遺漏、重疊等問題。因此，提出「有效幀選取方法」，僅採樣影片中的一小段幀序列作為輸入，而這些資料提供的joint足以用來理解人體動作。</li>
+<li>根據OpenPose提供的confidence score，替除掉模稜兩可的人體姿態資訊，只留下可靠度高的資訊。</li>
+<li>方法：
+<ol>
+<li>整段影片以相同間距被均分為 $T$ 段 ${S_1, S2, …, S_T}$，每一段有 $M$ 幀。</li>
+<li>從以上 $T$ 段各取一幀，得 $Ｍ$ 個 $T$ 幀序列，為 $S$ ，即第t段 $S_t$ 包含了幀 ${F^1_t, F^2_t, F^3_t, …, F^M_t}$ ，其中的 $F^m_t$ 為第t段的第m幀。
+<blockquote>
+<p>因連續幀的資訊較為相像，如此作法可去除相鄰的高度重複資訊</p>
+</blockquote>
+</li>
+<li>對每一幀 $F^m_t$ 進行姿態辨識可得每一骨架節點 $h^m_{ti}$ 的信心分數（confidence score） $c^m_{ti}$ ，其中 $i=1, …, N$ 為骨架點位數目。</li>
+<li>將 $S_t$ 的所有信心分數加總，並取用分數最高的 $S$ 直接作為時序資訊。<br>
+$V={v_{ti}\ |\ v_{it}=h^{m*}_{ti}, m*=arg\ max \sum^N_i c^m_{ti}}$</li>
+</ol>
+</li>
+</ul>
+<h2 id="Result">Result</h2>
+<h3 id="Dataset">Dataset</h3>
+<ol>
+<li>IRD dataset: illegal rubbish dumping (IRD) dataset，總共十分鐘的影片，包含1374影片片段（1193訓練和181驗證）。</li>
+<li>ICVL-4 dataset: 包含805訓練資料和86驗證資料</li>
+</ol>
+<h3 id="Experiments">Experiments</h3>
+<p><img src="https://hackmd.io/_uploads/Sk8nF7DXp.png" alt="Screenshot from 2023-11-07 11-05-57.png"></p>
+<ul>
+<li>在互動物件與人體骨架的連接方式上（body/limbs/hands）,hands相較於其他兩者優異許多。</li>
+<li>在有效幀選取策略上（informatuve samples），能獲得最多改善。</li>
+<li>在有無加入互動物件上（HP/OHP/Two Stream），則僅有些為改善，甚至單用OHP時的表現會比單用HP來的差，但使用Two Stream方式可達到兩者互補。</li>
+</ul>
+<h2 id="Conclusion">Conclusion</h2>
+<ul>
+<li>該方法可即時辨識動作</li>
+<li>作者使用的資料集皆為自行蒐集，且僅選擇部份動作類別，較無公信力</li>
+<li>加入互動物件作為human pose的node，因不包含該互動物件之表徵，若遇到相同骨架構成的動作仍無法克服。</li>
+<li>ViBE演算法為C++基礎，Python版本相對速度較慢。且不適用於攝影機無法確實固定（會有晃動狀況）的情境。</li>
+</ul>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            10-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="previous">
+            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" data-toggle="tooltip" data-placement="top" title="【論文研讀】2D Human Pose Estimation - A Survey">&larr; Previous Post</a>
           </li>
           
-          <li>
-            10-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" style="color: #0085a1">
-              <span>
-                【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            10-23
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-20
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" style="color: #0085a1">
-              <span>
-                【論文研讀】2D Human Pose Estimation - A Survey
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-19
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/OHPHAR/" style="color: #0085a1">
-              <span>
-                【論文研讀】Skeleton-based Action Recognition of People Handling Objects
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-30
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/something_else/" style="color: #0085a1">
-              <span>
-                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
-              <span>
-                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
-              <span>
-                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-18
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
-              <span>
-                【技術分享】Airflow快速入門及如何在Docker上安裝
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-11
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
-              <span>
-                【技術分享】基本Dockerfile寫法與Command Line
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" data-toggle="tooltip" data-placement="top" title="【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Skeleton-based Action Recognition of People Handling Objects&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/OHPHAR/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Skeleton-based Action Recognition of People Handling Objects</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Introduction"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Introduction</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Literature-Review"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Literature Review</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Methodology"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Methodology</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ST-GCN"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">ST-GCN</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E3%80%8C%E4%BA%BA%E9%AB%94%E4%BD%BF%E7%94%A8%E7%89%A9%E4%BB%B6%E3%80%8D%E8%BF%BD%E8%B9%A4%EF%BC%88Objects-handled-by-humans%EF%BC%89"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">「人體使用物件」追蹤（Objects handled by humans）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%89%A9%E4%BB%B6%E9%97%9C%E8%81%AF%E4%BA%BA%E9%AB%94%E5%A7%BF%E6%85%8B%E8%BE%A8%E8%AD%98%EF%BC%88Object-related-human-pose%EF%BC%89"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">物件關聯人體姿態辨識（Object-related human pose）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2sGCNs%EF%BC%88OHA-GCN%EF%BC%89"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">2sGCNs（OHA-GCN）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9C%89%E6%95%88%E5%B9%80%E9%81%B8%E5%8F%96%E6%96%B9%E6%B3%95%EF%BC%88Informative-frame-selection-strategy%EF%BC%89"><span class="toc-nav-number">1.3.5.</span> <span class="toc-nav-text">有效幀選取方法（Informative frame selection strategy）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Result"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Result</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Dataset"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Dataset</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Experiments"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">Experiments</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Conclusion</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
-      <li>【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</li>
-    </a>
-    
-    <a href="../paper_review_ZeroShot_Anomaly_Action_Recognition/">
-      <li>【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</li>
-    </a>
-    
-    <a href="../paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
-      <li>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</li>
-    </a>
-    
-    <a href="../paper_review_2D_Human_Pose_Estimation_Survey/">
-      <li>【論文研讀】2D Human Pose Estimation - A Survey</li>
-    </a>
-    
-    <a href="../OHPHAR/">
-      <li>【論文研讀】Skeleton-based Action Recognition of People Handling Objects</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="2023/10/">October 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#docker">
-      <li>docker</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#airflow">
-      <li>airflow</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Human Pose Estimation">
-      <li>Human Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
-      <li>3D Interacting Hand Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Object-relation HAR">
-      <li>Object-relation HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Paper Review">
-      <li>Paper Review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Survey">
-      <li>Survey</li>
-    </a>
-    
-    <a href="/it-blog/categories/#De-occlusion">
-      <li>De-occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Diffusion Model">
-      <li>Diffusion Model</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Anomaly Action Recognition">
-      <li>Anomaly Action Recognition</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Removal">
-      <li>Removal</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
