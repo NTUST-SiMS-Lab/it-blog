@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/paper-review/RGB-based-HAR/video-recognition/">
   <title>
     
-      【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation - SiMS Lab | IT Blog
+      SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*post*/
-        background-image: var(--intro-header-background-image-url-post);
-        /* background-image: url(''); */
+       /*page*/
+        background-image: var(--intro-header-background-image-url-page);
+        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
       
     }
 
@@ -306,40 +306,10 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="post-heading">
-            <div class="tags">
-              
-            </div>
-            <h1>【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</h1>
-            <h2 class="subheading"></h2>
-            <span class="meta">
-              Posted by David Chen on
-              2023-10-27
-            </span>
-
-
-            
-            <!-- WordCount start -->
-            <div class="blank_box"></div>
-            <span class="meta">
-              Estimated Reading Time <span class="post-count">7</span> Minutes
-            </span>
-            <div class="blank_box"></div>
-            <span class="meta">
-              Words <span class="post-count">1.7k</span> In Total
-            </span>
-            <div class="blank_box"></div>
-            <!-- WordCount end -->
-            
-            
-            <!-- 不蒜子统计 start -->
-            <span class="meta" id="busuanzi_container_page_pv">
-              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
-            </span>
-            <!-- 不蒜子统计 end -->
-            
-
-
+          <div class="site-heading">
+            <h1>SiMS Lab</h1>
+            <!--<hr class="small">-->
+            <span class="subheading">IT Blog</span>
           </div>
           
         </div>
@@ -364,287 +334,554 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Modify by Yu-Hsuan Yen -->
-<!-- Post Content -->
-<article>
-  <div class="container">
-    <div class="row">
-      <!-- Post Container -->
-      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+		<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    
 
-        <h1>Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</h1>
-<p><a target="_blank" rel="noopener" href="https://hackmd.io/BX18gfwdQ9iS0NT7iMvc0Q"><img src="https://hackmd.io/BX18gfwdQ9iS0NT7iMvc0Q/badge" alt="hackmd-github-sync-badge"></a></p>
-<ul>
-<li>Journal reference: arXiv: 2306.17074</li>
-<li>Authors: Zhongwei Qiu, Qiansheng Yang, Jian Wang, Xiyu Wang, Chang Xu, Dongmei Fu, Kun Yao, Junyu Han, Errui Ding, Jingdong Wang</li>
-<li>Github: None</li>
-<li>論文連結: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2306.17074.pdf">Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</a></li>
-</ul>
-<hr>
-<p>本文提出 <strong>DiffusionPose</strong> 將 2D HPE 模擬為<strong>從雜訊熱圖產生關鍵點熱圖</strong>的問題。</p>
-<h2 id="Method">Method</h2>
-<p>下圖為 <strong>DiffusionPose</strong> 的架構圖，共有三種過程：</p>
-<ul>
-<li>前向擴散過程 Forward Diffusion Process, FDP (藍色流程線)</li>
-<li>模型前向過程 Model Forward Process, MFP (黑色流程線)</li>
-<li>反向擴散過程 Reverse Diffusion Process, RDP (紅色流程線)</li>
-</ul>
-<p><strong>Training PiPe Line：</strong></p>
-<ol>
-<li>FDP 透過添加高斯雜訊將真實人類關鍵點 $y_0$ 擴散到雜訊關鍵點 $y_t$。</li>
-<li>將 $y_t$ 進一步用於產生特徵掩模 $y^{mask}_t$。</li>
-<li>MFP以特徵掩模 $y^{mask}_t$ 從輸入影像 $x$ 中提取擴散模型的特徵條件 $x^c$。</li>
-<li>DiffusionPose 的解碼器學著利用特徵條件 $x^c$ 來把雜訊熱圖 $y^{hm}_t$ 恢復成 Ground Truth 熱圖 $y^{hm}_0$。</li>
-</ol>
-<p><strong>Inference Pipe Line：</strong></p>
-<ol>
-<li>RDP 透過擴散解碼器從雜訊熱圖 $y^{hm}_t$ 以漸進式去噪的方式恢復熱圖 $y^{hm}_0$。</li>
-<li>從估計出來的熱圖 $y^{hm}_0$ 中解碼關鍵點座標 $y_0$。</li>
-</ol>
-<p><img src="https://hackmd.io/_uploads/BJoDCGVMp.png" alt=""></p>
-<h3 id="Forward-Diffusion-Process-FDP-重點是特徵掩模">Forward Diffusion Process (FDP)(重點是特徵掩模)</h3>
-<p>給定以下資訊：</p>
-<ul>
-<li><strong>GT 關鍵點</strong> $y_0 \in \mathbb{R}^{J\times2}$</li>
-<li><strong>time step</strong> $t \in [1,T]$</li>
-</ul>
-<p><strong>FDP</strong> 會生成：</p>
-<ul>
-<li>雜訊熱圖 $y^{hm}_t \in \mathbb{R}^{J\times H\times W}$</li>
-<li>特徵掩模 $y^{mask}_t$</li>
-</ul>
-<p>公式如下：$$\begin{align}<br>
-y_t&amp; = q(y_t | y_0, \zeta) \<br>
-&amp; = \sqrt{\gamma_t}(\zeta\  \cdot\ y_0)\  + \ \sqrt{1-\gamma_t}\epsilon,\epsilon \sim \mathcal{N}(0,I) \<br>
-\end{align}$$<br>
-以上是DDPM裡的原公式，不要推導，會死得很難看，$\zeta$ 為控制訊號與雜訊比例的尺度參數。</p>
-<p>生成雜訊熱圖 $y^{hm}_t$ 與特徵掩模 $y^{mask}_t$ 的公式：$$	<br>
-\begin{array} \<br>
-y^{hm}_t = \phi(y_t,\sigma), \<br>
-y^{mask}_t = \begin{Bmatrix} M^{kps},M^{ske} \end{Bmatrix} = {\varphi}(y_t,\delta_{kps},\delta_{ske})<br>
-\end{array}$$<br>
-$\phi (\cdot)$ 為透過關鍵點 $y_t$ 的中心和參數 $\sigma$ (引用自 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Bin_Xiao_Simple_Baselines_for_ECCV_2018_paper.pdf">Simple Baselines for Human Pose Estimation and Tracking</a>) 來生成 2D 高斯熱圖的公式。<br>
-$\varphi(\cdot)$ 為根據關鍵點 $y_t$ 來生成 2D 關鍵點掩模 $M^{kps}$ 和 骨架掩模 $M^{ske}$，$\delta_{kps}$ 和 $\delta_{ske}$ 則用來控制掩模的寬度</p>
-<h3 id="Model-Forward-Process-MFP">Model Forward Process (MFP)</h3>
-<p>Diffsion Model $f_{\theta}$ 包括<strong>編碼器</strong> $E(\cdot)$、<strong>空間通道交叉注意(SC-CA)模組</strong> $A(\cdot)$、<strong>解碼器</strong> $D(\cdot)$。</p>
-<p>給定以下資訊：</p>
-<ul>
-<li>大小為 $H_x \times W_x$ 的圖像 $x$</li>
-<li>雜訊熱圖 $y^{hm}_t$</li>
-<li>特徵遮罩 $M^{kps}$ 和骨架遮罩 $M^{ske}$</li>
-</ul>
-<p>首先先用在 ImageNet 上預訓練的 HRNet Backbone 提取特徵 $x^{fea}$。</p>
-<p>然後透過掩蔽提取關鍵點特徵和骨架特徵，如下所示：$$x^{kps} = x^{fea} \otimes M^{kps}, x^{ske} = x^{fea} \otimes M^{ske}$$</p>
-<p>其中 $\otimes$ 為逐元素乘法。</p>
-<p>接下來，把 $x^{kps}$ 和 $x^{ske}$ 用 SC-CA 模組來捕獲結構訊息 $x^c$：$$ x^c = C(x^{kps} \oplus A(x^{kps}, x^{ske}, x^{ske}), x^{fea}) $$<br>
-其中 $C(\cdot), \oplus , A(\cdot)$ 分別代表連結特徵、加總、SC-CA 模組。</p>
-<p>獲得 $x^c$ 後，擴散解碼器 $D(\cdot)$ 將關鍵點熱圖 $\tilde{y}^{hm}_{t-1}$ 估計為：$$\tilde{y}^{hm}_{t-1} = D(y^{hm}_{t}, x^c)$$</p>
-<p>作者改進了生成任務中的擴散模型，並提出了結構引導擴散解碼器（SGDD），跟他的加強版：高解析度SGDD。</p>
-<h4 id="Spatial-Channel-Cross-Attention-SC-CA-Module">Spatial-Channel Cross-Attention (SC-CA) Module</h4>
-<p>SC-CA模組旨在計算關鍵點特徵和骨架特徵之間的關係，其中包括空間注意力和通道注意力：$$ A(Q, K, V ) = A_c(Q, K, V ) + A_s(Q, K, V ) $$</p>
-<p>$A_c, A_s$ 分別代表 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2204.03645.pdf">DaViT</a> 提出的通道注意力和空間視窗多頭注意力：</p>
-<ul>
-<li>$A_s$ 的目的是提高定位的準確性，因為特徵條件 $x^c$ 包含雜訊。</li>
-<li>$A_c$ 旨在增強特徵條件 $x^c$ 的語意資訊。</li>
-</ul>
-<h4 id="Structure-Guided-Diffusion-Decoder-SGDD">Structure-Guided Diffusion Decoder (SGDD)</h4>
-<p>跟 DDPM 一樣都包含一個具有 U-Net 架構的神經網絡，SGDD的工作就是把前向擴散過程產生的噪音熱圖恢復成真實熱圖。</p>
-<p>如下圖所示，給定雜訊熱圖$y^{hm}_{t} \in \mathbb{R}^{J×H×W}$ 與條件$x^c \in \mathbb{R}^{C_x×H×W}$ ，SGDD 輸出估計熱圖$y^{hm}_0 \in \mathbb{R}^{J×H×W}$，其中$C_x、J 、H × W$ 分別表示 $x^c$ 的通道數、關節數、熱圖的大小。</p>
-<p>在SGDD中，輸入特徵和熱圖以漸進的方式 Downsample 到 $2C × \frac{H}{8} × \frac{W}{8}$的大小，並通過殘差連接上採樣到 $H × W$ 的原始大小，其中 $C ∈ \begin{Bmatrix}64， 128, 256 \end{Bmatrix}$ 是解碼器中特徵的通道數。</p>
-<p><img src="https://hackmd.io/_uploads/H1T1lzFza.png" alt=""></p>
-<p>在SGDD的每個尺度中，多個Res-Blocks被堆疊起來以提取特徵並恢復熱圖，以下為SGDD的架構參數：<br>
-<img src="https://hackmd.io/_uploads/H1U0EzKMa.png" alt=""></p>
-<p>SGDD 也可以產生高解析度熱圖，在SGDD中，$H = H_x/s, W = W_x/s$，其中 $H_x × W_x$ 是輸入影像 $x$ 的原始尺寸，$s ∈ \begin{Bmatrix}1 , 2, 4, 8\end{Bmatrix}$ 則是熱圖的比例。</p>
-<p>因此，SGDD可以選擇不同的尺度來運作，高解析度熱圖的擴散解碼過程可以減輕量化誤差並提高熱圖品質。</p>
-<h3 id="Reverse-Diffusion-Process-RDP">Reverse Diffusion Process (RDP)</h3>
-<p><strong>RDP</strong> 包括了採樣初始化和反向擴散推理。</p>
-<p>在推理過程中，DiffusionPose 採用了 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2010.02502.pdf">DDIM</a> 的跳步採樣策略，不需要跟訓練一樣那麼多步驟。</p>
-<h4 id="Sampling-Initialization">Sampling Initialization</h4>
-<p>好的取樣初始化可以減少推理步驟，在 DiffusionPose 中，給定 time step $T$，並將雜訊熱圖 $y_T$ 初始化為：$$\tilde{y}^{hm}_t = conv(x^{fea})$$</p>
-<p>因為 $\tilde{y}^{hm}_t$ 是在 GT 熱圖監督下進行訓練的，所以它可以提供更好的初始化。</p>
-<h4 id="Reverse-Diffusion-Inference">Reverse Diffusion Inference</h4>
-<p>初始化雜訊熱圖後，DiffusionPose 透過 SGDD 估計 GT 熱圖。<br>
-過程如以下演算法所示：<br>
-<img src="https://hackmd.io/_uploads/SJxgbVYz6.png" alt=""><br>
-其中特徵掩模 $y^{mask}$ 是根據 $\tilde{y}^{hm}_T$ 生成的，它進一步用於生成特徵條件 $x^c$(在MFP有提到)。</p>
-<p>然後 SGDD 以 $\tilde{y}^{hm}_t$ 和 $x^c$ 作為輸入以估計 $\tilde{y}^{hm}_{t-1}$ (在MFP有提到)。</p>
-<p>然後，DiffusionPose 透過重複上述步驟迭代來估計 $\tilde{y}^{hm}_0$。</p>
-<p>最後再用 argmax 函數從 $\tilde{y}^{hm}_0$ 解碼出關鍵點 $\tilde{y}_0$。</p>
-<h3 id="Loss-Function">Loss Function</h3>
-<p>DiffusionPose 的 Loss 就是把解碼器 使用 <strong>L2 損失</strong>作為損失函數。</p>
-<p>為了加速推理過程，DiffusionPose 透過卷積層 $conv$ 從 $x^{fea}$ 學習粗略熱圖，該卷積層在推理過程中用於初始化熱圖。<br>
-$\Diamond$ 講白了就是先用卷積快速算一個大概的熱圖，再把這個熱圖當 Diffusion Model 的初始熱圖讓他用特徵條件去生成最終的熱圖。</p>
-<p>DiffusionPose 的 Loss 就是把 SGDD 的 Loss 跟上述 $conv$ 的 Loss 加起來：$$ L = \lVert D(y^{hm}_t, x^c) - y^{hm}_0 \rVert_2 + \lVert conv(x^{fea}) - y^{hm}_0 \rVert_2 $$</p>
+    <!-- USE SIDEBAR -->
+    <!-- Post Container -->
+    <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
 
+      <!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
+      <!-- 归档列表 -->
 
-        <hr>
-        <!-- Pager -->
-        <ul class="pager">
+      
+
+      <!-- 归档列表 -->
+      
+      <div class="one-tag-list">
+        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
+          <span class="tag-text">2023</span>
+        </span>
+        <ul>
           
-          <li class="previous">
-            <a href="/it-blog/slowfast/" data-toggle="tooltip" data-placement="top" title="【論文研讀】SlowFast Networks for Video Recognition">&larr; Previous Post</a>
+          <li>
+            11-14
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/slowfast/" style="color: #0085a1">
+              <span>
+                【論文研讀】SlowFast Networks for Video Recognition
+                
+                -- 
+                
+              </span>
+            </a>
           </li>
           
+          <li>
+            10-27
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
           
-          <li class="next">
-            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features">Next Post &rarr;</a>
+          <li>
+            10-24
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" style="color: #0085a1">
+              <span>
+                【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-23
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-20
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" style="color: #0085a1">
+              <span>
+                【論文研讀】2D Human Pose Estimation - A Survey
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-19
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/OHPHAR/" style="color: #0085a1">
+              <span>
+                【論文研讀】Skeleton-based Action Recognition of People Handling Objects
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-05
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-30
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/something_else/" style="color: #0085a1">
+              <span>
+                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-27
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
+              <span>
+                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-24
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
+              <span>
+                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-18
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
+              <span>
+                【技術分享】Airflow快速入門及如何在Docker上安裝
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-11
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
+              <span>
+                【技術分享】基本Dockerfile寫法與Command Line
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-05
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
+              <span>
+                【論文研讀】Action recognition of construction workers under occlusion
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-22
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
+              <span>
+                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-22
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
+              <span>
+                【實驗室資源】Simslab-server使用指南
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
+              <span>
+                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
+              <span>
+                【論文研讀】AcT - Action Transformer
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
+              <span>
+                【論文研讀】APSNet - Toward Adaptive Point Sampling
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-15
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
+              <span>
+                【論文研讀】Transformer - Attention Is All You Need
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-15
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
+              <span>
+                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            07-17
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
+              <span>
+                學習寫論文的小工具 - 我好想畢業
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            07-02
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/hello_world/" style="color: #0085a1">
+              <span>
+                如何在 Hackmd 中 push 自己的文章至 Github
+                
+                -- 
+                
+              </span>
+            </a>
           </li>
           
         </ul>
-
-        
-        <!-- tip start -->
-        <!-- tip -->
-<!-- tip start -->
-<div class="tip">
-  <p>
-    
-       
-    
-  </p>
+      </div>
+      
+    </div>
+  </div>
 </div>
-<!-- tip end -->
 
-        <!-- tip end -->
-        
 
-        
-        <!-- Sharing Srtart -->
-        <!-- Social Social Share Post -->
-<!-- Docs:https://github.com/overtrue/share.js -->
+      <!-- 如果开启评论功能 -->
+      
+    </div>
 
-<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
-  <ul class="list-inline text-center social-share-ul">
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-twitter">
-        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a class="social-share-icon icon-wechat">
-        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-weibo">
-        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-qq">
-        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
-        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
-      </a>
-    </li>
+    <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+
+    
+    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
+    
+
+    
+
+    <!-- SNS Link -->
+    <ul class="list-inline">
+      
+
+      
+      <li>
+        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+    </ul>
+  </div>
+</section>
+
+        <hr>
+    
+        <!-- RECENT POSTS -->
+
+<h5><a href="/it-blog/">RECENT POSTS</a></h5>
+<div class="widget">
+  <ul>
+    
+    <a href="../../../../slowfast/">
+      <li>【論文研讀】SlowFast Networks for Video Recognition</li>
+    </a>
+    
+    <a href="../../../../paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
+      <li>【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</li>
+    </a>
+    
+    <a href="../../../../paper_review_ZeroShot_Anomaly_Action_Recognition/">
+      <li>【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</li>
+    </a>
+    
+    <a href="../../../../paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
+      <li>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</li>
+    </a>
+    
+    <a href="../../../../paper_review_2D_Human_Pose_Estimation_Survey/">
+      <li>【論文研讀】2D Human Pose Estimation - A Survey</li>
+    </a>
+    
   </ul>
 </div>
 
-<!-- css & js -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
-<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
 
-        <!-- Sharing End -->
-        
         <hr>
+    
+        <!-- Archives -->
 
-        <!-- comments start -->
-        <!-- 1. gitalk comment -->
-
-
-<!-- 2. gitment comment -->
-
-
-<!-- 3. disqus comment -->
+<h5><a href="/it-blog/archives/">archives</a></h5>
+<div class="widget">
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2023/11/">November 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2023/10/">October 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
+</div>
 
 
-        <!-- comments end -->
         <hr>
+    
+        <!-- Categories -->
 
-      </div>
+<h5><a href="/it-blog/categories/">categories</a></h5>
+<div class="widget">
+  <ul>
+    
+    <a href="/it-blog/categories/#paper review">
+      <li>paper review</li>
+    </a>
+    
+    <a href="/it-blog/categories/#docker">
+      <li>docker</li>
+    </a>
+    
+    <a href="/it-blog/categories/#point cloud">
+      <li>point cloud</li>
+    </a>
+    
+    <a href="/it-blog/categories/#HAR">
+      <li>HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#server">
+      <li>server</li>
+    </a>
+    
+    <a href="/it-blog/categories/#transformer">
+      <li>transformer</li>
+    </a>
+    
+    <a href="/it-blog/categories/#it-blog">
+      <li>it-blog</li>
+    </a>
+    
+    <a href="/it-blog/categories/#research paper">
+      <li>research paper</li>
+    </a>
+    
+    <a href="/it-blog/categories/#airflow">
+      <li>airflow</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Human Pose Estimation">
+      <li>Human Pose Estimation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
+      <li>3D Interacting Hand Pose Estimation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#pointnet">
+      <li>pointnet</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Object-relation HAR">
+      <li>Object-relation HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Paper Review">
+      <li>Paper Review</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Survey">
+      <li>Survey</li>
+    </a>
+    
+    <a href="/it-blog/categories/#De-occlusion">
+      <li>De-occlusion</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Data imputation">
+      <li>Data imputation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Diffusion Model">
+      <li>Diffusion Model</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Anomaly Action Recognition">
+      <li>Anomaly Action Recognition</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Removal">
+      <li>Removal</li>
+    </a>
+    
+    <a href="/it-blog/categories/#GAN">
+      <li>GAN</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Feature matrix">
+      <li>Feature matrix</li>
+    </a>
+    
+    <a href="/it-blog/categories/#occlusion">
+      <li>occlusion</li>
+    </a>
+    
+    <a href="/it-blog/categories/#HAR">
+      <li>HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#RGB-based HAR">
+      <li>RGB-based HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#video recognition">
+      <li>video recognition</li>
+    </a>
+    
+  </ul>
+</div>
 
-      <!-- Catalog: Tabe of Content -->
-      <!-- Table of Contents -->
+
+        <hr>
+    
+</div>
+
 
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Method"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Forward-Diffusion-Process-FDP-%E9%87%8D%E9%BB%9E%E6%98%AF%E7%89%B9%E5%BE%B5%E6%8E%A9%E6%A8%A1"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Forward Diffusion Process (FDP)(重點是特徵掩模)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Model-Forward-Process-MFP"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Model Forward Process (MFP)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Spatial-Channel-Cross-Attention-SC-CA-Module"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">Spatial-Channel Cross-Attention (SC-CA) Module</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Structure-Guided-Diffusion-Decoder-SGDD"><span class="toc-nav-number">1.1.2.2.</span> <span class="toc-nav-text">Structure-Guided Diffusion Decoder (SGDD)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reverse-Diffusion-Process-RDP"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">Reverse Diffusion Process (RDP)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Sampling-Initialization"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">Sampling Initialization</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Reverse-Diffusion-Inference"><span class="toc-nav-number">1.1.3.2.</span> <span class="toc-nav-text">Reverse Diffusion Inference</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Loss-Function"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">Loss Function</span></a></li></ol></li></ol></li></ol>
-        
-        </div>
-      </aside>
-    
-
-
-
-      <!-- Sidebar Container -->
-      <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-        <!-- Featured Tags -->
-        
-
-        <!-- Friends Blog -->
-        
-      </div>
-    </div>
   </div>
-</article>
-
-
-
-<!-- anchorjs start -->
-<!-- async load function -->
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script type="text/javascript">
-  // async load function
-  function async (u, c) {
-    var d = document,
-      t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) {
-      o.addEventListener('load', function(e) {
-        c(null, e);
-      }, false);
-    }
-    s.parentNode.insertBefore(o, s);
-  };
-</script>
-<script type="text/javascript">
-  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
-  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
-    anchors.options = {
-      visible: 'hover',
-      placement: 'left',
-      // icon: 'ℬ'
-      icon: '❡'
-    };
-    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-  });
-</script>
-<style>
-  /* place left on bigger screen */
-  @media all and (min-width: 800px) {
-    .anchorjs-link {
-      position: absolute;
-      left: -0.75em;
-      font-size: 1.1em;
-      margin-top: -0.1em;
-    }
-  }
-</style>
-
-<!-- anchorjs end -->
-
+</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
