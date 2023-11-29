@@ -237,7 +237,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/docker/airflow/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,7 +258,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/docker/airflow/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -286,13 +286,6 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/</loc>
-    <lastmod>2023-11-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Object-relation-HAR/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
@@ -300,14 +293,14 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/Paper-Review/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/Paper-Review/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -328,14 +321,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/</loc>
-    <lastmod>2023-11-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -349,7 +335,21 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/</loc>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/Paper-Review/Anomaly-Action-Recognition/</loc>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -363,14 +363,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/</loc>
-    <lastmod>2023-11-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/Skeleton-based/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -378,6 +371,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/Feature-matrix/</loc>
+    <lastmod>2023-11-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/Skeleton-based/</loc>
     <lastmod>2023-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
