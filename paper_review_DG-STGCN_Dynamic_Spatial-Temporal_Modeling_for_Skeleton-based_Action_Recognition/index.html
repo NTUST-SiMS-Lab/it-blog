@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/it-blog/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/">
   <title>
     
-      SiMS Lab | IT Blog
+      【論文研讀】DG-STGCN:Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*page*/
-        background-image: var(--intro-header-background-image-url-page);
-        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
+       /*post*/
+        background-image: var(--intro-header-background-image-url-post);
+        /* background-image: url(''); */
       
     }
 
@@ -306,10 +306,40 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <h1>SiMS Lab</h1>
-            <!--<hr class="small">-->
-            <span class="subheading">IT Blog</span>
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>【論文研讀】DG-STGCN:Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by Kevin Huang on
+              2023-11-29
+            </span>
+
+
+            
+            <!-- WordCount start -->
+            <div class="blank_box"></div>
+            <span class="meta">
+              Estimated Reading Time <span class="post-count">11</span> Minutes
+            </span>
+            <div class="blank_box"></div>
+            <span class="meta">
+              Words <span class="post-count">3.2k</span> In Total
+            </span>
+            <div class="blank_box"></div>
+            <!-- WordCount end -->
+            
+            
+            <!-- 不蒜子统计 start -->
+            <span class="meta" id="busuanzi_container_page_pv">
+              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+            </span>
+            <!-- 不蒜子统计 end -->
+            
+
+
           </div>
           
         </div>
@@ -334,579 +364,383 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    
+		<!-- Modify by Yu-Hsuan Yen -->
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-    <!-- USE SIDEBAR -->
-    <!-- Post Container -->
-    <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+        <h1><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.05895v1">DG-STGCN: Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition</a>(arXiv)</h1>
+<h3 id="small-blue-diamond-Reference">:small_blue_diamond: Reference:</h3>
+<p><em>Computer Vision and Pattern Recognition</em></p>
+<p><em>arXiv preprint arXiv:2210.05895, 2022.</em></p>
+<h3 id="small-blue-diamond-Authors">:small_blue_diamond: Authors:</h3>
+<p><em>Haodong Duan, Jiaqi Wang, Kai Chen, Dahua Lin</em></p>
+<h3 id="small-blue-diamond-Github">:small_blue_diamond: Github:</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/kennymckormick/pyskl">pyskl</a> -&gt; <a target="_blank" rel="noopener" href="https://github.com/kennymckormick/pyskl/blob/main/configs/dgstgcn/README.md">DG-STGCN</a></p>
+<h2 id="white-check-mark-論文主要解決的問題">:white_check_mark: 論文主要解決的問題</h2>
+<ul>
+<li>歷代的STGCN演進</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/HkqyxJ0Ea.png" alt="image"></p>
+<ol>
+<li>依賴手動定義的骨架拓撲，需要針對不同資料集的精心自訂。更重要的是，由於執行動作時關節間的內在配合，完全可學習係數矩陣，而不是規定的圖形結構，更合適建模複雜的聯合相關性。</li>
+<li>基於 GCN 的方法主要利用固定感受野的時間來模擬一定時間範圍內的關節級運動，而忽略了在動態時間感受野內模擬多層次（即關節級 + 骨架級）運動模式的好處。</li>
+</ol>
+<h2 id="white-check-mark-論文主要貢獻">:white_check_mark: 論文主要貢獻</h2>
+<ol>
+<li>
+<p>DG-STGCN純粹基於可學習係數矩陣進行空間建模，消除了手動定義骨架拓撲的繁瑣過程。</p>
+</li>
+<li>
+<p>動態分組設計使得動態時空使用多樣化的圖卷積組對骨架運動進行建模和時間卷積，提高表示能力和彈性。</p>
+</li>
+<li>
+<p>DG-STGCN在多個基準上取得顯著改進同時保持模型效率。</p>
+</li>
+</ol>
+<h2 id="white-check-mark-Related-works">:white_check_mark: Related works</h2>
+<h3 id="1-圖神經網路-Graph-Neural-Networks">1. 圖神經網路(Graph Neural Networks)</h3>
+<p>圖神經網路(GNN)被廣泛採用進行了廣泛的探索。GNN通常可以分為譜GNN和空間GNN。譜GNN在譜域上應用卷積。他們假設所有樣本之間存在固定的鄰接關係，從而限制了普遍性到看不見的圖形結構。相較之下，空間GNN執行透過局部特徵融合和活化對每個節點進行逐層特徵更新。</p>
+<p>大多數基於骨架的動作辨識的GCN方法都遵循空間GNN的精神：他們根據骨架建立了時空圖數據，應用卷積進行鄰域中的特徵聚合，並執行逐層特徵更新。</p>
+<h3 id="2-基於骨架的動作辨識-Skeleton-based-Action-Recognition">2. 基於骨架的動作辨識(Skeleton-based Action Recognition)</h3>
+<p>早期方法設計手工製作的特徵來捕捉關節運動模式並將它們直接送入下游分類器。隨著繁榮在深度學習中，以下方法將骨架資料視為時間序列並使用循環神經網路和時間來處理它們卷積網。</p>
+<p>GCN在基於骨架的動作辨識上的早期應用是STGCN。ST-GCN使用堆疊的GCN區塊來處理骨架數據，而每個區塊由一個空間模組和一個時間模組組成，並作為一個簡單的基線。</p>
+<p>在時間建模中，使用先進的多尺度TCN來代替簡單的實現，能夠對具有多個持續時間的操作進行建模。</p>
+<p>Shift-GCN採用圖升降技術進行連接間特徵融合。特徵融合，而SGN則根據輸入的序列，透過輕量級注意模組來估計係數矩陣。而SGN則根據輸入序列和輕量級注意力模組來估計係數矩陣。</p>
+<p>另一個工作流程採用了卷積神經網絡（CNN）用於基於骨架的動作識別。基於2D-CNN轉換的方法將骨架序列轉換為偽影像並使用2D CNN 對其進行處理。</p>
+<p>PoseC3D擁有沿時間維度的一張熱圖，並使用3D-CNN進行重建處理。雖然PoseC3D的性能令人印象深刻，但其計算量更大，不能直接評估三維模型。計算量增大，無法直接無損地評估3D<br>
+骨架。</p>
+<h2 id="white-check-mark-DG-STGCN">:white_check_mark: DG-STGCN</h2>
+<ul>
+<li>
+<p><strong>DG-STGCN的改進主要體現在兩個方面：</strong></p>
+<ol>
+<li>作者設計動態組 GCN (DG-GCN) 和動態組時態 ConvNet (DG-TCN)，促進高度靈活和數據驅動的時空建模的骨架數據。</li>
+<li>開發了強大的時態資料增強策略，它普遍適用於不同的骨幹網，並且特別有益到高動態 DG-STGCN。</li>
+</ol>
+</li>
+<li>
+<p><strong>ST-GCN回顧</strong></p>
+<p><img src="https://hackmd.io/_uploads/BkvQWQfB6.png" alt="image"></p>
+<ol>
+<li>
+<p>inputs: $X ∈ R^{T×V ×C}$（每個人的T×V×C張量X），T表示時間長度，V表示骨架關節的數量，C表示通道數（2或3，XY座標或XY座標加D深度）。<img src="https://hackmd.io/_uploads/BJZFbJGra.png" alt="image"></p>
+</li>
+<li>
+<p>用於空間建模的係數矩陣 $A∈R^{K×V×V}$，K表示矩陣數（作者也稱為組數）。</p>
+</li>
+<li>
+<p>用$F$表示GCN區塊，$G$、$T$分別表示空間模組和時間模組。</p>
+</li>
+<li>
+<p>ST-GCN利用擁有的N個GCN塊（N = 10）來處理座標張量。<img src="https://hackmd.io/_uploads/rkgnIkfrp.png" alt="image"></p>
+</li>
+<li>
+<p>GCN塊F包含兩個組件：一個空間模塊G和一個時間模塊T。給定一個骨架特徵$X ∈ R^{T×V×C}$，G首先執行通道膨脹和重塑以獲得4D張量$X’ ∈ R^{T×K×V×C}$，然後使用一組係數矩陣A進行關節間的空間建模： <img src="https://hackmd.io/_uploads/Sk24MQMBp.png" alt="image"></p>
+</li>
+<li>
+<p>G的輸出進一步由T進行處理以學習時間特徵。F的計算可以總結為：<img src="https://hackmd.io/_uploads/rJGqzXzSa.png" alt="image"></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>DG-GCN：從零開始的動態空間建模</strong></p>
+<p>在本研究中，作者保持整體架構不變，提議使用動態群組GCN和動態群組TCN來增強其能力。</p>
+<p>在先前的工作中，一種常見的做法是首先將A設置為一系列手動定義的稀疏矩陣（從關節的鄰接矩陣導出），並在模型訓練期間學習細化ΔA。ΔA可以是靜態的，作為可訓練的參數，也可以是動態的，根據輸入樣本由模型生成。儘管直觀，作者認為這種範式在靈活性上存在限制，可能導致比純數據驅動方法更差的識別性能。</p>
+<p><strong>係數矩陣A設置為完全可學習的</strong>。在DG-GCN中，$A ∈ R^{K×V×V}$是一個可學習的參數，而不是一組手動定義的矩陣。在初始化時，作者直接使用<strong>常態分佈初始化A</strong>，而不是求解鄰接矩陣的導出。通過隨機初始化，K可以設置為任意值，從而實現DG-GCN中的新型多組設計。</p>
+<ul>
+<li>
+<p><strong>DG-GCN架構：</strong><img src="https://hackmd.io/_uploads/B1y1nmGST.png" alt="**image"></p>
+<ol>
+<li>在DG-GCN中，係數矩陣A包含K個不同的組件（在實驗中K = 8）。</li>
+<li>輸入（帶有C個通道）首先通過1×1卷積進行處理，以生成K個特徵組（每個組具有⌊ C/K ⌋個通道）。</li>
+<li>對每個特徵組使用相應的A~i~進行獨立的空間建模。</li>
+<li>K個特徵組在通道維度上連接(concat)，然後通過另一個1×1卷積進行處理以生成輸出。</li>
+</ol>
+</li>
+<li>
+<p><strong>係數矩陣A~i~：</strong> 每個係數矩陣Ai包含三個可學習的組件。</p>
+<ol>
+<li>通過整個訓練過程學習的數據集參數PA~i~（靜態項）。</li>
+<li>DA~i~和CA~i~，分別作為動態項。</li>
+<li>給定輸入特徵X，首先使用時間池化消除維度T。然後，分別對$\overline{X}$應用兩個獨立的1×1卷積以獲得X~a~和X~b~。</li>
+<li>DA~i~：<img src="https://hackmd.io/_uploads/SyPlENGrT.png" alt="image">CA~i~：$CA_i ∈ R^{C×V×V}$，通過將Tanh激活應用於X~a~和X~b~之間的兩兩差異來獲得CA~i~。</li>
+<li>係數矩陣使用三個組件的加權和：<img src="https://hackmd.io/_uploads/BJ2TwNMr6.png" alt="image"></li>
+<li>$α$，$β$是兩個可學習的參數。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>DG-TCN：具有動態接頭的多組TCN融合</strong></p>
+<p>作者還在時間建模中採用了動態分組設計。首先用一個多組TCN替換了普通的時間模塊。</p>
+<p><img src="https://hackmd.io/_uploads/ByvpWBGSa.png" alt="image"></p>
+<p>多組TCN由多個<strong>具有不同感受野</strong>的分支組成。每個分支獨立對一個特徵組進行時間建模（具有六個分支：4個帶有膨脹[1, 2, 3, 4]的卷積核為3的1D卷積分支，一個卷積核為3的最大池化分支，以及一個1 × 1卷積分支）。與ST-GCN中T的普通實現相比，多組設計不僅<strong>節省了大量計算</strong>，還大幅<strong>提高了時間建模的能力</strong>。</p>
+<p>作者提出在<strong>關節級和骨架級同時進行時間的D-JSF建模</strong>，用於明確建模並動態融合關節級和骨架級特徵。</p>
+<ul>
+<li>
+<p>D-JSF模塊：</p>
+<ol>
+<li>首先對V個關節級特徵X~1~到X~V~，$X_i ∈ R^{C×T}$執行平均池化，以獲得骨架級特徵S。</li>
+<li>多組TCN同時處理骨架特徵S和V個關節特徵X~i~以獲得S’, X’~i~。然後應用動態關節-骨架融合將S’合併到每個X’~i~。</li>
+<li>具體而言，每個DG-TCN實例包含一個學習的參數$γ ∈ R^V$。</li>
+<li>在自適應的關節-骨架融合後，關節i的特徵為X’~i~ + γ~i~S’，並進一步使用1×1卷積進行處理。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>作為時態資料增強的均勻取樣</strong></p>
+<p>由於DG-STGCN中廣泛使用了動態分組模塊，模型容量得到了大幅提升。同時，改進的靈活性也提高了過擬合的風險，使得強大的數據增強變得極為重要。</p>
+<p>採用隨機裁剪作為時間增強的策略：從原始序列中裁剪一個子字符串，並使用<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110754637">雙線性插值</a>將其調整為目標長度。</p>
+<p><img src="https://hackmd.io/_uploads/S1RtdHfrT.png" alt="image"></p>
+</li>
+</ul>
+<h2 id="white-check-mark-EXPERIMENTS">:white_check_mark: EXPERIMENTS</h2>
+<h3 id="1-資料集">1. 資料集</h3>
+<ul>
+<li>
+<p>NTU-60 &amp; NTU-120：</p>
+<p>NTU-60，包含60個人類動作的57K視頻。NTU-120，包含120個人類動作的114K視頻。數據集以三種方式劃分：跨主題（X-Sub），跨視圖（X-View，適用於NTU-60），跨設置（X-Set，適用於NTU-120），在這三種方式中，培訓和驗證中的動作主題，攝像機視圖，攝像機設置是不同的。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://babel.is.tue.mpg.de/">BABEL</a>：是一個用於具有語義的人體運動的大規模數據集。它使用<a target="_blank" rel="noopener" href="https://amass.is.tue.mpg.de/">AMASS</a>中∼43.5小時的mocap進行標註。BABEL從<a target="_blank" rel="noopener" href="https://smpl.is.tue.mpg.de/">SMPL-H</a>網格的頂點中預測用於NTURGB+D的25個關節骨架，並將其用於基於骨架的動作識別。BABEL有兩個版本，分別包含60（BABEL60）和120（BABEL120）個動作類別。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://project.inria.fr/toyotasmarthome/">Toyota SmartHome</a>：是一個聚焦於人類日常活動的視頻數據集。該數據集包含16K視頻和31種不同的日常生活動作。視頻來自7個不同的攝像機視圖。數據集以兩種方式劃分：跨主題（CS）或跨視圖（CV1：一個視圖進行培訓；CV2：五個視圖進行培訓）。我們僅在其Pose V1.2標註中使用3D關節進行訓練，並報告CS和CV1拆分的結果。</p>
+</li>
+</ul>
+<h3 id="2-Implementation-Details">2. Implementation Details</h3>
+<p>DG-STGCN遵循ST-GCN的基本設置。</p>
+<ul>
+<li>10個GCN塊：每個GCN塊包含一個DG-GCN和一個DG-TCN。</li>
+<li>基本通道寬度設置為64，在第5個和第8個GCN塊中，我們執行時間池化以將時間長度減半，同時將通道寬度加倍。</li>
+<li>帶有動量(momentum)0.9和權重衰減(weight decay)5e−4的SGD進行訓練。</li>
+<li>批量大小(Batchsize)：128</li>
+<li>初始學習率(lr)：0.1</li>
+<li>epoch：使用<a target="_blank" rel="noopener" href="https://paperswithcode.com/method/cosine-annealing">CosineAnnealing</a>學習率調度程序訓練模型100個epoch。</li>
+<li>使用<strong>均勻抽樣</strong>來從骨架數據中抽樣子序列以形成訓練樣本。</li>
+<li>在消融研究(ablation study)中，我們將輸入長度設置為64。與最先進技術(state-of-the-arts)的比較中，我們將輸入長度設置為100。</li>
+</ul>
+<h3 id="3-Ablation-study">3. Ablation study</h3>
+<p>作者在兩個大規模基準測試上訓練DG-STGCN：NTU120-XSub和NTU120-XSet。我們以關節模態為輸入，並按照<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.12213">[Channel-wise topology<br>
+refinement graph convolution for skeleton-based action recognition]</a>中的預處理進行操作。我們的基準使用GCN進行空間建模，其係數矩陣（3個組件）進行了隨機初始化，並使用多分支TCN（具有六個分支：4個帶有膨脹[1, 2, 3, 4]的卷積核為3的1D卷積分支，一個卷積核為3的最大池化分支，以及一個1 × 1卷積分支）進行時間建模。</p>
+<blockquote>
+<ul>
+<li><strong>Is a pre-defined topology<br>
+indispensable?</strong><br>
+找出預定義的圖形結構對空間建模的重要性。我們考慮了三種替代方案：<br>
+1）預先定義的固定拓撲(Pre-defined + fix)，<br>
+2）帶有靜態可學習改進(Pre-defined + refine)，<br>
+3）從頭開始隨機初始化的可學習拓撲(From scratch)<br>
+<img src="https://hackmd.io/_uploads/SynIOaMra.png" alt="image"></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Dynamic Group GCN (DG-GCN)</strong><br>
+<img src="https://hackmd.io/_uploads/ryMKR6MS6.png" alt="image"></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>How much data does DG-GCN require? &amp; Dynamic Group TCN (DG-TCN).</strong><br>
+<img src="https://hackmd.io/_uploads/BkijAafBa.png" alt="image"></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Uniform Sampling as Temporal Data Augmentation</strong><br>
+<img src="https://hackmd.io/_uploads/B1z6RpfBT.png" alt="image"></li>
+</ul>
+</blockquote>
+<h3 id="3-Comparisons-with-the-State-of-the-Art">3. Comparisons with the State-of-the-Art</h3>
+<blockquote>
+<ul>
+<li><strong>NTURGB+D &amp; Kinetics-400</strong><br>
+<img src="https://hackmd.io/_uploads/H1DG1CGHp.png" alt="image"></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>BABEL &amp; Toyota SmartHome</strong><br>
+<img src="https://hackmd.io/_uploads/BJXLkCfSa.png" alt="image"></li>
+</ul>
+</blockquote>
+<h2 id="white-check-mark-Conclusion">:white_check_mark: Conclusion</h2>
+<ol>
+<li>提出了一個高度動態的框架DG-STGCN，用於骨架數據的時空建模。</li>
+<li>DG-STGCN包括兩個具有動態多組設計的新模塊，即<strong>DG-GCN</strong>和<strong>DG-TCN</strong>。對於空間建模，DG-GCN將關節級特徵與從頭學習的係數矩陣融合，不依賴預定義的圖形結構。同時，DG-TCN採用組內時間卷積，具有多樣化的感受野，並使用動態的關節-骨架特徵模塊進行多層次的時序建模。</li>
+</ol>
 
-      <!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-      <!-- 归档列表 -->
 
-      
-
-      <!-- 归档列表 -->
-      
-      <div class="one-tag-list">
-        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
-          <span class="tag-text">2023</span>
-        </span>
-        <ul>
+        <hr>
+        <!-- Pager -->
+        <ul class="pager">
           
-          <li>
-            11-29
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/" style="color: #0085a1">
-              <span>
-                【論文研讀】DG-STGCN:Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
           
-          <li>
-            11-14
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/slowfast/" style="color: #0085a1">
-              <span>
-                【論文研讀】SlowFast Networks for Video Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" style="color: #0085a1">
-              <span>
-                【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-23
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-20
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" style="color: #0085a1">
-              <span>
-                【論文研讀】2D Human Pose Estimation - A Survey
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-19
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/OHPHAR/" style="color: #0085a1">
-              <span>
-                【論文研讀】Skeleton-based Action Recognition of People Handling Objects
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            10-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
-              <span>
-                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-30
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/something_else/" style="color: #0085a1">
-              <span>
-                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-27
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
-              <span>
-                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-24
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
-              <span>
-                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-18
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
-              <span>
-                【技術分享】Airflow快速入門及如何在Docker上安裝
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-11
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
-              <span>
-                【技術分享】基本Dockerfile寫法與Command Line
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            09-05
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
-              <span>
-                【論文研讀】Action recognition of construction workers under occlusion
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
-              <span>
-                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-22
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
-              <span>
-                【實驗室資源】Simslab-server使用指南
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
-              <span>
-                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】AcT - Action Transformer
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-16
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
-              <span>
-                【論文研讀】APSNet - Toward Adaptive Point Sampling
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】Transformer - Attention Is All You Need
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            08-15
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
-              <span>
-                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-17
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
-              <span>
-                學習寫論文的小工具 - 我好想畢業
-                
-                -- 
-                
-              </span>
-            </a>
-          </li>
-          
-          <li>
-            07-02
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/it-blog/hello_world/" style="color: #0085a1">
-              <span>
-                如何在 Hackmd 中 push 自己的文章至 Github
-                
-                -- 
-                
-              </span>
-            </a>
+          <li class="next">
+            <a href="/it-blog/slowfast/" data-toggle="tooltip" data-placement="top" title="【論文研讀】SlowFast Networks for Video Recognition">Next Post &rarr;</a>
           </li>
           
         </ul>
+
+        
+        <!-- tip start -->
+        <!-- tip -->
+<!-- tip start -->
+<div class="tip">
+  <p>
+    
+       
+    
+  </p>
+</div>
+<!-- tip end -->
+
+        <!-- tip end -->
+        
+
+        
+        <!-- Sharing Srtart -->
+        <!-- Social Social Share Post -->
+<!-- Docs:https://github.com/overtrue/share.js -->
+
+<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
+  <ul class="list-inline text-center social-share-ul">
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-twitter">
+        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a class="social-share-icon icon-wechat">
+        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-weibo">
+        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <!-- <li class="social-share-li">
+      <a target="_blank" class="social-share-icon icon-qq">
+        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
+      </a>
+    </li> -->
+    <li class="social-share-li">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【論文研讀】DG-STGCN:Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/">
+        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- css & js -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
+<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+        <!-- Sharing End -->
+        
+        <hr>
+
+        <!-- comments start -->
+        <!-- 1. gitalk comment -->
+
+
+<!-- 2. gitment comment -->
+
+
+<!-- 3. disqus comment -->
+
+
+        <!-- comments end -->
+        <hr>
+
       </div>
-      
+
+      <!-- Catalog: Tabe of Content -->
+      <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DG-STGCN: Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">:small_blue_diamond: Reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">:small_blue_diamond: Authors:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Github"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">:small_blue_diamond: Github:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%A7%A3%E6%B1%BA%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">:white_check_mark: 論文主要解決的問題</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">:white_check_mark: 論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">:white_check_mark: Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E5%9C%96%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-Graph-Neural-Networks"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 圖神經網路(Graph Neural Networks)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%9F%BA%E6%96%BC%E9%AA%A8%E6%9E%B6%E7%9A%84%E5%8B%95%E4%BD%9C%E8%BE%A8%E8%AD%98-Skeleton-based-Action-Recognition"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 基於骨架的動作辨識(Skeleton-based Action Recognition)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-DG-STGCN"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">:white_check_mark: DG-STGCN</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-EXPERIMENTS"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">:white_check_mark: EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">1. 資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Implementation-Details"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">2. Implementation Details</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Ablation-study"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">3. Ablation study</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Comparisons-with-the-State-of-the-Art"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">3. Comparisons with the State-of-the-Art</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Conclusion"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">:white_check_mark: Conclusion</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+      <!-- Sidebar Container -->
+      <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+        <!-- Featured Tags -->
+        
+
+        <!-- Friends Blog -->
+        
+      </div>
     </div>
   </div>
-</div>
+</article>
 
 
-      <!-- 如果开启评论功能 -->
-      
-    </div>
 
-    <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
-  <div class="short-about">
+<!-- anchorjs start -->
+<!-- async load function -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script type="text/javascript">
+  // async load function
+  function async (u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener('load', function(e) {
+        c(null, e);
+      }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+  };
+</script>
+<script type="text/javascript">
+  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
+    anchors.options = {
+      visible: 'hover',
+      placement: 'left',
+      // icon: 'ℬ'
+      icon: '❡'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+  });
+</script>
+<style>
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: -0.1em;
+    }
+  }
+</style>
 
-    
-    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" style="box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);" />
-    
+<!-- anchorjs end -->
 
-    
-
-    <!-- SNS Link -->
-    <ul class="list-inline">
-      
-
-      
-      <li>
-        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-    </ul>
-  </div>
-</section>
-
-        <hr>
-    
-        <!-- RECENT POSTS -->
-
-<h5><a href="/it-blog/">RECENT POSTS</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="../../paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/">
-      <li>【論文研讀】DG-STGCN:Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition</li>
-    </a>
-    
-    <a href="../../slowfast/">
-      <li>【論文研讀】SlowFast Networks for Video Recognition</li>
-    </a>
-    
-    <a href="../../paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
-      <li>【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</li>
-    </a>
-    
-    <a href="../../paper_review_ZeroShot_Anomaly_Action_Recognition/">
-      <li>【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features</li>
-    </a>
-    
-    <a href="../../paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/">
-      <li>【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Archives -->
-
-<h5><a href="/it-blog/archives/">archives</a></h5>
-<div class="widget">
-  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">November 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">October 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
-</div>
-
-
-        <hr>
-    
-        <!-- Categories -->
-
-<h5><a href="/it-blog/categories/">categories</a></h5>
-<div class="widget">
-  <ul>
-    
-    <a href="/it-blog/categories/#paper review">
-      <li>paper review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#docker">
-      <li>docker</li>
-    </a>
-    
-    <a href="/it-blog/categories/#point cloud">
-      <li>point cloud</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#server">
-      <li>server</li>
-    </a>
-    
-    <a href="/it-blog/categories/#transformer">
-      <li>transformer</li>
-    </a>
-    
-    <a href="/it-blog/categories/#it-blog">
-      <li>it-blog</li>
-    </a>
-    
-    <a href="/it-blog/categories/#research paper">
-      <li>research paper</li>
-    </a>
-    
-    <a href="/it-blog/categories/#airflow">
-      <li>airflow</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Human Pose Estimation">
-      <li>Human Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
-      <li>3D Interacting Hand Pose Estimation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#pointnet">
-      <li>pointnet</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Action Recognition">
-      <li>Action Recognition</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Object-relation HAR">
-      <li>Object-relation HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Paper Review">
-      <li>Paper Review</li>
-    </a>
-    
-    <a href="/it-blog/categories/#HAR">
-      <li>HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Survey">
-      <li>Survey</li>
-    </a>
-    
-    <a href="/it-blog/categories/#De-occlusion">
-      <li>De-occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Data imputation">
-      <li>Data imputation</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GCN">
-      <li>GCN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Diffusion Model">
-      <li>Diffusion Model</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Anomaly Action Recognition">
-      <li>Anomaly Action Recognition</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Removal">
-      <li>Removal</li>
-    </a>
-    
-    <a href="/it-blog/categories/#GAN">
-      <li>GAN</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Skeleton-based">
-      <li>Skeleton-based</li>
-    </a>
-    
-    <a href="/it-blog/categories/#Feature matrix">
-      <li>Feature matrix</li>
-    </a>
-    
-    <a href="/it-blog/categories/#occlusion">
-      <li>occlusion</li>
-    </a>
-    
-    <a href="/it-blog/categories/#RGB-based HAR">
-      <li>RGB-based HAR</li>
-    </a>
-    
-    <a href="/it-blog/categories/#video recognition">
-      <li>video recognition</li>
-    </a>
-    
-  </ul>
-</div>
-
-
-        <hr>
-    
-</div>
-
-
-    
-  </div>
-</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
