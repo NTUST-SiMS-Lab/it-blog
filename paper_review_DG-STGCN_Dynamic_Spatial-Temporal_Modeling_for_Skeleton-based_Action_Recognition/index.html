@@ -322,7 +322,7 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">11</span> Minutes
+              Estimated Reading Time <span class="post-count">12</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
@@ -373,14 +373,14 @@
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
         <h1><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.05895v1">DG-STGCN: Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition</a>(arXiv)</h1>
-<h3 id="small-blue-diamond-Reference">:small_blue_diamond: Reference:</h3>
+<h3 id="Reference">Reference:</h3>
 <p><em>Computer Vision and Pattern Recognition</em></p>
 <p><em>arXiv preprint arXiv:2210.05895, 2022.</em></p>
-<h3 id="small-blue-diamond-Authors">:small_blue_diamond: Authors:</h3>
+<h3 id="Authors">Authors:</h3>
 <p><em>Haodong Duan, Jiaqi Wang, Kai Chen, Dahua Lin</em></p>
-<h3 id="small-blue-diamond-Github">:small_blue_diamond: Github:</h3>
+<h3 id="Github">Github:</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/kennymckormick/pyskl">pyskl</a> -&gt; <a target="_blank" rel="noopener" href="https://github.com/kennymckormick/pyskl/blob/main/configs/dgstgcn/README.md">DG-STGCN</a></p>
-<h2 id="white-check-mark-論文主要解決的問題">:white_check_mark: 論文主要解決的問題</h2>
+<h2 id="論文主要解決的問題">論文主要解決的問題</h2>
 <ul>
 <li>歷代的STGCN演進</li>
 </ul>
@@ -389,7 +389,7 @@
 <li>依賴手動定義的骨架拓撲，需要針對不同資料集的精心自訂。更重要的是，由於執行動作時關節間的內在配合，完全可學習係數矩陣，而不是規定的圖形結構，更合適建模複雜的聯合相關性。</li>
 <li>基於 GCN 的方法主要利用固定感受野的時間來模擬一定時間範圍內的關節級運動，而忽略了在動態時間感受野內模擬多層次（即關節級 + 骨架級）運動模式的好處。</li>
 </ol>
-<h2 id="white-check-mark-論文主要貢獻">:white_check_mark: 論文主要貢獻</h2>
+<h2 id="論文主要貢獻">論文主要貢獻</h2>
 <ol>
 <li>
 <p>DG-STGCN純粹基於可學習係數矩陣進行空間建模，消除了手動定義骨架拓撲的繁瑣過程。</p>
@@ -401,7 +401,7 @@
 <p>DG-STGCN在多個基準上取得顯著改進同時保持模型效率。</p>
 </li>
 </ol>
-<h2 id="white-check-mark-Related-works">:white_check_mark: Related works</h2>
+<h2 id="Related-works">Related works</h2>
 <h3 id="1-圖神經網路-Graph-Neural-Networks">1. 圖神經網路(Graph Neural Networks)</h3>
 <p>圖神經網路(GNN)被廣泛採用進行了廣泛的探索。GNN通常可以分為譜GNN和空間GNN。譜GNN在譜域上應用卷積。他們假設所有樣本之間存在固定的鄰接關係，從而限制了普遍性到看不見的圖形結構。相較之下，空間GNN執行透過局部特徵融合和活化對每個節點進行逐層特徵更新。</p>
 <p>大多數基於骨架的動作辨識的GCN方法都遵循空間GNN的精神：他們根據骨架建立了時空圖數據，應用卷積進行鄰域中的特徵聚合，並執行逐層特徵更新。</p>
@@ -413,7 +413,7 @@
 <p>另一個工作流程採用了卷積神經網絡（CNN）用於基於骨架的動作識別。基於2D-CNN轉換的方法將骨架序列轉換為偽影像並使用2D CNN 對其進行處理。</p>
 <p>PoseC3D擁有沿時間維度的一張熱圖，並使用3D-CNN進行重建處理。雖然PoseC3D的性能令人印象深刻，但其計算量更大，不能直接評估三維模型。計算量增大，無法直接無損地評估3D<br>
 骨架。</p>
-<h2 id="white-check-mark-DG-STGCN">:white_check_mark: DG-STGCN</h2>
+<h2 id="DG-STGCN">DG-STGCN</h2>
 <ul>
 <li>
 <p><strong>DG-STGCN的改進主要體現在兩個方面：</strong></p>
@@ -439,10 +439,10 @@
 <p>ST-GCN利用擁有的N個GCN塊（N = 10）來處理座標張量。<img src="https://hackmd.io/_uploads/rkgnIkfrp.png" alt="image"></p>
 </li>
 <li>
-<p>GCN塊F包含兩個組件：一個空間模塊G和一個時間模塊T。給定一個骨架特徵$X ∈ R^{T×V×C}$，G首先執行通道膨脹和重塑以獲得4D張量$X’ ∈ R^{T×K×V×C}$，然後使用一組係數矩陣A進行關節間的空間建模： <img src="https://hackmd.io/_uploads/Sk24MQMBp.png" alt="image"></p>
+<p>GCN塊F包含兩個組件：一個空間模塊G和一個時間模塊T。給定一個骨架特徵$X ∈ R^{T×V×C}$，G首先執行通道膨脹和重塑以獲得4D張量$X’ ∈ R^{T×K×V×C}$，然後使用一組係數矩陣A進行關節間的空間建模：$G(X)_{lij}=\displaystyle\sum_{k=1}^{k=K}\displaystyle\sum_{v=1}^{v=V}A_{kvi}X’_{lkvj}, G(X)∈R^{T×V×C}$</p>
 </li>
 <li>
-<p>G的輸出進一步由T進行處理以學習時間特徵。F的計算可以總結為：<img src="https://hackmd.io/_uploads/rJGqzXzSa.png" alt="image"></p>
+<p>G的輸出進一步由T進行處理以學習時間特徵。F的計算可以總結為：$F(X)=T(G(X,A))+X$</p>
 </li>
 </ol>
 </li>
@@ -467,8 +467,9 @@
 <li>通過整個訓練過程學習的數據集參數PA~i~（靜態項）。</li>
 <li>DA~i~和CA~i~，分別作為動態項。</li>
 <li>給定輸入特徵X，首先使用時間池化消除維度T。然後，分別對$\overline{X}$應用兩個獨立的1×1卷積以獲得X~a~和X~b~。</li>
-<li>DA~i~：<img src="https://hackmd.io/_uploads/SyPlENGrT.png" alt="image">CA~i~：$CA_i ∈ R^{C×V×V}$，通過將Tanh激活應用於X~a~和X~b~之間的兩兩差異來獲得CA~i~。</li>
-<li>係數矩陣使用三個組件的加權和：<img src="https://hackmd.io/_uploads/BJ2TwNMr6.png" alt="image"></li>
+<li>DA~i~：$DA_i=Softmax(X_aX_b,dim=0)$</li>
+<li>CA~i~：$CA_i ∈ R^{C×V×V}$，通過將Tanh激活應用於X~a~和X~b~之間的兩兩差異來獲得CA~i~。</li>
+<li>係數矩陣使用三個組件的加權和：$A_i=PA_i+α \times DA_i+β \times CA_i$</li>
 <li>$α$，$β$是兩個可學習的參數。</li>
 </ol>
 </li>
@@ -499,7 +500,7 @@
 <p><img src="https://hackmd.io/_uploads/S1RtdHfrT.png" alt="image"></p>
 </li>
 </ul>
-<h2 id="white-check-mark-EXPERIMENTS">:white_check_mark: EXPERIMENTS</h2>
+<h2 id="EXPERIMENTS">EXPERIMENTS</h2>
 <h3 id="1-資料集">1. 資料集</h3>
 <ul>
 <li>
@@ -570,7 +571,7 @@ indispensable?</strong><br>
 <img src="https://hackmd.io/_uploads/BJXLkCfSa.png" alt="image"></li>
 </ul>
 </blockquote>
-<h2 id="white-check-mark-Conclusion">:white_check_mark: Conclusion</h2>
+<h2 id="Conclusion">Conclusion</h2>
 <ol>
 <li>提出了一個高度動態的框架DG-STGCN，用於骨架數據的時空建模。</li>
 <li>DG-STGCN包括兩個具有動態多組設計的新模塊，即<strong>DG-GCN</strong>和<strong>DG-TCN</strong>。對於空間建模，DG-GCN將關節級特徵與從頭學習的係數矩陣融合，不依賴預定義的圖形結構。同時，DG-TCN採用組內時間卷積，具有多樣化的感受野，並使用動態的關節-骨架特徵模塊進行多層次的時序建模。</li>
@@ -670,7 +671,7 @@ indispensable?</strong><br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DG-STGCN: Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">:small_blue_diamond: Reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">:small_blue_diamond: Authors:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#small-blue-diamond-Github"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">:small_blue_diamond: Github:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%A7%A3%E6%B1%BA%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">:white_check_mark: 論文主要解決的問題</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">:white_check_mark: 論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">:white_check_mark: Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E5%9C%96%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-Graph-Neural-Networks"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 圖神經網路(Graph Neural Networks)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%9F%BA%E6%96%BC%E9%AA%A8%E6%9E%B6%E7%9A%84%E5%8B%95%E4%BD%9C%E8%BE%A8%E8%AD%98-Skeleton-based-Action-Recognition"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 基於骨架的動作辨識(Skeleton-based Action Recognition)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-DG-STGCN"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">:white_check_mark: DG-STGCN</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-EXPERIMENTS"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">:white_check_mark: EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">1. 資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Implementation-Details"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">2. Implementation Details</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Ablation-study"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">3. Ablation study</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Comparisons-with-the-State-of-the-Art"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">3. Comparisons with the State-of-the-Art</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#white-check-mark-Conclusion"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">:white_check_mark: Conclusion</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DG-STGCN: Dynamic Spatial-Temporal Modeling for Skeleton-based Action Recognition(arXiv)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">Reference:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Authors"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">Authors:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Github"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">Github:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%A7%A3%E6%B1%BA%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">論文主要解決的問題</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AB%96%E6%96%87%E4%B8%BB%E8%A6%81%E8%B2%A2%E7%8D%BB"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">論文主要貢獻</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Related-works"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Related works</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E5%9C%96%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-Graph-Neural-Networks"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">1. 圖神經網路(Graph Neural Networks)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%9F%BA%E6%96%BC%E9%AA%A8%E6%9E%B6%E7%9A%84%E5%8B%95%E4%BD%9C%E8%BE%A8%E8%AD%98-Skeleton-based-Action-Recognition"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">2. 基於骨架的動作辨識(Skeleton-based Action Recognition)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DG-STGCN"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">DG-STGCN</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#EXPERIMENTS"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">EXPERIMENTS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-%E8%B3%87%E6%96%99%E9%9B%86"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">1. 資料集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Implementation-Details"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">2. Implementation Details</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Ablation-study"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">3. Ablation study</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Comparisons-with-the-State-of-the-Art"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">3. Comparisons with the State-of-the-Art</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Conclusion"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Conclusion</span></a></li></ol></li></ol>
         
         </div>
       </aside>
