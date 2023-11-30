@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/</loc>
-    <lastmod>2023-11-29</lastmod>
-  </url>
-  <url>
     <loc>https://ntust-sims-lab.github.io/it-blog/slowfast/</loc>
     <lastmod>2023-11-14</lastmod>
   </url>
@@ -65,11 +61,11 @@
     <lastmod>2023-08-22</lastmod>
   </url>
   <url>
-    <loc>https://ntust-sims-lab.github.io/it-blog/APSNet_paper_review/</loc>
+    <loc>https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/</loc>
     <lastmod>2023-08-16</lastmod>
   </url>
   <url>
-    <loc>https://ntust-sims-lab.github.io/it-blog/AcT_paper_review/</loc>
+    <loc>https://ntust-sims-lab.github.io/it-blog/APSNet_paper_review/</loc>
     <lastmod>2023-08-16</lastmod>
   </url>
   <url>
