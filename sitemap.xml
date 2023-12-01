@@ -30,6 +30,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/</loc>
+    
+    <lastmod>2023-11-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/slowfast/</loc>
     
     <lastmod>2023-11-14</lastmod>
@@ -258,13 +265,6 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/Human-Pose-Estimation/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
@@ -272,7 +272,21 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/Human-Pose-Estimation/</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/point-cloud/pointnet/</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -293,7 +307,7 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -307,14 +321,14 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/</loc>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -349,6 +363,13 @@
   </url>
   
   <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Action-Recognition/GCN/Skeleton-based/</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/Feature-matrix/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
@@ -357,6 +378,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/Feature-matrix/occlusion/</loc>
+    <lastmod>2023-12-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/paper-review/transformer/HAR/</loc>
     <lastmod>2023-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
