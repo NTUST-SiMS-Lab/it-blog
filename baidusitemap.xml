@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ntust-sims-lab.github.io/it-blog/paper_review_DG-STGCN_Dynamic_Spatial-Temporal_Modeling_for_Skeleton-based_Action_Recognition/</loc>
-    <lastmod>2024-01-15</lastmod>
-  </url>
-  <url>
     <loc>https://ntust-sims-lab.github.io/it-blog/build_pypkg/</loc>
     <lastmod>2024-01-15</lastmod>
   </url>
