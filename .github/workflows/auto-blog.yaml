@@ -32,6 +32,7 @@ jobs:
             image: hsiangjenli/simslab-it-blog:2024-02-03
             options: -v ${{ github.workspace }}:/app -w /app --user=root
             run: |
+              mkdir -p /root/.node_modules
               chmod -R 777 /root/.node_modules
               npm run build
 
