@@ -30,10 +30,8 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
             image: hsiangjenli/simslab-it-blog:2024-02-03
-            options: -v ${{ github.workspace }}:/app -w /app --user=root
+            options: -v ${{ github.workspace }}:/app -w /app
             run: |
-              mkdir -p /root/.node_modules
-              chmod -R 777 /root/.node_modules
               npm run build
 
       - name: Deploy
