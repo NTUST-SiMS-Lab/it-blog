@@ -31,8 +31,7 @@ jobs:
         with:
             image: hsiangjenli/simslab-it-blog:2024-02-03
             options: -v ${{ github.workspace }}:/app -w /app
-            run: |
-              npm run build
+            cmd: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
