@@ -32,7 +32,7 @@ jobs:
             image: hsiangjenli/simslab-it-blog:2024-02-03
             options: -v ${{ github.workspace }}:/app -w /app --user root
             run: |
-              rm -rf node_modules && npm install --force
+              rm -rf node_modules && npm i
               hexo generate
 
       - name: Deploy
