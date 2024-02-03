@@ -6,7 +6,7 @@ build:
 	hexo server
 
 docker-build:
-	docker build --tag ${DOCKER_USERNAME}/${APPLICATION_NAME} .
+	docker build --platform linux/amd64 --tag ${DOCKER_USERNAME}/${APPLICATION_NAME} .
 
 docker-push:
 	docker push ${DOCKER_USERNAME}/${APPLICATION_NAME}:$(VERSION)
