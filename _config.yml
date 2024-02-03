@@ -11,8 +11,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://hsiangjenli.github.io/     # Note: don't forget to modify the CNAME file to your url
-root: /ntust-simslab-it-blog/
+url: https://ntust-sims-lab.github.io     # Note: don't forget to modify the CNAME file to your url
+root: /it-blog/
 permalink: :title/
 permalink_defaults:
 
