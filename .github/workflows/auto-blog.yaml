@@ -25,12 +25,6 @@ jobs:
       - name: Refactor Markdownfile
         run: bash ref_markdownfile.sh
 
-      # Change Permissions --------
-      - name: Change Permissions
-        run: |
-          sudo chown -R $USER:$USER ${{ github.workspace }}
-          sudo chmod -R 777 ${{ github.workspace }}
-          
       # Hexo Image ----------------
       - name: Use Docker Image
         uses: addnab/docker-run-action@v3
@@ -38,6 +32,7 @@ jobs:
             image: hsiangjenli/simslab-it-blog:2024-02-03
             options: -v ${{ github.workspace }}:/app -w /app --user=root
             run: |
+              rm -rf node_modules && npm install --force
               npm run build
 
       - name: Deploy
