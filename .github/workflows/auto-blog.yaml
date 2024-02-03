@@ -31,7 +31,9 @@ jobs:
         with:
             image: hsiangjenli/simslab-it-blog:2024-02-03
             options: -v ${{ github.workspace }}:/app -w /app --user root
-            run: hexo generate
+            run: |
+              rm -rf node_modules && npm install --force
+              hexo generate
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
