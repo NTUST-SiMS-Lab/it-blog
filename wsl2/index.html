@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/DokerfileAndDocker/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/wsl2/">
   <title>
     
-      【技術分享】基本Dockerfile寫法與Command Line - SiMS Lab | IT Blog
+      【技術分享】在 windows 安裝 wsl2 (ubuntu) - SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -310,11 +310,11 @@
             <div class="tags">
               
             </div>
-            <h1>【技術分享】基本Dockerfile寫法與Command Line</h1>
+            <h1>【技術分享】在 windows 安裝 wsl2 (ubuntu)</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by BO-CHENG SU on
-              2023-09-11
+              Posted by Hsiangj-Jen Li, David Chen, Bo-Cheng Su on
+              2024-02-03
             </span>
 
 
@@ -322,11 +322,11 @@
             <!-- WordCount start -->
             <div class="blank_box"></div>
             <span class="meta">
-              Estimated Reading Time <span class="post-count">2</span> Minutes
+              Estimated Reading Time <span class="post-count">1</span> Minutes
             </span>
             <div class="blank_box"></div>
             <span class="meta">
-              Words <span class="post-count">482</span> In Total
+              Words <span class="post-count">73</span> In Total
             </span>
             <div class="blank_box"></div>
             <!-- WordCount end -->
@@ -372,69 +372,41 @@
       <!-- Post Container -->
       <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
 
-        <ol>
+        <h2 id="WSL2">WSL2</h2>
+<blockquote>
+<p>⭐ win 11務必更新到<strong>最新版</strong>, 否則無法成功安裝 WSL</p>
+</blockquote>
+<ol>
 <li>
-<p>首先準備一個 Dockerfile，這邊給一個簡單的範例：</p>
+<p>Open Control Panel</p>
+</li>
+<li>
+<p>Search <code>Turn Windows Features on or off</code><br>
+<img width='300px' src='https://i.imgur.com/h7BWsGf.png'></p>
 <ul>
-<li>Dockerfile<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>這是python image</span><br><span class="line">FROM python:<span class="number">3.11</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>把 requirement.txt複製到container中</span><br><span class="line">COPY requirement.txt requirement.txt</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 執行pip install 指令</span><br><span class="line">RUN pip install -r requirement.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li>requirement.txt  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">pandas</span>==<span class="number">2</span>.<span class="number">0</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>Virtual Machine Platform</li>
+<li>Windows Hypervisor Platform</li>
+<li>Window Subsystem for Linux<br>
+<img width='400px' src='https://i.imgur.com/w8krU78.png'></li>
 </ul>
 </li>
 <li>
-<p>在cmd中打開執行以下指令，用來建立 image</p>
- <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -<span class="built_in">t</span> &lt;<span class="built_in">na</span><span class="symbol">me:ta</span>g&gt; .</span><br></pre></td></tr></table></figure>
-<p>Note：如果你沒有要安裝其他套件，可以直接pull別人的image。</p>
-</li>
-<li>
-<p>查看自己的 image 有哪些</p>
- <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">image</span> <span class="keyword">ls</span> </span><br><span class="line">or</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p><img src="https://hackmd.io/_uploads/BJSzGoAqn.png" alt=""></p>
-</li>
-<li>
-<p>建立 Container 並執行</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--name &lt;name&gt; &lt;image&gt; bash</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>--name &lt;name&gt;</code> :替你的container取名</li>
-<li><code>-i</code>:代表交互式模式（interactive mode）</li>
-<li><code>-t</code>:分配一個虛擬終端給容器給你操作</li>
-<li><code>-d</code>:在背景執行<br>
-（<code>-t</code>、<code>-i</code>、<code>-t</code>可以混用，如：<code>-it</code>、<code>-itd</code>）</li>
-<li><code>bash</code>:進到bash操作(也可以換成<code>sh</code>運行shell指令)</li>
-</ul>
-<p>結果如下圖：<br>
-<img src="https://hackmd.io/_uploads/H143NiRc3.png" alt=""></p>
-<p>如果要掛載一個與Container共用的資料夾可以做以下操作：</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--name &lt;name&gt; -v &lt;路徑&gt;:/app &lt;image&gt;  bash</span></span><br></pre></td></tr></table></figure>
-<p>例如說：<code>docker run -it --name admin -v C:/Users/bc200/OneDrive/桌面/fortest/test:/app test bash</code>，本機端的<code>test</code>資料夾就會與container中的<code>app</code>資料夾共用，只要修改本機端<code>test</code>內容就會修改<code>app</code>的內容。<br>
-<img src="https://hackmd.io/_uploads/ByHJdjRc3.png" alt=""><br>
-執行 <code>python test.py</code>即可運行程式：<br>
-<img src="https://hackmd.io/_uploads/S1l6DuiC53.png" alt=""><br>
-<code>exit</code>就可以離開container<br>
-（請注意這時會結束容器的運行）</p>
-</li>
-<li>
-<p>啟動/結束容器可以使用：</p>
- <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 啟動容器</span></span><br><span class="line">docker start <span class="params">&lt;Container ID&gt;</span> or <span class="params">&lt;Container Name&gt;</span></span><br><span class="line"><span class="comment">// 結束容器</span></span><br><span class="line">docker stop <span class="params">&lt;Container ID&gt;</span> or <span class="params">&lt;Container Name&gt;</span></span><br></pre></td></tr></table></figure>
-<p>這裡啟動/結束容器可以使用容器ID或是你有設定container Name也可以使用名稱</p>
-</li>
-<li>
-<p>進入到容器內部：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it <span class="tag">&lt;<span class="name">Container</span> <span class="attr">ID</span>&gt;</span> <span class="tag">&lt;<span class="name">bash</span> <span class="attr">or</span> <span class="attr">sh</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>查看有哪些容器正在運行：</p>
-  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker ps</span></span><br></pre></td></tr></table></figure>
-<p>(加上<code>-a</code>就是看目前所有容器）</p>
-</li>
-<li>
-<p>刪除 image 或 Container：</p>
- <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 刪除 image</span><br><span class="line">docker rmi &lt;image ID&gt;</span><br><span class="line"><span class="regexp">//</span> 刪除 container</span><br><span class="line">docker rm &lt;container ID&gt;</span><br></pre></td></tr></table></figure>
+<p><code>wsl --install</code></p>
 </li>
 </ol>
-<p>其他Docker指令:<br>
-<a target="_blank" rel="noopener" href="https://medium.com/alberthg-docker-notes/docker%E7%AD%86%E8%A8%98-docker%E5%9F%BA%E7%A4%8E%E6%95%99%E5%AD%B8-7bbe3a351caf">https://medium.com/alberthg-docker-notes/docker筆記-docker基礎教學-7bbe3a351caf</a></p>
+<p><img src="https://i.imgur.com/oFo9ioj.png" alt=""></p>
+<h2 id="🚀-疑難排解">🚀 <strong>疑難排解</strong></h2>
+<blockquote>
+<p><code>WslRegisterDistribution failed with error: 0x800701bc</code></p>
+<ol>
+<li>進入<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/windows/wsl/install-manual">官網</a>下載Linux 核心更新套件<br>
+<img width="400px" src="https://i.imgur.com/kWXjmue.png"></li>
+</ol>
+</blockquote>
+<h2 id="Reference">Reference</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruyut.com/2022/09/windows-11-install-docker.html">Win11 Dokcer安裝 中文教學</a></li>
+</ul>
 
 
         <hr>
@@ -442,12 +414,12 @@
         <ul class="pager">
           
           <li class="previous">
-            <a href="/it-blog/AirflowTutorial/" title="【技術分享】Airflow快速入門及如何在Docker上安裝">&larr; Previous Post</a>
+            <a href="/it-blog/test/" title="TEST">&larr; Previous Post</a>
           </li>
           
           
           <li class="next">
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" title="【論文研讀】Action recognition of construction workers under occlusion">Next Post &rarr;</a>
+            <a href="/it-blog/build_pypkg/" title="【技術分享】 Build your own python package">Next Post &rarr;</a>
           </li>
           
         </ul>
@@ -496,7 +468,7 @@
       </a>
     </li> -->
     <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【技術分享】基本Dockerfile寫法與Command Line&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/DokerfileAndDocker/">
+      <a target="_blank" class="social-share-icon" href="mailto:?subject=【技術分享】在 windows 安裝 wsl2 (ubuntu)&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/wsl2/">
         <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
       </a>
     </li>
@@ -528,17 +500,6 @@
 
       <!-- Catalog: Tabe of Content -->
       <!-- Table of Contents -->
-
-    
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="nav">none</ol>
-        
-        </div>
-      </aside>
-    
 
 
 

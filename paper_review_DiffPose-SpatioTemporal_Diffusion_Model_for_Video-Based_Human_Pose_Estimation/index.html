@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="/it-blog/css/bootstrap.min.css"/>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/it-blog/css/beantech.min.css"/>
+    <link rel="stylesheet" href="/it-blog/css/beantech.css"/>
 
     <!-- Pygments Highlight CSS -->
     <link rel="stylesheet" href="/it-blog/css/highlight.css"/>
@@ -94,7 +94,7 @@
       【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation - SiMS Lab | IT Blog
     
   </title>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -395,7 +395,7 @@
 </ul>
 <hr>
 <h2 id="Method">Method</h2>
-<p>首先使用現成的物件偵測器來獲得每幀 $I_t$ 中的所有人體邊界框，並把每個邊界框放大 25%，以在連續幀中裁剪同一個人，$\mathcal{I} ^i_t =〈I^i_{t-δ}, …, I^i_{t}, …, I^i_{t+δ}〉$ ，$δ$ 為預先設定的時間步長，這樣就得到這個人 $i$ 以 $I_t$ 為關鍵幀的影片 $\mathcal{I} ^i_t$，我們的目標是估計 $I^i_t$ 的關鍵點熱圖。</p>
+<p>首先使用現成的物件偵測器來獲得每幀 $I_t$ 中的所有人體邊界框，並把每個邊界框放大 25%，以在連續幀中裁剪同一個人，$\mathcal{I} ^i_t =〈I^i_{t-δ},, …,, I^i_{t},, …,, I^i_{t+δ}〉$ ，$δ$ 為預先設定的時間步長，這樣就得到這個人 $i$ 以 $I_t$ 為關鍵幀的影片 $\mathcal{I} ^i_t$，我們的目標是估計 $I^i_t$ 的關鍵點熱圖。</p>
 <hr>
 <h3 id="DiffPose">DiffPose</h3>
 <p>DiffPose 旨在調整普通擴散模型以合併時間資訊並關注關鍵點區域線索，以適應多幀人體姿勢估計的任務。<br>
@@ -408,12 +408,12 @@ $$ \mathcal{L}_{x_0} = \left | f_{\theta}(x_t,,  t) - x_0\right | $$</p>
 <hr>
 <h3 id="Spatiotemporal-Representation-Learner-STRL">Spatiotemporal Representation Learner (STRL)</h3>
 <p>作者在這裡使用 <strong>cascaded Transformer</strong> 來捕捉視訊幀之間的時空依賴性。</p>
-<p>將裁剪好的影片 $\mathcal{I}^i_t$ 作為輸入，作者首先用在 ImageNet 上預訓練的 Vision Transformer 作為 Backbone 來對每一幀提取空間特徵$〈F^i_{t-δ}, …, F^i_{t}, …, F^i_{t+δ}〉$。</p>
-<p>接著每個幀特徵在空間上重新排列並輸入到 patch embedding 層，將特徵嵌入至token $〈\bar{F}^i_{t-δ}, …, \bar{F}^i_{t}, …, \bar{F}^i_{t+δ}〉$</p>
+<p>將裁剪好的影片 $\mathcal{I}^i_t$ 作為輸入，作者首先用在 ImageNet 上預訓練的 Vision Transformer 作為 Backbone 來對每一幀提取空間特徵$〈F^i_{t-δ},, …,, F^i_{t},, …,, F^i_{t+δ}〉$。</p>
+<p>接著每個幀特徵在空間上重新排列並輸入到 patch embedding 層，將特徵嵌入至token $〈\bar{F}^i_{t-δ},, …,, \bar{F}^i_{t},, …,, \bar{F}^i_{t+δ}〉$</p>
 <p>接著 concat 所有 token，透過可學習的 position embedding $E_{POS}$ 來保留它們的空間訊息，並將它們輸入級聯的 Transformer 編碼器，其中每個編碼器由多頭自注意力層(MHSA)和前饋神經網路(FFN)組成。</p>
 <p>最後用MLP把所有幀的 encoded 深度特徵 aggregated 起來，以產生時空特徵 $\mathbb{F}^i_t$。</p>
 <p>上述過程可以表述為：</p>
-<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS}, …, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br><br>
+<p>$$ \begin{array}{lcl}\tilde{F}^0_t = Concat(\bar{F}^i_{t-δ} , +, E^{t-δ}_{POS},, …,, \bar{F}^i_{t+δ},+,E^{t-δ}_{POS}), \<br><br>
 \tilde{F}^{'l}_t = \tilde{F}^{l-1}_t + MHSA(LN(\tilde{F}^{l-1}_t)), \<br><br>
 \tilde{F}^{l}_t = \tilde{F}^{'l}_t + FFN(LN(\tilde{F}^{'l}_t)), \<br><br>
 \qquad\qquad\vdots \<br><br>
@@ -508,12 +508,12 @@ $$ \mathcal{L} = \left | \mathbf{H}^i_t - \hat{\mathbf{H}}^i_t\right |^2_2 $$</p
         <ul class="pager">
           
           <li class="previous">
-            <a href="/it-blog/OHPHAR/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Skeleton-based Action Recognition of People Handling Objects">&larr; Previous Post</a>
+            <a href="/it-blog/OHPHAR/" title="【論文研讀】Skeleton-based Action Recognition of People Handling Objects">&larr; Previous Post</a>
           </li>
           
           
           <li class="next">
-            <a href="/it-blog/something_else/" data-toggle="tooltip" data-placement="top" title="【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks">Next Post &rarr;</a>
+            <a href="/it-blog/something_else/" title="【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks">Next Post &rarr;</a>
           </li>
           
         </ul>

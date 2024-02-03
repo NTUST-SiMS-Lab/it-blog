@@ -88,10 +88,10 @@
   <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
 
   <!-- ga & ba script hoook -->
-  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/DokerfileAndDocker/">
+  <link rel="canonical" href="https://ntust-sims-lab.github.io/it-blog/categories/ubuntu/">
   <title>
     
-      【技術分享】基本Dockerfile寫法與Command Line - SiMS Lab | IT Blog
+      SiMS Lab | IT Blog
     
   </title>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -286,9 +286,9 @@
     }
 
     header.intro-header {
-       /*post*/
-        background-image: var(--intro-header-background-image-url-post);
-        /* background-image: url(''); */
+       /*page*/
+        background-image: var(--intro-header-background-image-url-page);
+        /* background-image: url('/it-blog/img/header_img/archive_bg2.jpg'); */
       
     }
 
@@ -306,40 +306,10 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="post-heading">
-            <div class="tags">
-              
-            </div>
-            <h1>【技術分享】基本Dockerfile寫法與Command Line</h1>
-            <h2 class="subheading"></h2>
-            <span class="meta">
-              Posted by BO-CHENG SU on
-              2023-09-11
-            </span>
-
-
-            
-            <!-- WordCount start -->
-            <div class="blank_box"></div>
-            <span class="meta">
-              Estimated Reading Time <span class="post-count">2</span> Minutes
-            </span>
-            <div class="blank_box"></div>
-            <span class="meta">
-              Words <span class="post-count">482</span> In Total
-            </span>
-            <div class="blank_box"></div>
-            <!-- WordCount end -->
-            
-            
-            <!-- 不蒜子统计 start -->
-            <span class="meta" id="busuanzi_container_page_pv">
-              Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
-            </span>
-            <!-- 不蒜子统计 end -->
-            
-
-
+          <div class="site-heading">
+            <h1>SiMS Lab</h1>
+            <!--<hr class="small">-->
+            <span class="subheading">IT Blog</span>
           </div>
           
         </div>
@@ -364,247 +334,616 @@
 	Friends Blog、
 	anchorjs、
 	) -->
-		<!-- Modify by Yu-Hsuan Yen -->
-<!-- Post Content -->
-<article>
-  <div class="container">
-    <div class="row">
-      <!-- Post Container -->
-      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1 post-container">
+		<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    
 
-        <ol>
-<li>
-<p>首先準備一個 Dockerfile，這邊給一個簡單的範例：</p>
-<ul>
-<li>Dockerfile<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>這是python image</span><br><span class="line">FROM python:<span class="number">3.11</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>把 requirement.txt複製到container中</span><br><span class="line">COPY requirement.txt requirement.txt</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> 執行pip install 指令</span><br><span class="line">RUN pip install -r requirement.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li>requirement.txt  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">pandas</span>==<span class="number">2</span>.<span class="number">0</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li>
-<p>在cmd中打開執行以下指令，用來建立 image</p>
- <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -<span class="built_in">t</span> &lt;<span class="built_in">na</span><span class="symbol">me:ta</span>g&gt; .</span><br></pre></td></tr></table></figure>
-<p>Note：如果你沒有要安裝其他套件，可以直接pull別人的image。</p>
-</li>
-<li>
-<p>查看自己的 image 有哪些</p>
- <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">image</span> <span class="keyword">ls</span> </span><br><span class="line">or</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p><img src="https://hackmd.io/_uploads/BJSzGoAqn.png" alt=""></p>
-</li>
-<li>
-<p>建立 Container 並執行</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--name &lt;name&gt; &lt;image&gt; bash</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>--name &lt;name&gt;</code> :替你的container取名</li>
-<li><code>-i</code>:代表交互式模式（interactive mode）</li>
-<li><code>-t</code>:分配一個虛擬終端給容器給你操作</li>
-<li><code>-d</code>:在背景執行<br>
-（<code>-t</code>、<code>-i</code>、<code>-t</code>可以混用，如：<code>-it</code>、<code>-itd</code>）</li>
-<li><code>bash</code>:進到bash操作(也可以換成<code>sh</code>運行shell指令)</li>
-</ul>
-<p>結果如下圖：<br>
-<img src="https://hackmd.io/_uploads/H143NiRc3.png" alt=""></p>
-<p>如果要掛載一個與Container共用的資料夾可以做以下操作：</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--name &lt;name&gt; -v &lt;路徑&gt;:/app &lt;image&gt;  bash</span></span><br></pre></td></tr></table></figure>
-<p>例如說：<code>docker run -it --name admin -v C:/Users/bc200/OneDrive/桌面/fortest/test:/app test bash</code>，本機端的<code>test</code>資料夾就會與container中的<code>app</code>資料夾共用，只要修改本機端<code>test</code>內容就會修改<code>app</code>的內容。<br>
-<img src="https://hackmd.io/_uploads/ByHJdjRc3.png" alt=""><br>
-執行 <code>python test.py</code>即可運行程式：<br>
-<img src="https://hackmd.io/_uploads/S1l6DuiC53.png" alt=""><br>
-<code>exit</code>就可以離開container<br>
-（請注意這時會結束容器的運行）</p>
-</li>
-<li>
-<p>啟動/結束容器可以使用：</p>
- <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 啟動容器</span></span><br><span class="line">docker start <span class="params">&lt;Container ID&gt;</span> or <span class="params">&lt;Container Name&gt;</span></span><br><span class="line"><span class="comment">// 結束容器</span></span><br><span class="line">docker stop <span class="params">&lt;Container ID&gt;</span> or <span class="params">&lt;Container Name&gt;</span></span><br></pre></td></tr></table></figure>
-<p>這裡啟動/結束容器可以使用容器ID或是你有設定container Name也可以使用名稱</p>
-</li>
-<li>
-<p>進入到容器內部：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it <span class="tag">&lt;<span class="name">Container</span> <span class="attr">ID</span>&gt;</span> <span class="tag">&lt;<span class="name">bash</span> <span class="attr">or</span> <span class="attr">sh</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>查看有哪些容器正在運行：</p>
-  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker ps</span></span><br></pre></td></tr></table></figure>
-<p>(加上<code>-a</code>就是看目前所有容器）</p>
-</li>
-<li>
-<p>刪除 image 或 Container：</p>
- <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> 刪除 image</span><br><span class="line">docker rmi &lt;image ID&gt;</span><br><span class="line"><span class="regexp">//</span> 刪除 container</span><br><span class="line">docker rm &lt;container ID&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>其他Docker指令:<br>
-<a target="_blank" rel="noopener" href="https://medium.com/alberthg-docker-notes/docker%E7%AD%86%E8%A8%98-docker%E5%9F%BA%E7%A4%8E%E6%95%99%E5%AD%B8-7bbe3a351caf">https://medium.com/alberthg-docker-notes/docker筆記-docker基礎教學-7bbe3a351caf</a></p>
+    <!-- USE SIDEBAR -->
+    <!-- Post Container -->
+    <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
 
+      <!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
+      <!-- 归档列表 -->
 
-        <hr>
-        <!-- Pager -->
-        <ul class="pager">
+      
+
+      <!-- 归档列表 -->
+      
+      <div class="one-tag-list">
+        <span class="fa fa-calendar-times-o listing-seperator" id="2024">
+          <span class="tag-text">2024</span>
+        </span>
+        <ul>
           
-          <li class="previous">
-            <a href="/it-blog/AirflowTutorial/" title="【技術分享】Airflow快速入門及如何在Docker上安裝">&larr; Previous Post</a>
+          <li>
+            02-03
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/wsl2/" style="color: #0085a1">
+              <span>
+                【技術分享】在 windows 安裝 wsl2 (ubuntu)
+                
+                -- 
+                
+              </span>
+            </a>
           </li>
           
+          <li>
+            02-03
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/test/" style="color: #0085a1">
+              <span>
+                TEST
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
           
-          <li class="next">
-            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" title="【論文研讀】Action recognition of construction workers under occlusion">Next Post &rarr;</a>
+          <li>
+            01-15
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/build_pypkg/" style="color: #0085a1">
+              <span>
+                【技術分享】 Build your own python package
+                
+                -- 
+                
+              </span>
+            </a>
           </li>
           
         </ul>
-
-        
-        <!-- tip start -->
-        <!-- tip -->
-<!-- tip start -->
-<div class="tip">
-  <p>
-    
-       
-    
-  </p>
+      </div>
+      
+      <div class="one-tag-list">
+        <span class="fa fa-calendar-times-o listing-seperator" id="2023">
+          <span class="tag-text">2023</span>
+        </span>
+        <ul>
+          
+          <li>
+            11-14
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/slowfast/" style="color: #0085a1">
+              <span>
+                【論文研讀】SlowFast Networks for Video Recognition
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-27
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-24
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_ZeroShot_Anomaly_Action_Recognition/" style="color: #0085a1">
+              <span>
+                【論文研讀】Prompt-Guided Zero-Shot Anomaly Action Recognition using Pretrained Deep Skeleton Features
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-23
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Cascaded_Pyramid_Network_for_Multi-Person_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】Cascaded Pyramid Network for Multi-Person Pose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-20
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_2D_Human_Pose_Estimation_Survey/" style="color: #0085a1">
+              <span>
+                【論文研讀】2D Human Pose Estimation - A Survey
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-19
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/OHPHAR/" style="color: #0085a1">
+              <span>
+                【論文研讀】Skeleton-based Action Recognition of People Handling Objects
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            10-05
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_DiffPose-SpatioTemporal_Diffusion_Model_for_Video-Based_Human_Pose_Estimation/" style="color: #0085a1">
+              <span>
+                【論文研讀】DiffPose - SpatioTemporal Diffusion Model for Video-Based HumanPose Estimation
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-30
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/something_else/" style="color: #0085a1">
+              <span>
+                【論文研讀】Something-Else Compositional Action Recognition with Spatial-Temporal Interaction Networks
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-27
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/install_gpu_docker_ubuntu2004/" style="color: #0085a1">
+              <span>
+                【技術分享】重灌後，安裝 GPU 驅動以及 Docker
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-24
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_3D_Interacting_Hand_Pose_Estimation_by_Hand_De-occlusion_and_Removel/" style="color: #0085a1">
+              <span>
+                【論文研讀】3D Interacting Hand Pose Estimation by Hand De-occlusion and Removal
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-18
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/AirflowTutorial/" style="color: #0085a1">
+              <span>
+                【技術分享】Airflow快速入門及如何在Docker上安裝
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-11
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/DokerfileAndDocker/" style="color: #0085a1">
+              <span>
+                【技術分享】基本Dockerfile寫法與Command Line
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            09-05
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_Action_recognition_of_construction_workers_under_occlusion/" style="color: #0085a1">
+              <span>
+                【論文研讀】Action recognition of construction workers under occlusion
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-22
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_mmnet/" style="color: #0085a1">
+              <span>
+                【論文研讀】MMNet - A Model-Based Multimodal Networkfor Human Action Recognition in RGB-D Videos
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-22
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/Simslab-server_guide/" style="color: #0085a1">
+              <span>
+                【實驗室資源】Simslab-server使用指南
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_posec3d/" style="color: #0085a1">
+              <span>
+                【論文研讀】Revisiting Skeleton-based Action Recognition(PoseC3D)
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/APSNet_paper_review/" style="color: #0085a1">
+              <span>
+                【論文研讀】APSNet - Toward Adaptive Point Sampling
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-16
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/AcT_paper_review/" style="color: #0085a1">
+              <span>
+                【論文研讀】AcT - Action Transformer
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-15
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_transformer/" style="color: #0085a1">
+              <span>
+                【論文研讀】Transformer - Attention Is All You Need
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            08-15
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/paper_review_star_transformer/" style="color: #0085a1">
+              <span>
+                【論文研讀】STAR-Transformer - A Spatio-temporal Cross Attention Transformer for Human Action Recognition
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            07-17
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/i_want_to_graduate/" style="color: #0085a1">
+              <span>
+                學習寫論文的小工具 - 我好想畢業
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            07-02
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/it-blog/hello_world/" style="color: #0085a1">
+              <span>
+                如何在 Hackmd 中 push 自己的文章至 Github
+                
+                -- 
+                
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </div>
 </div>
-<!-- tip end -->
 
-        <!-- tip end -->
-        
 
-        
-        <!-- Sharing Srtart -->
-        <!-- Social Social Share Post -->
-<!-- Docs:https://github.com/overtrue/share.js -->
+      <!-- 如果开启评论功能 -->
+      
+    </div>
 
-<div class="social-share" data-initialized="true" data-disabled="tencent ,douban ,qzone ,linkedin ,facebook ,google ,diandian" data-wechat-qrcode-helper="" align="center">
-  <ul class="list-inline text-center social-share-ul">
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-twitter">
-        <i class="fa fa-twitter fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a class="social-share-icon icon-wechat">
-        <i class="fa fa-weixin fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-weibo">
-        <i class="fa fa-weibo fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <!-- <li class="social-share-li">
-      <a target="_blank" class="social-share-icon icon-qq">
-        <i class="fa fa-qq fa-1x" aria-hidden="true"></i>
-      </a>
-    </li> -->
-    <li class="social-share-li">
-      <a target="_blank" class="social-share-icon" href="mailto:?subject=【技術分享】基本Dockerfile寫法與Command Line&body=Hi,I found this website and thought you might like it https://ntust-sims-lab.github.io/it-blog/DokerfileAndDocker/">
-        <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
-      </a>
-    </li>
+    <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+  <h5><a href="/it-blog/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+
+    
+    <img id="avatar_pic" src="/it-blog/img/avatar/ntust-simslab.png" alt="avatar_pic" />
+    
+
+    
+
+    <!-- SNS Link -->
+    <ul class="list-inline">
+      
+
+      
+      <li>
+        <a target="_blank" href="https://github.com/NTUST-SiMS-Lab">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+    </ul>
+  </div>
+</section>
+
+        <hr>
+    
+        <!-- RECENT POSTS -->
+
+<h5><a href="/it-blog/">RECENT POSTS</a></h5>
+<div class="widget">
+  <ul>
+    
+    <a href="../../test/">
+      <li>TEST</li>
+    </a>
+    
+    <a href="../../wsl2/">
+      <li>【技術分享】在 windows 安裝 wsl2 (ubuntu)</li>
+    </a>
+    
+    <a href="../../build_pypkg/">
+      <li>【技術分享】 Build your own python package</li>
+    </a>
+    
+    <a href="../../slowfast/">
+      <li>【論文研讀】SlowFast Networks for Video Recognition</li>
+    </a>
+    
+    <a href="../../paper_review_Learning_Structure_Guided_Diffusion_Model_for_2D_Human_Pose_Estimation/">
+      <li>【論文研讀】Learning Structure-Guided Diffusion Model for 2D Human Pose Estimation</li>
+    </a>
+    
   </ul>
 </div>
 
-<!-- css & js -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"> -->
-<script defer="defer" async="true" src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
 
-        <!-- Sharing End -->
-        
         <hr>
+    
+        <!-- Archives -->
 
-        <!-- comments start -->
-        <!-- 1. gitalk comment -->
-
-
-<!-- 2. gitment comment -->
-
-
-<!-- 3. disqus comment -->
+<h5><a href="/it-blog/archives/">archives</a></h5>
+<div class="widget">
+  <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/02/">February 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/01/">January 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">November 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">October 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">September 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">August 2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">July 2023</a><span class="archive-list-count">2</span></li></ul>
+</div>
 
 
-        <!-- comments end -->
         <hr>
+    
+        <!-- Categories -->
 
-      </div>
+<h5><a href="/it-blog/categories/">categories</a></h5>
+<div class="widget">
+  <ul>
+    
+    <a href="/it-blog/categories/#paper review">
+      <li>paper review</li>
+    </a>
+    
+    <a href="/it-blog/categories/#docker">
+      <li>docker</li>
+    </a>
+    
+    <a href="/it-blog/categories/#transformer">
+      <li>transformer</li>
+    </a>
+    
+    <a href="/it-blog/categories/#HAR">
+      <li>HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#server">
+      <li>server</li>
+    </a>
+    
+    <a href="/it-blog/categories/#point cloud">
+      <li>point cloud</li>
+    </a>
+    
+    <a href="/it-blog/categories/#python">
+      <li>python</li>
+    </a>
+    
+    <a href="/it-blog/categories/#it-blog">
+      <li>it-blog</li>
+    </a>
+    
+    <a href="/it-blog/categories/#airflow">
+      <li>airflow</li>
+    </a>
+    
+    <a href="/it-blog/categories/#research paper">
+      <li>research paper</li>
+    </a>
+    
+    <a href="/it-blog/categories/#3D Interacting Hand Pose Estimation">
+      <li>3D Interacting Hand Pose Estimation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Human Pose Estimation">
+      <li>Human Pose Estimation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Object-relation HAR">
+      <li>Object-relation HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Paper Review">
+      <li>Paper Review</li>
+    </a>
+    
+    <a href="/it-blog/categories/#pointnet">
+      <li>pointnet</li>
+    </a>
+    
+    <a href="/it-blog/categories/#HAR">
+      <li>HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#RGB-based HAR">
+      <li>RGB-based HAR</li>
+    </a>
+    
+    <a href="/it-blog/categories/#De-occlusion">
+      <li>De-occlusion</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Survey">
+      <li>Survey</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Data imputation">
+      <li>Data imputation</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Diffusion Model">
+      <li>Diffusion Model</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Anomaly Action Recognition">
+      <li>Anomaly Action Recognition</li>
+    </a>
+    
+    <a href="/it-blog/categories/#video recognition">
+      <li>video recognition</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Removal">
+      <li>Removal</li>
+    </a>
+    
+    <a href="/it-blog/categories/#GAN">
+      <li>GAN</li>
+    </a>
+    
+    <a href="/it-blog/categories/#Feature matrix">
+      <li>Feature matrix</li>
+    </a>
+    
+    <a href="/it-blog/categories/#occlusion">
+      <li>occlusion</li>
+    </a>
+    
+    <a href="/it-blog/categories/#test">
+      <li>test</li>
+    </a>
+    
+    <a href="/it-blog/categories/#ubuntu">
+      <li>ubuntu</li>
+    </a>
+    
+    <a href="/it-blog/categories/#wsl">
+      <li>wsl</li>
+    </a>
+    
+  </ul>
+</div>
 
-      <!-- Catalog: Tabe of Content -->
-      <!-- Table of Contents -->
+
+        <hr>
+    
+</div>
+
 
     
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="nav">none</ol>
-        
-        </div>
-      </aside>
-    
-
-
-
-      <!-- Sidebar Container -->
-      <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-        <!-- Featured Tags -->
-        
-
-        <!-- Friends Blog -->
-        
-      </div>
-    </div>
   </div>
-</article>
-
-
-
-<!-- anchorjs start -->
-<!-- async load function -->
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script type="text/javascript">
-  // async load function
-  function async (u, c) {
-    var d = document,
-      t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) {
-      o.addEventListener('load', function(e) {
-        c(null, e);
-      }, false);
-    }
-    s.parentNode.insertBefore(o, s);
-  };
-</script>
-<script type="text/javascript">
-  //anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
-  async ("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js", function() {
-    anchors.options = {
-      visible: 'hover',
-      placement: 'left',
-      // icon: 'ℬ'
-      icon: '❡'
-    };
-    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-  });
-</script>
-<style>
-  /* place left on bigger screen */
-  @media all and (min-width: 800px) {
-    .anchorjs-link {
-      position: absolute;
-      left: -0.75em;
-      font-size: 1.1em;
-      margin-top: -0.1em;
-    }
-  }
-</style>
-
-<!-- anchorjs end -->
-
+</div>
 
 
 		<!-- Footer (contains ThemeColor、viewer) -->
