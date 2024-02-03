@@ -25,12 +25,15 @@ jobs:
       - name: Refactor Markdownfile
         run: bash ref_markdownfile.sh
 
+      - name: Generate Public dir
+        run: mkdir public
+
       # Hexo Image ----------------
       - name: Use Docker Image
         uses: addnab/docker-run-action@v3
         with:
             image: hsiangjenli/simslab-it-blog:2024-02-03
-            options: -v ${{ github.workspace }}/source:/app/source -v ${{ github.workspace }}/themes:/app/themes -v ${{ github.workspace }}/_config.yml:/app/_config.yml  -w /app --user root
+            options: -v ${{ github.workspace }}/source:/app/source -v ${{ github.workspace }}/themes:/app/themes -v ${{ github.workspace }}/_config.yml:/app/_config.yml  -v ${{ github.workspace }}/public:/app/public -w /app --user root
             run: |
               hexo generate
 
