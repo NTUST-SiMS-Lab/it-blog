@@ -9,7 +9,7 @@ categories:
 
 > 終於走到最後一步了，接下來就是離校的流程，以下是一些注意事項。祝各位鵬程萬里。
 > 以下內容如有錯誤歡迎直接在 github 上指正，歡迎共編，感謝。
-> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/source/_posts/thesis/03_leave.md)
+> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/tree/master/source/_posts/thesis/03_leave.md)
 
 
 # 🚀 離校流程

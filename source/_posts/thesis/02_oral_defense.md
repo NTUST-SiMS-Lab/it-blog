@@ -9,7 +9,7 @@ categories:
 
 > 恭喜各位已經把實驗都跑完了，接下來就是論文口試的流程了，以下是一些口試前後的注意事項。
 > 以下內容如有錯誤歡迎直接在 github 上指正，歡迎共編，感謝。
-> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/source/_posts/thesis/02_oral_defense.md)
+> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/tree/master/source/_posts/thesis/02_oral_defense.md)
 
 # 🚀 口試前
 

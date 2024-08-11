@@ -11,7 +11,7 @@ categories:
 
 > 祝各位在寫論文的路上可以少走一些歪路。
 > 以下內容如有錯誤歡迎直接在 github 上指正，歡迎共編，感謝。
-> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/source/_posts/thesis/01_thesis.md)
+> [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NTUST-SiMS-Lab/it-blog/tree/master/source/_posts/thesis/01_thesis.md)
 
 
 # 🚀 尋找主題 
