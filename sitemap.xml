@@ -356,13 +356,6 @@
   </url>
   
   <url>
-    <loc>https://ntust-sims-lab.github.io/categories/thesis/</loc>
-    <lastmod>2024-08-11</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ntust-sims-lab.github.io/categories/3D-Interacting-Hand-Pose-Estimation/De-occlusion/</loc>
     <lastmod>2024-08-11</lastmod>
     <changefreq>daily</changefreq>
@@ -441,6 +434,13 @@
   
   <url>
     <loc>https://ntust-sims-lab.github.io/categories/paper-review/HAR/Data-imputation/GAN/Feature-matrix/occlusion/</loc>
+    <lastmod>2024-08-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ntust-sims-lab.github.io/categories/thesis/</loc>
     <lastmod>2024-08-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
