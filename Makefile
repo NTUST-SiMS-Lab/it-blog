@@ -14,8 +14,8 @@ docker-push:
 exec:
 	# docker run --rm -it -v ${PWD}:/app -w /app -p 4000:4000 ${DOCKER_USERNAME}/${APPLICATION_NAME} bash
 	docker run --rm -it \
-		-v ${PWD}/source:/app/source  \
-		-v ${PWD}/themes:/app/themes  \
-		-v ${PWD}/_config.yml:/app/_config.yml  \
-		-v ${PWD}/Makefile:/app/Makefile  \
+		-v "${PWD}/source:/app/source"  \
+		-v "${PWD}/themes:/app/themes"  \
+		-v "${PWD}/_config.yml:/app/_config.yml"  \
+		-v "${PWD}/Makefile:/app/Makefile"  \
 		-p 4000:4000 ${DOCKER_USERNAME}/${APPLICATION_NAME} bash
