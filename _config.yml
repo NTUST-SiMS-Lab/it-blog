@@ -60,7 +60,8 @@ public_dir: public
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
-skip_render:
+thesis_dir: thesis
+# skip_render:
 
 
 # Writing
