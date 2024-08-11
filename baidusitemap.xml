@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ntust-sims-lab.github.io/it-blog/i_want_to_graduate/</loc>
+    <loc>https://ntust-sims-lab.github.io/it-blog/thesis/03_leave/</loc>
+    <lastmod>2024-08-06</lastmod>
+  </url>
+  <url>
+    <loc>https://ntust-sims-lab.github.io/it-blog/thesis/02_oral_defense/</loc>
+    <lastmod>2024-08-05</lastmod>
+  </url>
+  <url>
+    <loc>https://ntust-sims-lab.github.io/it-blog/thesis/01_thesis/</loc>
     <lastmod>2024-03-06</lastmod>
   </url>
   <url>
