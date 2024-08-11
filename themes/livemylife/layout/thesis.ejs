@@ -1,0 +1,44 @@
+---
+layout: layout
+---
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <!-- 論文專區頁面 -->
+
+      <!-- 創建一個 Set 來跟蹤已顯示的文章 -->
+      <% var displayedPosts = new Set(); %>
+
+      <!-- 篩選 thesis 目錄中的文章並避免重複顯示 -->
+      <% site.categories.map(function(category){ %>
+      <div class="one-tag-list">
+        <% category.posts.filter(function(post){
+          return post.source.startsWith('_posts/thesis/') && !displayedPosts.has(post._id);
+        }).map(function(post){
+          displayedPosts.add(post._id); // 將文章標記為已顯示
+        %>
+        <!-- 文章預覽 -->
+        <div class="post-preview">
+          <a href="<%- config.root %><%- post.path %>">
+            <h2 class="post-title">
+              <%- post.title || "Untitled" %>
+              <% if(post.lang !== 'en'){ %>
+              -- <%- post.lang %>
+              <% } %>
+            </h2>
+            <% if (post.subtitle && post.subtitle.length) { %>
+            <h3 class="post-subtitle">
+              <%- post.subtitle %>
+            </h3>
+            <% } %>
+          </a>
+          <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </div>
+        <hr>
+        <% }); %>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</div>
